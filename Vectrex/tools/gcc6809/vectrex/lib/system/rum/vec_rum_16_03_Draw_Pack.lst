@@ -1,0 +1,35 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              5 	.module	vec_rum_16_03_Draw_Pack.c
+                              6 	.area	.text
+                              7 	.globl	__Draw_Pack
+   0000                       8 __Draw_Pack:
+   0000 34 20         [ 6]    9 	pshs	y
+                             10 ;----- asm -----
+                             11 ; 65 "source\vec_rum_16_03_Draw_Pack.c" 1
+   0002 10 AE 64      [ 7]   12 	ldy 4,s
+   0005 BD 00 00      [ 8]   13 	jsr ___Draw_Pack; BIOS call
+                             14 ;--- end asm ---
+   0008 35 A0         [ 7]   15 	puls	y,pc
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:24 2023
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 __Draw_Pack        0000 GR  |     ___Draw_Pack       **** GX
+
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:24 2023
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size    A   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

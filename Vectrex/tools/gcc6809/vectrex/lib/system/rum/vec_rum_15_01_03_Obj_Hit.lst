@@ -1,0 +1,38 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              5 	.module	vec_rum_15_01_03_Obj_Hit.c
+                              6 	.area	.text
+                              7 	.globl	__Obj_Hit
+   0000                       8 __Obj_Hit:
+   0000 34 20         [ 6]    9 	pshs	y
+                             10 ;----- asm -----
+                             11 ; 53 "source\vec_rum_15_01_03_Obj_Hit.c" 1
+   0002 A6 64         [ 5]   12 	lda 4,s
+   0004 10 AE 65      [ 7]   13 	ldy 5,s
+   0007 BD 00 00      [ 8]   14 	jsr ___Obj_Hit; BIOS call
+   000A C6 00         [ 2]   15 	ldb #0
+   000C C9 00         [ 2]   16 	adcb #0
+                             17 ;--- end asm ---
+   000E 35 A0         [ 7]   18 	puls	y,pc
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:23 2023
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 __Obj_Hit          0000 GR  |     ___Obj_Hit         **** GX
+
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:23 2023
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   10   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

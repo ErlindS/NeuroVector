@@ -1,0 +1,272 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	friend.c
+                              6 	.globl	_friends
+                              7 	.area	.data
+   0000                       8 _friends:
+   0000 01                    9 	.byte	1
+   0001 00                   10 	.byte	0
+   0002 00                   11 	.byte	0
+   0003 00                   12 	.byte	0
+   0004 00                   13 	.byte	0
+   0005 01                   14 	.byte	1
+   0006 00                   15 	.byte	0
+   0007 00                   16 	.byte	0
+   0008 00                   17 	.byte	0
+   0009 00                   18 	.byte	0
+   000A 01                   19 	.byte	1
+   000B 00                   20 	.byte	0
+   000C 00                   21 	.byte	0
+   000D 00                   22 	.byte	0
+   000E 00                   23 	.byte	0
+   000F 01                   24 	.byte	1
+   0010 00                   25 	.byte	0
+   0011 00                   26 	.byte	0
+   0012 00                   27 	.byte	0
+   0013 00                   28 	.byte	0
+                             29 	.globl	_vectors_friend
+                             30 	.area	.text
+   0000                      31 _vectors_friend:
+   0000 00                   32 	.byte	0
+   0001 E8                   33 	.byte	-24
+   0002 00                   34 	.byte	0
+   0003 FF                   35 	.byte	-1
+   0004 18                   36 	.byte	24
+   0005 E8                   37 	.byte	-24
+   0006 FF                   38 	.byte	-1
+   0007 18                   39 	.byte	24
+   0008 18                   40 	.byte	24
+   0009 FF                   41 	.byte	-1
+   000A E8                   42 	.byte	-24
+   000B 18                   43 	.byte	24
+   000C FF                   44 	.byte	-1
+   000D E8                   45 	.byte	-24
+   000E E8                   46 	.byte	-24
+   000F 01                   47 	.byte	1
+   0010 00                   48 	.byte	0
+   0011 00                   49 	.byte	0
+                             50 	.globl	_draw_friend
+   0012                      51 _draw_friend:
+   0012 32 7B         [ 5]   52 	leas	-5,s
+   0014 AF 61         [ 6]   53 	stx	1,s
+   0016 BD`00`00      [ 8]   54 	jsr	___Reset0Ref
+   0019 C6 7F         [ 2]   55 	ldb	#127
+   001B D7`00         [ 4]   56 	stb	*_dp_VIA_t1_cnt_lo
+   001D AE 61         [ 6]   57 	ldx	1,s
+   001F E6 02         [ 5]   58 	ldb	2,x
+   0021 E7 E4         [ 4]   59 	stb	,s
+   0023 AE 61         [ 6]   60 	ldx	1,s
+   0025 E6 01         [ 5]   61 	ldb	1,x
+   0027 E7 64         [ 5]   62 	stb	4,s
+   0029 E6 E4         [ 4]   63 	ldb	,s
+   002B E7 63         [ 5]   64 	stb	3,s
+   002D E6 64         [ 5]   65 	ldb	4,s
+   002F E7 E2         [ 6]   66 	stb	,-s
+   0031 E6 64         [ 5]   67 	ldb	4,s
+   0033 BD`00`00      [ 8]   68 	jsr	__Moveto_d
+   0036 32 61         [ 5]   69 	leas	1,s
+   0038 C6 22         [ 2]   70 	ldb	#34
+   003A D7`00         [ 4]   71 	stb	*_dp_VIA_t1_cnt_lo
+   003C 8E`00`00      [ 3]   72 	ldx	#_vectors_friend
+   003F BD`00`00      [ 8]   73 	jsr	___Draw_VLp
+   0042 32 65         [ 5]   74 	leas	5,s
+   0044 39            [ 5]   75 	rts
+                             76 	.globl	_check_friend
+   0045                      77 _check_friend:
+   0045 32 79         [ 5]   78 	leas	-7,s
+   0047 AF 65         [ 6]   79 	stx	5,s
+   0049 AE 65         [ 6]   80 	ldx	5,s
+   004B E6 02         [ 5]   81 	ldb	2,x
+   004D E7 E4         [ 4]   82 	stb	,s
+   004F AE 65         [ 6]   83 	ldx	5,s
+   0051 E6 01         [ 5]   84 	ldb	1,x
+   0053 E7 61         [ 5]   85 	stb	1,s
+   0055 F6`00`02      [ 5]   86 	ldb	_player+2
+   0058 E7 62         [ 5]   87 	stb	2,s
+   005A F6`00`01      [ 5]   88 	ldb	_player+1
+   005D E7 63         [ 5]   89 	stb	3,s
+   005F C6 04         [ 2]   90 	ldb	#4
+   0061 E7 E2         [ 6]   91 	stb	,-s
+   0063 C6 04         [ 2]   92 	ldb	#4
+   0065 E7 E2         [ 6]   93 	stb	,-s
+   0067 E6 62         [ 5]   94 	ldb	2,s
+   0069 34 04         [ 6]   95 	pshs	b
+   006B E6 64         [ 5]   96 	ldb	4,s
+   006D 34 04         [ 6]   97 	pshs	b
+   006F E6 66         [ 5]   98 	ldb	6,s
+   0071 34 04         [ 6]   99 	pshs	b
+   0073 E6 68         [ 5]  100 	ldb	8,s
+   0075 BD`00`00      [ 8]  101 	jsr	_check_collision
+   0078 32 65         [ 5]  102 	leas	5,s
+   007A 5D            [ 2]  103 	tstb
+   007B 27 3D         [ 3]  104 	beq	L5
+   007D 8E`00`00      [ 3]  105 	ldx	#_bing
+   0080 BD`00`00      [ 8]  106 	jsr	_play_music
+   0083 C6 01         [ 2]  107 	ldb	#1
+   0085 E7 F8 05      [ 8]  108 	stb	[5,s]
+   0088 F6`00`08      [ 5]  109 	ldb	_current_game+8
+   008B E7 64         [ 5]  110 	stb	4,s
+   008D E6 64         [ 5]  111 	ldb	4,s
+   008F 4F            [ 2]  112 	clra		;zero_extendqihi: R:b -> R:d
+   0090 1F 01         [ 6]  113 	tfr	d,x
+   0092 E6 89`00`06   [ 8]  114 	ldb	_current_game+6,x
+   0096 E7 E4         [ 4]  115 	stb	,s
+   0098 E6 E4         [ 4]  116 	ldb	,s
+   009A 5C            [ 2]  117 	incb
+   009B E7 E4         [ 4]  118 	stb	,s
+   009D E6 64         [ 5]  119 	ldb	4,s
+   009F 4F            [ 2]  120 	clra		;zero_extendqihi: R:b -> R:d
+   00A0 1F 01         [ 6]  121 	tfr	d,x
+   00A2 E6 E4         [ 4]  122 	ldb	,s
+   00A4 E7 89`00`06   [ 8]  123 	stb	_current_game+6,x
+   00A8 F6`00`01      [ 5]  124 	ldb	_current_level+1
+   00AB 5A            [ 2]  125 	decb
+   00AC F7`00`01      [ 5]  126 	stb	_current_level+1
+   00AF F6`00`01      [ 5]  127 	ldb	_current_level+1
+   00B2 5D            [ 2]  128 	tstb
+   00B3 26 05         [ 3]  129 	bne	L5
+   00B5 C6 02         [ 2]  130 	ldb	#2
+   00B7 F7`00`00      [ 5]  131 	stb	_current_level
+   00BA                     132 L5:
+   00BA 32 67         [ 5]  133 	leas	7,s
+   00BC 39            [ 5]  134 	rts
+                            135 	.globl	_init_friends
+   00BD                     136 _init_friends:
+   00BD 32 7D         [ 5]  137 	leas	-3,s
+   00BF 6F 62         [ 7]  138 	clr	2,s
+   00C1 20 1E         [ 3]  139 	bra	L7
+   00C3                     140 L8:
+   00C3 E6 62         [ 5]  141 	ldb	2,s
+   00C5 4F            [ 2]  142 	clra		;zero_extendqihi: R:b -> R:d
+   00C6 1F 01         [ 6]  143 	tfr	d,x
+   00C8 AF E4         [ 5]  144 	stx	,s
+   00CA EC E4         [ 5]  145 	ldd	,s
+   00CC 58            [ 2]  146 	aslb
+   00CD 49            [ 2]  147 	rola
+   00CE 58            [ 2]  148 	aslb
+   00CF 49            [ 2]  149 	rola
+   00D0 ED E4         [ 5]  150 	std	,s
+   00D2 1E 01         [ 8]  151 	exg	d,x
+   00D4 E3 E4         [ 6]  152 	addd	,s; addhi3,3
+   00D6 1E 01         [ 8]  153 	exg	d,x
+   00D8 30 89`00`00   [ 8]  154 	leax	_friends,x
+   00DC BD`00`00      [ 8]  155 	jsr	_init_object
+   00DF 6C 62         [ 7]  156 	inc	2,s
+   00E1                     157 L7:
+   00E1 E6 62         [ 5]  158 	ldb	2,s
+   00E3 C1 03         [ 2]  159 	cmpb	#3	;cmpqi:
+   00E5 23 DC         [ 3]  160 	bls	L8
+   00E7 32 63         [ 5]  161 	leas	3,s
+   00E9 39            [ 5]  162 	rts
+                            163 	.globl	_handle_friends
+   00EA                     164 _handle_friends:
+   00EA 34 40         [ 6]  165 	pshs	u
+   00EC 32 77         [ 5]  166 	leas	-9,s
+   00EE 6F 68         [ 7]  167 	clr	8,s
+   00F0 16 00 76      [ 5]  168 	lbra	L11
+   00F3                     169 L13:
+   00F3 E6 68         [ 5]  170 	ldb	8,s
+   00F5 4F            [ 2]  171 	clra		;zero_extendqihi: R:b -> R:d
+   00F6 1F 01         [ 6]  172 	tfr	d,x
+   00F8 AF 66         [ 6]  173 	stx	6,s
+   00FA EC 66         [ 6]  174 	ldd	6,s
+   00FC 58            [ 2]  175 	aslb
+   00FD 49            [ 2]  176 	rola
+   00FE 58            [ 2]  177 	aslb
+   00FF 49            [ 2]  178 	rola
+   0100 ED 66         [ 6]  179 	std	6,s
+   0102 EC 66         [ 6]  180 	ldd	6,s
+   0104 30 8B         [ 8]  181 	leax	d,x
+   0106 AF 66         [ 6]  182 	stx	6,s
+   0108 EE 66         [ 6]  183 	ldu	6,s
+   010A 30 C9`00`00   [ 8]  184 	leax	_friends,u
+   010E E6 84         [ 4]  185 	ldb	,x
+   0110 5D            [ 2]  186 	tstb
+   0111 26 54         [ 3]  187 	bne	L12
+   0113 E6 68         [ 5]  188 	ldb	8,s
+   0115 4F            [ 2]  189 	clra		;zero_extendqihi: R:b -> R:d
+   0116 1F 01         [ 6]  190 	tfr	d,x
+   0118 AF 64         [ 6]  191 	stx	4,s
+   011A EC 64         [ 6]  192 	ldd	4,s
+   011C 58            [ 2]  193 	aslb
+   011D 49            [ 2]  194 	rola
+   011E 58            [ 2]  195 	aslb
+   011F 49            [ 2]  196 	rola
+   0120 ED 64         [ 6]  197 	std	4,s
+   0122 1E 01         [ 8]  198 	exg	d,x
+   0124 E3 64         [ 7]  199 	addd	4,s; addhi3,3
+   0126 1E 01         [ 8]  200 	exg	d,x
+   0128 30 89`00`00   [ 8]  201 	leax	_friends,x
+   012C BD`00`00      [ 8]  202 	jsr	_move_object
+   012F E6 68         [ 5]  203 	ldb	8,s
+   0131 4F            [ 2]  204 	clra		;zero_extendqihi: R:b -> R:d
+   0132 1F 01         [ 6]  205 	tfr	d,x
+   0134 AF 62         [ 6]  206 	stx	2,s
+   0136 EC 62         [ 6]  207 	ldd	2,s
+   0138 58            [ 2]  208 	aslb
+   0139 49            [ 2]  209 	rola
+   013A 58            [ 2]  210 	aslb
+   013B 49            [ 2]  211 	rola
+   013C ED 62         [ 6]  212 	std	2,s
+   013E 1E 01         [ 8]  213 	exg	d,x
+   0140 E3 62         [ 7]  214 	addd	2,s; addhi3,3
+   0142 1E 01         [ 8]  215 	exg	d,x
+   0144 30 89`00`00   [ 8]  216 	leax	_friends,x
+   0148 BD`00`12      [ 8]  217 	jsr	_draw_friend
+   014B E6 68         [ 5]  218 	ldb	8,s
+   014D 4F            [ 2]  219 	clra		;zero_extendqihi: R:b -> R:d
+   014E 1F 01         [ 6]  220 	tfr	d,x
+   0150 AF E4         [ 5]  221 	stx	,s
+   0152 EC E4         [ 5]  222 	ldd	,s
+   0154 58            [ 2]  223 	aslb
+   0155 49            [ 2]  224 	rola
+   0156 58            [ 2]  225 	aslb
+   0157 49            [ 2]  226 	rola
+   0158 ED E4         [ 5]  227 	std	,s
+   015A 1E 01         [ 8]  228 	exg	d,x
+   015C E3 E4         [ 6]  229 	addd	,s; addhi3,3
+   015E 1E 01         [ 8]  230 	exg	d,x
+   0160 30 89`00`00   [ 8]  231 	leax	_friends,x
+   0164 BD`00`45      [ 8]  232 	jsr	_check_friend
+   0167                     233 L12:
+   0167 6C 68         [ 7]  234 	inc	8,s
+   0169                     235 L11:
+   0169 E6 68         [ 5]  236 	ldb	8,s
+   016B C1 03         [ 2]  237 	cmpb	#3	;cmpqi:
+   016D 10 23 FF 82   [ 6]  238 	lbls	L13
+   0171 32 69         [ 5]  239 	leas	9,s
+   0173 35 C0         [ 7]  240 	puls	u,pc
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  3 L11                0169 R   |   3 L12                0167 R
+  3 L13                00F3 R   |   3 L5                 00BA R
+  3 L7                 00E1 R   |   3 L8                 00C3 R
+    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
+    ___Reset0Ref       **** GX  |     _bing              **** GX
+    _check_collisi     **** GX  |   3 _check_friend      0045 GR
+    _current_game      **** GX  |     _current_level     **** GX
+    _dp_VIA_t1_cnt     **** GX  |   3 _draw_friend       0012 GR
+  2 _friends           0000 GR  |   3 _handle_friend     00EA GR
+  3 _init_friends      00BD GR  |     _init_object       **** GX
+    _move_object       **** GX  |     _play_music        **** GX
+    _player            **** GX  |   3 _vectors_frien     0000 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size   14   flags  100
+   3 .text            size  175   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

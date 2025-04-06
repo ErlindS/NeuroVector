@@ -1,0 +1,35 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              5 	.module	vec_rum_06_03_Bitmask_a.c
+                              6 	.area	.text
+                              7 	.globl	__Bitmask_a
+   0000                       8 __Bitmask_a:
+                              9 ;----- asm -----
+                             10 ; 60 "source\vec_rum_06_03_Bitmask_a.c" 1
+   0000 1F 98         [ 6]   11 	tfr b,a
+   0002 BD 00 00      [ 8]   12 	jsr ___Bitmask_a; BIOS call
+   0005 1F 89         [ 6]   13 	tfr a,b
+                             14 ;--- end asm ---
+   0007 39            [ 5]   15 	rts
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:21 2023
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 __Bitmask_a        0000 GR  |     ___Bitmask_a       **** GX
+
+ASxxxx Assembler V05.31  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Thu Nov 16 12:23:21 2023
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size    8   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

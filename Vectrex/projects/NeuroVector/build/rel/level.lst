@@ -1,0 +1,199 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	level.c
+                              6 	.globl	_current_level
+                              7 	.area	.data
+   0000                       8 _current_level:
+   0000 01                    9 	.byte	1
+                             10 	.globl	_Display_pattern
+   0001                      11 _Display_pattern:
+   0001 00 00 00 00 00 00    12 	.word	0,0,0,0,0,0,0,0,0,0
+        00 00 00 00 00 00
+        00 00 00 00 00 00
+        00 00
+                             13 	.area	.text
+                             14 	.globl	_level_init
+   0000                      15 _level_init:
+   0000 32 7D         [ 5]   16 	leas	-3,s
+   0002 6F 62         [ 7]   17 	clr	2,s
+   0004 20 2A         [ 3]   18 	bra	L2
+   0006                      19 L3:
+   0006 E6 62         [ 5]   20 	ldb	2,s
+   0008 E7 61         [ 5]   21 	stb	1,s
+   000A BD`00`00      [ 8]   22 	jsr	__Random
+   000D 4F            [ 2]   23 	clra		;zero_extendqihi: R:b -> R:d
+   000E 8E 00 09      [ 3]   24 	ldx	#9
+   0011 34 10         [ 6]   25 	pshs	x
+   0013 1F 01         [ 6]   26 	tfr	d,x
+   0015 BD`00`00      [ 8]   27 	jsr	_umodhi3
+   0018 32 62         [ 5]   28 	leas	2,s
+   001A 1F 10         [ 6]   29 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   001C E7 E4         [ 4]   30 	stb	,s
+   001E E6 E4         [ 4]   31 	ldb	,s
+   0020 5C            [ 2]   32 	incb
+   0021 E7 E4         [ 4]   33 	stb	,s
+   0023 E6 61         [ 5]   34 	ldb	1,s
+   0025 1D            [ 2]   35 	sex		;extendqihi2: R:b -> R:d
+   0026 1F 01         [ 6]   36 	tfr	d,x
+   0028 E6 E4         [ 4]   37 	ldb	,s
+   002A E7 89`00`01   [ 8]   38 	stb	_Display_pattern,x
+   002E 6C 62         [ 7]   39 	inc	2,s
+   0030                      40 L2:
+   0030 E6 62         [ 5]   41 	ldb	2,s
+   0032 C1 13         [ 2]   42 	cmpb	#19	;cmpqi:
+   0034 2F D0         [ 3]   43 	ble	L3
+   0036 7F`00`00      [ 7]   44 	clr	_current_level
+   0039 32 63         [ 5]   45 	leas	3,s
+   003B 39            [ 5]   46 	rts
+                             47 	.globl	_Gamefield
+                             48 	.area	.data
+   0015                      49 _Gamefield:
+   0015 01                   50 	.byte	1
+   0016 00                   51 	.byte	0
+   0017 00                   52 	.byte	0
+   0018 00                   53 	.byte	0
+   0019 00                   54 	.byte	0
+   001A 01                   55 	.byte	1
+   001B 1E                   56 	.byte	30
+   001C 00                   57 	.byte	0
+   001D 00                   58 	.byte	0
+   001E 00                   59 	.byte	0
+   001F 01                   60 	.byte	1
+   0020 00                   61 	.byte	0
+   0021 1E                   62 	.byte	30
+   0022 00                   63 	.byte	0
+   0023 00                   64 	.byte	0
+   0024 01                   65 	.byte	1
+   0025 1E                   66 	.byte	30
+   0026 1E                   67 	.byte	30
+   0027 00                   68 	.byte	0
+   0028 00                   69 	.byte	0
+   0029 01                   70 	.byte	1
+   002A E2                   71 	.byte	-30
+   002B 00                   72 	.byte	0
+   002C 00                   73 	.byte	0
+   002D 00                   74 	.byte	0
+   002E 01                   75 	.byte	1
+   002F 00                   76 	.byte	0
+   0030 E2                   77 	.byte	-30
+   0031 00                   78 	.byte	0
+   0032 00                   79 	.byte	0
+   0033 01                   80 	.byte	1
+   0034 E2                   81 	.byte	-30
+   0035 E2                   82 	.byte	-30
+   0036 00                   83 	.byte	0
+   0037 00                   84 	.byte	0
+   0038 01                   85 	.byte	1
+   0039 1E                   86 	.byte	30
+   003A E2                   87 	.byte	-30
+   003B 00                   88 	.byte	0
+   003C 00                   89 	.byte	0
+   003D 01                   90 	.byte	1
+   003E E2                   91 	.byte	-30
+   003F 1E                   92 	.byte	30
+   0040 00                   93 	.byte	0
+   0041 00                   94 	.byte	0
+                             95 	.area	.text
+                             96 	.globl	_Generate_Gamefield
+   003C                      97 _Generate_Gamefield:
+   003C 32 7D         [ 5]   98 	leas	-3,s
+   003E 6F 62         [ 7]   99 	clr	2,s
+   0040 20 1E         [ 3]  100 	bra	L6
+   0042                     101 L7:
+   0042 E6 62         [ 5]  102 	ldb	2,s
+   0044 1D            [ 2]  103 	sex		;extendqihi2: R:b -> R:d
+   0045 1F 01         [ 6]  104 	tfr	d,x
+   0047 AF E4         [ 5]  105 	stx	,s
+   0049 EC E4         [ 5]  106 	ldd	,s
+   004B 58            [ 2]  107 	aslb
+   004C 49            [ 2]  108 	rola
+   004D 58            [ 2]  109 	aslb
+   004E 49            [ 2]  110 	rola
+   004F ED E4         [ 5]  111 	std	,s
+   0051 1E 01         [ 8]  112 	exg	d,x
+   0053 E3 E4         [ 6]  113 	addd	,s; addhi3,3
+   0055 1E 01         [ 8]  114 	exg	d,x
+   0057 30 89`00`15   [ 8]  115 	leax	_Gamefield,x
+   005B BD`00`00      [ 8]  116 	jsr	_handle_objects
+   005E 6C 62         [ 7]  117 	inc	2,s
+   0060                     118 L6:
+   0060 E6 62         [ 5]  119 	ldb	2,s
+   0062 C1 08         [ 2]  120 	cmpb	#8	;cmpqi:
+   0064 2F DC         [ 3]  121 	ble	L7
+   0066 32 63         [ 5]  122 	leas	3,s
+   0068 39            [ 5]  123 	rts
+                            124 	.globl	_Display_Pattern
+   0069                     125 _Display_Pattern:
+   0069 32 7F         [ 5]  126 	leas	-1,s
+   006B C6 03         [ 2]  127 	ldb	#3
+   006D E7 E4         [ 4]  128 	stb	,s
+   006F 32 61         [ 5]  129 	leas	1,s
+   0071 39            [ 5]  130 	rts
+                            131 	.globl	_Repeat_Pattern
+   0072                     132 _Repeat_Pattern:
+   0072 32 7F         [ 5]  133 	leas	-1,s
+   0074 C6 04         [ 2]  134 	ldb	#4
+   0076 E7 E4         [ 4]  135 	stb	,s
+   0078 32 61         [ 5]  136 	leas	1,s
+   007A 39            [ 5]  137 	rts
+                            138 	.globl	_level_play
+   007B                     139 _level_play:
+   007B 32 7C         [ 5]  140 	leas	-4,s
+   007D 20 29         [ 3]  141 	bra	L14
+   007F                     142 L15:
+   007F BD`00`00      [ 8]  143 	jsr	___DP_to_C8
+   0082 BE`00`00      [ 6]  144 	ldx	_current_explosion
+   0085 AF E4         [ 5]  145 	stx	,s
+   0087 AE E4         [ 5]  146 	ldx	,s
+   0089 BD`00`00      [ 8]  147 	jsr	__Explosion_Snd
+   008C BE`00`00      [ 6]  148 	ldx	_current_music
+   008F AF 62         [ 6]  149 	stx	2,s
+   0091 AE 62         [ 6]  150 	ldx	2,s
+   0093 BD`00`00      [ 8]  151 	jsr	__Init_Music_chk
+   0096 BD`00`00      [ 8]  152 	jsr	___Wait_Recal
+   0099 BD`00`00      [ 8]  153 	jsr	__Do_Sound
+   009C BD`00`00      [ 8]  154 	jsr	___Intensity_5F
+   009F BD`00`3C      [ 8]  155 	jsr	_Generate_Gamefield
+   00A2 BD`00`69      [ 8]  156 	jsr	_Display_Pattern
+   00A5 BD`00`72      [ 8]  157 	jsr	_Repeat_Pattern
+   00A8                     158 L14:
+   00A8 F6`00`00      [ 5]  159 	ldb	_current_level
+   00AB 5D            [ 2]  160 	tstb
+   00AC 27 D1         [ 3]  161 	beq	L15
+   00AE 32 64         [ 5]  162 	leas	4,s
+   00B0 39            [ 5]  163 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  3 L14                00A8 R   |   3 L15                007F R
+  3 L2                 0030 R   |   3 L3                 0006 R
+  3 L6                 0060 R   |   3 L7                 0042 R
+  3 _Display_Patte     0069 GR  |   2 _Display_patte     0001 GR
+  2 _Gamefield         0015 GR  |   3 _Generate_Game     003C GR
+  3 _Repeat_Patter     0072 GR  |     __Do_Sound         **** GX
+    __Explosion_Sn     **** GX  |     __Init_Music_c     **** GX
+    __Random           **** GX  |     ___DP_to_C8        **** GX
+    ___Intensity_5     **** GX  |     ___Wait_Recal      **** GX
+    _current_explo     **** GX  |   2 _current_level     0000 GR
+    _current_music     **** GX  |     _handle_object     **** GX
+  3 _level_init        0000 GR  |   3 _level_play        007B GR
+    _umodhi3           **** GX
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size   42   flags  100
+   3 .text            size   B1   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<desktop version="1">
+
+	<!-- The sections below MUST occur in the following order : FRAME, DOCKING, VIEW* -->
+
+	<frame x="5" y="5" width="1200" height="800" state="0" />
+
+	<docking><![CDATA[<?xml version="1.0"?><VLDocking version="2.1"><DockingDesktop name=""><DockingPanel><Split orientation="0" location="0.6680440771349863"><Split orientation="1" location="0.4502127659574468"><TabbedDockable><Dockable><Key dockName="PARAJVE"/></Dockable><Dockable><Key dockName="PROGRAM"/></Dockable></TabbedDockable><Split orientation="0" location="0.5176715176715176"><TabbedDockable><Dockable><Key dockName="MEM_RAM"/></Dockable><Dockable><Key dockName="MEM_CARTRIDGE"/></Dockable><Dockable><Key dockName="MEM_ROM"/></Dockable></TabbedDockable><Split orientation="1" location="0.17289719626168223"><Dockable><Key dockName="REGISTERS"/></Dockable><TabbedDockable><Dockable><Key dockName="WATCH"/></Dockable><Dockable><Key dockName="BREAKPOINTS"/></Dockable></TabbedDockable></Split></Split></Split><Split orientation="1" location="0.4229787234042553"><Dockable><Key dockName="CONSOLE"/></Dockable><Split orientation="1" location="0.5593471810089021"><Split orientation="1" location="0.5093833780160858"><Dockable><Key dockName="FRAMEBUFFER"/></Dockable><Dockable><Key dockName="SYMBOLS"/></Dockable></Split><Split orientation="0" location="0.5021097046413502"><Dockable><Key dockName="BACKTRACE"/></Dockable><Dockable><Key dockName="CYCLES"/></Dockable></Split></Split></Split></Split></DockingPanel><TabGroups><TabGroup><Dockable><Key dockName="MEM_RAM"/></Dockable><Dockable><Key dockName="MEM_CARTRIDGE"/></Dockable><Dockable><Key dockName="MEM_ROM"/></Dockable></TabGroup><TabGroup><Dockable><Key dockName="PARAJVE"/></Dockable><Dockable><Key dockName="PROGRAM"/></Dockable></TabGroup><TabGroup><Dockable><Key dockName="WATCH"/></Dockable><Dockable><Key dockName="BREAKPOINTS"/></Dockable></TabGroup></TabGroups></DockingDesktop></VLDocking>]]></docking>
+
+	<view name="REGISTERS">
+		<horizontal value="false" />
+	</view>
+
+	<view name="WATCH">
+		<font size="10"><![CDATA[Envy Code R]]></font>
+		<genericFont size="10" />
+		<columns>
+			<width value="40" />
+			<width value="159" />
+			<width value="116" />
+			<width value="49" />
+			<width value="151" />
+		</columns>
+	</view>
+
+	<view name="BACKTRACE">
+		<font size="10"><![CDATA[Envy Code R]]></font>
+		<columns>
+			<width value="31" />
+			<width value="32" />
+			<width value="31" />
+			<width value="32" />
+			<width value="31" />
+			<width value="33" />
+			<width value="32" />
+			<width value="32" />
+			<width value="32" />
+		</columns>
+	</view>
+
+	<view name="MEM_RAM">
+		<font size="10"><![CDATA[Envy Code R]]></font>
+	</view>
+
+	<view name="MEM_ROM">
+		<font size="10"><![CDATA[Envy Code R]]></font>
+	</view>
+
+	<view name="MEM_CARTRIDGE">
+		<font size="10"><![CDATA[Envy Code R]]></font>
+	</view>
+
+	<view name="PROGRAM">
+		<font size="10"><![CDATA[Bitstream Vera Sans Mono]]></font>
+	</view>
+
+	<view name="SYMBOLS">
+		<font size="10"><![CDATA[Bitstream Vera Sans Mono]]></font>
+	</view>
+
+</desktop>

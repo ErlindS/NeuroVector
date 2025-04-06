@@ -1,0 +1,1 @@
+@C:\ProgramData\Oracle\Java\javapath\java.exe -Djava.library.path=libs/natives -Dsun.java2d.noddraw=true -cp libs/ParaJVD.jar;libs/jogl.jar;libs/gluegen-rt.jar;libs/jinput.jar;libs/vldocking_2.1.4.jar;libs/miglayout-3.6.3.jar;libs/antlr-3.5.2-runtime.jar frc.jvd.ParaJVD_VLDocking -monitorDeadlocks=true

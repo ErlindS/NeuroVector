@@ -1,0 +1,64 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	level.c
+                              6 	.globl	_current_level
+                              7 	.area	.data
+   0000                       8 _current_level:
+   0000 01                    9 	.byte	1
+                             10 	.area	.text
+                             11 	.globl	_level_init
+   0000                      12 _level_init:
+   0000 7F`00`00      [ 7]   13 	clr	_current_level
+   0003 39            [ 5]   14 	rts
+                             15 	.globl	_level_play
+   0004                      16 _level_play:
+   0004 32 7C         [ 5]   17 	leas	-4,s
+   0006 20 20         [ 3]   18 	bra	L4
+   0008                      19 L5:
+   0008 BD`00`00      [ 8]   20 	jsr	___DP_to_C8
+   000B BE`00`00      [ 6]   21 	ldx	_current_explosion
+   000E AF E4         [ 5]   22 	stx	,s
+   0010 AE E4         [ 5]   23 	ldx	,s
+   0012 BD`00`00      [ 8]   24 	jsr	__Explosion_Snd
+   0015 BE`00`00      [ 6]   25 	ldx	_current_music
+   0018 AF 62         [ 6]   26 	stx	2,s
+   001A AE 62         [ 6]   27 	ldx	2,s
+   001C BD`00`00      [ 8]   28 	jsr	__Init_Music_chk
+   001F BD`00`00      [ 8]   29 	jsr	___Wait_Recal
+   0022 BD`00`00      [ 8]   30 	jsr	__Do_Sound
+   0025 BD`00`00      [ 8]   31 	jsr	___Intensity_5F
+   0028                      32 L4:
+   0028 F6`00`00      [ 5]   33 	ldb	_current_level
+   002B 5D            [ 2]   34 	tstb
+   002C 27 DA         [ 3]   35 	beq	L5
+   002E 32 64         [ 5]   36 	leas	4,s
+   0030 39            [ 5]   37 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sat Apr  5 01:51:59 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  3 L4                 0028 R   |   3 L5                 0008 R
+    __Do_Sound         **** GX  |     __Explosion_Sn     **** GX
+    __Init_Music_c     **** GX  |     ___DP_to_C8        **** GX
+    ___Intensity_5     **** GX  |     ___Wait_Recal      **** GX
+    _current_explo     **** GX  |   2 _current_level     0000 GR
+    _current_music     **** GX  |   3 _level_init        0000 GR
+  3 _level_play        0004 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sat Apr  5 01:51:59 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size    1   flags  100
+   3 .text            size   31   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

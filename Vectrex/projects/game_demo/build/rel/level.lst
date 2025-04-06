@@ -1,0 +1,178 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	level.c
+                              6 	.globl	_current_level
+                              7 	.area	.data
+   0000                       8 _current_level:
+   0000 01                    9 	.byte	1
+   0001 00                   10 	.byte	0
+   0002 00                   11 	.byte	0
+                             12 	.area	.text
+   0000                      13 LC0:
+   0000 4C 45 56 45 4C 80    14 	.byte	76,69,86,69,76,-128,0
+        00
+   0007                      15 LC1:
+   0007 50 4C 41 59 45 52    16 	.byte	80,76,65,89,69,82,-128,0
+        80 00
+                             17 	.globl	_level_init
+   000F                      18 _level_init:
+   000F 32 7A         [ 5]   19 	leas	-6,s
+   0011 BD`00`00      [ 8]   20 	jsr	_init_friends
+   0014 BD`00`00      [ 8]   21 	jsr	_init_enemies
+   0017 BD`00`00      [ 8]   22 	jsr	_init_player
+   001A C6 64         [ 2]   23 	ldb	#100
+   001C E7 E4         [ 4]   24 	stb	,s
+   001E                      25 L3:
+   001E BD`00`00      [ 8]   26 	jsr	___DP_to_C8
+   0021 BE`00`00      [ 6]   27 	ldx	_current_explosion
+   0024 AF 61         [ 6]   28 	stx	1,s
+   0026 AE 61         [ 6]   29 	ldx	1,s
+   0028 BD`00`00      [ 8]   30 	jsr	__Explosion_Snd
+   002B BE`00`00      [ 6]   31 	ldx	_current_music
+   002E AF 63         [ 6]   32 	stx	3,s
+   0030 AE 63         [ 6]   33 	ldx	3,s
+   0032 BD`00`00      [ 8]   34 	jsr	__Init_Music_chk
+   0035 BD`00`00      [ 8]   35 	jsr	___Wait_Recal
+   0038 BD`00`00      [ 8]   36 	jsr	__Do_Sound
+   003B BD`00`00      [ 8]   37 	jsr	___Read_Btns
+   003E BD`00`00      [ 8]   38 	jsr	___Intensity_5F
+   0041 C6 9C         [ 2]   39 	ldb	#-100
+   0043 E7 E2         [ 6]   40 	stb	,-s
+   0045 8E`00`00      [ 3]   41 	ldx	#LC0
+   0048 C6 3C         [ 2]   42 	ldb	#60
+   004A BD`00`00      [ 8]   43 	jsr	_print_string
+   004D 32 61         [ 5]   44 	leas	1,s
+   004F F6`00`08      [ 5]   45 	ldb	_current_game+8
+   0052 4F            [ 2]   46 	clra		;zero_extendqihi: R:b -> R:d
+   0053 1F 01         [ 6]   47 	tfr	d,x
+   0055 E6 89`00`04   [ 8]   48 	ldb	_current_game+4,x
+   0059 34 04         [ 6]   49 	pshs	b
+   005B C6 28         [ 2]   50 	ldb	#40
+   005D E7 E2         [ 6]   51 	stb	,-s
+   005F C6 3C         [ 2]   52 	ldb	#60
+   0061 BD`00`00      [ 8]   53 	jsr	_print_unsigned_int
+   0064 32 62         [ 5]   54 	leas	2,s
+   0066 C6 9C         [ 2]   55 	ldb	#-100
+   0068 E7 E2         [ 6]   56 	stb	,-s
+   006A 8E`00`07      [ 3]   57 	ldx	#LC1
+   006D C6 14         [ 2]   58 	ldb	#20
+   006F BD`00`00      [ 8]   59 	jsr	_print_string
+   0072 32 61         [ 5]   60 	leas	1,s
+   0074 F6`00`08      [ 5]   61 	ldb	_current_game+8
+   0077 5C            [ 2]   62 	incb
+   0078 34 04         [ 6]   63 	pshs	b
+   007A C6 28         [ 2]   64 	ldb	#40
+   007C E7 E2         [ 6]   65 	stb	,-s
+   007E C6 14         [ 2]   66 	ldb	#20
+   0080 BD`00`00      [ 8]   67 	jsr	_print_unsigned_int
+   0083 32 62         [ 5]   68 	leas	2,s
+   0085 F6`00`08      [ 5]   69 	ldb	_current_game+8
+   0088 4F            [ 2]   70 	clra		;zero_extendqihi: R:b -> R:d
+   0089 1F 01         [ 6]   71 	tfr	d,x
+   008B E6 89`00`02   [ 8]   72 	ldb	_current_game+2,x
+   008F E7 65         [ 5]   73 	stb	5,s
+   0091 C6 69         [ 2]   74 	ldb	#105
+   0093 E7 E2         [ 6]   75 	stb	,-s
+   0095 8E C0 E2      [ 3]   76 	ldx	#-16158
+   0098 E6 66         [ 5]   77 	ldb	6,s
+   009A BD`00`00      [ 8]   78 	jsr	__Print_Ships
+   009D 32 61         [ 5]   79 	leas	1,s
+   009F 6A E4         [ 6]   80 	dec	,s
+   00A1 6D E4         [ 6]   81 	tst	,s
+   00A3 27 0A         [ 3]   82 	beq	L2
+   00A5 F6`00`00      [ 5]   83 	ldb	_Vec_Buttons
+   00A8 C4 08         [ 2]   84 	andb	#8
+   00AA 5D            [ 2]   85 	tstb
+   00AB 10 27 FF 6F   [ 6]   86 	lbeq	L3
+   00AF                      87 L2:
+   00AF 7F`00`00      [ 7]   88 	clr	_current_level
+   00B2 C6 04         [ 2]   89 	ldb	#4
+   00B4 F7`00`01      [ 5]   90 	stb	_current_level+1
+   00B7 7F`00`02      [ 7]   91 	clr	_current_level+2
+   00BA 32 66         [ 5]   92 	leas	6,s
+   00BC 39            [ 5]   93 	rts
+                             94 	.globl	_level_play
+   00BD                      95 _level_play:
+   00BD 32 7B         [ 5]   96 	leas	-5,s
+   00BF 20 5D         [ 3]   97 	bra	L6
+   00C1                      98 L7:
+   00C1 BD`00`00      [ 8]   99 	jsr	___DP_to_C8
+   00C4 BE`00`00      [ 6]  100 	ldx	_current_explosion
+   00C7 AF 61         [ 6]  101 	stx	1,s
+   00C9 AE 61         [ 6]  102 	ldx	1,s
+   00CB BD`00`00      [ 8]  103 	jsr	__Explosion_Snd
+   00CE BE`00`00      [ 6]  104 	ldx	_current_music
+   00D1 AF 63         [ 6]  105 	stx	3,s
+   00D3 AE 63         [ 6]  106 	ldx	3,s
+   00D5 BD`00`00      [ 8]  107 	jsr	__Init_Music_chk
+   00D8 BD`00`00      [ 8]  108 	jsr	___Wait_Recal
+   00DB BD`00`00      [ 8]  109 	jsr	__Do_Sound
+   00DE BD`00`00      [ 8]  110 	jsr	___Intensity_5F
+   00E1 F6`00`08      [ 5]  111 	ldb	_current_game+8
+   00E4 4F            [ 2]  112 	clra		;zero_extendqihi: R:b -> R:d
+   00E5 1F 01         [ 6]  113 	tfr	d,x
+   00E7 E6 89`00`06   [ 8]  114 	ldb	_current_game+6,x
+   00EB 34 04         [ 6]  115 	pshs	b
+   00ED C6 9C         [ 2]  116 	ldb	#-100
+   00EF E7 E2         [ 6]  117 	stb	,-s
+   00F1 C6 78         [ 2]  118 	ldb	#120
+   00F3 BD`00`00      [ 8]  119 	jsr	_print_unsigned_int
+   00F6 32 62         [ 5]  120 	leas	2,s
+   00F8 BD`00`00      [ 8]  121 	jsr	_handle_friends
+   00FB BD`00`00      [ 8]  122 	jsr	_handle_enemies
+   00FE BD`00`00      [ 8]  123 	jsr	_handle_player
+   0101 F6`00`02      [ 5]  124 	ldb	_current_level+2
+   0104 5C            [ 2]  125 	incb
+   0105 F7`00`02      [ 5]  126 	stb	_current_level+2
+   0108 F6`00`02      [ 5]  127 	ldb	_current_level+2
+   010B E7 E4         [ 4]  128 	stb	,s
+   010D F6`00`08      [ 5]  129 	ldb	_current_game+8
+   0110 4F            [ 2]  130 	clra		;zero_extendqihi: R:b -> R:d
+   0111 1F 01         [ 6]  131 	tfr	d,x
+   0113 E6 89`00`04   [ 8]  132 	ldb	_current_game+4,x
+   0117 E1 E4         [ 4]  133 	cmpb	,s	;cmpqi:(R)
+   0119 26 03         [ 3]  134 	bne	L6
+   011B 7F`00`02      [ 7]  135 	clr	_current_level+2
+   011E                     136 L6:
+   011E F6`00`00      [ 5]  137 	ldb	_current_level
+   0121 5D            [ 2]  138 	tstb
+   0122 27 9D         [ 3]  139 	beq	L7
+   0124 32 65         [ 5]  140 	leas	5,s
+   0126 39            [ 5]  141 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  3 L2                 00AF R   |   3 L3                 001E R
+  3 L6                 011E R   |   3 L7                 00C1 R
+  3 LC0                0000 R   |   3 LC1                0007 R
+    _Vec_Buttons       **** GX  |     __Do_Sound         **** GX
+    __Explosion_Sn     **** GX  |     __Init_Music_c     **** GX
+    __Print_Ships      **** GX  |     ___DP_to_C8        **** GX
+    ___Intensity_5     **** GX  |     ___Read_Btns       **** GX
+    ___Wait_Recal      **** GX  |     _current_explo     **** GX
+    _current_game      **** GX  |   2 _current_level     0000 GR
+    _current_music     **** GX  |     _handle_enemie     **** GX
+    _handle_friend     **** GX  |     _handle_player     **** GX
+    _init_enemies      **** GX  |     _init_friends      **** GX
+    _init_player       **** GX  |   3 _level_init        000F GR
+  3 _level_play        00BD GR  |     _print_string      **** GX
+    _print_unsigne     **** GX
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size    3   flags  100
+   3 .text            size  127   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

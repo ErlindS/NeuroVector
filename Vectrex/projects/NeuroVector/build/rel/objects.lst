@@ -1,0 +1,134 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	objects.c
+                              6 	.area	.text
+                              7 	.globl	_init_object
+   0000                       8 _init_object:
+   0000 32 7E         [ 5]    9 	leas	-2,s
+   0002 AF E4         [ 5]   10 	stx	,s
+   0004 6F F4         [ 9]   11 	clr	[,s]
+   0006 BD`00`00      [ 8]   12 	jsr	__Random
+   0009 C4 7F         [ 2]   13 	andb	#127
+   000B CB 40         [ 2]   14 	addb	#64
+   000D AE E4         [ 5]   15 	ldx	,s
+   000F E7 01         [ 5]   16 	stb	1,x
+   0011 BD`00`00      [ 8]   17 	jsr	__Random
+   0014 C4 7F         [ 2]   18 	andb	#127
+   0016 CB 40         [ 2]   19 	addb	#64
+   0018 AE E4         [ 5]   20 	ldx	,s
+   001A E7 02         [ 5]   21 	stb	2,x
+   001C BD`00`00      [ 8]   22 	jsr	__Random
+   001F C4 03         [ 2]   23 	andb	#3
+   0021 CB FE         [ 2]   24 	addb	#-2
+   0023 AE E4         [ 5]   25 	ldx	,s
+   0025 E7 03         [ 5]   26 	stb	3,x
+   0027 BD`00`00      [ 8]   27 	jsr	__Random
+   002A C4 03         [ 2]   28 	andb	#3
+   002C 5A            [ 2]   29 	decb
+   002D AE E4         [ 5]   30 	ldx	,s
+   002F E7 04         [ 5]   31 	stb	4,x
+   0031 32 62         [ 5]   32 	leas	2,s
+   0033 39            [ 5]   33 	rts
+                             34 	.globl	_vectors_player
+   0034                      35 _vectors_player:
+   0034 00                   36 	.byte	0
+   0035 20                   37 	.byte	32
+   0036 E0                   38 	.byte	-32
+   0037 FF                   39 	.byte	-1
+   0038 00                   40 	.byte	0
+   0039 40                   41 	.byte	64
+   003A FF                   42 	.byte	-1
+   003B C0                   43 	.byte	-64
+   003C 00                   44 	.byte	0
+   003D FF                   45 	.byte	-1
+   003E 00                   46 	.byte	0
+   003F C0                   47 	.byte	-64
+   0040 FF                   48 	.byte	-1
+   0041 40                   49 	.byte	64
+   0042 00                   50 	.byte	0
+   0043 01                   51 	.byte	1
+   0044 00                   52 	.byte	0
+   0045 00                   53 	.byte	0
+                             54 	.globl	_draw_player
+   0046                      55 _draw_player:
+   0046 BD`00`00      [ 8]   56 	jsr	___Reset0Ref
+   0049 C6 7F         [ 2]   57 	ldb	#127
+   004B D7`00         [ 4]   58 	stb	*_dp_VIA_t1_cnt_lo
+   004D C6 05         [ 2]   59 	ldb	#5
+   004F E7 E2         [ 6]   60 	stb	,-s
+   0051 C6 05         [ 2]   61 	ldb	#5
+   0053 BD`00`00      [ 8]   62 	jsr	__Moveto_d
+   0056 32 61         [ 5]   63 	leas	1,s
+   0058 C6 22         [ 2]   64 	ldb	#34
+   005A D7`00         [ 4]   65 	stb	*_dp_VIA_t1_cnt_lo
+   005C 8E`00`34      [ 3]   66 	ldx	#_vectors_player
+   005F BD`00`00      [ 8]   67 	jsr	___Draw_VLp
+   0062 39            [ 5]   68 	rts
+                             69 	.globl	_handle_objects
+   0063                      70 _handle_objects:
+   0063 32 79         [ 5]   71 	leas	-7,s
+   0065 AF 63         [ 6]   72 	stx	3,s
+   0067 BD`00`00      [ 8]   73 	jsr	___Reset0Ref
+   006A C6 7F         [ 2]   74 	ldb	#127
+   006C D7`00         [ 4]   75 	stb	*_dp_VIA_t1_cnt_lo
+   006E AE 63         [ 6]   76 	ldx	3,s
+   0070 E6 01         [ 5]   77 	ldb	1,x
+   0072 E7 E4         [ 4]   78 	stb	,s
+   0074 AE 63         [ 6]   79 	ldx	3,s
+   0076 E6 02         [ 5]   80 	ldb	2,x
+   0078 E7 66         [ 5]   81 	stb	6,s
+   007A E6 E4         [ 4]   82 	ldb	,s
+   007C E7 65         [ 5]   83 	stb	5,s
+   007E E6 66         [ 5]   84 	ldb	6,s
+   0080 E7 E2         [ 6]   85 	stb	,-s
+   0082 E6 66         [ 5]   86 	ldb	6,s
+   0084 BD`00`00      [ 8]   87 	jsr	__Moveto_d
+   0087 32 61         [ 5]   88 	leas	1,s
+   0089 C6 22         [ 2]   89 	ldb	#34
+   008B D7`00         [ 4]   90 	stb	*_dp_VIA_t1_cnt_lo
+   008D 8E`00`34      [ 3]   91 	ldx	#_vectors_player
+   0090 BD`00`00      [ 8]   92 	jsr	___Draw_VLp
+   0093 AE 63         [ 6]   93 	ldx	3,s
+   0095 E6 01         [ 5]   94 	ldb	1,x
+   0097 E7 61         [ 5]   95 	stb	1,s
+   0099 AE 63         [ 6]   96 	ldx	3,s
+   009B E6 03         [ 5]   97 	ldb	3,x
+   009D EB 61         [ 5]   98 	addb	1,s
+   009F AE 63         [ 6]   99 	ldx	3,s
+   00A1 E7 01         [ 5]  100 	stb	1,x
+   00A3 AE 63         [ 6]  101 	ldx	3,s
+   00A5 E6 02         [ 5]  102 	ldb	2,x
+   00A7 E7 62         [ 5]  103 	stb	2,s
+   00A9 AE 63         [ 6]  104 	ldx	3,s
+   00AB E6 04         [ 5]  105 	ldb	4,x
+   00AD EB 62         [ 5]  106 	addb	2,s
+   00AF AE 63         [ 6]  107 	ldx	3,s
+   00B1 E7 02         [ 5]  108 	stb	2,x
+   00B3 32 67         [ 5]  109 	leas	7,s
+   00B5 39            [ 5]  110 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+    __Moveto_d         **** GX  |     __Random           **** GX
+    ___Draw_VLp        **** GX  |     ___Reset0Ref       **** GX
+    _dp_VIA_t1_cnt     **** GX  |   2 _draw_player       0046 GR
+  2 _handle_object     0063 GR  |   2 _init_object       0000 GR
+  2 _vectors_playe     0034 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   B6   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

@@ -1,0 +1,67 @@
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tbeq\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1a\n\tbeq\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tbmi\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1b\n\tbmi\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tbne\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1c\n\tbne\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tbpl\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1d\n\tbpl\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tlbeq\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1e\n\tlbeq\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tlbmi\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1f\n\tlbmi\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tlbne\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1g\n\tlbne\t" 
+-i -s "\tdec\t([^\n]+)\n\ttst\t\1\n\tlbpl\t" -r "\tdec\t\1\n\t; tst\t\1\t; optimization 1h\n\tlbpl\t" 
+
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tbeq\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2a\n\tbeq\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tbmi\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2b\n\tbmi\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tbne\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2c\n\tbne\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tbpl\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2d\n\tbpl\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tlbeq\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2e\n\tlbeq\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tlbmi\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2f\n\tlbmi\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tlbne\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2g\n\tlbne\t" 
+-i -s "\tinc\t([^\n]+)\n\ttst\t\1\n\tlbpl\t" -r "\tinc\t\1\n\t; tst\t\1\t; optimization 2h\n\tlbpl\t" 
+
+-i -s "(\tst[abdxyus]\t)([^\n]+)\n\ttst\t\2" -r "\1\2\n\t; tst\t\2\t; optimization 3a" 
+-i -s "(\tld[abdxyus]\t)([^\n]+)\n\ttst\t\2" -r "\1\2\n\t; tst\t\2\t; optimization 3b" 
+
+-i -s "\n;[^\n]+\n;[^\n]+\n\tpuls ([^\n;]+); pull frame\n\t\n;[^\n]+\n;[^\n]+\n\tpshs \1; push frame\n" -r "\n\t; puls \1\t; optimization 4\n\t; pshs \1\t; optimization 4\n"
+
+-i -s "\tst([abdxyus])[\t ]+([^\n]+)\n(;[^\n]+\n)*\tld\1[\t ]+\2\n" -r "\tst\1\t\2\n\t; ld\1\t\2\t; optimization 5a\n" 
+
+
+-i -s "\tclr\t([^\n]+)\n\tld([ab])\t\1\n" -r "\tclr\t\1\n\tclr\2\t; ld\2 \1; optimization 5b\n" 
+
+
+
+
+-i -s "\tst([ab])\t([^\n]+)\n\ttst\1([^\n]*)\n" -r "\tst\1\t\2\n\t; tst\1\3\t; optimization 6a\n" 
+-i -s "\tld([ab])\t([^\n]+)\n\ttst\1([^\n]*)\n" -r "\tld\1\t\2\n\t; tst\1\3\t; optimization 6b\n" 
+
+-i -s "\ttfr\t([xyus]),([xyus])" -r "\tlea\2\t,\1\t; optimization 7"
+
+-i -s "\tst([abdxyus])\t([^\n]+)\n\tld([abdxyus])\t\2\n\tst\3\t([^\n]+)\n\tld\1\t\4\n" -r "\tst\1\t\2\n\tld\3\t\2\n\tst\3\t\4\n\t; ld\1\t\4\t; optimization 8\n"
+
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tlb([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tlb\4\n\t; ld\1\t\2; optimization 9\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbge\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbge\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbgt\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbgt\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbhi\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbhi\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbhs\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbhs\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tble\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tble\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbeq\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbeq\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tblo\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tblo\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbls\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbls\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tblt\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tblt\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbmi\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbmi\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbne\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbne\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+-i -s "\tld([abdxyus])\t([^\n]+)\n\tcmp\1\t([^\n]+)\n\tbpl\t([^\n]+)\n\tld\1\t\2\n\tcmp\1\t([^\n]+)\n" -r "\tld\1\t\2\n\tcmp\1\t\3\n\tbpl\t\4\n\t; ld\1\t\2; optimization 9a\n\tcmp\1\t\5\n"
+
+-i -s "\tclra\t([^\n]+)\n\tclra\t([^\n]+)" -r "\tclra\t\1\n\t; clra\t\2\t; optimization a1" 
+-i -s "\tclrb\t([^\n]+)\n\tclrb\t([^\n]+)" -r "\tclrb\t\1\n\t; clrb\t\2\t; optimization a2" 
+
+-i -s "\tlbra\t([^\n]+)" -r "\tjmp\t\1\t; optimization b" 
+
+-i -s "\tTFR\t([abdxyus]),([abdxyus])([^\n]*)\n\tEXG\t\1,\2([^\n]*)\n" -r "\ttfr\t\1,\2\3\n\t; exg \1,\2\t; optimization c1\n"
+-i -s "\tTFR\t([abdxyus]),([abdxyus])([^\n]*)\n\tEXG\t\2,\1([^\n]*)\n" -r "\ttfr\t\1,\2\3\n\t; exg \2,\1\t; optimization c2\n"
+
+-i -s "\tCLRA([^\n]*)\n\tTFR\td,([^\n]+)\n\tLDB\t([^\n]+)\n\tCLRA([^\n]*)\n" -r "\tclra\1\n\ttfr\td,\2\n\tldb\t\3\n\t; clra\4\t; optimization d\n"
+
+-i -s "\tTFR\t([abdxyus]),([abdxyus])([^\n]*)\n\tTFR\t\2,\1([^\n]*)\n" -r "\ttfr\t\1,\2\t; tfr \2,\1 ; optimization e\n"
+
+-i -s "\tjsr\t([^\n]+)\n\trts\n" -r "\tjmp\t\1\t; optimization f (jsr + rts -> jmp)\n" 
+
+

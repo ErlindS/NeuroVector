@@ -1,0 +1,81 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	object.c
+                              6 	.area	.text
+                              7 	.globl	_init_object
+   0000                       8 _init_object:
+   0000 32 7E         [ 5]    9 	leas	-2,s
+   0002 AF E4         [ 5]   10 	stx	,s
+   0004 6F F4         [ 9]   11 	clr	[,s]
+   0006 BD`00`00      [ 8]   12 	jsr	__Random
+   0009 C4 7F         [ 2]   13 	andb	#127
+   000B CB 40         [ 2]   14 	addb	#64
+   000D AE E4         [ 5]   15 	ldx	,s
+   000F E7 01         [ 5]   16 	stb	1,x
+   0011 BD`00`00      [ 8]   17 	jsr	__Random
+   0014 C4 7F         [ 2]   18 	andb	#127
+   0016 CB 40         [ 2]   19 	addb	#64
+   0018 AE E4         [ 5]   20 	ldx	,s
+   001A E7 02         [ 5]   21 	stb	2,x
+   001C BD`00`00      [ 8]   22 	jsr	__Random
+   001F C4 03         [ 2]   23 	andb	#3
+   0021 CB FE         [ 2]   24 	addb	#-2
+   0023 AE E4         [ 5]   25 	ldx	,s
+   0025 E7 03         [ 5]   26 	stb	3,x
+   0027 BD`00`00      [ 8]   27 	jsr	__Random
+   002A C4 03         [ 2]   28 	andb	#3
+   002C 5A            [ 2]   29 	decb
+   002D AE E4         [ 5]   30 	ldx	,s
+   002F E7 04         [ 5]   31 	stb	4,x
+   0031 32 62         [ 5]   32 	leas	2,s
+   0033 39            [ 5]   33 	rts
+                             34 	.globl	_move_object
+   0034                      35 _move_object:
+   0034 32 7C         [ 5]   36 	leas	-4,s
+   0036 AF 62         [ 6]   37 	stx	2,s
+   0038 F6`00`02      [ 5]   38 	ldb	_current_level+2
+   003B 5D            [ 2]   39 	tstb
+   003C 27 20         [ 3]   40 	beq	L5
+   003E AE 62         [ 6]   41 	ldx	2,s
+   0040 E6 01         [ 5]   42 	ldb	1,x
+   0042 E7 E4         [ 4]   43 	stb	,s
+   0044 AE 62         [ 6]   44 	ldx	2,s
+   0046 E6 03         [ 5]   45 	ldb	3,x
+   0048 EB E4         [ 4]   46 	addb	,s
+   004A AE 62         [ 6]   47 	ldx	2,s
+   004C E7 01         [ 5]   48 	stb	1,x
+   004E AE 62         [ 6]   49 	ldx	2,s
+   0050 E6 02         [ 5]   50 	ldb	2,x
+   0052 E7 61         [ 5]   51 	stb	1,s
+   0054 AE 62         [ 6]   52 	ldx	2,s
+   0056 E6 04         [ 5]   53 	ldb	4,x
+   0058 EB 61         [ 5]   54 	addb	1,s
+   005A AE 62         [ 6]   55 	ldx	2,s
+   005C E7 02         [ 5]   56 	stb	2,x
+   005E                      57 L5:
+   005E 32 64         [ 5]   58 	leas	4,s
+   0060 39            [ 5]   59 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 L5                 005E R   |     __Random           **** GX
+    _current_level     **** GX  |   2 _init_object       0000 GR
+  2 _move_object       0034 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 13:16:31 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   61   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

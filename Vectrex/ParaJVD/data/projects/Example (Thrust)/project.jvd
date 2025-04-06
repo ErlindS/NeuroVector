@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project version="1">
+
+	<info>
+		<name><![CDATA[THRUST (example project)]]></name>
+		<author><![CDATA[Ville Krumlinde]]></author>
+		<description><![CDATA[This is an example of ParaJVD project, that makes use of Ville Krumlinde's THUST sources.]]></description>
+		<creation date="08/03/10 14:55:47" />
+		<modification date="20/10/15 11:25:37" />
+	</info>
+
+	<program>
+		<system mode="DBG/AS09" tabSize="8">
+			<source file="data/system/bios.dbg" />
+			<binary file="data/system/bios_fastboot.bin" />
+		</system>
+		<cartridge mode="DBG/AS09" tabSize="8">
+			<source file="data/sources/example (thrust)/thrust.dbg" />
+			<binary file="data/sources/example (thrust)/thrust.bin" />
+		</cartridge>
+	</program>
+
+	<breakpoints>
+		<breakpoint type="executable" address="$0039" />
+		<breakpoint type="executable" address="$008B" enabled="false" />
+		<breakpoint type="memory" address="$CB45" length="1" access="write" enabled="false" />
+		<breakpoint type="memory" address="$CB46" length="2" access="write" enabled="false" />
+		<breakpoint type="memory" address="$CB48" length="6" access="read" enabled="false" />
+		<breakpoint type="memory" address="$CB4E" length="10" access="all" enabled="false" />
+	</breakpoints>
+
+	<watches>
+		<watch type="word" display="hexa">
+			<expression><![CDATA[[S]]]></expression>
+			<description><![CDATA[Word on stack]]></description>
+		</watch>
+		<watch type="word*" display="hexa">
+			<expression><![CDATA[ShipFuel]]></expression>
+			<description><![CDATA[Program Symbol]]></description>
+		</watch>
+		<watch type="area*" display="addr_data" length="4">
+			<expression><![CDATA[S]]></expression>
+			<description><![CDATA[Content on stack]]></description>
+		</watch>
+		<watch type="area*" display="data" length="32">
+			<expression><![CDATA[$C8F0]]></expression>
+			<description><![CDATA[Some memory]]></description>
+		</watch>
+		<watch type="area*" display="addr_data" length="6">
+			<expression><![CDATA[PC]]></expression>
+			<description><![CDATA[Next instruction's bytes]]></description>
+		</watch>
+		<watch type="word" display="hexa">
+			<expression><![CDATA[(A<<8) | B]]></expression>
+			<description><![CDATA[D register (synthetic)]]></description>
+		</watch>
+		<watch type="word" display="hexa">
+			<expression><![CDATA[D]]></expression>
+			<description><![CDATA[D register]]></description>
+		</watch>
+		<watch type="word" display="hexa">
+			<expression><![CDATA[(X ^ Y) | (U & S & $7fff) | $8000]]></expression>
+			<description><![CDATA[Binary expression]]></description>
+		</watch>
+	</watches>
+
+	<options>
+		<property name="BACKTRACE.autoScroll" value="true" />
+		<property name="BACKTRACE.bufferMaxSize" value="2000" />
+		<property name="BACKTRACE.filter.include.rom.calls" value="true" />
+		<property name="BACKTRACE.filter.include.rom.timings" value="true" />
+		<property name="BACKTRACE.synchronize.program" value="true" />
+		<property name="BACKTRACE.synchronize.registers" value="true" />
+		<property name="CONSOLE.autoScroll" value="true" />
+		<property name="CONSOLE.hideDebugText" value="true" />
+		<property name="CYCLES.address.start" value="$F1A2" />
+		<property name="CYCLES.address.stop" value="$F19C" />
+		<property name="CYCLES.histogram.visible" value="true" />
+		<property name="CYCLES.scaling.counter.maximum" value="50000" />
+		<property name="CYCLES.scaling.counter.tick" value="10000" />
+		<property name="CYCLES.scaling.histogram.maximum" value="55000" />
+		<property name="CYCLES.scaling.histogram.tick" value="10000" />
+		<property name="FRAMEBUFFER.antiAlias" value="true" />
+		<property name="FRAMEBUFFER.beamPosition" value="true" />
+		<property name="FRAMEBUFFER.reverse" value="false" />
+		<property name="MEM_CARTRIDGE.header.alignment" value="Left" />
+		<property name="MEM_CARTRIDGE.header.position" value="Top" />
+		<property name="MEM_CARTRIDGE.table.column.ASCII" value="true" />
+		<property name="MEM_CARTRIDGE.table.column.address" value="true" />
+		<property name="MEM_CART_RAM.header.alignment" value="Left" />
+		<property name="MEM_CART_RAM.header.position" value="Top" />
+		<property name="MEM_CART_RAM.snapshot.locked" value="false" />
+		<property name="MEM_CART_RAM.table.column.ASCII" value="true" />
+		<property name="MEM_CART_RAM.table.column.address" value="true" />
+		<property name="MEM_RAM.header.alignment" value="Left" />
+		<property name="MEM_RAM.header.position" value="Top" />
+		<property name="MEM_RAM.snapshot.locked" value="false" />
+		<property name="MEM_RAM.table.column.ASCII" value="true" />
+		<property name="MEM_RAM.table.column.address" value="true" />
+		<property name="MEM_ROM.header.alignment" value="Left" />
+		<property name="MEM_ROM.header.position" value="Top" />
+		<property name="MEM_ROM.table.column.ASCII" value="true" />
+		<property name="MEM_ROM.table.column.address" value="true" />
+		<property name="PROGRAM.find.caseSensitive" value="false" />
+		<property name="PROGRAM.find.codeOnly" value="true" />
+		<property name="PROGRAM.find.direction" value="forward" />
+		<property name="PROGRAM.find.regex" value="false" />
+		<property name="PROGRAM.find.scope" value="all" />
+		<property name="PROGRAM.find.text" value="" />
+		<property name="PROGRAM.find.wholeWord" value="false" />
+		<property name="PROGRAM.findAll.highlight" value="true" />
+		<property name="PROGRAM.header.alignment" value="Center" />
+		<property name="PROGRAM.header.position" value="Top" />
+		<property name="PROGRAM.hideSymbolsWarning" value="false" />
+		<property name="REGISTERS.layout.horizontal" value="false" />
+		<property name="SYMBOLS.filter.text" value="fuel" />
+		<property name="SYMBOLS.options.hide.bios" value="true" />
+		<property name="SYMBOLS.options.hide.cartridge" value="false" />
+		<property name="SYMBOLS.options.hide.shadowed" value="true" />
+		<property name="SYMBOLS.options.hide.unmapped" value="true" />
+		<property name="SYMBOLS.options.hide.user" value="true" />
+		<property name="SYMBOLS.options.hide.user.text" value="$41" />
+		<property name="SYMBOLS.options.hide.via" value="true" />
+		<property name="SYMBOLS.sort.key0" value="0:ASCENDING" />
+	</options>
+
+</project>
