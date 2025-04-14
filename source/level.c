@@ -101,14 +101,14 @@ void Display_Pattern(){
 	}
 }
 
-int counter = 0;
+unsigned int counter = 0;
 void Display_TimeLeft(){
 	print_string(80, -60, "TIME LEFT\x80");
 
-	draw_cross(counter);		
-	++counter;
-	if(counter > 10){
-		counter = 0;
+	Loadingbar(counter);		
+	counter -=4;
+	if(counter == 0){
+		counter = 200;
 	}
 }
 

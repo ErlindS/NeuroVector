@@ -67,8 +67,21 @@ const struct packet_t cross[] =
 
 const struct vector_t Time_Positions3[11] = {{-50, 60},{-40, 60},{-30, 60},{-20, 60},{-10, 60},{0, 60},{10, 60},{20, 60},{30, 60},{40, 60},{50,60}};
 
-int cross_y = -50;
-int cross_x = 60;
+int cross_y = 50;
+int cross_x = -60;
+
+
+void Loadingbar(unsigned int q) {
+		
+		for(int i = 0; i < 3; ++i){
+			Reset0Ref();					// reset beam to center of screen
+			dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
+			Moveto_d(cross_y - i*4, cross_x);			// move beam to object coordinates
+			dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+			Draw_Line_d(0,100);
+		}
+		
+}
 
 void draw_cross(int q){
 		while(--q){
