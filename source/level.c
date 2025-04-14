@@ -102,33 +102,32 @@ void Display_TimeLeft(){
 	}
 }
 // ---------------------------------------------------------------------------
-const unsigned int nibby_vl_style_1[] =
+const unsigned int nibby_vl_style_0[] =
 {
 	// nibby_packet 1: "N"
-	3,	// control byte: 4 nibby_vectors follow, move last vector
-	0x60, 0xa3, 0x60, 0xa3,
+	3,	// control byte: 3 nibby_vectors follow
+	0x60, 0xa3, 0x60,
 	// nibby_packet 2: "I"
-	1,	// control byte: 2 nibby_vectors follow, move last vector
-	0x60, 0xa3,
+	128 + 2,	// control byte: 2 nibby_vectors follow, move first vector
+	0xa3, 0x60,
 	// nibby_packet 3: "B"
-	5,	// control byte: 6 nibby_vectors follow, move last vector
-	0x60, 0xf3, 0xed, 0xf3, 0xed, 0x06,
+	128 + 6,	// control byte: 6 nibby_vectors follow, move first vector
+	0xa3, 0x60, 0xf3, 0xed, 0xf3, 0xed,
 	// nibby_packet 4: "B"
-	5,	// control byte: 6 nibby_vectors follow, move last vector
-	0x60, 0xf3, 0xed, 0xf3, 0xed, 0x66,
+	128 + 6,	// control byte: 6 nibby_vectors follow, move first vector
+	0x06, 0x60, 0xf3, 0xed, 0xf3, 0xed,
 	// nibby_packet 5: "Y"
-	2,	// control byte: 3 nibby_vectors follow, move last vector
-	0xd2, 0x32, 0xde,
+	128 + 3,	// control byte: 3 nibby_vectors follow, move first vector
+	0x66, 0xd2, 0x32,
 	// nibby_packet 6: "Y"
-	128 + 0,	// control byte: 1 nibby_vector follows, draw last vector
-	0xd0,
-	// nibby_packet 7: "1"
-	128 + 32 + 16 + 1,	// control byte: 2 position bytes and then 2 nibby_vectors follow, draw last vector, last packet
-	0xb0, 0xe0, 0x60, 0xee,
+	128 + 2,	// control byte: 2 nibby_vectors follow, move first vector
+	0xde, 0xd0,
+	// nibby_packet 7: "0"
+	128 + 32 + 5,	// control byte: 5 nibby_vectors follow, move first vector, last packet
+	0x07, 0x60, 0x03, 0xa0, 0x0d,
 };
+
 //-----------------------------------------------------------------------------------------
-
-
 
 void level_play(void)
 {
@@ -141,10 +140,37 @@ void level_play(void)
 		Wait_Recal();
 		Do_Sound();
 		Intensity_5F();
-		// game loop header end
 
 		//Display_TimeLeft();
-		Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_1);
+		while(1)
+	{
+		Wait_Recal();
+		Intensity_7F();
+
+		Reset0Ref();
+		Moveto_d(0, -32);
+
+		Vec_Misc_Count = 0;
+		Vec_0Ref_Enable = 0;
+		dp_VIA_t1_cnt_lo = 60;
+		
+		if (*((unsigned int*) 0xFFA1) == 0x20) // dirty bios check
+		{
+			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
+
+			Reset0Ref();
+			Print_Str_d(-120, 0, "B796 YES\x80");
+		}
+		else
+		{
+			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
+
+			Reset0Ref();
+			Print_Str_d(-120, 0, "B796 NO\x80");			
+		}
+
+	}
+		
 		
 		//Generate_Gamefield();
 		//Display_Pattern();
