@@ -69,10 +69,7 @@ const struct vector_t Time_Positions3[11] = {{-50, 60},{-40, 60},{-30, 60},{-20,
 
 int cross_y = 50;
 int cross_x = -60;
-
-
-void Loadingbar(unsigned int q) {
-		
+void Loadingbar(unsigned int q) {	
 		for(int i = 0; i < 3; ++i){
 			Reset0Ref();					// reset beam to center of screen
 			dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning

@@ -74,7 +74,7 @@ void level_init()
 	current_level.status = LEVEL_PLAY;
 }	
 // ---------------------------------------------------------------------------
-
+//Gamefield
 struct object_t Gamefield[] = 
 {
 	{ .status = INACTIVE, .y = 0, .x = 0, .dy = 0, .dx = 0},
@@ -89,18 +89,8 @@ struct object_t Gamefield[] =
 };
 
 
-void Generate_Gamefield(){
-	for(int i = 0; i < 9; i++){
-		handle_objects(&Gamefield[i]);
-	}
-}
-
-void Display_Pattern(){
-	for(int i = 0; i < 9; i++){
-		//draw_cross(&Positions[i]);
-	}
-}
-
+// ---------------------------------------------------------------------------
+// Loadingbar
 unsigned int counter = 0;
 void Display_TimeLeft(){
 	print_string(80, -60, "TIME LEFT\x80");
@@ -111,6 +101,34 @@ void Display_TimeLeft(){
 		counter = 200;
 	}
 }
+// ---------------------------------------------------------------------------
+const unsigned int nibby_vl_style_1[] =
+{
+	// nibby_packet 1: "N"
+	3,	// control byte: 4 nibby_vectors follow, move last vector
+	0x60, 0xa3, 0x60, 0xa3,
+	// nibby_packet 2: "I"
+	1,	// control byte: 2 nibby_vectors follow, move last vector
+	0x60, 0xa3,
+	// nibby_packet 3: "B"
+	5,	// control byte: 6 nibby_vectors follow, move last vector
+	0x60, 0xf3, 0xed, 0xf3, 0xed, 0x06,
+	// nibby_packet 4: "B"
+	5,	// control byte: 6 nibby_vectors follow, move last vector
+	0x60, 0xf3, 0xed, 0xf3, 0xed, 0x66,
+	// nibby_packet 5: "Y"
+	2,	// control byte: 3 nibby_vectors follow, move last vector
+	0xd2, 0x32, 0xde,
+	// nibby_packet 6: "Y"
+	128 + 0,	// control byte: 1 nibby_vector follows, draw last vector
+	0xd0,
+	// nibby_packet 7: "1"
+	128 + 32 + 16 + 1,	// control byte: 2 position bytes and then 2 nibby_vectors follow, draw last vector, last packet
+	0xb0, 0xe0, 0x60, 0xee,
+};
+//-----------------------------------------------------------------------------------------
+
+
 
 void level_play(void)
 {
@@ -125,7 +143,9 @@ void level_play(void)
 		Intensity_5F();
 		// game loop header end
 
-		Display_TimeLeft();
+		//Display_TimeLeft();
+		Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_1);
+		
 		//Generate_Gamefield();
 		//Display_Pattern();
 		// end of frame
