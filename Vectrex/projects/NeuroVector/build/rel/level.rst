@@ -7,193 +7,271 @@
                               7 	.area	.data
    C889                       8 _current_level:
    C889 01                    9 	.byte	1
-                             10 	.globl	_Display_pattern
-   C88A                      11 _Display_pattern:
-   C88A 00 00 00 00 00 00    12 	.word	0,0,0,0,0,0,0,0,0,0
-        00 00 00 00 00 00
-        00 00 00 00 00 00
-        00 00
-                             13 	.area	.text
-                             14 	.globl	_level_init
-   0194                      15 _level_init:
-   0194 32 7D         [ 5]   16 	leas	-3,s
-   0196 6F 62         [ 7]   17 	clr	2,s
-   0198 20 2A         [ 3]   18 	bra	L2
-   019A                      19 L3:
-   019A E6 62         [ 5]   20 	ldb	2,s
-   019C E7 61         [ 5]   21 	stb	1,s
-   019E BD 03 5F      [ 8]   22 	jsr	__Random
-   01A1 4F            [ 2]   23 	clra		;zero_extendqihi: R:b -> R:d
-   01A2 8E 00 09      [ 3]   24 	ldx	#9
-   01A5 34 10         [ 6]   25 	pshs	x
-   01A7 1F 01         [ 6]   26 	tfr	d,x
-   01A9 BD 03 47      [ 8]   27 	jsr	_umodhi3
-   01AC 32 62         [ 5]   28 	leas	2,s
-   01AE 1F 10         [ 6]   29 	tfr	x,d	;movlsbqihi: R:x -> R:b
-   01B0 E7 E4         [ 4]   30 	stb	,s
-   01B2 E6 E4         [ 4]   31 	ldb	,s
-   01B4 5C            [ 2]   32 	incb
-   01B5 E7 E4         [ 4]   33 	stb	,s
-   01B7 E6 61         [ 5]   34 	ldb	1,s
-   01B9 1D            [ 2]   35 	sex		;extendqihi2: R:b -> R:d
-   01BA 1F 01         [ 6]   36 	tfr	d,x
-   01BC E6 E4         [ 4]   37 	ldb	,s
-   01BE E7 89 C8 8A   [ 8]   38 	stb	_Display_pattern,x
-   01C2 6C 62         [ 7]   39 	inc	2,s
-   01C4                      40 L2:
-   01C4 E6 62         [ 5]   41 	ldb	2,s
-   01C6 C1 13         [ 2]   42 	cmpb	#19	;cmpqi:
-   01C8 2F D0         [ 3]   43 	ble	L3
-   01CA 7F C8 89      [ 7]   44 	clr	_current_level
-   01CD 32 63         [ 5]   45 	leas	3,s
-   01CF 39            [ 5]   46 	rts
-                             47 	.globl	_Gamefield
-                             48 	.area	.data
-   C89E                      49 _Gamefield:
-   C89E 01                   50 	.byte	1
-   C89F 00                   51 	.byte	0
-   C8A0 00                   52 	.byte	0
-   C8A1 00                   53 	.byte	0
-   C8A2 00                   54 	.byte	0
-   C8A3 01                   55 	.byte	1
-   C8A4 1E                   56 	.byte	30
-   C8A5 00                   57 	.byte	0
-   C8A6 00                   58 	.byte	0
-   C8A7 00                   59 	.byte	0
-   C8A8 01                   60 	.byte	1
-   C8A9 00                   61 	.byte	0
-   C8AA 1E                   62 	.byte	30
-   C8AB 00                   63 	.byte	0
-   C8AC 00                   64 	.byte	0
-   C8AD 01                   65 	.byte	1
-   C8AE 1E                   66 	.byte	30
-   C8AF 1E                   67 	.byte	30
-   C8B0 00                   68 	.byte	0
-   C8B1 00                   69 	.byte	0
-   C8B2 01                   70 	.byte	1
-   C8B3 E2                   71 	.byte	-30
-   C8B4 00                   72 	.byte	0
-   C8B5 00                   73 	.byte	0
-   C8B6 00                   74 	.byte	0
-   C8B7 01                   75 	.byte	1
-   C8B8 00                   76 	.byte	0
-   C8B9 E2                   77 	.byte	-30
-   C8BA 00                   78 	.byte	0
-   C8BB 00                   79 	.byte	0
-   C8BC 01                   80 	.byte	1
-   C8BD E2                   81 	.byte	-30
-   C8BE E2                   82 	.byte	-30
-   C8BF 00                   83 	.byte	0
-   C8C0 00                   84 	.byte	0
-   C8C1 01                   85 	.byte	1
-   C8C2 1E                   86 	.byte	30
-   C8C3 E2                   87 	.byte	-30
-   C8C4 00                   88 	.byte	0
-   C8C5 00                   89 	.byte	0
-   C8C6 01                   90 	.byte	1
-   C8C7 E2                   91 	.byte	-30
-   C8C8 1E                   92 	.byte	30
-   C8C9 00                   93 	.byte	0
-   C8CA 00                   94 	.byte	0
-                             95 	.area	.text
-                             96 	.globl	_Generate_Gamefield
-   01D0                      97 _Generate_Gamefield:
-   01D0 32 7D         [ 5]   98 	leas	-3,s
-   01D2 6F 62         [ 7]   99 	clr	2,s
-   01D4 20 1E         [ 3]  100 	bra	L6
-   01D6                     101 L7:
-   01D6 E6 62         [ 5]  102 	ldb	2,s
-   01D8 1D            [ 2]  103 	sex		;extendqihi2: R:b -> R:d
-   01D9 1F 01         [ 6]  104 	tfr	d,x
-   01DB AF E4         [ 5]  105 	stx	,s
-   01DD EC E4         [ 5]  106 	ldd	,s
-   01DF 58            [ 2]  107 	aslb
-   01E0 49            [ 2]  108 	rola
-   01E1 58            [ 2]  109 	aslb
-   01E2 49            [ 2]  110 	rola
-   01E3 ED E4         [ 5]  111 	std	,s
-   01E5 1E 01         [ 8]  112 	exg	d,x
-   01E7 E3 E4         [ 6]  113 	addd	,s; addhi3,3
-   01E9 1E 01         [ 8]  114 	exg	d,x
-   01EB 30 89 C8 9E   [ 8]  115 	leax	_Gamefield,x
-   01EF BD 02 B8      [ 8]  116 	jsr	_handle_objects
-   01F2 6C 62         [ 7]  117 	inc	2,s
-   01F4                     118 L6:
-   01F4 E6 62         [ 5]  119 	ldb	2,s
-   01F6 C1 08         [ 2]  120 	cmpb	#8	;cmpqi:
-   01F8 2F DC         [ 3]  121 	ble	L7
-   01FA 32 63         [ 5]  122 	leas	3,s
-   01FC 39            [ 5]  123 	rts
-                            124 	.globl	_Display_Pattern
-   01FD                     125 _Display_Pattern:
-   01FD 32 7F         [ 5]  126 	leas	-1,s
-   01FF C6 03         [ 2]  127 	ldb	#3
-   0201 E7 E4         [ 4]  128 	stb	,s
-   0203 32 61         [ 5]  129 	leas	1,s
-   0205 39            [ 5]  130 	rts
-                            131 	.globl	_Repeat_Pattern
-   0206                     132 _Repeat_Pattern:
-   0206 32 7F         [ 5]  133 	leas	-1,s
-   0208 C6 04         [ 2]  134 	ldb	#4
-   020A E7 E4         [ 4]  135 	stb	,s
-   020C 32 61         [ 5]  136 	leas	1,s
-   020E 39            [ 5]  137 	rts
-                            138 	.globl	_level_play
-   020F                     139 _level_play:
-   020F 32 7C         [ 5]  140 	leas	-4,s
-   0211 20 29         [ 3]  141 	bra	L14
-   0213                     142 L15:
-   0213 BD F1 AF      [ 8]  143 	jsr	___DP_to_C8
-   0216 BE C8 CB      [ 6]  144 	ldx	_current_explosion
-   0219 AF E4         [ 5]  145 	stx	,s
-   021B AE E4         [ 5]  146 	ldx	,s
-   021D BD 03 35      [ 8]  147 	jsr	__Explosion_Snd
-   0220 BE C8 CD      [ 6]  148 	ldx	_current_music
-   0223 AF 62         [ 6]  149 	stx	2,s
-   0225 AE 62         [ 6]  150 	ldx	2,s
-   0227 BD 03 3E      [ 8]  151 	jsr	__Init_Music_chk
-   022A BD F1 92      [ 8]  152 	jsr	___Wait_Recal
-   022D BD 03 58      [ 8]  153 	jsr	__Do_Sound
-   0230 BD F2 A5      [ 8]  154 	jsr	___Intensity_5F
-   0233 BD 01 D0      [ 8]  155 	jsr	_Generate_Gamefield
-   0236 BD 01 FD      [ 8]  156 	jsr	_Display_Pattern
-   0239 BD 02 06      [ 8]  157 	jsr	_Repeat_Pattern
-   023C                     158 L14:
-   023C F6 C8 89      [ 5]  159 	ldb	_current_level
-   023F 5D            [ 2]  160 	tstb
-   0240 27 D1         [ 3]  161 	beq	L15
-   0242 32 64         [ 5]  162 	leas	4,s
-   0244 39            [ 5]  163 	rts
+                             10 	.area	.text
+                             11 	.globl	_level_init
+   0194                      12 _level_init:
+   0194 7F C8 89      [ 7]   13 	clr	_current_level
+   0197 39            [ 5]   14 	rts
+                             15 	.globl	_counter
+                             16 	.area	.data
+   C88A                      17 _counter:
+   C88A 00                   18 	.byte	0
+                             19 	.area	.text
+   0198                      20 LC0:
+   0198 54 49 4D 45 20 4C    21 	.byte	84,73,77,69,32,76,69,70
+        45 46
+   01A0 54 80 00             22 	.byte	84,-128,0
+                             23 	.globl	_Display_TimeLeft
+   01A3                      24 _Display_TimeLeft:
+   01A3 C6 C4         [ 2]   25 	ldb	#-60
+   01A5 E7 E2         [ 6]   26 	stb	,-s
+   01A7 8E 01 98      [ 3]   27 	ldx	#LC0
+   01AA C6 64         [ 2]   28 	ldb	#100
+   01AC BD 04 20      [ 8]   29 	jsr	_print_string
+   01AF 32 61         [ 5]   30 	leas	1,s
+   01B1 F6 C8 8A      [ 5]   31 	ldb	_counter
+   01B4 BD 03 85      [ 8]   32 	jsr	_Loadingbar
+   01B7 F6 C8 8A      [ 5]   33 	ldb	_counter
+   01BA CB FC         [ 2]   34 	addb	#-4
+   01BC F7 C8 8A      [ 5]   35 	stb	_counter
+   01BF F6 C8 8A      [ 5]   36 	ldb	_counter
+   01C2 5D            [ 2]   37 	tstb
+   01C3 26 05         [ 3]   38 	bne	L5
+   01C5 C6 C8         [ 2]   39 	ldb	#-56
+   01C7 F7 C8 8A      [ 5]   40 	stb	_counter
+   01CA                      41 L5:
+   01CA 39            [ 5]   42 	rts
+                             43 	.globl	_nibby_vl_style_0
+   01CB                      44 _nibby_vl_style_0:
+   01CB 82                   45 	.byte	-126
+   01CC C3                   46 	.byte	-61
+   01CD 60                   47 	.byte	96
+   01CE 82                   48 	.byte	-126
+   01CF 02                   49 	.byte	2
+   01D0 A0                   50 	.byte	-96
+   01D1 82                   51 	.byte	-126
+   01D2 22                   52 	.byte	34
+   01D3 0A                   53 	.byte	10
+   01D4 A2                   54 	.byte	-94
+   01D5 20                   55 	.byte	32
+   01D6 06                   56 	.byte	6
+                             57 	.globl	_Generate_Gamefield
+   01D7                      58 _Generate_Gamefield:
+   01D7 BD F3 54      [ 8]   59 	jsr	___Reset0Ref
+   01DA C6 0A         [ 2]   60 	ldb	#10
+   01DC E7 E2         [ 6]   61 	stb	,-s
+   01DE C6 E2         [ 2]   62 	ldb	#-30
+   01E0 BD 05 6E      [ 8]   63 	jsr	__Moveto_d
+   01E3 32 61         [ 5]   64 	leas	1,s
+   01E5 8E FF A1      [ 3]   65 	ldx	#-95
+   01E8 E6 84         [ 4]   66 	ldb	,x
+   01EA C1 20         [ 2]   67 	cmpb	#32	;cmpqi:
+   01EC 26 13         [ 3]   68 	bne	L7
+   01EE C6 FF         [ 2]   69 	ldb	#-1
+   01F0 D7 04         [ 4]   70 	stb	*_dp_VIA_t1_cnt_lo
+   01F2 8E 01 CB      [ 3]   71 	ldx	#_nibby_vl_style_0
+   01F5 34 10         [ 6]   72 	pshs	x
+   01F7 8E 00 00      [ 3]   73 	ldx	#0
+   01FA BD 04 FA      [ 8]   74 	jsr	__Draw_Grid_VL
+   01FD 32 62         [ 5]   75 	leas	2,s
+   01FF 20 11         [ 3]   76 	bra	L9
+   0201                      77 L7:
+   0201 C6 FF         [ 2]   78 	ldb	#-1
+   0203 D7 04         [ 4]   79 	stb	*_dp_VIA_t1_cnt_lo
+   0205 8E 01 CB      [ 3]   80 	ldx	#_nibby_vl_style_0
+   0208 34 10         [ 6]   81 	pshs	x
+   020A 8E 00 00      [ 3]   82 	ldx	#0
+   020D BD 04 FA      [ 8]   83 	jsr	__Draw_Grid_VL
+   0210 32 62         [ 5]   84 	leas	2,s
+   0212                      85 L9:
+   0212 39            [ 5]   86 	rts
+                             87 	.area	.bss
+   C8A5                      88 _joy_x:	.blkb	1
+   C8A6                      89 _joy_y:	.blkb	1
+                             90 	.area	.text
+                             91 	.globl	_move_cursor
+   0213                      92 _move_cursor:
+   0213 BD F1 F8      [ 8]   93 	jsr	___Joy_Digital
+   0216 F6 C8 1B      [ 5]   94 	ldb	_Vec_Joy_1_X
+   0219 34 04         [ 6]   95 	pshs	b
+   021B C6 A6         [ 2]   96 	ldb	#-90
+   021D E7 E2         [ 6]   97 	stb	,-s
+   021F C6 A6         [ 2]   98 	ldb	#-90
+   0221 BD 04 5C      [ 8]   99 	jsr	_print_signed_int
+   0224 32 62         [ 5]  100 	leas	2,s
+   0226 F6 C8 1C      [ 5]  101 	ldb	_Vec_Joy_1_Y
+   0229 34 04         [ 6]  102 	pshs	b
+   022B C6 CE         [ 2]  103 	ldb	#-50
+   022D E7 E2         [ 6]  104 	stb	,-s
+   022F C6 A6         [ 2]  105 	ldb	#-90
+   0231 BD 04 5C      [ 8]  106 	jsr	_print_signed_int
+   0234 32 62         [ 5]  107 	leas	2,s
+   0236 F6 C8 A5      [ 5]  108 	ldb	_joy_x
+   0239 34 04         [ 6]  109 	pshs	b
+   023B C6 A6         [ 2]  110 	ldb	#-90
+   023D E7 E2         [ 6]  111 	stb	,-s
+   023F C6 BA         [ 2]  112 	ldb	#-70
+   0241 BD 04 5C      [ 8]  113 	jsr	_print_signed_int
+   0244 32 62         [ 5]  114 	leas	2,s
+   0246 F6 C8 A6      [ 5]  115 	ldb	_joy_y
+   0249 34 04         [ 6]  116 	pshs	b
+   024B C6 CE         [ 2]  117 	ldb	#-50
+   024D E7 E2         [ 6]  118 	stb	,-s
+   024F C6 BA         [ 2]  119 	ldb	#-70
+   0251 BD 04 5C      [ 8]  120 	jsr	_print_signed_int
+   0254 32 62         [ 5]  121 	leas	2,s
+   0256 F6 C8 1B      [ 5]  122 	ldb	_Vec_Joy_1_X
+   0259 F7 C8 A5      [ 5]  123 	stb	_joy_x
+   025C F6 C8 1C      [ 5]  124 	ldb	_Vec_Joy_1_Y
+   025F F7 C8 A6      [ 5]  125 	stb	_joy_y
+   0262 F6 C8 A5      [ 5]  126 	ldb	_joy_x
+   0265 5D            [ 2]  127 	tstb
+   0266 2C 0B         [ 3]  128 	bge	L11
+   0268 F6 C8 A6      [ 5]  129 	ldb	_joy_y
+   026B 5D            [ 2]  130 	tstb
+   026C 2F 05         [ 3]  131 	ble	L11
+   026E C6 01         [ 2]  132 	ldb	#1
+   0270 BD 03 DA      [ 8]  133 	jsr	_draw_cross
+   0273                     134 L11:
+   0273 F6 C8 A5      [ 5]  135 	ldb	_joy_x
+   0276 5D            [ 2]  136 	tstb
+   0277 26 0B         [ 3]  137 	bne	L12
+   0279 F6 C8 A6      [ 5]  138 	ldb	_joy_y
+   027C 5D            [ 2]  139 	tstb
+   027D 2F 05         [ 3]  140 	ble	L12
+   027F C6 02         [ 2]  141 	ldb	#2
+   0281 BD 03 DA      [ 8]  142 	jsr	_draw_cross
+   0284                     143 L12:
+   0284 F6 C8 1B      [ 5]  144 	ldb	_Vec_Joy_1_X
+   0287 5D            [ 2]  145 	tstb
+   0288 2F 0B         [ 3]  146 	ble	L13
+   028A F6 C8 1C      [ 5]  147 	ldb	_Vec_Joy_1_Y
+   028D 5D            [ 2]  148 	tstb
+   028E 2F 05         [ 3]  149 	ble	L13
+   0290 C6 03         [ 2]  150 	ldb	#3
+   0292 BD 03 DA      [ 8]  151 	jsr	_draw_cross
+   0295                     152 L13:
+   0295 F6 C8 A5      [ 5]  153 	ldb	_joy_x
+   0298 5D            [ 2]  154 	tstb
+   0299 2C 0B         [ 3]  155 	bge	L14
+   029B F6 C8 A6      [ 5]  156 	ldb	_joy_y
+   029E 5D            [ 2]  157 	tstb
+   029F 26 05         [ 3]  158 	bne	L14
+   02A1 C6 04         [ 2]  159 	ldb	#4
+   02A3 BD 03 DA      [ 8]  160 	jsr	_draw_cross
+   02A6                     161 L14:
+   02A6 F6 C8 A5      [ 5]  162 	ldb	_joy_x
+   02A9 5D            [ 2]  163 	tstb
+   02AA 26 0B         [ 3]  164 	bne	L15
+   02AC F6 C8 A6      [ 5]  165 	ldb	_joy_y
+   02AF 5D            [ 2]  166 	tstb
+   02B0 26 05         [ 3]  167 	bne	L15
+   02B2 C6 05         [ 2]  168 	ldb	#5
+   02B4 BD 03 DA      [ 8]  169 	jsr	_draw_cross
+   02B7                     170 L15:
+   02B7 F6 C8 A5      [ 5]  171 	ldb	_joy_x
+   02BA 5D            [ 2]  172 	tstb
+   02BB 2F 0B         [ 3]  173 	ble	L16
+   02BD F6 C8 A6      [ 5]  174 	ldb	_joy_y
+   02C0 5D            [ 2]  175 	tstb
+   02C1 26 05         [ 3]  176 	bne	L16
+   02C3 C6 06         [ 2]  177 	ldb	#6
+   02C5 BD 03 DA      [ 8]  178 	jsr	_draw_cross
+   02C8                     179 L16:
+   02C8 F6 C8 A5      [ 5]  180 	ldb	_joy_x
+   02CB 5D            [ 2]  181 	tstb
+   02CC 2C 0B         [ 3]  182 	bge	L17
+   02CE F6 C8 A6      [ 5]  183 	ldb	_joy_y
+   02D1 5D            [ 2]  184 	tstb
+   02D2 2C 05         [ 3]  185 	bge	L17
+   02D4 C6 07         [ 2]  186 	ldb	#7
+   02D6 BD 03 DA      [ 8]  187 	jsr	_draw_cross
+   02D9                     188 L17:
+   02D9 F6 C8 A5      [ 5]  189 	ldb	_joy_x
+   02DC 5D            [ 2]  190 	tstb
+   02DD 26 0B         [ 3]  191 	bne	L18
+   02DF F6 C8 A6      [ 5]  192 	ldb	_joy_y
+   02E2 5D            [ 2]  193 	tstb
+   02E3 2C 05         [ 3]  194 	bge	L18
+   02E5 C6 08         [ 2]  195 	ldb	#8
+   02E7 BD 03 DA      [ 8]  196 	jsr	_draw_cross
+   02EA                     197 L18:
+   02EA F6 C8 A5      [ 5]  198 	ldb	_joy_x
+   02ED 5D            [ 2]  199 	tstb
+   02EE 2F 0B         [ 3]  200 	ble	L20
+   02F0 F6 C8 A6      [ 5]  201 	ldb	_joy_y
+   02F3 5D            [ 2]  202 	tstb
+   02F4 2C 05         [ 3]  203 	bge	L20
+   02F6 C6 09         [ 2]  204 	ldb	#9
+   02F8 BD 03 DA      [ 8]  205 	jsr	_draw_cross
+   02FB                     206 L20:
+   02FB 39            [ 5]  207 	rts
+                            208 	.globl	_level_play
+   02FC                     209 _level_play:
+   02FC 32 7C         [ 5]  210 	leas	-4,s
+   02FE 20 29         [ 3]  211 	bra	L22
+   0300                     212 L23:
+   0300 BD F1 AF      [ 8]  213 	jsr	___DP_to_C8
+   0303 BE C8 A1      [ 6]  214 	ldx	_current_explosion
+   0306 AF E4         [ 5]  215 	stx	,s
+   0308 AE E4         [ 5]  216 	ldx	,s
+   030A BD 04 4A      [ 8]  217 	jsr	__Explosion_Snd
+   030D BE C8 A3      [ 6]  218 	ldx	_current_music
+   0310 AF 62         [ 6]  219 	stx	2,s
+   0312 AE 62         [ 6]  220 	ldx	2,s
+   0314 BD 04 53      [ 8]  221 	jsr	__Init_Music_chk
+   0317 BD F1 92      [ 8]  222 	jsr	___Wait_Recal
+   031A BD 04 C7      [ 8]  223 	jsr	__Do_Sound
+   031D BD F2 A5      [ 8]  224 	jsr	___Intensity_5F
+   0320 BD 01 A3      [ 8]  225 	jsr	_Display_TimeLeft
+   0323 BD 01 D7      [ 8]  226 	jsr	_Generate_Gamefield
+   0326 BD 02 13      [ 8]  227 	jsr	_move_cursor
+   0329                     228 L22:
+   0329 F6 C8 89      [ 5]  229 	ldb	_current_level
+   032C 5D            [ 2]  230 	tstb
+   032D 27 D1         [ 3]  231 	beq	L23
+   032F 32 64         [ 5]  232 	leas	4,s
+   0331 39            [ 5]  233 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+Hexadecimal [16-Bits]                                 Tue Apr 29 00:53:09 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L14                00A8 R   |   3 L15                007F R
-  3 L2                 0030 R   |   3 L3                 0006 R
-  3 L6                 0060 R   |   3 L7                 0042 R
-  3 _Display_Patte     0069 GR  |   2 _Display_patte     0001 GR
-  2 _Gamefield         0015 GR  |   3 _Generate_Game     003C GR
-  3 _Repeat_Patter     0072 GR  |     __Do_Sound         **** GX
+  3 L11                00DF R   |   3 L12                00F0 R
+  3 L13                0101 R   |   3 L14                0112 R
+  3 L15                0123 R   |   3 L16                0134 R
+  3 L17                0145 R   |   3 L18                0156 R
+  3 L20                0167 R   |   3 L22                0195 R
+  3 L23                016C R   |   3 L5                 0036 R
+  3 L7                 006D R   |   3 L9                 007E R
+  3 LC0                0004 R   |   3 _Display_TimeL     000F GR
+  3 _Generate_Game     0043 GR  |     _Loadingbar        **** GX
+    _Vec_Joy_1_X       **** GX  |     _Vec_Joy_1_Y       **** GX
+    __Do_Sound         **** GX  |     __Draw_Grid_VL     **** GX
     __Explosion_Sn     **** GX  |     __Init_Music_c     **** GX
-    __Random           **** GX  |     ___DP_to_C8        **** GX
-    ___Intensity_5     **** GX  |     ___Wait_Recal      **** GX
-    _current_explo     **** GX  |   2 _current_level     0000 GR
-    _current_music     **** GX  |     _handle_object     **** GX
-  3 _level_init        0000 GR  |   3 _level_play        007B GR
-    _umodhi3           **** GX
+    __Moveto_d         **** GX  |     ___DP_to_C8        **** GX
+    ___Intensity_5     **** GX  |     ___Joy_Digital     **** GX
+    ___Reset0Ref       **** GX  |     ___Wait_Recal      **** GX
+  2 _counter           0001 GR  |     _current_explo     **** GX
+  2 _current_level     0000 GR  |     _current_music     **** GX
+    _dp_VIA_t1_cnt     **** GX  |     _draw_cross        **** GX
+  4 _joy_x             0000 R   |   4 _joy_y             0001 R
+  3 _level_init        0000 GR  |   3 _level_play        0168 GR
+  3 _move_cursor       007F GR  |   3 _nibby_vl_styl     0037 GR
+    _print_signed_     **** GX  |     _print_string      **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+Hexadecimal [16-Bits]                                 Tue Apr 29 00:53:09 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .data            size   42   flags  100
-   3 .text            size   B1   flags  100
+   2 .data            size    2   flags  100
+   3 .text            size  19E   flags  100
+   4 .bss             size    2   flags    0
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

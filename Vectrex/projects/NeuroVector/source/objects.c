@@ -22,51 +22,41 @@ void init_object(struct object_t* p)
 // ---------------------------------------------------------------------------
 #undef SF
 #define SF 32
+#define SFN 48
 
-const struct packet_t vectors_player[] =
+struct vector_t Positions_Cursor[10] = {{0,0},{32, -32},{32, 0},{32, 32},
+								{0, -32}, {0,  0},{0, 32},
+								{-32, -32}, {-32,0},{-32, 32}};
+
+const struct packet_t cross[] =
 {
-	{MOVE, {  1 * SF, -1 * SF}},
-	{DRAW, {  0 * SF,  2 * SF}},
-	{DRAW, { -2 * SF,  0 * SF}},
-	{DRAW, {  0 * SF, -2 * SF}},
-	{DRAW, {  2 * SF,  0 * SF}},
+	{MOVE, {  1 * SF, 1 * SF}},
+	{DRAW, {  -1 * SF,  -1 * SF}},
+	{MOVE, {  1 * SF, 0 * SF}},
+	{DRAW, {  -1 * SF,  1 * SF}},
 	{STOP, { 0, 0}},
 };
 
+int cross_y = 70;
+int cross_x = -60;
+void Loadingbar(unsigned int q) {	
+		for(int i = 0; i < 3; ++i){
+			Reset0Ref();					// reset beam to center of screen
+			dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
+			Moveto_d(cross_y - i*4, cross_x);			// move beam to object coordinates
+			dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+			Draw_Line_d(0,100);
+		}
+		dp_VIA_t1_cnt_lo = 0xFF;
+}
 
-
-void draw_player(void)
-{
+void draw_cross(int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(5, 5);	// move beam to object coordinates
+	Moveto_d(Positions_Cursor[i].y, Positions_Cursor[i].x);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 0x22;		// set scalinf factor for drawing
-	Draw_VLp(&vectors_player);		// draw vector list
+	Draw_VLp(&cross);
 }
-
-
-
-void handle_objects(struct object_t* p)
-{		
-		Reset0Ref();					// reset beam to center of screen
-		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(p->x, p->y);	// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = 0x22;		// set scalinf factor for drawing
-		Draw_VLp(&vectors_player);		// draw vector list
-		
-		p->y += p->dy;
-		p->x += p->dx;
-}
-
-
-void draw_cross(){
-	
-}
-
-void draw_rectangle(){
-	
-}
-
 
 // ***************************************************************************
 // end of file

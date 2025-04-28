@@ -138,7 +138,7 @@
 		<cartridgeMenu id="AUTOVF" mode="VECFLASH" name="Automatic Launcher for VecFlash" path="data/roms/menu/vfm_auto.men.jverom" counterSize="0" namesSize="1" />
 	</cartridgeMenus>
 
-	<games selected="absorbtex" picked="C:/Users/erlin/Documents/Vectrex/Vectrex/projects/game_demo/bin/game_demo.bin">
+	<games selected="BERZERK">
 
 		<separator label="Development" />
 

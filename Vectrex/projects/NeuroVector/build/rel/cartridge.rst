@@ -13,12 +13,12 @@
    000D F8                   12 	.byte	-8
    000E 50                   13 	.byte	80
    000F 18                   14 	.byte	24
-   0010 AA                   15 	.byte	-86
-   0011 4E 65 75 72 6F 20    16 	.byte	78,101,117,114,111,32,86,101
-        56 65
-   0019 63 74 6F 72 80 00    17 	.byte	99,116,111,114,-128,0
+   0010 B3                   15 	.byte	-77
+   0011 4E 45 55 52 4F 20    16 	.byte	78,69,85,82,79,32,86,69
+        56 45
+   0019 43 54 4F 52 80 00    17 	.byte	67,84,79,82,-128,0
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+Hexadecimal [16-Bits]                                 Tue Apr 29 00:53:09 2025
 
 Symbol Table
 
@@ -27,7 +27,7 @@ Symbol Table
     _Vec_Music_1       **** GX  |   2 _game_header       0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sun Apr  6 21:29:21 2025
+Hexadecimal [16-Bits]                                 Tue Apr 29 00:53:09 2025
 
 Area Table
 

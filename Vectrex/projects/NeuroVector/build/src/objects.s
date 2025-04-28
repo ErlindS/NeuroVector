@@ -31,80 +31,135 @@ _init_object:
 	stb	4,x
 	leas	2,s
 	rts
-	.globl	_vectors_player
-_vectors_player:
+	.globl	_Positions_Cursor
+	.area	.data
+_Positions_Cursor:
+	.byte	0
 	.byte	0
 	.byte	32
 	.byte	-32
-	.byte	-1
+	.byte	32
 	.byte	0
-	.byte	64
+	.byte	32
+	.byte	32
+	.byte	0
+	.byte	-32
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	32
+	.byte	-32
+	.byte	-32
+	.byte	-32
+	.byte	0
+	.byte	-32
+	.byte	32
+	.globl	_cross
+	.area	.text
+_cross:
+	.byte	0
+	.byte	32
+	.byte	32
 	.byte	-1
-	.byte	-64
+	.byte	-32
+	.byte	-32
+	.byte	0
+	.byte	32
 	.byte	0
 	.byte	-1
-	.byte	0
-	.byte	-64
-	.byte	-1
-	.byte	64
-	.byte	0
+	.byte	-32
+	.byte	32
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_draw_player
-_draw_player:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#5
-	stb	,-s
-	ldb	#5
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	#34
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vectors_player
-	jsr	___Draw_VLp
-	rts
-	.globl	_handle_objects
-_handle_objects:
+	.globl	_cross_y
+	.area	.data
+_cross_y:
+	.byte	70
+	.globl	_cross_x
+_cross_x:
+	.byte	-60
+	.area	.text
+	.globl	_Loadingbar
+_Loadingbar:
 	leas	-7,s
-	stx	3,s
+	stb	3,s
+	clr	4,s
+	bra	L4
+L5:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	3,s
-	ldb	1,x
+	ldb	_cross_x
+	stb	1,s
+	ldb	4,s
 	stb	,s
-	ldx	3,s
-	ldb	2,x
-	stb	6,s
 	ldb	,s
+	aslb
+	aslb
+	stb	,s
+	ldb	,s
+	negb
+	stb	2,s
+	ldb	_cross_y
+	addb	2,s
+	stb	6,s
+	ldb	1,s
 	stb	5,s
 	ldb	6,s
 	stb	,-s
 	ldb	6,s
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	#34
+	ldb	3,s
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vectors_player
-	jsr	___Draw_VLp
-	ldx	3,s
-	ldb	1,x
-	stb	1,s
-	ldx	3,s
-	ldb	3,x
-	addb	1,s
-	ldx	3,s
-	stb	1,x
-	ldx	3,s
-	ldb	2,x
-	stb	2,s
-	ldx	3,s
-	ldb	4,x
-	addb	2,s
-	ldx	3,s
-	stb	2,x
+	clr	,-s
+	ldb	#100
+	jsr	__Draw_Line_d
+	leas	1,s
+	inc	4,s
+L4:
+	ldb	4,s
+	cmpb	#2	;cmpqi:
+	ble	L5
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
 	leas	7,s
 	rts
+	.globl	_draw_cross
+_draw_cross:
+	pshs	u
+	leas	-4,s
+	stb	1,s
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	1,s
+	sex		;extendqihi2: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Cursor+1
+	leax	d,u
+	ldb	,x
+	stb	,s
+	ldb	1,s
+	sex		;extendqihi2: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Cursor
+	leax	d,u
+	ldb	,x
+	stb	3,s
+	ldb	,s
+	stb	2,s
+	ldb	3,s
+	stb	,-s
+	ldb	3,s
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#34
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_cross
+	jsr	___Draw_VLp
+	leas	4,s
+	puls	u,pc

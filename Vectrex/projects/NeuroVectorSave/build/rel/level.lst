@@ -1,0 +1,551 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	level.c
+                              6 	.globl	_current_level
+                              7 	.area	.data
+   0000                       8 _current_level:
+   0000 01                    9 	.byte	1
+                             10 	.globl	_Display_pattern
+   0001                      11 _Display_pattern:
+   0001 00 00 00 00 00 00    12 	.word	0,0,0,0,0,0,0,0,0,0
+        00 00 00 00 00 00
+        00 00 00 00 00 00
+        00 00
+                             13 	.area	.bss
+                             14 	.globl	_Positions
+   0000                      15 _Positions:	.blkb	40
+                             16 	.globl	_Time_Positions
+                             17 	.area	.data
+   0015                      18 _Time_Positions:
+   0015 CE                   19 	.byte	-50
+   0016 3C                   20 	.byte	60
+   0017 D8                   21 	.byte	-40
+   0018 3C                   22 	.byte	60
+   0019 E2                   23 	.byte	-30
+   001A 3C                   24 	.byte	60
+   001B EC                   25 	.byte	-20
+   001C 3C                   26 	.byte	60
+   001D F6                   27 	.byte	-10
+   001E 3C                   28 	.byte	60
+   001F 00                   29 	.byte	0
+   0020 3C                   30 	.byte	60
+   0021 0A                   31 	.byte	10
+   0022 3C                   32 	.byte	60
+   0023 14                   33 	.byte	20
+   0024 3C                   34 	.byte	60
+   0025 1E                   35 	.byte	30
+   0026 3C                   36 	.byte	60
+   0027 28                   37 	.byte	40
+   0028 3C                   38 	.byte	60
+   0029 32                   39 	.byte	50
+   002A 3C                   40 	.byte	60
+                             41 	.area	.text
+                             42 	.globl	_level_init
+   0000                      43 _level_init:
+   0000 34 40         [ 6]   44 	pshs	u
+   0002 32 E8 EF      [ 5]   45 	leas	-17,s
+   0005 6F 6F         [ 7]   46 	clr	15,s
+   0007 20 2A         [ 3]   47 	bra	L2
+   0009                      48 L3:
+   0009 E6 6F         [ 5]   49 	ldb	15,s
+   000B E7 63         [ 5]   50 	stb	3,s
+   000D BD`00`00      [ 8]   51 	jsr	__Random
+   0010 4F            [ 2]   52 	clra		;zero_extendqihi: R:b -> R:d
+   0011 8E 00 09      [ 3]   53 	ldx	#9
+   0014 34 10         [ 6]   54 	pshs	x
+   0016 1F 01         [ 6]   55 	tfr	d,x
+   0018 BD`00`00      [ 8]   56 	jsr	_umodhi3
+   001B 32 62         [ 5]   57 	leas	2,s
+   001D 1F 10         [ 6]   58 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   001F E7 E4         [ 4]   59 	stb	,s
+   0021 E6 E4         [ 4]   60 	ldb	,s
+   0023 5C            [ 2]   61 	incb
+   0024 E7 62         [ 5]   62 	stb	2,s
+   0026 E6 63         [ 5]   63 	ldb	3,s
+   0028 1D            [ 2]   64 	sex		;extendqihi2: R:b -> R:d
+   0029 1F 01         [ 6]   65 	tfr	d,x
+   002B E6 62         [ 5]   66 	ldb	2,s
+   002D E7 89`00`01   [ 8]   67 	stb	_Display_pattern,x
+   0031 6C 6F         [ 7]   68 	inc	15,s
+   0033                      69 L2:
+   0033 E6 6F         [ 5]   70 	ldb	15,s
+   0035 C1 13         [ 2]   71 	cmpb	#19	;cmpqi:
+   0037 2F D0         [ 3]   72 	ble	L3
+   0039 6F E8 10      [ 7]   73 	clr	16,s
+   003C 16 01 E1      [ 5]   74 	lbra	L4
+   003F                      75 L17:
+   003F E6 E8 10      [ 5]   76 	ldb	16,s
+   0042 1D            [ 2]   77 	sex		;extendqihi2: R:b -> R:d
+   0043 1F 01         [ 6]   78 	tfr	d,x
+   0045 E6 89`00`01   [ 8]   79 	ldb	_Display_pattern,x
+   0049 E7 64         [ 5]   80 	stb	4,s
+   004B E6 64         [ 5]   81 	ldb	4,s
+   004D C1 09         [ 2]   82 	cmpb	#9	;cmpqi:
+   004F 10 22 01 A5   [ 6]   83 	lbhi	L5
+   0053 E6 64         [ 5]   84 	ldb	4,s
+   0055 4F            [ 2]   85 	clra		;zero_extendqihi: R:b -> R:d
+   0056 ED E4         [ 5]   86 	std	,s
+   0058 EC E4         [ 5]   87 	ldd	,s
+   005A 58            [ 2]   88 	aslb
+   005B 49            [ 2]   89 	rola
+   005C CE`00`65      [ 3]   90 	ldu	#L15
+   005F 30 CB         [ 8]   91 	leax	d,u
+   0061 AE 84         [ 5]   92 	ldx	,x
+   0063 6E 84         [ 3]   93 	jmp	,x
+   0065                      94 L15:
+   0065`01`F8                95 	.word	L5
+   0067`00`79                96 	.word	L6
+   0069`00`A5                97 	.word	L7
+   006B`00`CF                98 	.word	L8
+   006D`00`FB                99 	.word	L9
+   006F`01`25               100 	.word	L10
+   0071`01`4D               101 	.word	L11
+   0073`01`77               102 	.word	L12
+   0075`01`A3               103 	.word	L13
+   0077`01`CD               104 	.word	L14
+   0079                     105 L6:
+   0079 E6 E8 10      [ 5]  106 	ldb	16,s
+   007C E7 65         [ 5]  107 	stb	5,s
+   007E E6 65         [ 5]  108 	ldb	5,s
+   0080 1D            [ 2]  109 	sex		;extendqihi2: R:b -> R:d
+   0081 ED E4         [ 5]  110 	std	,s
+   0083 EC E4         [ 5]  111 	ldd	,s
+   0085 58            [ 2]  112 	aslb
+   0086 49            [ 2]  113 	rola
+   0087 CE`00`00      [ 3]  114 	ldu	#_Positions
+   008A 30 CB         [ 8]  115 	leax	d,u
+   008C C6 E2         [ 2]  116 	ldb	#-30
+   008E E7 84         [ 4]  117 	stb	,x
+   0090 E6 65         [ 5]  118 	ldb	5,s
+   0092 1D            [ 2]  119 	sex		;extendqihi2: R:b -> R:d
+   0093 ED E4         [ 5]  120 	std	,s
+   0095 EC E4         [ 5]  121 	ldd	,s
+   0097 58            [ 2]  122 	aslb
+   0098 49            [ 2]  123 	rola
+   0099 CE`00`01      [ 3]  124 	ldu	#_Positions+1
+   009C 30 CB         [ 8]  125 	leax	d,u
+   009E C6 1E         [ 2]  126 	ldb	#30
+   00A0 E7 84         [ 4]  127 	stb	,x
+   00A2 16 01 78      [ 5]  128 	lbra	L16
+   00A5                     129 L7:
+   00A5 E6 E8 10      [ 5]  130 	ldb	16,s
+   00A8 E7 66         [ 5]  131 	stb	6,s
+   00AA E6 66         [ 5]  132 	ldb	6,s
+   00AC 1D            [ 2]  133 	sex		;extendqihi2: R:b -> R:d
+   00AD ED E4         [ 5]  134 	std	,s
+   00AF EC E4         [ 5]  135 	ldd	,s
+   00B1 58            [ 2]  136 	aslb
+   00B2 49            [ 2]  137 	rola
+   00B3 CE`00`00      [ 3]  138 	ldu	#_Positions
+   00B6 30 CB         [ 8]  139 	leax	d,u
+   00B8 6F 84         [ 6]  140 	clr	,x
+   00BA E6 66         [ 5]  141 	ldb	6,s
+   00BC 1D            [ 2]  142 	sex		;extendqihi2: R:b -> R:d
+   00BD ED E4         [ 5]  143 	std	,s
+   00BF EC E4         [ 5]  144 	ldd	,s
+   00C1 58            [ 2]  145 	aslb
+   00C2 49            [ 2]  146 	rola
+   00C3 CE`00`01      [ 3]  147 	ldu	#_Positions+1
+   00C6 30 CB         [ 8]  148 	leax	d,u
+   00C8 C6 1E         [ 2]  149 	ldb	#30
+   00CA E7 84         [ 4]  150 	stb	,x
+   00CC 16 01 4E      [ 5]  151 	lbra	L16
+   00CF                     152 L8:
+   00CF E6 E8 10      [ 5]  153 	ldb	16,s
+   00D2 E7 67         [ 5]  154 	stb	7,s
+   00D4 E6 67         [ 5]  155 	ldb	7,s
+   00D6 1D            [ 2]  156 	sex		;extendqihi2: R:b -> R:d
+   00D7 ED E4         [ 5]  157 	std	,s
+   00D9 EC E4         [ 5]  158 	ldd	,s
+   00DB 58            [ 2]  159 	aslb
+   00DC 49            [ 2]  160 	rola
+   00DD CE`00`00      [ 3]  161 	ldu	#_Positions
+   00E0 30 CB         [ 8]  162 	leax	d,u
+   00E2 C6 1E         [ 2]  163 	ldb	#30
+   00E4 E7 84         [ 4]  164 	stb	,x
+   00E6 E6 67         [ 5]  165 	ldb	7,s
+   00E8 1D            [ 2]  166 	sex		;extendqihi2: R:b -> R:d
+   00E9 ED E4         [ 5]  167 	std	,s
+   00EB EC E4         [ 5]  168 	ldd	,s
+   00ED 58            [ 2]  169 	aslb
+   00EE 49            [ 2]  170 	rola
+   00EF CE`00`01      [ 3]  171 	ldu	#_Positions+1
+   00F2 30 CB         [ 8]  172 	leax	d,u
+   00F4 C6 1E         [ 2]  173 	ldb	#30
+   00F6 E7 84         [ 4]  174 	stb	,x
+   00F8 16 01 22      [ 5]  175 	lbra	L16
+   00FB                     176 L9:
+   00FB E6 E8 10      [ 5]  177 	ldb	16,s
+   00FE E7 68         [ 5]  178 	stb	8,s
+   0100 E6 68         [ 5]  179 	ldb	8,s
+   0102 1D            [ 2]  180 	sex		;extendqihi2: R:b -> R:d
+   0103 ED E4         [ 5]  181 	std	,s
+   0105 EC E4         [ 5]  182 	ldd	,s
+   0107 58            [ 2]  183 	aslb
+   0108 49            [ 2]  184 	rola
+   0109 CE`00`00      [ 3]  185 	ldu	#_Positions
+   010C 30 CB         [ 8]  186 	leax	d,u
+   010E C6 E2         [ 2]  187 	ldb	#-30
+   0110 E7 84         [ 4]  188 	stb	,x
+   0112 E6 68         [ 5]  189 	ldb	8,s
+   0114 1D            [ 2]  190 	sex		;extendqihi2: R:b -> R:d
+   0115 ED E4         [ 5]  191 	std	,s
+   0117 EC E4         [ 5]  192 	ldd	,s
+   0119 58            [ 2]  193 	aslb
+   011A 49            [ 2]  194 	rola
+   011B CE`00`01      [ 3]  195 	ldu	#_Positions+1
+   011E 30 CB         [ 8]  196 	leax	d,u
+   0120 6F 84         [ 6]  197 	clr	,x
+   0122 16 00 F8      [ 5]  198 	lbra	L16
+   0125                     199 L10:
+   0125 E6 E8 10      [ 5]  200 	ldb	16,s
+   0128 E7 69         [ 5]  201 	stb	9,s
+   012A E6 69         [ 5]  202 	ldb	9,s
+   012C 1D            [ 2]  203 	sex		;extendqihi2: R:b -> R:d
+   012D ED E4         [ 5]  204 	std	,s
+   012F EC E4         [ 5]  205 	ldd	,s
+   0131 58            [ 2]  206 	aslb
+   0132 49            [ 2]  207 	rola
+   0133 CE`00`00      [ 3]  208 	ldu	#_Positions
+   0136 30 CB         [ 8]  209 	leax	d,u
+   0138 6F 84         [ 6]  210 	clr	,x
+   013A E6 69         [ 5]  211 	ldb	9,s
+   013C 1D            [ 2]  212 	sex		;extendqihi2: R:b -> R:d
+   013D ED E4         [ 5]  213 	std	,s
+   013F EC E4         [ 5]  214 	ldd	,s
+   0141 58            [ 2]  215 	aslb
+   0142 49            [ 2]  216 	rola
+   0143 CE`00`01      [ 3]  217 	ldu	#_Positions+1
+   0146 30 CB         [ 8]  218 	leax	d,u
+   0148 6F 84         [ 6]  219 	clr	,x
+   014A 16 00 D0      [ 5]  220 	lbra	L16
+   014D                     221 L11:
+   014D E6 E8 10      [ 5]  222 	ldb	16,s
+   0150 E7 6A         [ 5]  223 	stb	10,s
+   0152 E6 6A         [ 5]  224 	ldb	10,s
+   0154 1D            [ 2]  225 	sex		;extendqihi2: R:b -> R:d
+   0155 ED E4         [ 5]  226 	std	,s
+   0157 EC E4         [ 5]  227 	ldd	,s
+   0159 58            [ 2]  228 	aslb
+   015A 49            [ 2]  229 	rola
+   015B CE`00`00      [ 3]  230 	ldu	#_Positions
+   015E 30 CB         [ 8]  231 	leax	d,u
+   0160 C6 1E         [ 2]  232 	ldb	#30
+   0162 E7 84         [ 4]  233 	stb	,x
+   0164 E6 6A         [ 5]  234 	ldb	10,s
+   0166 1D            [ 2]  235 	sex		;extendqihi2: R:b -> R:d
+   0167 ED E4         [ 5]  236 	std	,s
+   0169 EC E4         [ 5]  237 	ldd	,s
+   016B 58            [ 2]  238 	aslb
+   016C 49            [ 2]  239 	rola
+   016D CE`00`01      [ 3]  240 	ldu	#_Positions+1
+   0170 30 CB         [ 8]  241 	leax	d,u
+   0172 6F 84         [ 6]  242 	clr	,x
+   0174 16 00 A6      [ 5]  243 	lbra	L16
+   0177                     244 L12:
+   0177 E6 E8 10      [ 5]  245 	ldb	16,s
+   017A E7 6B         [ 5]  246 	stb	11,s
+   017C E6 6B         [ 5]  247 	ldb	11,s
+   017E 1D            [ 2]  248 	sex		;extendqihi2: R:b -> R:d
+   017F ED E4         [ 5]  249 	std	,s
+   0181 EC E4         [ 5]  250 	ldd	,s
+   0183 58            [ 2]  251 	aslb
+   0184 49            [ 2]  252 	rola
+   0185 CE`00`00      [ 3]  253 	ldu	#_Positions
+   0188 30 CB         [ 8]  254 	leax	d,u
+   018A C6 E2         [ 2]  255 	ldb	#-30
+   018C E7 84         [ 4]  256 	stb	,x
+   018E E6 6B         [ 5]  257 	ldb	11,s
+   0190 1D            [ 2]  258 	sex		;extendqihi2: R:b -> R:d
+   0191 ED E4         [ 5]  259 	std	,s
+   0193 EC E4         [ 5]  260 	ldd	,s
+   0195 58            [ 2]  261 	aslb
+   0196 49            [ 2]  262 	rola
+   0197 CE`00`01      [ 3]  263 	ldu	#_Positions+1
+   019A 30 CB         [ 8]  264 	leax	d,u
+   019C C6 E2         [ 2]  265 	ldb	#-30
+   019E E7 84         [ 4]  266 	stb	,x
+   01A0 16 00 7A      [ 5]  267 	lbra	L16
+   01A3                     268 L13:
+   01A3 E6 E8 10      [ 5]  269 	ldb	16,s
+   01A6 E7 6C         [ 5]  270 	stb	12,s
+   01A8 E6 6C         [ 5]  271 	ldb	12,s
+   01AA 1D            [ 2]  272 	sex		;extendqihi2: R:b -> R:d
+   01AB ED E4         [ 5]  273 	std	,s
+   01AD EC E4         [ 5]  274 	ldd	,s
+   01AF 58            [ 2]  275 	aslb
+   01B0 49            [ 2]  276 	rola
+   01B1 CE`00`00      [ 3]  277 	ldu	#_Positions
+   01B4 30 CB         [ 8]  278 	leax	d,u
+   01B6 6F 84         [ 6]  279 	clr	,x
+   01B8 E6 6C         [ 5]  280 	ldb	12,s
+   01BA 1D            [ 2]  281 	sex		;extendqihi2: R:b -> R:d
+   01BB ED E4         [ 5]  282 	std	,s
+   01BD EC E4         [ 5]  283 	ldd	,s
+   01BF 58            [ 2]  284 	aslb
+   01C0 49            [ 2]  285 	rola
+   01C1 CE`00`01      [ 3]  286 	ldu	#_Positions+1
+   01C4 30 CB         [ 8]  287 	leax	d,u
+   01C6 C6 E2         [ 2]  288 	ldb	#-30
+   01C8 E7 84         [ 4]  289 	stb	,x
+   01CA 16 00 50      [ 5]  290 	lbra	L16
+   01CD                     291 L14:
+   01CD E6 E8 10      [ 5]  292 	ldb	16,s
+   01D0 E7 6D         [ 5]  293 	stb	13,s
+   01D2 E6 6D         [ 5]  294 	ldb	13,s
+   01D4 1D            [ 2]  295 	sex		;extendqihi2: R:b -> R:d
+   01D5 ED E4         [ 5]  296 	std	,s
+   01D7 EC E4         [ 5]  297 	ldd	,s
+   01D9 58            [ 2]  298 	aslb
+   01DA 49            [ 2]  299 	rola
+   01DB CE`00`00      [ 3]  300 	ldu	#_Positions
+   01DE 30 CB         [ 8]  301 	leax	d,u
+   01E0 C6 1E         [ 2]  302 	ldb	#30
+   01E2 E7 84         [ 4]  303 	stb	,x
+   01E4 E6 6D         [ 5]  304 	ldb	13,s
+   01E6 1D            [ 2]  305 	sex		;extendqihi2: R:b -> R:d
+   01E7 ED E4         [ 5]  306 	std	,s
+   01E9 EC E4         [ 5]  307 	ldd	,s
+   01EB 58            [ 2]  308 	aslb
+   01EC 49            [ 2]  309 	rola
+   01ED CE`00`01      [ 3]  310 	ldu	#_Positions+1
+   01F0 30 CB         [ 8]  311 	leax	d,u
+   01F2 C6 E2         [ 2]  312 	ldb	#-30
+   01F4 E7 84         [ 4]  313 	stb	,x
+   01F6 20 25         [ 3]  314 	bra	L16
+   01F8                     315 L5:
+   01F8 E6 E8 10      [ 5]  316 	ldb	16,s
+   01FB E7 6E         [ 5]  317 	stb	14,s
+   01FD E6 6E         [ 5]  318 	ldb	14,s
+   01FF 1D            [ 2]  319 	sex		;extendqihi2: R:b -> R:d
+   0200 ED E4         [ 5]  320 	std	,s
+   0202 EC E4         [ 5]  321 	ldd	,s
+   0204 58            [ 2]  322 	aslb
+   0205 49            [ 2]  323 	rola
+   0206 CE`00`00      [ 3]  324 	ldu	#_Positions
+   0209 30 CB         [ 8]  325 	leax	d,u
+   020B 6F 84         [ 6]  326 	clr	,x
+   020D E6 6E         [ 5]  327 	ldb	14,s
+   020F 1D            [ 2]  328 	sex		;extendqihi2: R:b -> R:d
+   0210 ED E4         [ 5]  329 	std	,s
+   0212 EC E4         [ 5]  330 	ldd	,s
+   0214 58            [ 2]  331 	aslb
+   0215 49            [ 2]  332 	rola
+   0216 CE`00`01      [ 3]  333 	ldu	#_Positions+1
+   0219 30 CB         [ 8]  334 	leax	d,u
+   021B 6F 84         [ 6]  335 	clr	,x
+   021D                     336 L16:
+   021D 6C E8 10      [ 7]  337 	inc	16,s
+   0220                     338 L4:
+   0220 E6 E8 10      [ 5]  339 	ldb	16,s
+   0223 C1 13         [ 2]  340 	cmpb	#19	;cmpqi:
+   0225 10 2F FE 16   [ 6]  341 	lble	L17
+   0229 7F`00`00      [ 7]  342 	clr	_current_level
+   022C 32 E8 11      [ 5]  343 	leas	17,s
+   022F 35 C0         [ 7]  344 	puls	u,pc
+                            345 	.globl	_Gamefield
+                            346 	.area	.data
+   002B                     347 _Gamefield:
+   002B 01                  348 	.byte	1
+   002C 00                  349 	.byte	0
+   002D 00                  350 	.byte	0
+   002E 00                  351 	.byte	0
+   002F 00                  352 	.byte	0
+   0030 01                  353 	.byte	1
+   0031 1E                  354 	.byte	30
+   0032 00                  355 	.byte	0
+   0033 00                  356 	.byte	0
+   0034 00                  357 	.byte	0
+   0035 01                  358 	.byte	1
+   0036 00                  359 	.byte	0
+   0037 1E                  360 	.byte	30
+   0038 00                  361 	.byte	0
+   0039 00                  362 	.byte	0
+   003A 01                  363 	.byte	1
+   003B 1E                  364 	.byte	30
+   003C 1E                  365 	.byte	30
+   003D 00                  366 	.byte	0
+   003E 00                  367 	.byte	0
+   003F 01                  368 	.byte	1
+   0040 E2                  369 	.byte	-30
+   0041 00                  370 	.byte	0
+   0042 00                  371 	.byte	0
+   0043 00                  372 	.byte	0
+   0044 01                  373 	.byte	1
+   0045 00                  374 	.byte	0
+   0046 E2                  375 	.byte	-30
+   0047 00                  376 	.byte	0
+   0048 00                  377 	.byte	0
+   0049 01                  378 	.byte	1
+   004A E2                  379 	.byte	-30
+   004B E2                  380 	.byte	-30
+   004C 00                  381 	.byte	0
+   004D 00                  382 	.byte	0
+   004E 01                  383 	.byte	1
+   004F 1E                  384 	.byte	30
+   0050 E2                  385 	.byte	-30
+   0051 00                  386 	.byte	0
+   0052 00                  387 	.byte	0
+   0053 01                  388 	.byte	1
+   0054 E2                  389 	.byte	-30
+   0055 1E                  390 	.byte	30
+   0056 00                  391 	.byte	0
+   0057 00                  392 	.byte	0
+                            393 	.area	.text
+                            394 	.globl	_Generate_Gamefield
+   0231                     395 _Generate_Gamefield:
+   0231 32 7D         [ 5]  396 	leas	-3,s
+   0233 6F 62         [ 7]  397 	clr	2,s
+   0235 20 1E         [ 3]  398 	bra	L20
+   0237                     399 L21:
+   0237 E6 62         [ 5]  400 	ldb	2,s
+   0239 1D            [ 2]  401 	sex		;extendqihi2: R:b -> R:d
+   023A 1F 01         [ 6]  402 	tfr	d,x
+   023C AF E4         [ 5]  403 	stx	,s
+   023E EC E4         [ 5]  404 	ldd	,s
+   0240 58            [ 2]  405 	aslb
+   0241 49            [ 2]  406 	rola
+   0242 58            [ 2]  407 	aslb
+   0243 49            [ 2]  408 	rola
+   0244 ED E4         [ 5]  409 	std	,s
+   0246 1E 01         [ 8]  410 	exg	d,x
+   0248 E3 E4         [ 6]  411 	addd	,s; addhi3,3
+   024A 1E 01         [ 8]  412 	exg	d,x
+   024C 30 89`00`2B   [ 8]  413 	leax	_Gamefield,x
+   0250 BD`00`00      [ 8]  414 	jsr	_handle_objects
+   0253 6C 62         [ 7]  415 	inc	2,s
+   0255                     416 L20:
+   0255 E6 62         [ 5]  417 	ldb	2,s
+   0257 C1 08         [ 2]  418 	cmpb	#8	;cmpqi:
+   0259 2F DC         [ 3]  419 	ble	L21
+   025B 32 63         [ 5]  420 	leas	3,s
+   025D 39            [ 5]  421 	rts
+                            422 	.globl	_Display_Pattern
+   025E                     423 _Display_Pattern:
+   025E 34 40         [ 6]  424 	pshs	u
+   0260 32 7D         [ 5]  425 	leas	-3,s
+   0262 6F 62         [ 7]  426 	clr	2,s
+   0264 20 13         [ 3]  427 	bra	L24
+   0266                     428 L25:
+   0266 E6 62         [ 5]  429 	ldb	2,s
+   0268 1D            [ 2]  430 	sex		;extendqihi2: R:b -> R:d
+   0269 ED E4         [ 5]  431 	std	,s
+   026B EC E4         [ 5]  432 	ldd	,s
+   026D 58            [ 2]  433 	aslb
+   026E 49            [ 2]  434 	rola
+   026F CE`00`00      [ 3]  435 	ldu	#_Positions
+   0272 30 CB         [ 8]  436 	leax	d,u
+   0274 BD`00`00      [ 8]  437 	jsr	_draw_cross
+   0277 6C 62         [ 7]  438 	inc	2,s
+   0279                     439 L24:
+   0279 E6 62         [ 5]  440 	ldb	2,s
+   027B C1 08         [ 2]  441 	cmpb	#8	;cmpqi:
+   027D 2F E7         [ 3]  442 	ble	L25
+   027F 32 63         [ 5]  443 	leas	3,s
+   0281 35 C0         [ 7]  444 	puls	u,pc
+   0283                     445 LC0:
+   0283 54 49 4D 45 20 4C   446 	.byte	84,73,77,69,32,76,69,70
+        45 46
+   028B 54 80 00            447 	.byte	84,-128,0
+                            448 	.globl	_Display_TimeLeft
+   028E                     449 _Display_TimeLeft:
+   028E 34 40         [ 6]  450 	pshs	u
+   0290 32 7D         [ 5]  451 	leas	-3,s
+   0292 C6 C4         [ 2]  452 	ldb	#-60
+   0294 E7 E2         [ 6]  453 	stb	,-s
+   0296 8E`02`83      [ 3]  454 	ldx	#LC0
+   0299 C6 50         [ 2]  455 	ldb	#80
+   029B BD`00`00      [ 8]  456 	jsr	_print_string
+   029E 32 61         [ 5]  457 	leas	1,s
+   02A0 6F 62         [ 7]  458 	clr	2,s
+   02A2 20 13         [ 3]  459 	bra	L28
+   02A4                     460 L29:
+   02A4 E6 62         [ 5]  461 	ldb	2,s
+   02A6 1D            [ 2]  462 	sex		;extendqihi2: R:b -> R:d
+   02A7 ED E4         [ 5]  463 	std	,s
+   02A9 EC E4         [ 5]  464 	ldd	,s
+   02AB 58            [ 2]  465 	aslb
+   02AC 49            [ 2]  466 	rola
+   02AD CE`00`15      [ 3]  467 	ldu	#_Time_Positions
+   02B0 30 CB         [ 8]  468 	leax	d,u
+   02B2 BD`00`00      [ 8]  469 	jsr	_draw_cross
+   02B5 6C 62         [ 7]  470 	inc	2,s
+   02B7                     471 L28:
+   02B7 E6 62         [ 5]  472 	ldb	2,s
+   02B9 C1 0A         [ 2]  473 	cmpb	#10	;cmpqi:
+   02BB 2F E7         [ 3]  474 	ble	L29
+   02BD 32 63         [ 5]  475 	leas	3,s
+   02BF 35 C0         [ 7]  476 	puls	u,pc
+                            477 	.globl	_level_play
+   02C1                     478 _level_play:
+   02C1 32 7C         [ 5]  479 	leas	-4,s
+   02C3 20 29         [ 3]  480 	bra	L32
+   02C5                     481 L33:
+   02C5 BD`00`00      [ 8]  482 	jsr	___DP_to_C8
+   02C8 BE`00`00      [ 6]  483 	ldx	_current_explosion
+   02CB AF E4         [ 5]  484 	stx	,s
+   02CD AE E4         [ 5]  485 	ldx	,s
+   02CF BD`00`00      [ 8]  486 	jsr	__Explosion_Snd
+   02D2 BE`00`00      [ 6]  487 	ldx	_current_music
+   02D5 AF 62         [ 6]  488 	stx	2,s
+   02D7 AE 62         [ 6]  489 	ldx	2,s
+   02D9 BD`00`00      [ 8]  490 	jsr	__Init_Music_chk
+   02DC BD`00`00      [ 8]  491 	jsr	___Wait_Recal
+   02DF BD`00`00      [ 8]  492 	jsr	__Do_Sound
+   02E2 BD`00`00      [ 8]  493 	jsr	___Intensity_5F
+   02E5 BD`02`8E      [ 8]  494 	jsr	_Display_TimeLeft
+   02E8 BD`02`31      [ 8]  495 	jsr	_Generate_Gamefield
+   02EB BD`02`5E      [ 8]  496 	jsr	_Display_Pattern
+   02EE                     497 L32:
+   02EE F6`00`00      [ 5]  498 	ldb	_current_level
+   02F1 5D            [ 2]  499 	tstb
+   02F2 27 D1         [ 3]  500 	beq	L33
+   02F4 32 64         [ 5]  501 	leas	4,s
+   02F6 39            [ 5]  502 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Sun Apr  6 23:20:57 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  4 L10                0125 R   |   4 L11                014D R
+  4 L12                0177 R   |   4 L13                01A3 R
+  4 L14                01CD R   |   4 L15                0065 R
+  4 L16                021D R   |   4 L17                003F R
+  4 L2                 0033 R   |   4 L20                0255 R
+  4 L21                0237 R   |   4 L24                0279 R
+  4 L25                0266 R   |   4 L28                02B7 R
+  4 L29                02A4 R   |   4 L3                 0009 R
+  4 L32                02EE R   |   4 L33                02C5 R
+  4 L4                 0220 R   |   4 L5                 01F8 R
+  4 L6                 0079 R   |   4 L7                 00A5 R
+  4 L8                 00CF R   |   4 L9                 00FB R
+  4 LC0                0283 R   |   4 _Display_Patte     025E GR
+  4 _Display_TimeL     028E GR  |   2 _Display_patte     0001 GR
+  2 _Gamefield         002B GR  |   4 _Generate_Game     0231 GR
+  3 _Positions         0000 GR  |   2 _Time_Position     0015 GR
+    __Do_Sound         **** GX  |     __Explosion_Sn     **** GX
+    __Init_Music_c     **** GX  |     __Random           **** GX
+    ___DP_to_C8        **** GX  |     ___Intensity_5     **** GX
+    ___Wait_Recal      **** GX  |     _current_explo     **** GX
+  2 _current_level     0000 GR  |     _current_music     **** GX
+    _draw_cross        **** GX  |     _handle_object     **** GX
+  4 _level_init        0000 GR  |   4 _level_play        02C1 GR
+    _print_string      **** GX  |     _umodhi3           **** GX
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Sun Apr  6 23:20:57 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size   58   flags  100
+   3 .bss             size   28   flags    0
+   4 .text            size  2F7   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+
