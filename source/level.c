@@ -8,6 +8,7 @@
 #include "level.h"
 #include "objects.h"
 #include "print/print.h"
+#include "utils/controller.h"
 
 // ---------------------------------------------------------------------------
 
@@ -15,10 +16,6 @@ struct level_t current_level =
 {
 	.status = LEVEL_LOST,
 };
-
-short Display_pattern[20] = {0};
-struct vector_t Positions[20];
-struct vector_t Time_Positions[11] = {{-50, 60},{-40, 60},{-30, 60},{-20, 60},{-10, 60},{0, 60},{10, 60},{20, 60},{30, 60},{40, 60},{50,60}};
 
 /*
 const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
@@ -34,66 +31,15 @@ const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2,
 // ---------------------------------------------------------------------------
 void level_init()
 {
-	for(int i = 0; i < 20; ++i){
-			Display_pattern[i] =  (short) (Random() % 9) + 1;
-	}
-	for(int i = 0; i < 20; ++i){
-	switch(Display_pattern[i]){
-	case 1:
-		Positions[i] = (struct vector_t){-30, 30};
-		break;
-	case 2:
-		Positions[i] = (struct vector_t){0, 30};
-		break;
-	case 3:
-		Positions[i] = (struct vector_t){30, 30};
-		break;
-	case 4:
-		Positions[i] = (struct vector_t){-30, 0};
-		break;
-	case 5:
-		Positions[i] = (struct vector_t){0, 0};
-		break;
-	case 6:
-		Positions[i] = (struct vector_t){30, 0};
-		break;
-	case 7:
-		Positions[i] = (struct vector_t){-30, -30};
-		break;
-	case 8:
-		Positions[i] = (struct vector_t){0, -30};
-		break;
-	case 9:
-		Positions[i] = (struct vector_t){30, -30};
-		break;		
-	default:
-		Positions[i] = (struct vector_t){0, 0};
-		break;
-		}
-	}
 	current_level.status = LEVEL_PLAY;
 }	
-// ---------------------------------------------------------------------------
-//Gamefield
-struct object_t Gamefield[] = 
-{
-	{ .status = INACTIVE, .y = 0, .x = 0, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = 30, .x = 0, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = 0, .x = 30, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = 30, .x = 30, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = -30, .x = 0, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = 0, .x = -30, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = -30, .x = -30, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = 30, .x = -30, .dy = 0, .dx = 0},
-	{ .status = INACTIVE, .y = -30, .x = 30, .dy = 0, .dx = 0},
-};
 
 
 // ---------------------------------------------------------------------------
 // Loadingbar
 unsigned int counter = 0;
 void Display_TimeLeft(){
-	print_string(80, -60, "TIME LEFT\x80");
+	print_string(100, -60, "TIME LEFT\x80");
 
 	Loadingbar(counter);		
 	counter -=4;
@@ -101,34 +47,86 @@ void Display_TimeLeft(){
 		counter = 200;
 	}
 }
+
+
 // ---------------------------------------------------------------------------
+// Gamefield
 const unsigned int nibby_vl_style_0[] =
 {
-	// nibby_packet 1: "N"
-	3,	// control byte: 3 nibby_vectors follow
-	0x60, 0xa3, 0x60,
-	// nibby_packet 2: "I"
-	128 + 2,	// control byte: 2 nibby_vectors follow, move first vector
-	0xa3, 0x60,
-	// nibby_packet 3: "B"
-	128 + 6,	// control byte: 6 nibby_vectors follow, move first vector
-	0xa3, 0x60, 0xf3, 0xed, 0xf3, 0xed,
-	// nibby_packet 4: "B"
-	128 + 6,	// control byte: 6 nibby_vectors follow, move first vector
-	0x06, 0x60, 0xf3, 0xed, 0xf3, 0xed,
-	// nibby_packet 5: "Y"
-	128 + 3,	// control byte: 3 nibby_vectors follow, move first vector
-	0x66, 0xd2, 0x32,
-	// nibby_packet 6: "Y"
-	128 + 2,	// control byte: 2 nibby_vectors follow, move first vector
-	0xde, 0xd0,
-	// nibby_packet 7: "0"
-	128 + 32 + 5,	// control byte: 5 nibby_vectors follow, move first vector, last packet
-	0x07, 0x60, 0x03, 0xa0, 0x0d,
+	// draw up
+	128 + 2,	
+	0xc3, 0x60, 
+	128 + 2,
+	0x02, 0xa0,
+	128 + 2,
+	0x22, 0x0A,
+	128 + 2 + 32,
+	0x20, 0x06,
 };
 
-//-----------------------------------------------------------------------------------------
+void Generate_Gamefield(){
+		Reset0Ref();
+		Moveto_d(10, -30);
+		if (*((unsigned int*) 0xFFA1) == 0x20) // dirty bios check
+		{
+			dp_VIA_t1_cnt_lo = 0xFF;		// set scalinf factor for drawing
+			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
+		}
+		else
+		{
+			dp_VIA_t1_cnt_lo = 0xFF;
+			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg			
+		}
+}
 
+//-----------------------------------------------------------------------------------------
+// Player
+static int joy_x = 0;
+static int joy_y = 0;
+void move_cursor(){
+	//draw_cross(2);
+	//draw_cross(4);
+	//draw_cross(6);
+	//draw_cross(8);
+	check_joysticks();
+	
+	print_signed_int(-90, -90, joystick_1_x());
+	print_signed_int(-90, -50, joystick_1_y());
+	print_signed_int(-70, -90, joy_x);
+	print_signed_int(-70, -50, joy_y);
+	
+	/*
+	
+	if(joystick_1_x() > 0){
+		++joy_x;
+	}
+	if(joystick_1_x() < 0){
+		--joy_x;
+	}
+	
+	if(joystick_1_y() > 0){
+		++joy_y;
+	}
+	if(joystick_1_y() < 0){
+		--joy_y;
+	}
+	*/
+	joy_x = joystick_1_x();
+	joy_y = joystick_1_y();
+	
+	if(joy_x < 0 && joy_y > 0){draw_cross(1);}
+	if(joy_x == 0 && joy_y > 0){draw_cross(2);}
+	if( joystick_1_x() > 0 && joystick_1_y() > 0){draw_cross(3);}
+	if(joy_x < 0 && joy_y == 0){draw_cross(4);}
+	if(joy_x == 0 && joy_y == 0){draw_cross(5);}
+	if(joy_x > 0 && joy_y == 0){draw_cross(6);}
+	if(joy_x < 0 && joy_y < 0){draw_cross(7);}
+	if(joy_x == 0 && joy_y < 0){draw_cross(8);}
+	if(joy_x > 0 && joy_y < 0){draw_cross(9);}
+}
+
+//-----------------------------------------------------------------------------------------
+// Gameloop
 void level_play(void)
 {
 	while(current_level.status == LEVEL_PLAY)
@@ -140,41 +138,11 @@ void level_play(void)
 		Wait_Recal();
 		Do_Sound();
 		Intensity_5F();
-
-		//Display_TimeLeft();
-		while(1)
-	{
-		Wait_Recal();
-		Intensity_7F();
-
-		Reset0Ref();
-		Moveto_d(0, -32);
-
-		Vec_Misc_Count = 0;
-		Vec_0Ref_Enable = 0;
-		dp_VIA_t1_cnt_lo = 60;
 		
-		if (*((unsigned int*) 0xFFA1) == 0x20) // dirty bios check
-		{
-			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
+		Display_TimeLeft();
+		Generate_Gamefield();
+		move_cursor();
 
-			Reset0Ref();
-			Print_Str_d(-120, 0, "B796 YES\x80");
-		}
-		else
-		{
-			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
-
-			Reset0Ref();
-			Print_Str_d(-120, 0, "B796 NO\x80");			
-		}
-
-	}
-		
-		
-		//Generate_Gamefield();
-		//Display_Pattern();
-		// end of frame
 	}
 }	
 
