@@ -60,7 +60,7 @@ extern struct player_t player;
 void init_object(struct object_t* p);
 void handle_objects(struct object_t* p);
 void draw_player(void);
-void draw_cross(int q);
+void draw_cross(unsigned int q);
 void Loadingbar(unsigned int q);
 
 // ***************************************************************************

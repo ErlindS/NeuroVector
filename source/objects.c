@@ -8,25 +8,13 @@
 #include "level.h"
 
 // ---------------------------------------------------------------------------
-
-void init_object(struct object_t* p)
-{
-	p->status = ACTIVE;
-
-	p->y = 64 + (int) (Random() & 0b01111111);
-	p->x = 64 + (int) (Random() & 0b01111111);
-
-	p->dy = (int) (Random() & 0b00000011) - 2; 
-	p->dx = (int) (Random() & 0b00000011) - 1;
-}
-// ---------------------------------------------------------------------------
 #undef SF
 #define SF 32
 #define SFN 48
 
-struct vector_t Positions_Cursor[10] = {{0,0},{32, -32},{32, 0},{32, 32},
-								{0, -32}, {0,  0},{0, 32},
-								{-32, -32}, {-32,0},{-32, 32}};
+struct vector_t Positions_Cursor[10] = {{0,0},  {32, -32}, {32, 0},{32, 32},
+												{0, -32},  {0,  0},{0, 32},
+												{-32, -32},{-32,0},{-32, 32}};
 
 const struct packet_t cross[] =
 {
@@ -50,7 +38,7 @@ void Loadingbar(unsigned int q) {
 		dp_VIA_t1_cnt_lo = 0xFF;
 }
 
-void draw_cross(int i){
+void draw_cross(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 	Moveto_d(Positions_Cursor[i].y, Positions_Cursor[i].x);			// move beam to object coordinates
