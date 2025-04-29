@@ -17,21 +17,33 @@ struct level_t current_level =
 	.status = LEVEL_LOST,
 };
 
-/*
-const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
-const int a1[] = {4, 1, 6, 8, 2, 9, 1, 8, 9, 8, 9, 6, 2, 6, 3, 3, 3, 5, 9, 7, 7, 3, 8, 8, 6};
-const int a1[] = {6, 4, 4, 3, 4, 9, 8, 5, 6, 1, 8, 7, 5, 9, 1, 6, 7, 9, 7, 8, 2, 2, 3, 2, 5};
-const int a1[] = {2, 4, 3, 5, 3, 1, 9, 1, 9, 1, 1, 6, 6, 7, 9, 4, 9, 2, 4, 4, 4, 7, 3, 3, 8};
-const int a1[] = {9, 4, 1, 2, 1, 2, 3, 5, 6, 9, 5, 4, 7, 1, 4, 9, 4 1 9 6 4 9 7 5 8};
-const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
-const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
-const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
-const int a1[] = {3, 6, 3, 4, 4, 1, 8, 7, 5, 9, 4, 2, 5, 1, 8, 5, 9, 6, 8, 8, 2, 5, 4, 6, 4};
-*/
+
+// ----------------------------------------------------------------------------
+//Random Number Generator
+unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3 };
+void RandomNumberGenerator(){
+	for(int i = 0; i < 20; ++i){
+		a_random[i] = (a_random[i] + Random()) % 10;
+	}
+}
+
+unsigned int RandomSequenceCounter = 50;
+unsigned int RandomSequenceCounterDisplay = 0;
+void Display_RandomSequence(){
+	draw_cross((int)a_random[RandomSequenceCounterDisplay]);
+	--RandomSequenceCounter;
+	if(RandomSequenceCounter == 0){
+		RandomSequenceCounterDisplay++;
+		RandomSequenceCounter = 50;
+	}
+}
+
 // ---------------------------------------------------------------------------
+//Init 
 void level_init()
 {
 	current_level.status = LEVEL_PLAY;
+	RandomNumberGenerator();
 }	
 
 
@@ -84,10 +96,6 @@ void Generate_Gamefield(){
 static int joy_x = 0;
 static int joy_y = 0;
 void move_cursor(){
-	//draw_cross(2);
-	//draw_cross(4);
-	//draw_cross(6);
-	//draw_cross(8);
 	check_joysticks();
 	
 	print_signed_int(-90, -90, joystick_1_x());
@@ -95,28 +103,12 @@ void move_cursor(){
 	print_signed_int(-70, -90, joy_x);
 	print_signed_int(-70, -50, joy_y);
 	
-	/*
-	
-	if(joystick_1_x() > 0){
-		++joy_x;
-	}
-	if(joystick_1_x() < 0){
-		--joy_x;
-	}
-	
-	if(joystick_1_y() > 0){
-		++joy_y;
-	}
-	if(joystick_1_y() < 0){
-		--joy_y;
-	}
-	*/
 	joy_x = joystick_1_x();
 	joy_y = joystick_1_y();
 	
 	if(joy_x < 0 && joy_y > 0){draw_cross(1);}
 	if(joy_x == 0 && joy_y > 0){draw_cross(2);}
-	if( joystick_1_x() > 0 && joystick_1_y() > 0){draw_cross(3);}
+	if(joy_x > 0 && joy_y > 0){draw_cross(3);}
 	if(joy_x < 0 && joy_y == 0){draw_cross(4);}
 	if(joy_x == 0 && joy_y == 0){draw_cross(5);}
 	if(joy_x > 0 && joy_y == 0){draw_cross(6);}
@@ -139,8 +131,11 @@ void level_play(void)
 		Do_Sound();
 		Intensity_5F();
 		
-		Display_TimeLeft();
+	
+		//Display_RandomSequence();
 		Generate_Gamefield();
+		Display_RandomSequence();
+		Display_TimeLeft();
 		move_cursor();
 
 	}
