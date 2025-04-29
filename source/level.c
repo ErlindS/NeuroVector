@@ -82,8 +82,8 @@ unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 
 unsigned int a_random_compare[20] = {0};
 void RandomNumberGenerator(){
 	for(int i = 0; i < 20; ++i){
-		//a_random[i] = (a_random[i] + Random()) % 10;
-		a_random[i] = a_random[i];
+		a_random[i] = (a_random[i] + Random()) % 10;
+		//a_random[i] = a_random[i];
 	}
 }
 
