@@ -49,6 +49,33 @@ void Generate_Gamefield(){
 		}
 }
 
+// ---------------------------------------------------------------------------
+// Loadingbar
+unsigned int counter = 0;
+int counterw = 3;
+
+void decrementCounter(){
+	counter -=1;
+}
+
+void Display_TimeLeft(){
+	print_string(100, -60, "TIME LEFT\x80");
+
+	Loadingbar(counter);
+	--counterw;
+	if(counterw == 0){
+		decrementCounter();
+		counterw = 3;
+	}
+	if(counter == 0){
+		while(1){
+			print_string(100, -60, "GAME OVER\x80");	
+		}
+		counter = 200;
+	}
+}
+
+
 // ----------------------------------------------------------------------------
 //Random Number Generator
 unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3 };
@@ -65,11 +92,15 @@ unsigned int RandomSequenceCounterDisplay = 0;
 void Display_RandomSequence(){
 	for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 		while(--RandomSequenceCounter){
+			counter = 200;
 			Wait_Recal();
 			Generate_Gamefield();
 			print_string(100, -75, "REMEMBER THE\x80");	
 			print_string(80, -50, "SEQUENCE\x80");
 			draw_cross(a_random[i]);
+			play_tune(1, 100*i+100, 200);
+			play_tune(2, 100*i+100, 200);
+			play_tune(3, 100*i+100, 200);
 		}
 		RandomSequenceCounter = 30;
 	}
@@ -84,20 +115,6 @@ void level_init()
 	RandomNumberGenerator();
 }	
 
-
-// ---------------------------------------------------------------------------
-// Loadingbar
-unsigned int counter = 0;
-void Display_TimeLeft(){
-	print_string(100, -60, "TIME LEFT\x80");
-
-	Loadingbar(counter);		
-	counter -=4;
-	if(counter == 0){
-		counter = 200;
-	}
-}
-
 // ----------------------------------------------------------------------------
 //Game Logic
 unsigned int buttonspressedcounter = 0;
@@ -105,7 +122,7 @@ void Check_if_succesfull(){
 		for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 				if(a_random[i] != a_random_compare[i]){
 					while(1){
-					print_string(100, -60, "TIME LEFT\x80");	
+					print_string(100, -60, "GAME OVER\x80");	
 					print_unsigned_int(-70, -50, a_random[i]);
 					print_unsigned_int(-50, -50, a_random_compare[i]);
 					}
@@ -115,6 +132,7 @@ void Check_if_succesfull(){
 		SequenceTime = 1;
 		RandomSequenceCounterDisplay++;
 		buttonspressedcounter = 0;
+		counter = 200;
 }
 
 //-----------------------------------------------------------------------------------------

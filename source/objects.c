@@ -33,7 +33,7 @@ void Loadingbar(unsigned int q) {
 			dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 			Moveto_d(cross_y - i*4, cross_x);			// move beam to object coordinates
 			dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-			Draw_Line_d(0,100);
+			Draw_Line_d(0,80);
 		}
 		dp_VIA_t1_cnt_lo = 0xFF;
 }
