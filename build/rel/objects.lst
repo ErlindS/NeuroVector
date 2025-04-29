@@ -1,0 +1,164 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	objects.c
+                              6 	.globl	_Positions_Cursor
+                              7 	.area	.data
+   0000                       8 _Positions_Cursor:
+   0000 00                    9 	.byte	0
+   0001 00                   10 	.byte	0
+   0002 20                   11 	.byte	32
+   0003 E0                   12 	.byte	-32
+   0004 20                   13 	.byte	32
+   0005 00                   14 	.byte	0
+   0006 20                   15 	.byte	32
+   0007 20                   16 	.byte	32
+   0008 00                   17 	.byte	0
+   0009 E0                   18 	.byte	-32
+   000A 00                   19 	.byte	0
+   000B 00                   20 	.byte	0
+   000C 00                   21 	.byte	0
+   000D 20                   22 	.byte	32
+   000E E0                   23 	.byte	-32
+   000F E0                   24 	.byte	-32
+   0010 E0                   25 	.byte	-32
+   0011 00                   26 	.byte	0
+   0012 E0                   27 	.byte	-32
+   0013 20                   28 	.byte	32
+                             29 	.globl	_cross
+                             30 	.area	.text
+   0000                      31 _cross:
+   0000 00                   32 	.byte	0
+   0001 20                   33 	.byte	32
+   0002 20                   34 	.byte	32
+   0003 FF                   35 	.byte	-1
+   0004 E0                   36 	.byte	-32
+   0005 E0                   37 	.byte	-32
+   0006 00                   38 	.byte	0
+   0007 20                   39 	.byte	32
+   0008 00                   40 	.byte	0
+   0009 FF                   41 	.byte	-1
+   000A E0                   42 	.byte	-32
+   000B 20                   43 	.byte	32
+   000C 01                   44 	.byte	1
+   000D 00                   45 	.byte	0
+   000E 00                   46 	.byte	0
+                             47 	.globl	_cross_y
+                             48 	.area	.data
+   0014                      49 _cross_y:
+   0014 46                   50 	.byte	70
+                             51 	.globl	_cross_x
+   0015                      52 _cross_x:
+   0015 C4                   53 	.byte	-60
+                             54 	.area	.text
+                             55 	.globl	_Loadingbar
+   000F                      56 _Loadingbar:
+   000F 32 79         [ 5]   57 	leas	-7,s
+   0011 E7 63         [ 5]   58 	stb	3,s
+   0013 6F 64         [ 7]   59 	clr	4,s
+   0015 20 40         [ 3]   60 	bra	L2
+   0017                      61 L3:
+   0017 BD`00`00      [ 8]   62 	jsr	___Reset0Ref
+   001A C6 7F         [ 2]   63 	ldb	#127
+   001C D7`00         [ 4]   64 	stb	*_dp_VIA_t1_cnt_lo
+   001E F6`00`15      [ 5]   65 	ldb	_cross_x
+   0021 E7 61         [ 5]   66 	stb	1,s
+   0023 E6 64         [ 5]   67 	ldb	4,s
+   0025 E7 E4         [ 4]   68 	stb	,s
+   0027 E6 E4         [ 4]   69 	ldb	,s
+   0029 58            [ 2]   70 	aslb
+   002A 58            [ 2]   71 	aslb
+   002B E7 E4         [ 4]   72 	stb	,s
+   002D E6 E4         [ 4]   73 	ldb	,s
+   002F 50            [ 2]   74 	negb
+   0030 E7 62         [ 5]   75 	stb	2,s
+   0032 F6`00`14      [ 5]   76 	ldb	_cross_y
+   0035 EB 62         [ 5]   77 	addb	2,s
+   0037 E7 66         [ 5]   78 	stb	6,s
+   0039 E6 61         [ 5]   79 	ldb	1,s
+   003B E7 65         [ 5]   80 	stb	5,s
+   003D E6 66         [ 5]   81 	ldb	6,s
+   003F E7 E2         [ 6]   82 	stb	,-s
+   0041 E6 66         [ 5]   83 	ldb	6,s
+   0043 BD`00`00      [ 8]   84 	jsr	__Moveto_d
+   0046 32 61         [ 5]   85 	leas	1,s
+   0048 E6 63         [ 5]   86 	ldb	3,s
+   004A D7`00         [ 4]   87 	stb	*_dp_VIA_t1_cnt_lo
+   004C 6F E2         [ 8]   88 	clr	,-s
+   004E C6 50         [ 2]   89 	ldb	#80
+   0050 BD`00`00      [ 8]   90 	jsr	__Draw_Line_d
+   0053 32 61         [ 5]   91 	leas	1,s
+   0055 6C 64         [ 7]   92 	inc	4,s
+   0057                      93 L2:
+   0057 E6 64         [ 5]   94 	ldb	4,s
+   0059 C1 02         [ 2]   95 	cmpb	#2	;cmpqi:
+   005B 2F BA         [ 3]   96 	ble	L3
+   005D C6 FF         [ 2]   97 	ldb	#-1
+   005F D7`00         [ 4]   98 	stb	*_dp_VIA_t1_cnt_lo
+   0061 32 67         [ 5]   99 	leas	7,s
+   0063 39            [ 5]  100 	rts
+                            101 	.globl	_draw_cross
+   0064                     102 _draw_cross:
+   0064 34 40         [ 6]  103 	pshs	u
+   0066 32 7C         [ 5]  104 	leas	-4,s
+   0068 E7 61         [ 5]  105 	stb	1,s
+   006A BD`00`00      [ 8]  106 	jsr	___Reset0Ref
+   006D C6 7F         [ 2]  107 	ldb	#127
+   006F D7`00         [ 4]  108 	stb	*_dp_VIA_t1_cnt_lo
+   0071 E6 61         [ 5]  109 	ldb	1,s
+   0073 4F            [ 2]  110 	clra		;zero_extendqihi: R:b -> R:d
+   0074 58            [ 2]  111 	aslb
+   0075 49            [ 2]  112 	rola
+   0076 CE`00`01      [ 3]  113 	ldu	#_Positions_Cursor+1
+   0079 30 CB         [ 8]  114 	leax	d,u
+   007B E6 84         [ 4]  115 	ldb	,x
+   007D E7 E4         [ 4]  116 	stb	,s
+   007F E6 61         [ 5]  117 	ldb	1,s
+   0081 4F            [ 2]  118 	clra		;zero_extendqihi: R:b -> R:d
+   0082 58            [ 2]  119 	aslb
+   0083 49            [ 2]  120 	rola
+   0084 CE`00`00      [ 3]  121 	ldu	#_Positions_Cursor
+   0087 30 CB         [ 8]  122 	leax	d,u
+   0089 E6 84         [ 4]  123 	ldb	,x
+   008B E7 63         [ 5]  124 	stb	3,s
+   008D E6 E4         [ 4]  125 	ldb	,s
+   008F E7 62         [ 5]  126 	stb	2,s
+   0091 E6 63         [ 5]  127 	ldb	3,s
+   0093 E7 E2         [ 6]  128 	stb	,-s
+   0095 E6 63         [ 5]  129 	ldb	3,s
+   0097 BD`00`00      [ 8]  130 	jsr	__Moveto_d
+   009A 32 61         [ 5]  131 	leas	1,s
+   009C C6 22         [ 2]  132 	ldb	#34
+   009E D7`00         [ 4]  133 	stb	*_dp_VIA_t1_cnt_lo
+   00A0 8E`00`00      [ 3]  134 	ldx	#_cross
+   00A3 BD`00`00      [ 8]  135 	jsr	___Draw_VLp
+   00A6 32 64         [ 5]  136 	leas	4,s
+   00A8 35 C0         [ 7]  137 	puls	u,pc
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Tue Apr 29 05:37:36 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  3 L2                 0057 R   |   3 L3                 0017 R
+  3 _Loadingbar        000F GR  |   2 _Positions_Cur     0000 GR
+    __Draw_Line_d      **** GX  |     __Moveto_d         **** GX
+    ___Draw_VLp        **** GX  |     ___Reset0Ref       **** GX
+  3 _cross             0000 GR  |   2 _cross_x           0015 GR
+  2 _cross_y           0014 GR  |     _dp_VIA_t1_cnt     **** GX
+  3 _draw_cross        0064 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Tue Apr 29 05:37:36 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .data            size   16   flags  100
+   3 .text            size   AA   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+
