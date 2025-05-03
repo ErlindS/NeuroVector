@@ -94,6 +94,8 @@ void game_over(void)
 
 // ---------------------------------------------------------------------------
 
+
+
 int game(void)
 {
 	game_options();
@@ -101,7 +103,8 @@ int game(void)
 	if (button_1_4_held())
 	{
 		game_init();
-		game_play();
+		level_init();
+		level_play();
 		return 0;		// go to option screen, repeat cycle
 	}
 	else

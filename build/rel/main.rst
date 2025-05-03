@@ -5,18 +5,18 @@
                               5 	.module	main.c
                               6 	.area	.text
                               7 	.globl	_main
-   0546                       8 _main:
-   0546 32 7F         [ 5]    9 	leas	-1,s
-   0548                      10 L2:
-   0548 BD 01 60      [ 8]   11 	jsr	_game
-   054B E7 E4         [ 4]   12 	stb	,s
-   054D 6D E4         [ 6]   13 	tst	,s
-   054F 27 F7         [ 3]   14 	beq	L2
-   0551 E6 E4         [ 4]   15 	ldb	,s
-   0553 32 61         [ 5]   16 	leas	1,s
-   0555 39            [ 5]   17 	rts
+   05D8                       8 _main:
+   05D8 32 7F         [ 5]    9 	leas	-1,s
+   05DA                      10 L2:
+   05DA BD 02 98      [ 8]   11 	jsr	_game
+   05DD E7 E4         [ 4]   12 	stb	,s
+   05DF 6D E4         [ 6]   13 	tst	,s
+   05E1 27 F7         [ 3]   14 	beq	L2
+   05E3 E6 E4         [ 4]   15 	ldb	,s
+   05E5 32 61         [ 5]   16 	leas	1,s
+   05E7 39            [ 5]   17 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 15:24:22 2025
+Hexadecimal [16-Bits]                                 Sun May  4 00:01:53 2025
 
 Symbol Table
 
@@ -26,7 +26,7 @@ Symbol Table
   2 _main              0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 15:24:22 2025
+Hexadecimal [16-Bits]                                 Sun May  4 00:01:53 2025
 
 Area Table
 

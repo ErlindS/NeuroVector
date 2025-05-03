@@ -3,8 +3,14 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
 	.module	game.c
-	.globl	_current_game
+	.globl	_counter
 	.area	.data
+_counter:
+	.byte	0
+	.globl	_counterw
+_counterw:
+	.byte	3
+	.globl	_current_game
 _current_game:
 	.word	0,0,0,0
 	.byte	0
@@ -141,7 +147,8 @@ _game:
 	tstb
 	beq	L12
 	jsr	_game_init
-	jsr	_game_play
+	jsr	_level_init
+	jsr	_level_play
 	clr	,s
 	bra	L13
 L12:

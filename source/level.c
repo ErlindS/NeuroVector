@@ -6,115 +6,51 @@
 #include "utils/utils.h"
 #include "game.h"
 #include "level.h"
-#include "objects.h"
 #include "print/print.h"
 #include "utils/controller.h"
 
 
-int SequenceTime = 1;
 // ---------------------------------------------------------------------------
+// Random Number generator
+unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3 };
+unsigned int a_random_compare[20] = {0};
+unsigned int RandomSequenceCounter = 200;
+unsigned int RandomSequenceCounterDisplay = 0;
 
+void RandomNumberGenerator(){
+	for(int i = 0; i < 20; ++i){
+		a_random[i] = (a_random[i]) % 10;
+		//a_random[i] = a_random[i];
+	}
+}
+
+// ---------------------------------------------------------------------------
+//Init 
 struct level_t current_level =
 {
-	.status = LEVEL_LOST,
+	.status = LEVEL_PLAY,
 };
 
-// ---------------------------------------------------------------------------
-// Gamefield
-const unsigned int nibby_vl_style_0[] =
+
+void level_init()
 {
-	// draw up
-	128 + 2,	
-	0xc3, 0x60, 
-	128 + 2,
-	0x02, 0xa0,
-	128 + 2,
-	0x22, 0x0A,
-	128 + 2 + 32,
-	0x20, 0x06,
-};
+	RandomNumberGenerator();
+	current_level.status  = LEVEL_PLAY;
+}	
+
+int SequenceTime = 1;
 
 
-struct packet
-{
-	enum mode_t mode;			// drawing mode
-	int y;		// relative vector;
-	int x;		// relative vector;
-};
 
-const int offset = -30;
-
-const struct packet Gamefield[] = 
-{
-	{MOVE, 24, -8},
-	{DRAW, -48, 0},
-	{MOVE, 0, 16},
-	{DRAW, 48, 0},
-	{MOVE, -16, 16},
-	{DRAW, 0, -48},
-	{MOVE, -16, 0},
-	{DRAW, 0, 48},
-	{STOP, 0, 0},
-};
-const struct packet Brainright[] = 
-{
-	{MOVE, -45, 0},
-	{DRAW, -5, 5},
-	{DRAW, 1, 15},
-	{DRAW, 10, 7},
-	{DRAW, 10, 5},
-	{DRAW, 45, -1},
-	{DRAW, 5, -10},
-	{DRAW, 0, -10},
-	{DRAW, -5, -10},
-	{STOP, 0, 0},
-};
-
-const struct packet Brainleft[] = 
-{
-	{MOVE, -45, 0},
-	{DRAW, -5, -5},
-	{DRAW, 1, -15},
-	{DRAW, 10, -7},
-	{DRAW, 10, -5},
-	{DRAW, 45, 1},
-	{DRAW, 5, 10},
-	{DRAW, 0, 10},
-	{DRAW, -5, 10},
-	{STOP, 0, 0},
-};
-
-
-void Generate_Gamefield(){
-
-		Reset0Ref();
-		dp_VIA_t1_cnt_lo = 0xFF;
-		Moveto_d(-15, 0);
-		Draw_VLp(&Gamefield);
-		Reset0Ref();
-		Moveto_d(0, 0);
-		Draw_VLp(&Brainright);
-		Reset0Ref();
-		Moveto_d(0, 0);
-		Draw_VLp(&Brainleft);
-}
-
-// ---------------------------------------------------------------------------
-// Loadingbar
-unsigned int counter = 0;
-int counterw = 3;
-
-void decrementCounter(){
-	counter -=1;
-}
-
+// ----------------------------------------------------------------------------
+//	Display Time left
 void Display_TimeLeft(){
 	print_string(100, -60, "TIME LEFT\x80");
 
 	Loadingbar(counter);
 	--counterw;
 	if(counterw == 0){
-		decrementCounter();
+		counter -=1;
 		counterw = 3;
 	}
 	if(counter == 0){
@@ -125,26 +61,14 @@ void Display_TimeLeft(){
 	}
 }
 
-
 // ----------------------------------------------------------------------------
-//Random Number Generator
-unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3 };
-unsigned int a_random_compare[20] = {0};
-void RandomNumberGenerator(){
-	for(int i = 0; i < 20; ++i){
-		a_random[i] = (a_random[i] + Random()) % 10;
-		//a_random[i] = a_random[i];
-	}
-}
-
-unsigned int RandomSequenceCounter = 200;
-unsigned int RandomSequenceCounterDisplay = 0;
+//	Pattern to be repeated
 void Display_RandomSequence(){
 	for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 		while(--RandomSequenceCounter){
 			counter = 200;
 			Wait_Recal();
-			Generate_Gamefield();
+			Display_Gamefield();
 			print_string(100, -75, "REMEMBER THE\x80");	
 			print_string(80, -50, "SEQUENCE\x80");
 			draw_cross(a_random[i]);
@@ -157,18 +81,10 @@ void Display_RandomSequence(){
 	SequenceTime = 0;
 }
 
-// ---------------------------------------------------------------------------
-//Init 
-void level_init()
-{
-	current_level.status = LEVEL_PLAY;
-	RandomNumberGenerator();
-}	
-
 // ----------------------------------------------------------------------------
 //Game Logic
 unsigned int buttonspressedcounter = 0;
-void Check_if_succesfull(){
+void is_pattern_succesfull(){
 		for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 				if(a_random[i] != a_random_compare[i]){
 					while(1){
@@ -190,13 +106,8 @@ void Check_if_succesfull(){
 static int joy_x = 0;
 static int joy_y = 0;
 unsigned int temppass = 0;
-void move_cursor(){
+void move_player(){
 	check_joysticks();
-	
-	//print_signed_int(-90, -90, joystick_1_x());
-	//print_signed_int(-90, -50, joystick_1_y());
-	//print_signed_int(-70, -90, joy_x);
-	//print_signed_int(-70, -50, joy_y);
 	
 	joy_x = joystick_1_x();
 	joy_y = joystick_1_y();
@@ -219,13 +130,10 @@ void move_cursor(){
 		a_random_compare[buttonspressedcounter] = temppass;
 		buttonspressedcounter++;
 		if(buttonspressedcounter == RandomSequenceCounterDisplay+1){
-			Check_if_succesfull();
+			is_pattern_succesfull();
 		}
 	}
-	//print_unsigned_int(70, -50, buttonspressedcounter);
-	//print_unsigned_int(50, -50, RandomSequenceCounterDisplay);
 }
-
 
 //-----------------------------------------------------------------------------------------
 // Gameloop
@@ -241,13 +149,12 @@ void level_play(void)
 		Do_Sound();
 		Intensity_5F();
 	
-		//Display_RandomSequence();
-		Generate_Gamefield();
+		Display_Gamefield();
 		if(SequenceTime) {
 			Display_RandomSequence();
 		} else {
 			Display_TimeLeft();
-			move_cursor();
+			move_player();
 		}
 	}
 }	
