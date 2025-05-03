@@ -40,8 +40,8 @@
    009A 39            [ 5]   39 	rts
                              40 	.globl	_game_play
    009B                      41 _game_play:
-   009B BD 03 33      [ 8]   42 	jsr	_level_init
-   009E BD 04 AF      [ 8]   43 	jsr	_level_play
+   009B BD 03 89      [ 8]   42 	jsr	_level_init
+   009E BD 05 05      [ 8]   43 	jsr	_level_play
    00A1 39            [ 5]   44 	rts
    00A2                      45 LC0:
    00A2 47 41 4D 45 20 4F    46 	.byte	71,65,77,69,32,79,86,69
@@ -63,12 +63,12 @@
    00C8 E7 68         [ 5]   60 	stb	8,s
    00CA 30 E4         [ 4]   61 	leax	,s
    00CC E6 68         [ 5]   62 	ldb	8,s
-   00CE BD 06 04      [ 8]   63 	jsr	__Add_Score_a
+   00CE BD 06 65      [ 8]   63 	jsr	__Add_Score_a
    00D1 31 E4         [ 4]   64 	leay	,s
    00D3 8E CB EB      [ 3]   65 	ldx	#_Vec_High_Score
    00D6 34 10         [ 6]   66 	pshs	x
    00D8 30 A4         [ 4]   67 	leax	,y
-   00DA BD 06 0D      [ 8]   68 	jsr	__New_High_Score
+   00DA BD 06 6E      [ 8]   68 	jsr	__New_High_Score
    00DD 32 62         [ 5]   69 	leas	2,s
    00DF C6 96         [ 2]   70 	ldb	#-106
    00E1 E7 67         [ 5]   71 	stb	7,s
@@ -77,25 +77,25 @@
    00E6 BE C8 CF      [ 6]   74 	ldx	_current_explosion
    00E9 AF 69         [ 6]   75 	stx	9,s
    00EB AE 69         [ 6]   76 	ldx	9,s
-   00ED BD 05 D4      [ 8]   77 	jsr	__Explosion_Snd
+   00ED BD 06 35      [ 8]   77 	jsr	__Explosion_Snd
    00F0 BE C8 D1      [ 6]   78 	ldx	_current_music
    00F3 AF 6B         [ 6]   79 	stx	11,s
    00F5 AE 6B         [ 6]   80 	ldx	11,s
-   00F7 BD 05 DD      [ 8]   81 	jsr	__Init_Music_chk
+   00F7 BD 06 3E      [ 8]   81 	jsr	__Init_Music_chk
    00FA BD F1 92      [ 8]   82 	jsr	___Wait_Recal
-   00FD BD 05 F7      [ 8]   83 	jsr	__Do_Sound
+   00FD BD 06 58      [ 8]   83 	jsr	__Do_Sound
    0100 BD F2 A5      [ 8]   84 	jsr	___Intensity_5F
    0103 C6 C0         [ 2]   85 	ldb	#-64
    0105 E7 E2         [ 6]   86 	stb	,-s
    0107 8E 00 A2      [ 3]   87 	ldx	#LC0
    010A 5F            [ 2]   88 	clrb
-   010B BD 05 AA      [ 8]   89 	jsr	_print_string
+   010B BD 06 0B      [ 8]   89 	jsr	_print_string
    010E 32 61         [ 5]   90 	leas	1,s
    0110 C6 9C         [ 2]   91 	ldb	#-100
    0112 E7 E2         [ 6]   92 	stb	,-s
    0114 8E 00 AD      [ 3]   93 	ldx	#LC1
    0117 C6 14         [ 2]   94 	ldb	#20
-   0119 BD 05 AA      [ 8]   95 	jsr	_print_string
+   0119 BD 06 0B      [ 8]   95 	jsr	_print_string
    011C 32 61         [ 5]   96 	leas	1,s
    011E F6 C8 88      [ 5]   97 	ldb	_current_game+8
    0121 5C            [ 2]   98 	incb
@@ -103,7 +103,7 @@
    0124 C6 28         [ 2]  100 	ldb	#40
    0126 E7 E2         [ 6]  101 	stb	,-s
    0128 C6 14         [ 2]  102 	ldb	#20
-   012A BD 06 99      [ 8]  103 	jsr	_print_unsigned_int
+   012A BD 06 F0      [ 8]  103 	jsr	_print_unsigned_int
    012D 32 62         [ 5]  104 	leas	2,s
    012F F6 C8 88      [ 5]  105 	ldb	_current_game+8
    0132 4F            [ 2]  106 	clra		;zero_extendqihi: R:b -> R:d
@@ -114,7 +114,7 @@
    013D E7 E2         [ 6]  111 	stb	,-s
    013F 8E C0 E2      [ 3]  112 	ldx	#-16158
    0142 E6 6E         [ 5]  113 	ldb	14,s
-   0144 BD 06 86      [ 8]  114 	jsr	__Print_Ships
+   0144 BD 06 E7      [ 8]  114 	jsr	__Print_Ships
    0147 32 61         [ 5]  115 	leas	1,s
    0149 BD F1 BA      [ 8]  116 	jsr	___Read_Btns
    014C 6A 67         [ 7]  117 	dec	7,s
@@ -133,7 +133,7 @@
    0162 C6 01         [ 2]  130 	ldb	#1
    0164 E7 E2         [ 6]  131 	stb	,-s
    0166 C6 03         [ 2]  132 	ldb	#3
-   0168 BD 06 FA      [ 8]  133 	jsr	__Select_Game
+   0168 BD 07 51      [ 8]  133 	jsr	__Select_Game
    016B 32 61         [ 5]  134 	leas	1,s
    016D F6 C8 79      [ 5]  135 	ldb	_Vec_Num_Players
    0170 F7 C8 80      [ 5]  136 	stb	_current_game
@@ -155,7 +155,7 @@
    0191 32 61         [ 5]  152 	leas	1,s
    0193 39            [ 5]  153 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Tue Apr 29 05:37:36 2025
+Hexadecimal [16-Bits]                                 Sat May  3 15:24:22 2025
 
 Symbol Table
 
@@ -183,7 +183,7 @@ Symbol Table
     _print_string      **** GX  |     _print_unsigne     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Tue Apr 29 05:37:36 2025
+Hexadecimal [16-Bits]                                 Sat May  3 15:24:22 2025
 
 Area Table
 

@@ -34,19 +34,69 @@ const unsigned int nibby_vl_style_0[] =
 	0x20, 0x06,
 };
 
+
+struct packet
+{
+	enum mode_t mode;			// drawing mode
+	int y;		// relative vector;
+	int x;		// relative vector;
+};
+
+const int offset = -30;
+
+const struct packet Gamefield[] = 
+{
+	{MOVE, 24, -8},
+	{DRAW, -48, 0},
+	{MOVE, 0, 16},
+	{DRAW, 48, 0},
+	{MOVE, -16, 16},
+	{DRAW, 0, -48},
+	{MOVE, -16, 0},
+	{DRAW, 0, 48},
+	{STOP, 0, 0},
+};
+const struct packet Brainright[] = 
+{
+	{MOVE, -45, 0},
+	{DRAW, -5, 5},
+	{DRAW, 1, 15},
+	{DRAW, 10, 7},
+	{DRAW, 10, 5},
+	{DRAW, 45, -1},
+	{DRAW, 5, -10},
+	{DRAW, 0, -10},
+	{DRAW, -5, -10},
+	{STOP, 0, 0},
+};
+
+const struct packet Brainleft[] = 
+{
+	{MOVE, -45, 0},
+	{DRAW, -5, -5},
+	{DRAW, 1, -15},
+	{DRAW, 10, -7},
+	{DRAW, 10, -5},
+	{DRAW, 45, 1},
+	{DRAW, 5, 10},
+	{DRAW, 0, 10},
+	{DRAW, -5, 10},
+	{STOP, 0, 0},
+};
+
+
 void Generate_Gamefield(){
+
 		Reset0Ref();
-		Moveto_d(10, -30);
-		if (*((unsigned int*) 0xFFA1) == 0x20) // dirty bios check
-		{
-			dp_VIA_t1_cnt_lo = 0xFF;		// set scalinf factor for drawing
-			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg
-		}
-		else
-		{
-			dp_VIA_t1_cnt_lo = 0xFF;
-			Draw_Grid_VL((void*) 0L, (void*) nibby_vl_style_0); // ignore x reg			
-		}
+		dp_VIA_t1_cnt_lo = 0xFF;
+		Moveto_d(-15, 0);
+		Draw_VLp(&Gamefield);
+		Reset0Ref();
+		Moveto_d(0, 0);
+		Draw_VLp(&Brainright);
+		Reset0Ref();
+		Moveto_d(0, 0);
+		Draw_VLp(&Brainleft);
 }
 
 // ---------------------------------------------------------------------------

@@ -8,24 +8,24 @@
 _Positions_Cursor:
 	.byte	0
 	.byte	0
-	.byte	32
-	.byte	-32
-	.byte	32
+	.byte	16
+	.byte	-16
+	.byte	16
 	.byte	0
-	.byte	32
-	.byte	32
+	.byte	16
+	.byte	16
 	.byte	0
-	.byte	-32
+	.byte	-16
 	.byte	0
 	.byte	0
 	.byte	0
-	.byte	32
-	.byte	-32
-	.byte	-32
-	.byte	-32
+	.byte	16
+	.byte	-16
+	.byte	-16
+	.byte	-16
 	.byte	0
-	.byte	-32
-	.byte	32
+	.byte	-16
+	.byte	16
 	.globl	_cross
 	.area	.text
 _cross:
@@ -104,8 +104,13 @@ _draw_cross:
 	leas	-4,s
 	stb	1,s
 	jsr	___Reset0Ref
-	ldb	#127
+	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-21
+	stb	,-s
+	ldb	#-6
+	jsr	__Moveto_d
+	leas	1,s
 	ldb	1,s
 	clra		;zero_extendqihi: R:b -> R:d
 	aslb
@@ -129,7 +134,7 @@ _draw_cross:
 	ldb	3,s
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	#34
+	ldb	#96
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_cross
 	jsr	___Draw_VLp
