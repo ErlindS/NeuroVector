@@ -28,18 +28,19 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=6
-FILE_NAME_0=22;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables.c;0;4
-FILE_NAME_1=234;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables.h;0;4
-FILE_NAME_2=119;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5CrandomNumberGenerator.h;0;4
-FILE_NAME_3=141;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5CrandomNumberGenerator.c;0;4
-FILE_NAME_4=0;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cmain.c;0;4
-FILE_NAME_5=615;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Clevel.h;0;4
-FILE_NAME_6=940;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Clevel.c;0;4
-FILE_NAME_7=2331;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cgame.c;0;4
-FILE_NAME_8=604;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cgame.h;0;4
+current_page=11
+FILE_NAME_0=472;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables.c;0;4
+FILE_NAME_1=12;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables%5Cdrawablesbasic.h;0;4
+FILE_NAME_2=12;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables%5Cgamefield.h;0;4
+FILE_NAME_3=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables%5Cbrain.h;0;4
+FILE_NAME_4=193;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables.h;0;4
+FILE_NAME_5=40;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cdrawables%5Ccross.h;0;4
+FILE_NAME_6=3790;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Clevel.c;0;4
+FILE_NAME_7=0;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cmain.c;0;4
+FILE_NAME_8=1202;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Cgame.c;0;4
 FILE_NAME_9=0;C;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Ccartridge.c;0;4
 FILE_NAME_10=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Ccartridge.h;0;4
+FILE_NAME_11=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5Cerlin%5CDocuments%5Crepo%5CVectrex%5CVectrex%5Cprojects%5CNeuroVector%5Csource%5Clevel.h;0;4
 
 [build-menu]
 EX_00_LB=_Execute

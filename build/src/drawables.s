@@ -3,14 +3,8 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
 	.module	drawables.c
-	.globl	_counter
-	.area	.data
-_counter:
-	.byte	0
-	.globl	_counterw
-_counterw:
-	.byte	3
 	.globl	_Positions_Cursor
+	.area	.text
 _Positions_Cursor:
 	.byte	0
 	.byte	0
@@ -33,7 +27,6 @@ _Positions_Cursor:
 	.byte	-16
 	.byte	16
 	.globl	_cross
-	.area	.text
 _cross:
 	.byte	0
 	.byte	32
@@ -50,48 +43,6 @@ _cross:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_draw_cross
-_draw_cross:
-	pshs	u
-	leas	-4,s
-	stb	1,s
-	jsr	___Reset0Ref
-	ldb	#-1
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-21
-	stb	,-s
-	ldb	#-6
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	aslb
-	rola
-	ldu	#_Positions_Cursor
-	leax	d,u
-	ldb	,x
-	stb	,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	aslb
-	rola
-	ldu	#_Positions_Cursor+1
-	leax	d,u
-	ldb	,x
-	stb	3,s
-	ldb	,s
-	stb	2,s
-	ldb	3,s
-	stb	,-s
-	ldb	3,s
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	#96
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_cross
-	jsr	___Draw_VLp
-	leas	4,s
-	puls	u,pc
 	.globl	_Gamefield
 _Gamefield:
 	.byte	0
@@ -185,6 +136,48 @@ _Brainleft:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_draw_cross
+_draw_cross:
+	pshs	u
+	leas	-4,s
+	stb	1,s
+	jsr	___Reset0Ref
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-21
+	stb	,-s
+	ldb	#-6
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	1,s
+	clra		;zero_extendqihi: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Cursor
+	leax	d,u
+	ldb	,x
+	stb	,s
+	ldb	1,s
+	clra		;zero_extendqihi: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Cursor+1
+	leax	d,u
+	ldb	,x
+	stb	3,s
+	ldb	,s
+	stb	2,s
+	ldb	3,s
+	stb	,-s
+	ldb	3,s
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#96
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_cross
+	jsr	___Draw_VLp
+	leas	4,s
+	puls	u,pc
 	.globl	_Display_Gamefield
 _Display_Gamefield:
 	jsr	___Reset0Ref
@@ -214,41 +207,51 @@ _Display_Gamefield:
 	rts
 	.globl	_Loadingbar
 _Loadingbar:
-	leas	-4,s
-	stb	1,s
-	clr	2,s
-	bra	L6
-L7:
+	leas	-1,s
+	stb	,s
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	2,s
-	stb	,s
-	ldb	,s
-	aslb
-	aslb
-	stb	,s
-	ldb	,s
-	negb
-	addb	#70
-	stb	3,s
-	ldb	3,s
+	ldb	#70
 	stb	,-s
 	ldb	#-60
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	1,s
+	ldb	,s
 	stb	*_dp_VIA_t1_cnt_lo
 	clr	,-s
 	ldb	#80
 	jsr	__Draw_Line_d
 	leas	1,s
-	inc	2,s
-L6:
-	ldb	2,s
-	cmpb	#2	;cmpqi:
-	ble	L7
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#66
+	stb	,-s
+	ldb	#-60
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#62
+	stb	,-s
+	ldb	#-60
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
-	leas	4,s
+	leas	1,s
 	rts

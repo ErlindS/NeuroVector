@@ -44,6 +44,8 @@ int SequenceTime = 1;
 
 // ----------------------------------------------------------------------------
 //	Display Time left
+unsigned int counter = 0;
+int counterw = 3;
 void Display_TimeLeft(){
 	print_string(100, -60, "TIME LEFT\x80");
 
@@ -83,6 +85,7 @@ void Display_RandomSequence(){
 
 // ----------------------------------------------------------------------------
 //Game Logic
+
 unsigned int buttonspressedcounter = 0;
 void is_pattern_succesfull(){
 		for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){

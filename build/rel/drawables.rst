@@ -3,281 +3,281 @@
                               3 ;;; ABI version 1
                               4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
                               5 	.module	drawables.c
-                              6 	.globl	_counter
-                              7 	.area	.data
-   C880                       8 _counter:
-   C880 00                    9 	.byte	0
-                             10 	.globl	_counterw
-   C881                      11 _counterw:
-   C881 03                   12 	.byte	3
-                             13 	.globl	_Positions_Cursor
-   C882                      14 _Positions_Cursor:
-   C882 00                   15 	.byte	0
-   C883 00                   16 	.byte	0
-   C884 10                   17 	.byte	16
-   C885 F0                   18 	.byte	-16
-   C886 10                   19 	.byte	16
-   C887 00                   20 	.byte	0
-   C888 10                   21 	.byte	16
-   C889 10                   22 	.byte	16
-   C88A 00                   23 	.byte	0
-   C88B F0                   24 	.byte	-16
-   C88C 00                   25 	.byte	0
-   C88D 00                   26 	.byte	0
-   C88E 00                   27 	.byte	0
-   C88F 10                   28 	.byte	16
-   C890 F0                   29 	.byte	-16
-   C891 F0                   30 	.byte	-16
-   C892 F0                   31 	.byte	-16
-   C893 00                   32 	.byte	0
-   C894 F0                   33 	.byte	-16
-   C895 10                   34 	.byte	16
-                             35 	.globl	_cross
-                             36 	.area	.text
-   005E                      37 _cross:
-   005E 00                   38 	.byte	0
-   005F 20                   39 	.byte	32
-   0060 20                   40 	.byte	32
-   0061 FF                   41 	.byte	-1
-   0062 E0                   42 	.byte	-32
-   0063 E0                   43 	.byte	-32
-   0064 00                   44 	.byte	0
-   0065 20                   45 	.byte	32
-   0066 00                   46 	.byte	0
-   0067 FF                   47 	.byte	-1
-   0068 E0                   48 	.byte	-32
-   0069 20                   49 	.byte	32
-   006A 01                   50 	.byte	1
-   006B 00                   51 	.byte	0
-   006C 00                   52 	.byte	0
-                             53 	.globl	_draw_cross
-   006D                      54 _draw_cross:
-   006D 34 40         [ 6]   55 	pshs	u
-   006F 32 7C         [ 5]   56 	leas	-4,s
-   0071 E7 61         [ 5]   57 	stb	1,s
-   0073 BD F3 54      [ 8]   58 	jsr	___Reset0Ref
-   0076 C6 FF         [ 2]   59 	ldb	#-1
-   0078 D7 04         [ 4]   60 	stb	*_dp_VIA_t1_cnt_lo
-   007A C6 EB         [ 2]   61 	ldb	#-21
-   007C E7 E2         [ 6]   62 	stb	,-s
-   007E C6 FA         [ 2]   63 	ldb	#-6
-   0080 BD 07 36      [ 8]   64 	jsr	__Moveto_d
-   0083 32 61         [ 5]   65 	leas	1,s
-   0085 E6 61         [ 5]   66 	ldb	1,s
-   0087 4F            [ 2]   67 	clra		;zero_extendqihi: R:b -> R:d
-   0088 58            [ 2]   68 	aslb
-   0089 49            [ 2]   69 	rola
-   008A CE C8 82      [ 3]   70 	ldu	#_Positions_Cursor
-   008D 30 CB         [ 8]   71 	leax	d,u
-   008F E6 84         [ 4]   72 	ldb	,x
-   0091 E7 E4         [ 4]   73 	stb	,s
-   0093 E6 61         [ 5]   74 	ldb	1,s
-   0095 4F            [ 2]   75 	clra		;zero_extendqihi: R:b -> R:d
-   0096 58            [ 2]   76 	aslb
-   0097 49            [ 2]   77 	rola
-   0098 CE C8 83      [ 3]   78 	ldu	#_Positions_Cursor+1
-   009B 30 CB         [ 8]   79 	leax	d,u
-   009D E6 84         [ 4]   80 	ldb	,x
-   009F E7 63         [ 5]   81 	stb	3,s
-   00A1 E6 E4         [ 4]   82 	ldb	,s
-   00A3 E7 62         [ 5]   83 	stb	2,s
-   00A5 E6 63         [ 5]   84 	ldb	3,s
-   00A7 E7 E2         [ 6]   85 	stb	,-s
-   00A9 E6 63         [ 5]   86 	ldb	3,s
-   00AB BD 07 36      [ 8]   87 	jsr	__Moveto_d
-   00AE 32 61         [ 5]   88 	leas	1,s
-   00B0 C6 60         [ 2]   89 	ldb	#96
-   00B2 D7 04         [ 4]   90 	stb	*_dp_VIA_t1_cnt_lo
-   00B4 8E 00 5E      [ 3]   91 	ldx	#_cross
-   00B7 BD F4 10      [ 8]   92 	jsr	___Draw_VLp
-   00BA 32 64         [ 5]   93 	leas	4,s
-   00BC 35 C0         [ 7]   94 	puls	u,pc
-                             95 	.globl	_Gamefield
-   00BE                      96 _Gamefield:
-   00BE 00                   97 	.byte	0
-   00BF 18                   98 	.byte	24
-   00C0 F8                   99 	.byte	-8
-   00C1 FF                  100 	.byte	-1
-   00C2 D0                  101 	.byte	-48
-   00C3 00                  102 	.byte	0
-   00C4 00                  103 	.byte	0
-   00C5 00                  104 	.byte	0
-   00C6 10                  105 	.byte	16
-   00C7 FF                  106 	.byte	-1
-   00C8 30                  107 	.byte	48
-   00C9 00                  108 	.byte	0
-   00CA 00                  109 	.byte	0
-   00CB F0                  110 	.byte	-16
-   00CC 10                  111 	.byte	16
-   00CD FF                  112 	.byte	-1
-   00CE 00                  113 	.byte	0
-   00CF D0                  114 	.byte	-48
-   00D0 00                  115 	.byte	0
-   00D1 F0                  116 	.byte	-16
-   00D2 00                  117 	.byte	0
-   00D3 FF                  118 	.byte	-1
-   00D4 00                  119 	.byte	0
-   00D5 30                  120 	.byte	48
-   00D6 01                  121 	.byte	1
-   00D7 00                  122 	.byte	0
-   00D8 00                  123 	.byte	0
-                            124 	.globl	_Brainright
-   00D9                     125 _Brainright:
-   00D9 00                  126 	.byte	0
-   00DA D3                  127 	.byte	-45
-   00DB 00                  128 	.byte	0
-   00DC FF                  129 	.byte	-1
-   00DD FB                  130 	.byte	-5
-   00DE 05                  131 	.byte	5
-   00DF FF                  132 	.byte	-1
-   00E0 01                  133 	.byte	1
-   00E1 0F                  134 	.byte	15
-   00E2 FF                  135 	.byte	-1
-   00E3 0A                  136 	.byte	10
-   00E4 07                  137 	.byte	7
-   00E5 FF                  138 	.byte	-1
-   00E6 0A                  139 	.byte	10
-   00E7 05                  140 	.byte	5
-   00E8 FF                  141 	.byte	-1
-   00E9 2D                  142 	.byte	45
-   00EA FF                  143 	.byte	-1
-   00EB FF                  144 	.byte	-1
-   00EC 05                  145 	.byte	5
-   00ED F6                  146 	.byte	-10
-   00EE FF                  147 	.byte	-1
-   00EF 00                  148 	.byte	0
-   00F0 F6                  149 	.byte	-10
-   00F1 FF                  150 	.byte	-1
-   00F2 FB                  151 	.byte	-5
-   00F3 F6                  152 	.byte	-10
-   00F4 01                  153 	.byte	1
-   00F5 00                  154 	.byte	0
-   00F6 00                  155 	.byte	0
-                            156 	.globl	_Brainleft
-   00F7                     157 _Brainleft:
-   00F7 00                  158 	.byte	0
-   00F8 D3                  159 	.byte	-45
-   00F9 00                  160 	.byte	0
-   00FA FF                  161 	.byte	-1
-   00FB FB                  162 	.byte	-5
-   00FC FB                  163 	.byte	-5
-   00FD FF                  164 	.byte	-1
-   00FE 01                  165 	.byte	1
-   00FF F1                  166 	.byte	-15
-   0100 FF                  167 	.byte	-1
-   0101 0A                  168 	.byte	10
-   0102 F9                  169 	.byte	-7
-   0103 FF                  170 	.byte	-1
-   0104 0A                  171 	.byte	10
-   0105 FB                  172 	.byte	-5
-   0106 FF                  173 	.byte	-1
-   0107 2D                  174 	.byte	45
-   0108 01                  175 	.byte	1
-   0109 FF                  176 	.byte	-1
-   010A 05                  177 	.byte	5
-   010B 0A                  178 	.byte	10
-   010C FF                  179 	.byte	-1
-   010D 00                  180 	.byte	0
-   010E 0A                  181 	.byte	10
-   010F FF                  182 	.byte	-1
-   0110 FB                  183 	.byte	-5
-   0111 0A                  184 	.byte	10
-   0112 01                  185 	.byte	1
-   0113 00                  186 	.byte	0
-   0114 00                  187 	.byte	0
-                            188 	.globl	_Display_Gamefield
-   0115                     189 _Display_Gamefield:
-   0115 BD F3 54      [ 8]  190 	jsr	___Reset0Ref
-   0118 C6 FF         [ 2]  191 	ldb	#-1
-   011A D7 04         [ 4]  192 	stb	*_dp_VIA_t1_cnt_lo
-   011C C6 F1         [ 2]  193 	ldb	#-15
-   011E E7 E2         [ 6]  194 	stb	,-s
-   0120 5F            [ 2]  195 	clrb
-   0121 BD 07 36      [ 8]  196 	jsr	__Moveto_d
-   0124 32 61         [ 5]  197 	leas	1,s
-   0126 8E 00 BE      [ 3]  198 	ldx	#_Gamefield
-   0129 BD F4 10      [ 8]  199 	jsr	___Draw_VLp
-   012C BD F3 54      [ 8]  200 	jsr	___Reset0Ref
-   012F 6F E2         [ 8]  201 	clr	,-s
-   0131 5F            [ 2]  202 	clrb
-   0132 BD 07 36      [ 8]  203 	jsr	__Moveto_d
-   0135 32 61         [ 5]  204 	leas	1,s
-   0137 8E 00 D9      [ 3]  205 	ldx	#_Brainright
-   013A BD F4 10      [ 8]  206 	jsr	___Draw_VLp
-   013D BD F3 54      [ 8]  207 	jsr	___Reset0Ref
-   0140 6F E2         [ 8]  208 	clr	,-s
-   0142 5F            [ 2]  209 	clrb
-   0143 BD 07 36      [ 8]  210 	jsr	__Moveto_d
-   0146 32 61         [ 5]  211 	leas	1,s
-   0148 8E 00 F7      [ 3]  212 	ldx	#_Brainleft
-   014B BD F4 10      [ 8]  213 	jsr	___Draw_VLp
-   014E 39            [ 5]  214 	rts
-                            215 	.globl	_Loadingbar
-   014F                     216 _Loadingbar:
-   014F 32 7C         [ 5]  217 	leas	-4,s
-   0151 E7 61         [ 5]  218 	stb	1,s
-   0153 6F 62         [ 7]  219 	clr	2,s
-   0155 20 32         [ 3]  220 	bra	L6
-   0157                     221 L7:
-   0157 BD F3 54      [ 8]  222 	jsr	___Reset0Ref
-   015A C6 7F         [ 2]  223 	ldb	#127
-   015C D7 04         [ 4]  224 	stb	*_dp_VIA_t1_cnt_lo
-   015E E6 62         [ 5]  225 	ldb	2,s
-   0160 E7 E4         [ 4]  226 	stb	,s
-   0162 E6 E4         [ 4]  227 	ldb	,s
-   0164 58            [ 2]  228 	aslb
-   0165 58            [ 2]  229 	aslb
-   0166 E7 E4         [ 4]  230 	stb	,s
-   0168 E6 E4         [ 4]  231 	ldb	,s
-   016A 50            [ 2]  232 	negb
-   016B CB 46         [ 2]  233 	addb	#70
-   016D E7 63         [ 5]  234 	stb	3,s
-   016F E6 63         [ 5]  235 	ldb	3,s
-   0171 E7 E2         [ 6]  236 	stb	,-s
-   0173 C6 C4         [ 2]  237 	ldb	#-60
-   0175 BD 07 36      [ 8]  238 	jsr	__Moveto_d
-   0178 32 61         [ 5]  239 	leas	1,s
-   017A E6 61         [ 5]  240 	ldb	1,s
-   017C D7 04         [ 4]  241 	stb	*_dp_VIA_t1_cnt_lo
-   017E 6F E2         [ 8]  242 	clr	,-s
-   0180 C6 50         [ 2]  243 	ldb	#80
-   0182 BD 07 23      [ 8]  244 	jsr	__Draw_Line_d
-   0185 32 61         [ 5]  245 	leas	1,s
-   0187 6C 62         [ 7]  246 	inc	2,s
-   0189                     247 L6:
-   0189 E6 62         [ 5]  248 	ldb	2,s
-   018B C1 02         [ 2]  249 	cmpb	#2	;cmpqi:
-   018D 2F C8         [ 3]  250 	ble	L7
-   018F C6 FF         [ 2]  251 	ldb	#-1
-   0191 D7 04         [ 4]  252 	stb	*_dp_VIA_t1_cnt_lo
-   0193 32 64         [ 5]  253 	leas	4,s
-   0195 39            [ 5]  254 	rts
+                              6 	.globl	_Positions_Cursor
+                              7 	.area	.text
+   005E                       8 _Positions_Cursor:
+   005E 00                    9 	.byte	0
+   005F 00                   10 	.byte	0
+   0060 10                   11 	.byte	16
+   0061 F0                   12 	.byte	-16
+   0062 10                   13 	.byte	16
+   0063 00                   14 	.byte	0
+   0064 10                   15 	.byte	16
+   0065 10                   16 	.byte	16
+   0066 00                   17 	.byte	0
+   0067 F0                   18 	.byte	-16
+   0068 00                   19 	.byte	0
+   0069 00                   20 	.byte	0
+   006A 00                   21 	.byte	0
+   006B 10                   22 	.byte	16
+   006C F0                   23 	.byte	-16
+   006D F0                   24 	.byte	-16
+   006E F0                   25 	.byte	-16
+   006F 00                   26 	.byte	0
+   0070 F0                   27 	.byte	-16
+   0071 10                   28 	.byte	16
+                             29 	.globl	_cross
+   0072                      30 _cross:
+   0072 00                   31 	.byte	0
+   0073 20                   32 	.byte	32
+   0074 20                   33 	.byte	32
+   0075 FF                   34 	.byte	-1
+   0076 E0                   35 	.byte	-32
+   0077 E0                   36 	.byte	-32
+   0078 00                   37 	.byte	0
+   0079 20                   38 	.byte	32
+   007A 00                   39 	.byte	0
+   007B FF                   40 	.byte	-1
+   007C E0                   41 	.byte	-32
+   007D 20                   42 	.byte	32
+   007E 01                   43 	.byte	1
+   007F 00                   44 	.byte	0
+   0080 00                   45 	.byte	0
+                             46 	.globl	_Gamefield
+   0081                      47 _Gamefield:
+   0081 00                   48 	.byte	0
+   0082 18                   49 	.byte	24
+   0083 F8                   50 	.byte	-8
+   0084 FF                   51 	.byte	-1
+   0085 D0                   52 	.byte	-48
+   0086 00                   53 	.byte	0
+   0087 00                   54 	.byte	0
+   0088 00                   55 	.byte	0
+   0089 10                   56 	.byte	16
+   008A FF                   57 	.byte	-1
+   008B 30                   58 	.byte	48
+   008C 00                   59 	.byte	0
+   008D 00                   60 	.byte	0
+   008E F0                   61 	.byte	-16
+   008F 10                   62 	.byte	16
+   0090 FF                   63 	.byte	-1
+   0091 00                   64 	.byte	0
+   0092 D0                   65 	.byte	-48
+   0093 00                   66 	.byte	0
+   0094 F0                   67 	.byte	-16
+   0095 00                   68 	.byte	0
+   0096 FF                   69 	.byte	-1
+   0097 00                   70 	.byte	0
+   0098 30                   71 	.byte	48
+   0099 01                   72 	.byte	1
+   009A 00                   73 	.byte	0
+   009B 00                   74 	.byte	0
+                             75 	.globl	_Brainright
+   009C                      76 _Brainright:
+   009C 00                   77 	.byte	0
+   009D D3                   78 	.byte	-45
+   009E 00                   79 	.byte	0
+   009F FF                   80 	.byte	-1
+   00A0 FB                   81 	.byte	-5
+   00A1 05                   82 	.byte	5
+   00A2 FF                   83 	.byte	-1
+   00A3 01                   84 	.byte	1
+   00A4 0F                   85 	.byte	15
+   00A5 FF                   86 	.byte	-1
+   00A6 0A                   87 	.byte	10
+   00A7 07                   88 	.byte	7
+   00A8 FF                   89 	.byte	-1
+   00A9 0A                   90 	.byte	10
+   00AA 05                   91 	.byte	5
+   00AB FF                   92 	.byte	-1
+   00AC 2D                   93 	.byte	45
+   00AD FF                   94 	.byte	-1
+   00AE FF                   95 	.byte	-1
+   00AF 05                   96 	.byte	5
+   00B0 F6                   97 	.byte	-10
+   00B1 FF                   98 	.byte	-1
+   00B2 00                   99 	.byte	0
+   00B3 F6                  100 	.byte	-10
+   00B4 FF                  101 	.byte	-1
+   00B5 FB                  102 	.byte	-5
+   00B6 F6                  103 	.byte	-10
+   00B7 01                  104 	.byte	1
+   00B8 00                  105 	.byte	0
+   00B9 00                  106 	.byte	0
+                            107 	.globl	_Brainleft
+   00BA                     108 _Brainleft:
+   00BA 00                  109 	.byte	0
+   00BB D3                  110 	.byte	-45
+   00BC 00                  111 	.byte	0
+   00BD FF                  112 	.byte	-1
+   00BE FB                  113 	.byte	-5
+   00BF FB                  114 	.byte	-5
+   00C0 FF                  115 	.byte	-1
+   00C1 01                  116 	.byte	1
+   00C2 F1                  117 	.byte	-15
+   00C3 FF                  118 	.byte	-1
+   00C4 0A                  119 	.byte	10
+   00C5 F9                  120 	.byte	-7
+   00C6 FF                  121 	.byte	-1
+   00C7 0A                  122 	.byte	10
+   00C8 FB                  123 	.byte	-5
+   00C9 FF                  124 	.byte	-1
+   00CA 2D                  125 	.byte	45
+   00CB 01                  126 	.byte	1
+   00CC FF                  127 	.byte	-1
+   00CD 05                  128 	.byte	5
+   00CE 0A                  129 	.byte	10
+   00CF FF                  130 	.byte	-1
+   00D0 00                  131 	.byte	0
+   00D1 0A                  132 	.byte	10
+   00D2 FF                  133 	.byte	-1
+   00D3 FB                  134 	.byte	-5
+   00D4 0A                  135 	.byte	10
+   00D5 01                  136 	.byte	1
+   00D6 00                  137 	.byte	0
+   00D7 00                  138 	.byte	0
+                            139 	.globl	_draw_cross
+   00D8                     140 _draw_cross:
+   00D8 34 40         [ 6]  141 	pshs	u
+   00DA 32 7C         [ 5]  142 	leas	-4,s
+   00DC E7 61         [ 5]  143 	stb	1,s
+   00DE BD F3 54      [ 8]  144 	jsr	___Reset0Ref
+   00E1 C6 FF         [ 2]  145 	ldb	#-1
+   00E3 D7 04         [ 4]  146 	stb	*_dp_VIA_t1_cnt_lo
+   00E5 C6 EB         [ 2]  147 	ldb	#-21
+   00E7 E7 E2         [ 6]  148 	stb	,-s
+   00E9 C6 FA         [ 2]  149 	ldb	#-6
+   00EB BD 07 0A      [ 8]  150 	jsr	__Moveto_d
+   00EE 32 61         [ 5]  151 	leas	1,s
+   00F0 E6 61         [ 5]  152 	ldb	1,s
+   00F2 4F            [ 2]  153 	clra		;zero_extendqihi: R:b -> R:d
+   00F3 58            [ 2]  154 	aslb
+   00F4 49            [ 2]  155 	rola
+   00F5 CE 00 5E      [ 3]  156 	ldu	#_Positions_Cursor
+   00F8 30 CB         [ 8]  157 	leax	d,u
+   00FA E6 84         [ 4]  158 	ldb	,x
+   00FC E7 E4         [ 4]  159 	stb	,s
+   00FE E6 61         [ 5]  160 	ldb	1,s
+   0100 4F            [ 2]  161 	clra		;zero_extendqihi: R:b -> R:d
+   0101 58            [ 2]  162 	aslb
+   0102 49            [ 2]  163 	rola
+   0103 CE 00 5F      [ 3]  164 	ldu	#_Positions_Cursor+1
+   0106 30 CB         [ 8]  165 	leax	d,u
+   0108 E6 84         [ 4]  166 	ldb	,x
+   010A E7 63         [ 5]  167 	stb	3,s
+   010C E6 E4         [ 4]  168 	ldb	,s
+   010E E7 62         [ 5]  169 	stb	2,s
+   0110 E6 63         [ 5]  170 	ldb	3,s
+   0112 E7 E2         [ 6]  171 	stb	,-s
+   0114 E6 63         [ 5]  172 	ldb	3,s
+   0116 BD 07 0A      [ 8]  173 	jsr	__Moveto_d
+   0119 32 61         [ 5]  174 	leas	1,s
+   011B C6 60         [ 2]  175 	ldb	#96
+   011D D7 04         [ 4]  176 	stb	*_dp_VIA_t1_cnt_lo
+   011F 8E 00 72      [ 3]  177 	ldx	#_cross
+   0122 BD F4 10      [ 8]  178 	jsr	___Draw_VLp
+   0125 32 64         [ 5]  179 	leas	4,s
+   0127 35 C0         [ 7]  180 	puls	u,pc
+                            181 	.globl	_Display_Gamefield
+   0129                     182 _Display_Gamefield:
+   0129 BD F3 54      [ 8]  183 	jsr	___Reset0Ref
+   012C C6 FF         [ 2]  184 	ldb	#-1
+   012E D7 04         [ 4]  185 	stb	*_dp_VIA_t1_cnt_lo
+   0130 C6 F1         [ 2]  186 	ldb	#-15
+   0132 E7 E2         [ 6]  187 	stb	,-s
+   0134 5F            [ 2]  188 	clrb
+   0135 BD 07 0A      [ 8]  189 	jsr	__Moveto_d
+   0138 32 61         [ 5]  190 	leas	1,s
+   013A 8E 00 81      [ 3]  191 	ldx	#_Gamefield
+   013D BD F4 10      [ 8]  192 	jsr	___Draw_VLp
+   0140 BD F3 54      [ 8]  193 	jsr	___Reset0Ref
+   0143 6F E2         [ 8]  194 	clr	,-s
+   0145 5F            [ 2]  195 	clrb
+   0146 BD 07 0A      [ 8]  196 	jsr	__Moveto_d
+   0149 32 61         [ 5]  197 	leas	1,s
+   014B 8E 00 9C      [ 3]  198 	ldx	#_Brainright
+   014E BD F4 10      [ 8]  199 	jsr	___Draw_VLp
+   0151 BD F3 54      [ 8]  200 	jsr	___Reset0Ref
+   0154 6F E2         [ 8]  201 	clr	,-s
+   0156 5F            [ 2]  202 	clrb
+   0157 BD 07 0A      [ 8]  203 	jsr	__Moveto_d
+   015A 32 61         [ 5]  204 	leas	1,s
+   015C 8E 00 BA      [ 3]  205 	ldx	#_Brainleft
+   015F BD F4 10      [ 8]  206 	jsr	___Draw_VLp
+   0162 39            [ 5]  207 	rts
+                            208 	.globl	_Loadingbar
+   0163                     209 _Loadingbar:
+   0163 32 7F         [ 5]  210 	leas	-1,s
+   0165 E7 E4         [ 4]  211 	stb	,s
+   0167 BD F3 54      [ 8]  212 	jsr	___Reset0Ref
+   016A C6 7F         [ 2]  213 	ldb	#127
+   016C D7 04         [ 4]  214 	stb	*_dp_VIA_t1_cnt_lo
+   016E C6 46         [ 2]  215 	ldb	#70
+   0170 E7 E2         [ 6]  216 	stb	,-s
+   0172 C6 C4         [ 2]  217 	ldb	#-60
+   0174 BD 07 0A      [ 8]  218 	jsr	__Moveto_d
+   0177 32 61         [ 5]  219 	leas	1,s
+   0179 E6 E4         [ 4]  220 	ldb	,s
+   017B D7 04         [ 4]  221 	stb	*_dp_VIA_t1_cnt_lo
+   017D 6F E2         [ 8]  222 	clr	,-s
+   017F C6 50         [ 2]  223 	ldb	#80
+   0181 BD 07 00      [ 8]  224 	jsr	__Draw_Line_d
+   0184 32 61         [ 5]  225 	leas	1,s
+   0186 BD F3 54      [ 8]  226 	jsr	___Reset0Ref
+   0189 C6 7F         [ 2]  227 	ldb	#127
+   018B D7 04         [ 4]  228 	stb	*_dp_VIA_t1_cnt_lo
+   018D C6 42         [ 2]  229 	ldb	#66
+   018F E7 E2         [ 6]  230 	stb	,-s
+   0191 C6 C4         [ 2]  231 	ldb	#-60
+   0193 BD 07 0A      [ 8]  232 	jsr	__Moveto_d
+   0196 32 61         [ 5]  233 	leas	1,s
+   0198 E6 E4         [ 4]  234 	ldb	,s
+   019A D7 04         [ 4]  235 	stb	*_dp_VIA_t1_cnt_lo
+   019C 6F E2         [ 8]  236 	clr	,-s
+   019E C6 50         [ 2]  237 	ldb	#80
+   01A0 BD 07 00      [ 8]  238 	jsr	__Draw_Line_d
+   01A3 32 61         [ 5]  239 	leas	1,s
+   01A5 BD F3 54      [ 8]  240 	jsr	___Reset0Ref
+   01A8 C6 7F         [ 2]  241 	ldb	#127
+   01AA D7 04         [ 4]  242 	stb	*_dp_VIA_t1_cnt_lo
+   01AC C6 3E         [ 2]  243 	ldb	#62
+   01AE E7 E2         [ 6]  244 	stb	,-s
+   01B0 C6 C4         [ 2]  245 	ldb	#-60
+   01B2 BD 07 0A      [ 8]  246 	jsr	__Moveto_d
+   01B5 32 61         [ 5]  247 	leas	1,s
+   01B7 E6 E4         [ 4]  248 	ldb	,s
+   01B9 D7 04         [ 4]  249 	stb	*_dp_VIA_t1_cnt_lo
+   01BB 6F E2         [ 8]  250 	clr	,-s
+   01BD C6 50         [ 2]  251 	ldb	#80
+   01BF BD 07 00      [ 8]  252 	jsr	__Draw_Line_d
+   01C2 32 61         [ 5]  253 	leas	1,s
+   01C4 C6 FF         [ 2]  254 	ldb	#-1
+   01C6 D7 04         [ 4]  255 	stb	*_dp_VIA_t1_cnt_lo
+   01C8 32 61         [ 5]  256 	leas	1,s
+   01CA 39            [ 5]  257 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sun May  4 00:01:53 2025
+Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L6                 012B R   |   3 L7                 00F9 R
-  3 _Brainleft         0099 GR  |   3 _Brainright        007B GR
-  3 _Display_Gamef     00B7 GR  |   3 _Gamefield         0060 GR
-  3 _Loadingbar        00F1 GR  |   2 _Positions_Cur     0002 GR
+  2 _Brainleft         005C GR  |   2 _Brainright        003E GR
+  2 _Display_Gamef     00CB GR  |   2 _Gamefield         0023 GR
+  2 _Loadingbar        0105 GR  |   2 _Positions_Cur     0000 GR
     __Draw_Line_d      **** GX  |     __Moveto_d         **** GX
     ___Draw_VLp        **** GX  |     ___Reset0Ref       **** GX
-  2 _counter           0000 GR  |   2 _counterw          0001 GR
-  3 _cross             0000 GR  |     _dp_VIA_t1_cnt     **** GX
-  3 _draw_cross        000F GR
+  2 _cross             0014 GR  |     _dp_VIA_t1_cnt     **** GX
+  2 _draw_cross        007A GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sun May  4 00:01:53 2025
+Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .data            size   16   flags  100
-   3 .text            size  138   flags  100
+   2 .text            size  16D   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

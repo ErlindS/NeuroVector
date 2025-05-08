@@ -1,10 +1,11 @@
 #pragma once
+#include "drawables/cross.h"
+#include "drawables/gamefield.h"
+#include "drawables/brain.h"
 #include <vectrex.h>
 
 // --------------------------------------------------
 // Loadingbar
-unsigned int counter = 0;
-int counterw = 3;
 void Loadingbar(unsigned int q);
 
 // --------------------------------------------------

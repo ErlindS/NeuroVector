@@ -3,14 +3,141 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
 	.module	level.c
-	.globl	_counter
-	.area	.data
-_counter:
+	.globl	_Positions_Cursor
+	.area	.text
+_Positions_Cursor:
 	.byte	0
-	.globl	_counterw
-_counterw:
-	.byte	3
+	.byte	0
+	.byte	16
+	.byte	-16
+	.byte	16
+	.byte	0
+	.byte	16
+	.byte	16
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	-16
+	.byte	-16
+	.byte	-16
+	.byte	0
+	.byte	-16
+	.byte	16
+	.globl	_cross
+_cross:
+	.byte	0
+	.byte	32
+	.byte	32
+	.byte	-1
+	.byte	-32
+	.byte	-32
+	.byte	0
+	.byte	32
+	.byte	0
+	.byte	-1
+	.byte	-32
+	.byte	32
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_Gamefield
+_Gamefield:
+	.byte	0
+	.byte	24
+	.byte	-8
+	.byte	-1
+	.byte	-48
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	-1
+	.byte	48
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	-48
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	48
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_Brainright
+_Brainright:
+	.byte	0
+	.byte	-45
+	.byte	0
+	.byte	-1
+	.byte	-5
+	.byte	5
+	.byte	-1
+	.byte	1
+	.byte	15
+	.byte	-1
+	.byte	10
+	.byte	7
+	.byte	-1
+	.byte	10
+	.byte	5
+	.byte	-1
+	.byte	45
+	.byte	-1
+	.byte	-1
+	.byte	5
+	.byte	-10
+	.byte	-1
+	.byte	0
+	.byte	-10
+	.byte	-1
+	.byte	-5
+	.byte	-10
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_Brainleft
+_Brainleft:
+	.byte	0
+	.byte	-45
+	.byte	0
+	.byte	-1
+	.byte	-5
+	.byte	-5
+	.byte	-1
+	.byte	1
+	.byte	-15
+	.byte	-1
+	.byte	10
+	.byte	-7
+	.byte	-1
+	.byte	10
+	.byte	-5
+	.byte	-1
+	.byte	45
+	.byte	1
+	.byte	-1
+	.byte	5
+	.byte	10
+	.byte	-1
+	.byte	0
+	.byte	10
+	.byte	-1
+	.byte	-5
+	.byte	10
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_a_random
+	.area	.data
 _a_random:
 	.byte	3
 	.byte	9
@@ -88,6 +215,12 @@ _level_init:
 	.area	.data
 _SequenceTime:
 	.byte	1
+	.globl	_counter
+_counter:
+	.byte	0
+	.globl	_counterw
+_counterw:
+	.byte	3
 	.area	.text
 LC0:
 	.byte	84,73,77,69,32,76,69,70
