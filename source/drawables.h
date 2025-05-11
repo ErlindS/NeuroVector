@@ -1,4 +1,4 @@
-#pragma once
+
 #include "drawables/cross.h"
 #include "drawables/gamefield.h"
 #include "drawables/brain.h"

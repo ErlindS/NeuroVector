@@ -145,12 +145,12 @@
                             144 	.area	.text
                             145 	.globl	_game
    0245                     146 _game:
-   0245 BD 03 01      [ 8]  147 	jsr	_level_init
-   0248 BD 05 8F      [ 8]  148 	jsr	_level_play
+   0245 BD 06 1D      [ 8]  147 	jsr	_level_init
+   0248 BD 06 3A      [ 8]  148 	jsr	_level_play
    024B 5F            [ 2]  149 	clrb
    024C 39            [ 5]  150 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
+Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
 
 Symbol Table
 
@@ -163,7 +163,7 @@ Symbol Table
     _level_play        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
+Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
 
 Area Table
 

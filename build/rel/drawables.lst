@@ -153,7 +153,7 @@
    0094 4F            [ 2]  153 	clra		;zero_extendqihi: R:b -> R:d
    0095 58            [ 2]  154 	aslb
    0096 49            [ 2]  155 	rola
-   0097 CE`00`00      [ 3]  156 	ldu	#_Positions_Cursor
+   0097 CE`00`01      [ 3]  156 	ldu	#_Positions_Cursor+1
    009A 30 CB         [ 8]  157 	leax	d,u
    009C E6 84         [ 4]  158 	ldb	,x
    009E E7 E4         [ 4]  159 	stb	,s
@@ -161,7 +161,7 @@
    00A2 4F            [ 2]  161 	clra		;zero_extendqihi: R:b -> R:d
    00A3 58            [ 2]  162 	aslb
    00A4 49            [ 2]  163 	rola
-   00A5 CE`00`01      [ 3]  164 	ldu	#_Positions_Cursor+1
+   00A5 CE`00`00      [ 3]  164 	ldu	#_Positions_Cursor
    00A8 30 CB         [ 8]  165 	leax	d,u
    00AA E6 84         [ 4]  166 	ldb	,x
    00AC E7 63         [ 5]  167 	stb	3,s
@@ -256,7 +256,7 @@
    016A 32 61         [ 5]  256 	leas	1,s
    016C 39            [ 5]  257 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
+Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
 
 Symbol Table
 
@@ -271,7 +271,7 @@ Symbol Table
   2 _draw_cross        007A GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu May  8 20:41:17 2025
+Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
 
 Area Table
 

@@ -205,22 +205,12 @@ L2:
 	.area	.data
 _current_level:
 	.byte	0
-	.area	.text
-	.globl	_level_init
-_level_init:
-	jsr	_RandomNumberGenerator
-	clr	_current_level
-	rts
 	.globl	_SequenceTime
-	.area	.data
 _SequenceTime:
 	.byte	1
 	.globl	_counter
 _counter:
 	.byte	0
-	.globl	_counterw
-_counterw:
-	.byte	3
 	.area	.text
 LC0:
 	.byte	84,73,77,69,32,76,69,70
@@ -238,30 +228,18 @@ _Display_TimeLeft:
 	leas	1,s
 	ldb	_counter
 	jsr	_Loadingbar
-	ldb	_counterw
-	decb
-	stb	_counterw
-	ldb	_counterw
+	ldb	_counter
 	tstb
 	bne	L8
-	ldb	_counter
-	decb
-	stb	_counter
-	ldb	#3
-	stb	_counterw
-L8:
-	ldb	_counter
-	tstb
-	bne	L11
-L10:
+L7:
 	ldb	#-60
 	stb	,-s
 	ldx	#LC1
 	ldb	#100
 	jsr	_print_string
 	leas	1,s
-	bra	L10
-L11:
+	bra	L7
+L8:
 	rts
 LC2:
 	.byte	82,69,77,69,77,66,69,82
@@ -273,8 +251,8 @@ LC3:
 _Display_RandomSequence:
 	leas	-3,s
 	clr	2,s
-	lbra	L13
-L15:
+	lbra	L10
+L12:
 	ldb	#-56
 	stb	_counter
 	jsr	___Wait_Recal
@@ -335,23 +313,65 @@ L15:
 	ldb	#3
 	jsr	_play_tune
 	leas	1,s
-L14:
+L11:
 	ldb	_RandomSequenceCounter
 	decb
 	stb	_RandomSequenceCounter
 	ldb	_RandomSequenceCounter
 	tstb
-	lbne	L15
+	lbne	L12
 	ldb	#30
 	stb	_RandomSequenceCounter
 	inc	2,s
-L13:
+L10:
 	ldb	_RandomSequenceCounterDisplay
 	incb
 	cmpb	2,s	;cmpqi:
-	bhi	L14
+	bhi	L11
 	clr	_SequenceTime
 	leas	3,s
+	rts
+	.area	.bss
+	.globl	_execute_game_playing_state
+_execute_game_playing_state:	.blkb	2
+	.area	.text
+LC4:
+	.byte	80,82,69,83,83,32,50,32
+	.byte	66,85,84,84,79,78,32,84
+	.byte	79,32,82,69,83,84,65,82
+	.byte	84,-128,0
+	.globl	_display_game_over
+_display_game_over:
+	leas	-1,s
+	ldb	#1
+	stb	,s
+	bra	L16
+L17:
+	ldb	#-60
+	stb	,-s
+	ldx	#LC1
+	ldb	#100
+	jsr	_print_string
+	leas	1,s
+	ldb	#-60
+	stb	,-s
+	ldx	#LC4
+	ldb	#80
+	jsr	_print_string
+	leas	1,s
+	jsr	___Read_Btns
+	ldb	_Vec_Buttons
+	andb	#2
+	tstb
+	beq	L16
+	ldx	#_execute_display_sequence_state
+	stx	_execute_game_playing_state
+	clr	_RandomSequenceCounterDisplay
+	jsr	_level_play
+L16:
+	tst	,s
+	bne	L17
+	leas	1,s
 	rts
 	.globl	_buttonspressedcounter
 	.area	.data
@@ -362,7 +382,7 @@ _buttonspressedcounter:
 _is_pattern_succesfull:
 	leas	-2,s
 	clr	1,s
-	lbra	L19
+	bra	L20
 L22:
 	ldb	1,s
 	clra		;zero_extendqihi: R:b -> R:d
@@ -374,46 +394,19 @@ L22:
 	tfr	d,x
 	ldb	_a_random_compare,x
 	cmpb	,s	;cmpqi:(R)
-	beq	L20
+	beq	L21
+	jsr	_display_game_over
 L21:
-	ldb	#-60
-	stb	,-s
-	ldx	#LC1
-	ldb	#100
-	jsr	_print_string
-	leas	1,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	_a_random,x
-	pshs	b
-	ldb	#-50
-	stb	,-s
-	ldb	#-70
-	jsr	_print_unsigned_int
-	leas	2,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	_a_random_compare,x
-	pshs	b
-	ldb	#-50
-	stb	,-s
-	ldb	#-50
-	jsr	_print_unsigned_int
-	leas	2,s
-	bra	L21
-L20:
 	ldb	1,s
 	clra		;zero_extendqihi: R:b -> R:d
 	tfr	d,x
 	clr	_a_random_compare,x
 	inc	1,s
-L19:
+L20:
 	ldb	_RandomSequenceCounterDisplay
 	incb
 	cmpb	1,s	;cmpqi:
-	lbhi	L22
+	bhi	L22
 	ldb	#1
 	stb	_SequenceTime
 	ldb	_RandomSequenceCounterDisplay
@@ -424,22 +417,38 @@ L19:
 	stb	_counter
 	leas	2,s
 	rts
-	.area	.bss
-_joy_x:	.blkb	1
-_joy_y:	.blkb	1
-	.globl	_temppass
+	.globl	_joy_x
 	.area	.data
+_joy_x:
+	.byte	0
+	.globl	_joy_y
+_joy_y:
+	.byte	0
+	.globl	_temppass
 _temppass:
 	.byte	0
 	.area	.text
 	.globl	_move_player
 _move_player:
-	leas	-3,s
 	jsr	___Joy_Digital
 	ldb	_Vec_Joy_1_X
 	stb	_joy_x
 	ldb	_Vec_Joy_1_Y
 	stb	_joy_y
+	ldb	_joy_x
+	pshs	b
+	ldb	#-90
+	stb	,-s
+	ldb	#-70
+	jsr	_print_signed_int
+	leas	2,s
+	ldb	_joy_y
+	pshs	b
+	ldb	#-50
+	stb	,-s
+	ldb	#-70
+	jsr	_print_signed_int
+	leas	2,s
 	ldb	_joy_x
 	tstb
 	bge	L25
@@ -523,11 +532,15 @@ L32:
 L33:
 	ldb	_temppass
 	jsr	_draw_cross
+	rts
+	.globl	_read_player_input
+_read_player_input:
+	leas	-2,s
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
 	andb	#1
 	tstb
-	beq	L35
+	beq	L37
 	ldb	_buttonspressedcounter
 	stb	,s
 	ldb	_temppass
@@ -540,23 +553,93 @@ L33:
 	ldb	_buttonspressedcounter
 	incb
 	stb	_buttonspressedcounter
+L37:
+	leas	2,s
+	rts
+	.globl	_execute_repeat_sequence_state
+_execute_repeat_sequence_state:
+	jsr	_Display_Gamefield
+	jsr	_Display_TimeLeft
+	jsr	_move_player
+	jsr	_read_player_input
+	jsr	_check_successfully_repeated
+	rts
+	.globl	_execute_display_sequence_state
+_execute_display_sequence_state:
+	jsr	_Display_Gamefield
+	jsr	_Display_RandomSequence
+	ldx	#_execute_repeat_sequence_state
+	stx	_execute_game_playing_state
+	rts
+	.globl	_check_successfully_repeated
+_check_successfully_repeated:
+	leas	-5,s
+	ldb	_buttonspressedcounter
+	stb	4,s
+	bra	L43
+L45:
+	ldb	4,s
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_a_random,x
+	stb	2,s
+	ldb	4,s
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_a_random_compare,x
+	cmpb	2,s	;cmpqi:(R)
+	beq	L43
+	ldx	#_display_game_over
+	stx	_execute_game_playing_state
+L43:
+	ldb	4,s
+	stb	1,s
+	tst	1,s
+	beq	L44
+	ldb	#1
+	stb	1,s
+L44:
+	ldb	1,s
+	dec	4,s
+	tstb
+	bne	L45
 	ldb	_RandomSequenceCounterDisplay
 	stb	,s
 	ldb	,s
 	incb
-	stb	2,s
+	stb	3,s
 	ldb	_buttonspressedcounter
-	cmpb	2,s	;cmpqi:(R)
-	bne	L35
-	jsr	_is_pattern_succesfull
-L35:
-	leas	3,s
+	cmpb	3,s	;cmpqi:(R)
+	bne	L47
+	ldb	_RandomSequenceCounterDisplay
+	incb
+	stb	_RandomSequenceCounterDisplay
+	clr	_buttonspressedcounter
+	ldb	#-56
+	stb	_counter
+	ldx	#_execute_display_sequence_state
+	stx	_execute_game_playing_state
+L47:
+	leas	5,s
+	rts
+	.globl	_level_init
+_level_init:
+	ldb	#1
+	stb	_Vec_Joy_Mux_1_X
+	ldb	#3
+	stb	_Vec_Joy_Mux_1_Y
+	clr	_Vec_Joy_Mux_2_X
+	clr	_Vec_Joy_Mux_2_Y
+	jsr	_RandomNumberGenerator
+	clr	_current_level
+	ldx	#_execute_display_sequence_state
+	stx	_execute_game_playing_state
 	rts
 	.globl	_level_play
 _level_play:
 	leas	-4,s
-	bra	L37
-L39:
+	bra	L51
+L52:
 	jsr	___DP_to_C8
 	ldx	_current_explosion
 	stx	,s
@@ -569,18 +652,11 @@ L39:
 	jsr	___Wait_Recal
 	jsr	__Do_Sound
 	jsr	___Intensity_5F
-	jsr	_Display_Gamefield
-	ldb	_SequenceTime
-	tstb
-	beq	L38
-	jsr	_Display_RandomSequence
-	bra	L37
-L38:
-	jsr	_Display_TimeLeft
-	jsr	_move_player
-L37:
+	ldx	_execute_game_playing_state
+	jsr	,x
+L51:
 	ldb	_current_level
 	tstb
-	beq	L39
+	beq	L52
 	leas	4,s
 	rts

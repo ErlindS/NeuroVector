@@ -9,10 +9,12 @@
 #include "print/print.h"
 #include "utils/controller.h"
 
+void execute_repeat_sequence_state();
+void execute_display_sequence_state();
 
 // ---------------------------------------------------------------------------
 // Random Number generator
-unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3 };
+unsigned int a_random[20] = {3, 9, 7, 5, 5, 8, 4, 5, 9, 8, 1, 5, 9, 2, 9, 6, 3, 1, 6, 3};
 unsigned int a_random_compare[20] = {0};
 unsigned int RandomSequenceCounter = 200;
 unsigned int RandomSequenceCounterDisplay = 0;
@@ -31,13 +33,6 @@ struct level_t current_level =
 	.status = LEVEL_PLAY,
 };
 
-
-void level_init()
-{
-	RandomNumberGenerator();
-	current_level.status  = LEVEL_PLAY;
-}	
-
 int SequenceTime = 1;
 
 
@@ -45,16 +40,9 @@ int SequenceTime = 1;
 // ----------------------------------------------------------------------------
 //	Display Time left
 unsigned int counter = 0;
-int counterw = 3;
 void Display_TimeLeft(){
 	print_string(100, -60, "TIME LEFT\x80");
-
 	Loadingbar(counter);
-	--counterw;
-	if(counterw == 0){
-		counter -=1;
-		counterw = 3;
-	}
 	if(counter == 0){
 		while(1){
 			print_string(100, -60, "GAME OVER\x80");	
@@ -63,8 +51,9 @@ void Display_TimeLeft(){
 	}
 }
 
-// ----------------------------------------------------------------------------
-//	Pattern to be repeated
+
+
+
 void Display_RandomSequence(){
 	for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 		while(--RandomSequenceCounter){
@@ -86,15 +75,38 @@ void Display_RandomSequence(){
 // ----------------------------------------------------------------------------
 //Game Logic
 
+
+void (*execute_game_playing_state)(void);
+
+// ----------------------------------------------------------------------------
+//	Game Over
+
+void display_game_over(){
+	int a = 1;
+	while(a){
+		print_string(100, -60, "GAME OVER\x80");	
+		print_string(80, -60, "PRESS 2 BUTTON TO RESTART\x80");	
+	
+		Read_Btns();
+	
+		if(button_1_2_pressed()){
+			execute_game_playing_state = &execute_display_sequence_state;
+			RandomSequenceCounterDisplay = 1;
+			level_play();
+		}
+		
+		//print_unsigned_int(-70, -50, a_random[i]);
+		//print_unsigned_int(-50, -50, a_random_compare[i]);
+	}
+}
+
+
+
 unsigned int buttonspressedcounter = 0;
 void is_pattern_succesfull(){
 		for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
 				if(a_random[i] != a_random_compare[i]){
-					while(1){
-					print_string(100, -60, "GAME OVER\x80");	
-					print_unsigned_int(-70, -50, a_random[i]);
-					print_unsigned_int(-50, -50, a_random_compare[i]);
-					}
+					display_game_over();
 				} 
 				a_random_compare[i] = 0;
 		}
@@ -106,14 +118,24 @@ void is_pattern_succesfull(){
 
 //-----------------------------------------------------------------------------------------
 // Player
-static int joy_x = 0;
-static int joy_y = 0;
+int joy_x = 0;
+int joy_y = 0;
 unsigned int temppass = 0;
 void move_player(){
 	check_joysticks();
 	
 	joy_x = joystick_1_x();
 	joy_y = joystick_1_y();
+	
+	//joy_x = joy_x * -1;
+	//joy_y = joy_y * -1;
+	
+	//print_signed_int(-90, -90, joystick_1_x());
+	//print_signed_int(-90, -50, joystick_1_y());
+	//print_signed_int(-70, -90, Vec_Joy_1_X);
+	//print_signed_int(-70, -50, Vec_Joy_1_Y);
+	print_signed_int(-70, -90, joy_x);
+	print_signed_int(-70, -50, joy_y);
 	
 	if(joy_x < 0 && joy_y > 0){temppass = (1);}
 	if(joy_x == 0 && joy_y > 0){temppass = (2);}
@@ -126,20 +148,72 @@ void move_player(){
 	if(joy_x > 0 && joy_y < 0){temppass = (9);}
 	
 	draw_cross(temppass);
+}
+
+void read_player_input(){
 	
 	Read_Btns();
 	
 	if(button_1_1_pressed()){
 		a_random_compare[buttonspressedcounter] = temppass;
 		buttonspressedcounter++;
-		if(buttonspressedcounter == RandomSequenceCounterDisplay+1){
-			is_pattern_succesfull();
-		}
 	}
+	
 }
+
+
+
 
 //-----------------------------------------------------------------------------------------
 // Gameloop
+
+void check_successfully_repeated(void);
+
+void execute_repeat_sequence_state(void){
+		Display_Gamefield();
+		Display_TimeLeft();
+		move_player();
+		read_player_input();
+		check_successfully_repeated();
+};
+
+//------------------------------------------------
+void execute_display_sequence_state(void){
+		Display_Gamefield();
+		Display_RandomSequence();
+		execute_game_playing_state = &execute_repeat_sequence_state;
+};
+
+void check_successfully_repeated(){
+	unsigned int len = buttonspressedcounter;
+	while (len--) {
+        if ((a_random[len]) != (a_random_compare[len])){
+			execute_game_playing_state = &display_game_over;
+		};
+    }
+    if(RandomSequenceCounterDisplay+1 == buttonspressedcounter){
+		RandomSequenceCounterDisplay++;
+		buttonspressedcounter = 0;
+		counter = 200;
+		execute_game_playing_state = &execute_display_sequence_state;
+	}
+}
+
+void level_init()
+{
+	enable_controller_1_x();
+	enable_controller_1_y();
+	disable_controller_2_x();
+	disable_controller_2_y();
+	
+	RandomNumberGenerator();
+	current_level.status  = LEVEL_PLAY;
+	execute_game_playing_state = &execute_display_sequence_state;
+}	
+
+
+
+
 void level_play(void)
 {
 	while(current_level.status == LEVEL_PLAY)
@@ -151,14 +225,7 @@ void level_play(void)
 		Wait_Recal();
 		Do_Sound();
 		Intensity_5F();
-	
-		Display_Gamefield();
-		if(SequenceTime) {
-			Display_RandomSequence();
-		} else {
-			Display_TimeLeft();
-			move_player();
-		}
+		execute_game_playing_state();
 	}
 }	
 

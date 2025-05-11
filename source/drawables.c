@@ -6,7 +6,7 @@ void draw_cross(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0xff;		// set scaling factor for positioning
 	Moveto_d(-21, -6);
-	Moveto_d(Positions_Cursor[i].y, Positions_Cursor[i].x);			// move beam to object coordinates
+	Moveto_d(Positions_Cursor[i].x, Positions_Cursor[i].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 0x60;
 	Draw_VLp(&cross);
 }

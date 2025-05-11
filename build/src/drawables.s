@@ -153,7 +153,7 @@ _draw_cross:
 	clra		;zero_extendqihi: R:b -> R:d
 	aslb
 	rola
-	ldu	#_Positions_Cursor
+	ldu	#_Positions_Cursor+1
 	leax	d,u
 	ldb	,x
 	stb	,s
@@ -161,7 +161,7 @@ _draw_cross:
 	clra		;zero_extendqihi: R:b -> R:d
 	aslb
 	rola
-	ldu	#_Positions_Cursor+1
+	ldu	#_Positions_Cursor
 	leax	d,u
 	ldb	,x
 	stb	3,s
