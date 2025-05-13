@@ -11,6 +11,23 @@ void draw_cross(unsigned int i){
 	Draw_VLp(&cross);
 }
 
+
+void draw_round_advancement_cross(unsigned int i){
+	Reset0Ref();					// reset beam to center of screen
+	dp_VIA_t1_cnt_lo = 0xff;		// set scaling factor for positioning
+	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
+	dp_VIA_t1_cnt_lo = 0x20;
+	Draw_VLp(&cross);
+}
+
+void draw_round_advancement_cross_plus(unsigned int i){
+	Reset0Ref();					// reset beam to center of screen
+	dp_VIA_t1_cnt_lo = 0xff;		// set scaling factor for positioning
+	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
+	dp_VIA_t1_cnt_lo = 0x20;
+	Draw_VLp(&advancement_plus);
+}
+
 //--------------------------------------------------
 // Gamefield + Brain
 // -------------------------------------------------

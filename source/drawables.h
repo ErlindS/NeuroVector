@@ -12,7 +12,9 @@ void Loadingbar(unsigned int q);
 // --------------------------------------------------
 // draw Cross
 void draw_cross(unsigned int q);
-
+void draw_round_advancement_cross(unsigned int q);
+void Display_LevelAdvancement_plus(unsigned int q);
+void draw_round_advancement_cross_plus(unsigned int q);
 
 // --------------------------------------------------
 // Gamefield

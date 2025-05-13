@@ -26,6 +26,40 @@ _Positions_Cursor:
 	.byte	0
 	.byte	-16
 	.byte	16
+	.globl	_Level_advancement
+_Level_advancement:
+	.byte	-60
+	.byte	-35
+	.byte	-60
+	.byte	-25
+	.byte	-60
+	.byte	-15
+	.byte	-60
+	.byte	-5
+	.byte	-60
+	.byte	5
+	.byte	-60
+	.byte	15
+	.byte	-60
+	.byte	25
+	.byte	-60
+	.byte	35
+	.byte	-70
+	.byte	-35
+	.byte	-70
+	.byte	-25
+	.byte	-70
+	.byte	-15
+	.byte	-70
+	.byte	-5
+	.byte	-70
+	.byte	5
+	.byte	-70
+	.byte	15
+	.byte	-70
+	.byte	25
+	.byte	-70
+	.byte	35
 	.globl	_cross
 _cross:
 	.byte	0
@@ -40,6 +74,40 @@ _cross:
 	.byte	-1
 	.byte	-32
 	.byte	32
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_advancement_cross
+_advancement_cross:
+	.byte	0
+	.byte	16
+	.byte	32
+	.byte	-1
+	.byte	-32
+	.byte	-32
+	.byte	0
+	.byte	32
+	.byte	0
+	.byte	-1
+	.byte	-32
+	.byte	32
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_advancement_plus
+_advancement_plus:
+	.byte	0
+	.byte	32
+	.byte	16
+	.byte	-1
+	.byte	-32
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	-32
 	.byte	1
 	.byte	0
 	.byte	0
@@ -162,8 +230,17 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_a_random
+	.globl	_buttonspressedcounter
 	.area	.data
+_buttonspressedcounter:
+	.byte	0
+	.globl	_sneakyoffset
+_sneakyoffset:
+	.byte	0
+	.globl	_b
+_b:
+	.byte	1
+	.globl	_a_random
 _a_random:
 	.byte	3
 	.byte	9
@@ -190,7 +267,7 @@ _a_random_compare:
 	.word	0,0,0,0,0,0,0,0,0,0
 	.globl	_RandomSequenceCounter
 _RandomSequenceCounter:
-	.byte	-56
+	.byte	50
 	.globl	_RandomSequenceCounterDisplay
 _RandomSequenceCounterDisplay:
 	.byte	0
@@ -344,6 +421,45 @@ L11:
 	bra	L11
 L12:
 	rts
+	.globl	_Display_LevelAdvancement
+_Display_LevelAdvancement:
+	leas	-3,s
+	stb	2,s
+	bra	L14
+L16:
+	ldb	_buttonspressedcounter
+	addb	2,s
+	jsr	_draw_round_advancement_cross
+L14:
+	ldb	2,s
+	stb	1,s
+	tst	1,s
+	beq	L15
+	ldb	#1
+	stb	1,s
+L15:
+	ldb	1,s
+	dec	2,s
+	tstb
+	bne	L16
+	bra	L17
+L19:
+	ldb	5,s
+	jsr	_draw_round_advancement_cross_plus
+L17:
+	ldb	5,s
+	stb	,s
+	tst	,s
+	beq	L18
+	ldb	#1
+	stb	,s
+L18:
+	ldb	,s
+	dec	5,s
+	tstb
+	bne	L19
+	leas	3,s
+	rts
 LC2:
 	.byte	82,69,77,69,77,66,69,82
 	.byte	32,84,72,69,-128,0
@@ -354,8 +470,8 @@ LC3:
 _Display_RandomSequence:
 	leas	-3,s
 	clr	2,s
-	lbra	L14
-L16:
+	lbra	L22
+L24:
 	ldb	#-56
 	stb	_counter
 	jsr	___Wait_Recal
@@ -416,31 +532,32 @@ L16:
 	ldb	#3
 	jsr	_play_tune
 	leas	1,s
-L15:
+	ldb	2,s
+	incb
+	clr	,-s
+	jsr	_Display_LevelAdvancement
+	leas	1,s
+L23:
 	ldb	_RandomSequenceCounter
 	decb
 	stb	_RandomSequenceCounter
 	ldb	_RandomSequenceCounter
 	tstb
-	lbne	L16
+	lbne	L24
 	ldb	#30
 	stb	_RandomSequenceCounter
 	inc	2,s
-L14:
+L22:
 	ldb	_RandomSequenceCounterDisplay
 	incb
 	cmpb	2,s	;cmpqi:
-	bhi	L15
+	bhi	L23
 	clr	_SequenceTime
 	leas	3,s
 	rts
 	.area	.bss
 	.globl	_execute_game_playing_state
 _execute_game_playing_state:	.blkb	2
-	.globl	_buttonspressedcounter
-	.area	.data
-_buttonspressedcounter:
-	.byte	0
 	.area	.text
 LC4:
 	.byte	80,82,69,83,83,32,50,32
@@ -473,26 +590,26 @@ _display_game_over:
 	ldb	_Vec_Buttons
 	andb	#2
 	tstb
-	beq	L23
+	beq	L31
 	ldx	#_execute_display_sequence_state
 	stx	_execute_game_playing_state
 	clr	,s
-	bra	L21
-L22:
+	bra	L29
+L30:
 	ldb	,s
 	sex		;extendqihi2: R:b -> R:d
 	tfr	d,x
 	clr	_a_random_compare,x
 	inc	,s
-L21:
+L29:
 	ldb	,s
 	cmpb	#19	;cmpqi:
-	ble	L22
+	ble	L30
 	ldb	_RandomSequenceCounterDisplay
 	jsr	_rand
 	clr	_RandomSequenceCounterDisplay
 	clr	_buttonspressedcounter
-L23:
+L31:
 	leas	1,s
 	rts
 	.globl	_joy_x
@@ -514,100 +631,113 @@ _move_player:
 	ldb	_Vec_Joy_1_Y
 	stb	_joy_y
 	ldb	_joy_x
-	pshs	b
-	ldb	#-90
-	stb	,-s
-	ldb	#-70
-	jsr	_print_signed_int
-	leas	2,s
-	ldb	_joy_y
-	pshs	b
-	ldb	#-50
-	stb	,-s
-	ldb	#-70
-	jsr	_print_signed_int
-	leas	2,s
-	ldb	_joy_x
-	tstb
-	bge	L25
-	ldb	_joy_y
-	tstb
-	ble	L25
-	ldb	#1
-	stb	_temppass
-L25:
-	ldb	_joy_x
-	tstb
-	bne	L26
-	ldb	_joy_y
-	tstb
-	ble	L26
-	ldb	#2
-	stb	_temppass
-L26:
-	ldb	_joy_x
-	tstb
-	ble	L27
-	ldb	_joy_y
-	tstb
-	ble	L27
-	ldb	#3
-	stb	_temppass
-L27:
-	ldb	_joy_x
-	tstb
-	bge	L28
-	ldb	_joy_y
-	tstb
-	bne	L28
-	ldb	#4
-	stb	_temppass
-L28:
-	ldb	_joy_x
-	tstb
-	bne	L29
-	ldb	_joy_y
-	tstb
-	bne	L29
-	ldb	#5
-	stb	_temppass
-L29:
-	ldb	_joy_x
-	tstb
-	ble	L30
-	ldb	_joy_y
-	tstb
-	bne	L30
-	ldb	#6
-	stb	_temppass
-L30:
-	ldb	_joy_x
-	tstb
-	bge	L31
-	ldb	_joy_y
-	tstb
-	bge	L31
-	ldb	#7
-	stb	_temppass
-L31:
-	ldb	_joy_x
-	tstb
-	bne	L32
-	ldb	_joy_y
-	tstb
-	bge	L32
-	ldb	#8
-	stb	_temppass
-L32:
-	ldb	_joy_x
-	tstb
-	ble	L33
-	ldb	_joy_y
 	tstb
 	bge	L33
-	ldb	#9
+	ldb	_joy_y
+	tstb
+	ble	L33
+	ldb	_sneakyoffset
+	incb
 	stb	_temppass
 L33:
+	ldb	_joy_x
+	tstb
+	bne	L34
+	ldb	_joy_y
+	tstb
+	ble	L34
+	ldb	_sneakyoffset
+	addb	#2
+	stb	_temppass
+L34:
+	ldb	_joy_x
+	tstb
+	ble	L35
+	ldb	_joy_y
+	tstb
+	ble	L35
+	ldb	_sneakyoffset
+	addb	#3
+	stb	_temppass
+L35:
+	ldb	_joy_x
+	tstb
+	bge	L36
+	ldb	_joy_y
+	tstb
+	bne	L36
+	ldb	_sneakyoffset
+	addb	#4
+	stb	_temppass
+L36:
+	ldb	_joy_x
+	tstb
+	bne	L37
+	ldb	_joy_y
+	tstb
+	bne	L37
+	ldb	_sneakyoffset
+	addb	#5
+	stb	_temppass
+L37:
+	ldb	_joy_x
+	tstb
+	ble	L38
+	ldb	_joy_y
+	tstb
+	bne	L38
+	ldb	_sneakyoffset
+	addb	#6
+	stb	_temppass
+L38:
+	ldb	_joy_x
+	tstb
+	bge	L39
+	ldb	_joy_y
+	tstb
+	bge	L39
+	ldb	_sneakyoffset
+	cmpb	#3	;cmpqi:
+	bne	L40
+	ldb	#1
+	stb	_temppass
+	bra	L39
+L40:
+	ldb	#7
+	stb	_temppass
+L39:
+	ldb	_joy_x
+	tstb
+	bne	L41
+	ldb	_joy_y
+	tstb
+	bge	L41
+	ldb	_sneakyoffset
+	cmpb	#3	;cmpqi:
+	bne	L42
+	ldb	#2
+	stb	_temppass
+	bra	L41
+L42:
+	ldb	#8
+	stb	_temppass
+L41:
+	ldb	_joy_x
+	tstb
+	ble	L43
+	ldb	_joy_y
+	tstb
+	bge	L43
+	ldb	_sneakyoffset
+	cmpb	#3	;cmpqi:
+	bne	L44
+	ldb	#3
+	stb	_temppass
+	bra	L43
+L44:
+	ldb	#9
+	stb	_temppass
+L43:
 	ldb	_temppass
 	jsr	_draw_cross
 	rts
@@ -618,7 +748,7 @@ _read_player_input:
 	ldb	_Vec_Buttons
 	andb	#1
 	tstb
-	beq	L37
+	beq	L48
 	ldb	_buttonspressedcounter
 	stb	,s
 	ldb	_temppass
@@ -631,16 +761,69 @@ _read_player_input:
 	ldb	_buttonspressedcounter
 	incb
 	stb	_buttonspressedcounter
-L37:
+L48:
 	leas	2,s
+	rts
+LC6:
+	.byte	33,83,78,69,65,75,89,32
+	.byte	79,70,70,83,69,84,33,-128
+	.byte	0
+	.globl	_Set_traps
+_Set_traps:
+	clr	_sneakyoffset
+	ldb	_RandomSequenceCounterDisplay
+	cmpb	#3	;cmpqi:
+	bls	L51
+	ldb	_RandomSequenceCounterDisplay
+	cmpb	#7	;cmpqi:
+	bhi	L51
+	ldb	#-56
+	stb	,-s
+	ldx	#400
+	ldb	#3
+	jsr	_play_tune
+	leas	1,s
+	ldb	#-100
+	stb	,-s
+	ldx	#LC6
+	ldb	#115
+	jsr	_print_string
+	leas	1,s
+	ldb	#3
+	stb	_sneakyoffset
+L51:
 	rts
 	.globl	_execute_repeat_sequence_state
 _execute_repeat_sequence_state:
+	leas	-3,s
 	jsr	_Display_Gamefield
 	jsr	_Display_TimeLeft
+	ldb	_buttonspressedcounter
+	stb	1,s
+	ldb	_RandomSequenceCounterDisplay
+	stb	2,s
+	ldb	_buttonspressedcounter
+	stb	,s
+	ldb	2,s
+	subb	,s
+	stb	,s
+	ldb	,s
+	incb
+	stb	,s
+	ldb	1,s
+	pshs	b
+	ldb	1,s
+	jsr	_Display_LevelAdvancement
+	leas	1,s
+	ldb	_b
+	cmpb	#3	;cmpqi:
+	bne	L53
+	jsr	_Set_traps
+L53:
 	jsr	_move_player
 	jsr	_read_player_input
 	jsr	_check_successfully_repeated
+	leas	3,s
 	rts
 	.globl	_execute_display_sequence_state
 _execute_display_sequence_state:
@@ -654,8 +837,8 @@ _check_successfully_repeated:
 	leas	-5,s
 	ldb	_buttonspressedcounter
 	stb	4,s
-	bra	L43
-L45:
+	bra	L58
+L60:
 	ldb	4,s
 	clra		;zero_extendqihi: R:b -> R:d
 	tfr	d,x
@@ -666,21 +849,21 @@ L45:
 	tfr	d,x
 	ldb	_a_random_compare,x
 	cmpb	2,s	;cmpqi:(R)
-	beq	L43
+	beq	L58
 	ldx	#_display_game_over
 	stx	_execute_game_playing_state
-L43:
+L58:
 	ldb	4,s
 	stb	1,s
 	tst	1,s
-	beq	L44
+	beq	L59
 	ldb	#1
 	stb	1,s
-L44:
+L59:
 	ldb	1,s
 	dec	4,s
 	tstb
-	bne	L45
+	bne	L60
 	ldb	_RandomSequenceCounterDisplay
 	stb	,s
 	ldb	,s
@@ -688,7 +871,7 @@ L44:
 	stb	3,s
 	ldb	_buttonspressedcounter
 	cmpb	3,s	;cmpqi:(R)
-	bne	L47
+	bne	L62
 	ldb	_RandomSequenceCounterDisplay
 	incb
 	stb	_RandomSequenceCounterDisplay
@@ -697,20 +880,20 @@ L44:
 	stb	_counter
 	ldx	#_execute_display_sequence_state
 	stx	_execute_game_playing_state
-L47:
+L62:
 	leas	5,s
 	rts
-LC6:
+LC7:
 	.byte	83,69,76,69,67,84,32,84
 	.byte	72,69,32,71,65,77,69,77
 	.byte	79,68,69,-128,0
-LC7:
-	.byte	78,79,82,77,65,76,-128,0
 LC8:
+	.byte	78,79,82,77,65,76,-128,0
+LC9:
 	.byte	72,65,82,68,-128,0
 	.globl	_level_init
 _level_init:
-	leas	-2,s
+	leas	-1,s
 	ldb	#1
 	stb	_Vec_Joy_Mux_1_X
 	ldb	#3
@@ -718,27 +901,25 @@ _level_init:
 	clr	_Vec_Joy_Mux_2_X
 	clr	_Vec_Joy_Mux_2_Y
 	clr	,s
-	ldb	#1
-	stb	1,s
-	lbra	L49
-L53:
+	lbra	L64
+L69:
 	jsr	___Read_Btns
 	inc	,s
 	ldb	#-120
 	stb	,-s
-	ldx	#LC6
+	ldx	#LC7
 	ldb	#100
 	jsr	_print_string
 	leas	1,s
 	ldb	#-50
 	stb	,-s
-	ldx	#LC7
+	ldx	#LC8
 	ldb	#60
 	jsr	_print_string
 	leas	1,s
 	ldb	#-50
 	stb	,-s
-	ldx	#LC8
+	ldx	#LC9
 	ldb	#40
 	jsr	_print_string
 	leas	1,s
@@ -746,42 +927,53 @@ L53:
 	jsr	___Joy_Digital
 	ldb	_Vec_Joy_1_Y
 	tstb
-	beq	L50
+	beq	L65
 	ldb	_Vec_Joy_1_Y
 	stb	_joy_y
-L50:
+L65:
 	ldb	_joy_y
 	tstb
-	ble	L51
+	ble	L66
 	clrb
 	jsr	_draw_menu_arrow
-L51:
+L66:
 	ldb	_joy_y
 	tstb
-	bge	L52
+	bge	L67
 	ldb	#1
 	jsr	_draw_menu_arrow
-L52:
+L67:
 	ldb	_Vec_Buttons
 	andb	#1
 	tstb
-	beq	L49
-	clr	1,s
-L49:
-	tst	1,s
-	lbne	L53
+	beq	L64
+	ldb	_joy_y
+	tstb
+	ble	L68
+	ldb	#2
+	stb	_b
+L68:
+	ldb	_joy_y
+	tstb
+	bge	L64
+	ldb	#3
+	stb	_b
+L64:
+	ldb	_b
+	cmpb	#1	;cmpqi:
+	lble	L69
 	ldb	,s
 	jsr	_rand
 	clr	_current_level
 	ldx	#_execute_display_sequence_state
 	stx	_execute_game_playing_state
-	leas	2,s
+	leas	1,s
 	rts
 	.globl	_level_play
 _level_play:
 	leas	-4,s
-	bra	L56
-L57:
+	bra	L72
+L73:
 	jsr	___DP_to_C8
 	ldx	_current_explosion
 	stx	,s
@@ -796,9 +988,9 @@ L57:
 	jsr	___Intensity_5F
 	ldx	_execute_game_playing_state
 	jsr	,x
-L56:
+L72:
 	ldb	_current_level
 	tstb
-	beq	L57
+	beq	L73
 	leas	4,s
 	rts

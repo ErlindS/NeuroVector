@@ -26,6 +26,40 @@ _Positions_Cursor:
 	.byte	0
 	.byte	-16
 	.byte	16
+	.globl	_Level_advancement
+_Level_advancement:
+	.byte	-60
+	.byte	-35
+	.byte	-60
+	.byte	-25
+	.byte	-60
+	.byte	-15
+	.byte	-60
+	.byte	-5
+	.byte	-60
+	.byte	5
+	.byte	-60
+	.byte	15
+	.byte	-60
+	.byte	25
+	.byte	-60
+	.byte	35
+	.byte	-70
+	.byte	-35
+	.byte	-70
+	.byte	-25
+	.byte	-70
+	.byte	-15
+	.byte	-70
+	.byte	-5
+	.byte	-70
+	.byte	5
+	.byte	-70
+	.byte	15
+	.byte	-70
+	.byte	25
+	.byte	-70
+	.byte	35
 	.globl	_cross
 _cross:
 	.byte	0
@@ -40,6 +74,40 @@ _cross:
 	.byte	-1
 	.byte	-32
 	.byte	32
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_advancement_cross
+_advancement_cross:
+	.byte	0
+	.byte	16
+	.byte	32
+	.byte	-1
+	.byte	-32
+	.byte	-32
+	.byte	0
+	.byte	32
+	.byte	0
+	.byte	-1
+	.byte	-32
+	.byte	32
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_advancement_plus
+_advancement_plus:
+	.byte	0
+	.byte	32
+	.byte	16
+	.byte	-1
+	.byte	-32
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	-32
 	.byte	1
 	.byte	0
 	.byte	0
