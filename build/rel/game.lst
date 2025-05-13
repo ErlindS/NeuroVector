@@ -136,40 +136,67 @@
    0077 01                  136 	.byte	1
    0078 00                  137 	.byte	0
    0079 00                  138 	.byte	0
-                            139 	.globl	_current_game
-                            140 	.area	.data
-   0000                     141 _current_game:
-   0000 00 00 00 00 00 00   142 	.word	0,0,0,0
+                            139 	.globl	_Positions_Arrow
+   007A                     140 _Positions_Arrow:
+   007A 3C                  141 	.byte	60
+   007B C9                  142 	.byte	-55
+   007C 28                  143 	.byte	40
+   007D C9                  144 	.byte	-55
+                            145 	.globl	_arrow
+   007E                     146 _arrow:
+   007E 00                  147 	.byte	0
+   007F 04                  148 	.byte	4
+   0080 00                  149 	.byte	0
+   0081 FF                  150 	.byte	-1
+   0082 F6                  151 	.byte	-10
+   0083 0A                  152 	.byte	10
+   0084 FF                  153 	.byte	-1
+   0085 F6                  154 	.byte	-10
+   0086 F6                  155 	.byte	-10
+   0087 00                  156 	.byte	0
+   0088 0A                  157 	.byte	10
+   0089 0A                  158 	.byte	10
+   008A FF                  159 	.byte	-1
+   008B 00                  160 	.byte	0
+   008C EC                  161 	.byte	-20
+   008D 01                  162 	.byte	1
+   008E 00                  163 	.byte	0
+   008F 00                  164 	.byte	0
+                            165 	.globl	_current_game
+                            166 	.area	.data
+   0000                     167 _current_game:
+   0000 00 00 00 00 00 00   168 	.word	0,0,0,0
         00 00
-   0008 00                  143 	.byte	0
-                            144 	.area	.text
-                            145 	.globl	_game
-   007A                     146 _game:
-   007A BD`00`00      [ 8]  147 	jsr	_level_init
-   007D BD`00`00      [ 8]  148 	jsr	_level_play
-   0080 5F            [ 2]  149 	clrb
-   0081 39            [ 5]  150 	rts
+   0008 00                  169 	.byte	0
+                            170 	.area	.text
+                            171 	.globl	_game
+   0090                     172 _game:
+   0090 BD`00`00      [ 8]  173 	jsr	_level_init
+   0093 BD`00`00      [ 8]  174 	jsr	_level_play
+   0096 5F            [ 2]  175 	clrb
+   0097 39            [ 5]  176 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
+Hexadecimal [16-Bits]                                 Tue May 13 04:43:08 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
   2 _Brainleft         005C GR  |   2 _Brainright        003E GR
-  2 _Gamefield         0023 GR  |   2 _Positions_Cur     0000 GR
+  2 _Gamefield         0023 GR  |   2 _Positions_Arr     007A GR
+  2 _Positions_Cur     0000 GR  |   2 _arrow             007E GR
   2 _cross             0014 GR  |   3 _current_game      0000 GR
-  2 _game              007A GR  |     _level_init        **** GX
+  2 _game              0090 GR  |     _level_init        **** GX
     _level_play        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May 12 00:30:08 2025
+Hexadecimal [16-Bits]                                 Tue May 13 04:43:08 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   82   flags  100
+   2 .text            size   98   flags  100
    3 .data            size    9   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0

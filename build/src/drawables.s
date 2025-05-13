@@ -136,6 +136,32 @@ _Brainleft:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_Positions_Arrow
+_Positions_Arrow:
+	.byte	60
+	.byte	-55
+	.byte	40
+	.byte	-55
+	.globl	_arrow
+_arrow:
+	.byte	0
+	.byte	4
+	.byte	0
+	.byte	-1
+	.byte	-10
+	.byte	10
+	.byte	-1
+	.byte	-10
+	.byte	-10
+	.byte	0
+	.byte	10
+	.byte	10
+	.byte	-1
+	.byte	0
+	.byte	-20
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_draw_cross
 _draw_cross:
 	pshs	u
@@ -255,3 +281,40 @@ _Loadingbar:
 	stb	*_dp_VIA_t1_cnt_lo
 	leas	1,s
 	rts
+	.globl	_draw_menu_arrow
+_draw_menu_arrow:
+	pshs	u
+	leas	-4,s
+	stb	1,s
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	1,s
+	sex		;extendqihi2: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Arrow+1
+	leax	d,u
+	ldb	,x
+	stb	,s
+	ldb	1,s
+	sex		;extendqihi2: R:b -> R:d
+	aslb
+	rola
+	ldu	#_Positions_Arrow
+	leax	d,u
+	ldb	,x
+	stb	3,s
+	ldb	,s
+	stb	2,s
+	ldb	3,s
+	stb	,-s
+	ldb	3,s
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#96
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_arrow
+	jsr	___Draw_VLp
+	leas	4,s
+	puls	u,pc

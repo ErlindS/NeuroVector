@@ -22,7 +22,18 @@ unsigned int RandomSequenceCounterDisplay = 0;
 void RandomNumberGenerator(){
 	for(int i = 0; i < 20; ++i){
 		a_random[i] = (a_random[i]) % 10;
-		//a_random[i] = a_random[i];
+	}
+}
+
+//  TODO: Improve this
+void rand(unsigned int n) {	
+    for(int i = 0; i < 20; i++){
+		n ^= n >> 4;
+		n += n << 3;
+		n ^= n >> 6;
+		n += n << 2;
+		n ^= n >> 5;
+		a_random[i] = (a_random[i] + n) % 10;
 	}
 }
 
@@ -34,8 +45,6 @@ struct level_t current_level =
 };
 
 int SequenceTime = 1;
-
-
 
 // ----------------------------------------------------------------------------
 //	Display Time left
@@ -50,9 +59,6 @@ void Display_TimeLeft(){
 		counter = 200;
 	}
 }
-
-
-
 
 void Display_RandomSequence(){
 	for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
@@ -75,45 +81,28 @@ void Display_RandomSequence(){
 // ----------------------------------------------------------------------------
 //Game Logic
 
-
 void (*execute_game_playing_state)(void);
+unsigned int buttonspressedcounter = 0;
 
 // ----------------------------------------------------------------------------
 //	Game Over
 
 void display_game_over(){
-	int a = 1;
-	while(a){
-		print_string(100, -60, "GAME OVER\x80");	
-		print_string(80, -60, "PRESS 2 BUTTON TO RESTART\x80");	
-	
-		Read_Btns();
-	
-		if(button_1_2_pressed()){
-			execute_game_playing_state = &execute_display_sequence_state;
-			RandomSequenceCounterDisplay = 1;
-			level_play();
+	print_string(100, -60, "GAME OVER\x80");	
+	print_string(80, -80, "PRESS 2 BUTTON\x80"); 
+	print_string(60, -60, "TO RESTART\x80");	
+
+	Read_Btns();
+
+	if(button_1_2_pressed()){
+		execute_game_playing_state = &execute_display_sequence_state;
+		for(int i = 0; i < 20; i++){
+			a_random_compare[i] = 0;
 		}
-		
-		//print_unsigned_int(-70, -50, a_random[i]);
-		//print_unsigned_int(-50, -50, a_random_compare[i]);
-	}
-}
-
-
-
-unsigned int buttonspressedcounter = 0;
-void is_pattern_succesfull(){
-		for(unsigned int i = 0; i < RandomSequenceCounterDisplay+1; i++){
-				if(a_random[i] != a_random_compare[i]){
-					display_game_over();
-				} 
-				a_random_compare[i] = 0;
-		}
-		SequenceTime = 1;
-		RandomSequenceCounterDisplay++;
+		rand(RandomSequenceCounterDisplay);
+		RandomSequenceCounterDisplay = 0;
 		buttonspressedcounter = 0;
-		counter = 200;
+	}
 }
 
 //-----------------------------------------------------------------------------------------
@@ -126,9 +115,6 @@ void move_player(){
 	
 	joy_x = joystick_1_x();
 	joy_y = joystick_1_y();
-	
-	//joy_x = joy_x * -1;
-	//joy_y = joy_y * -1;
 	
 	//print_signed_int(-90, -90, joystick_1_x());
 	//print_signed_int(-90, -50, joystick_1_y());
@@ -160,9 +146,6 @@ void read_player_input(){
 	}
 	
 }
-
-
-
 
 //-----------------------------------------------------------------------------------------
 // Gameloop
@@ -205,14 +188,41 @@ void level_init()
 	enable_controller_1_y();
 	disable_controller_2_x();
 	disable_controller_2_y();
+	unsigned int a = 0;
+	int b = 1;
+	while(b){
+		Read_Btns();
+		a++;
+		print_string(100, -120, "SELECT THE GAMEMODE\x80");	
+		print_string(60, -50, "NORMAL\x80");
+		print_string(40, -50, "HARD\x80");
+		//draw_menu_arrow(1);
+		
+		Read_Btns();
+		check_joysticks();
 	
-	RandomNumberGenerator();
+		if(joystick_1_y() != 0){
+			joy_y = joystick_1_y();
+		}
+		
+		if(joy_y > 0){
+			draw_menu_arrow(0);
+		}
+		
+		if(joy_y < 0){
+			draw_menu_arrow(1);
+		}
+		if(button_1_1_pressed()){
+			b = 0;
+		}
+	}
+	
+	//RandomNumberGenerator is for testing purpose
+	//RandomNumberGenerator();
+	rand(a);
 	current_level.status  = LEVEL_PLAY;
 	execute_game_playing_state = &execute_display_sequence_state;
 }	
-
-
-
 
 void level_play(void)
 {

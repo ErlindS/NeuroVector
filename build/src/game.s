@@ -136,6 +136,32 @@ _Brainleft:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_Positions_Arrow
+_Positions_Arrow:
+	.byte	60
+	.byte	-55
+	.byte	40
+	.byte	-55
+	.globl	_arrow
+_arrow:
+	.byte	0
+	.byte	4
+	.byte	0
+	.byte	-1
+	.byte	-10
+	.byte	10
+	.byte	-1
+	.byte	-10
+	.byte	-10
+	.byte	0
+	.byte	10
+	.byte	10
+	.byte	-1
+	.byte	0
+	.byte	-20
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_current_game
 	.area	.data
 _current_game:

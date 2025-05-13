@@ -1,5 +1,5 @@
 XH2
-H 4 areas A global symbols 2 banks 1 modes
+H 4 areas C global symbols 2 banks 1 modes
 M game.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
@@ -9,13 +9,15 @@ S _level_play Ref0000
 S .__.ABS. Def0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .text size 82 flags D00
+A .text size 98 flags D00
 S _Positions_Cursor Def0000
 S _cross Def0014
+S _arrow Def007E
+S _Positions_Arrow Def007A
 S _Gamefield Def0023
 S _Brainright Def003E
 S _Brainleft Def005C
-S _game Def007A
+S _game Def0090
 A .data size 9 flags D00
 S _current_game Def0000
 T 00 00
@@ -54,11 +56,21 @@ T 00 69 0A FB FF 2D 01 FF 05 0A FF 00 0A FF FB
 R 00 00 00 02
 T 00 76 0A 01 00 00
 R 00 00 00 02
+T 00 7A
+R 00 00 00 02
+T 00 7A 3C C9 28 C9
+R 00 00 00 02
+T 00 7E
+R 00 00 00 02
+T 00 7E 00 04 00 FF F6 0A FF F6 F6 00 0A 0A FF
+R 00 00 00 02
+T 00 8B 00 EC 01 00 00
+R 00 00 00 02
 T 00 00
 R 00 00 00 03
 T 00 00 00 00 00 00 00 00 00 00 00
 R 00 00 00 03
-T 00 7A
+T 00 90
 R 00 00 00 02
-T 00 7A BD 00 00 BD 00 00 5F 39
+T 00 90 BD 00 00 BD 00 00 5F 39
 R 00 00 00 02 81 03 00 00 81 06 00 01
