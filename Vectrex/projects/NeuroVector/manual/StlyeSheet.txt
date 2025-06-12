@@ -1,0 +1,135 @@
+===========================
+ C Style Guide (All-in-One)
+===========================
+
+Author: [Your Name]
+Date: [YYYY-MM-DD]
+Purpose: Define consistent conventions for writing clean, maintainable C code.
+
+---------------------------
+1. FILE STRUCTURE
+---------------------------
+/* Filename: my_file.c
+ * Description: Short purpose.
+ * Author: Your Name
+ * Date: YYYY-MM-DD
+ */
+
+#include <stdio.h>
+#include "my_header.h"
+
+#define MY_MACRO 100
+
+// Function declarations
+int add(int a, int b);
+
+---------------------------
+2. INDENTATION & SPACING
+---------------------------
+- Use 4 spaces per indentation level.
+- No tabs.
+- One space between keywords and parentheses: if (x), while (x)
+- No space between function name and opening parenthesis: func(x)
+
+---------------------------
+3. NAMING CONVENTIONS
+---------------------------
+- Variables:         snake_case     → int user_id;
+- Functions:         snake_case     → int get_value(void);
+- Macros/Constants:  ALL_CAPS       → #define MAX_SIZE 100
+- Structs/Typedefs:  PascalCase     → typedef struct User { ... } User;
+
+---------------------------
+4. BRACES & BLOCKS
+---------------------------
+- Braces on the same line as control statements:
+    if (x == 1) {
+        do_something();
+    } else {
+        do_something_else();
+    }
+
+- Always use braces, even for one-liners.
+
+---------------------------
+5. COMMENTS
+---------------------------
+- Use `//` for short comments and `/* */` for block comments.
+- Comment why, not what.
+    // Good: Explain intention
+    // Bad: Explain the obvious
+
+---------------------------
+6. FUNCTIONS
+---------------------------
+/* Brief description.
+ * Parameters:
+ *    int a - first number
+ *    int b - second number
+ * Returns:
+ *    int - the sum of a and b
+ */
+int add(int a, int b) {
+    return a + b;
+}
+
+- Keep functions under 40 lines when possible.
+- Avoid global variables.
+- Use descriptive names.
+
+---------------------------
+7. ERROR HANDLING
+---------------------------
+- Always check return values.
+- Use consistent error codes or enums.
+- Use `fprintf(stderr, ...)` for logging errors.
+
+---------------------------
+8. STRUCTURES
+---------------------------
+typedef struct User {
+    int id;
+    char name[50];
+} User;
+
+- Name structs in PascalCase.
+- Use typedefs to simplify usage.
+
+---------------------------
+9. PREPROCESSOR USAGE
+---------------------------
+- Include guards in headers:
+    #ifndef MY_HEADER_H
+    #define MY_HEADER_H
+    ...
+    #endif
+
+- Group includes:
+    #include <stdio.h>      // system
+    #include "user.h"       // local
+
+---------------------------
+10. MISC RULES
+---------------------------
+- No magic numbers: use #define or const
+- Limit line length to 80–100 characters
+- Prefer `const` for read-only parameters
+- Avoid deep nesting
+
+---------------------------
+EXAMPLE
+---------------------------
+/* Calculates the factorial of a number.
+ * Returns -1 on error.
+ */
+int factorial(int n) {
+    if (n < 0) {
+        return -1; // invalid input
+    }
+
+    int result = 1;
+    for (int i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}

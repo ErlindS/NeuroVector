@@ -22,53 +22,7 @@ struct game_t current_game =
 };
 
 // ---------------------------------------------------------------------------
-
-static inline __attribute__((always_inline))
-void game_options(void)
-{
-	Select_Game(1 /* max_players */, 3 /* max_options */);
-	current_game.option_players = Vec_Num_Players;
-	current_game.option_mode = Vec_Num_Game;
-}
-
-// ---------------------------------------------------------------------------
-
-void game_init(void)
-{
-	// activate first joystick, switch off second joystick
-	enable_controller_1_x();
-	enable_controller_1_y();
-	disable_controller_2_x();
-	disable_controller_2_y();
-	
-	// set player data
-	current_game.lives[0] = 3; 
-	current_game.level[0] = 1;
-	current_game.score[0] = 0;
-	current_game.score[1] = 0;
-
-	if (current_game.option_players == 2)
-	{
-		current_game.lives[1] = 3; 
-		current_game.level[1] = 1;
-	}
-	else
-	{
-		current_game.lives[1] = 0; 
-		current_game.level[1] = 0;
-	}
-
-	current_game.player = 0;
-}
-
-
-// main game loop, this is where the action happens
-void game_play(void)
-{
-	level_init();
-	level_play();
-}
-
+/*
 void game_over(void)
 {
 	// update system high score
@@ -90,24 +44,17 @@ void game_over(void)
 		check_buttons();
 	}
 	while((--delay) && !button_1_4_pressed());
-}
+}*/
 
 // ---------------------------------------------------------------------------
 
+
+
 int game(void)
 {
-	game_options();
-
-	if (button_1_4_held())
-	{
-		game_init();
-		game_play();
-		return 0;		// go to option screen, repeat cycle
-	}
-	else
-	{
-		return -1; 		// jump to title screen
-	}
+		level_init();
+		level_play();
+		return 0;		
 }
 
 // ***************************************************************************

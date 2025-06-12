@@ -1,0 +1,112 @@
+#pragma once
+
+int sf = 8;
+
+const struct packet Brainright[] = 
+{
+	{MOVE, -120, 120},
+	{MOVE, -120, 0},
+	{MOVE, -120, 0},
+	{MOVE, -120, 0},
+	{DRAW, -100, 50},
+	{DRAW, 0, 60},
+	{DRAW, 0, 75},
+	{DRAW, 50, 75},
+	{DRAW, 50, 75},
+	{DRAW, 50, 0},
+	{DRAW, 30, 60},
+	{DRAW, 80, 40},
+	{DRAW, 60, 0},
+	{DRAW, 20, -20},
+	{DRAW, 15, -30},
+	{DRAW, -20, -50},
+	{MOVE, 20, 50},
+	{DRAW, 30, 30},
+	{DRAW, 70, 0},
+	{DRAW, 30, -10},
+	{DRAW, -40, -70},
+	{MOVE, 40, 70},
+	{DRAW, 70, 0},
+	{DRAW, 50, -25},
+	{DRAW, 0, -60},
+	{DRAW, -50, -25},
+	{DRAW, -25, -50},
+	{MOVE, 75, 75},
+	{DRAW, 60, -30},
+	{DRAW, 60, -30},
+	{DRAW, 60, -50},
+	{DRAW, 0, -50},
+	{DRAW, 40, -50},
+	{DRAW, 30, -100},
+	{DRAW, -30, -60},
+	{DRAW, -30, -50},
+	{STOP, 0, 0}
+};
+
+/*
+ * ,
+	{DRAW, 60, 0},
+	{DRAW, 15, -15},
+	{DRAW, 30, 0},
+	{DRAW, 30, -15},
+	{DRAW, 30, -30},
+	{DRAW, 0, -9},
+	{DRAW, 30, -9},
+	{DRAW, 30, -3},
+ * 
+ * */
+
+const struct packet BrainrightDetailed[] = 
+{
+	{MOVE, 0, 120},
+	{DRAW, 120, 120},
+	{DRAW, 60, 0},
+	{DRAW, 120, 120},
+	{DRAW, 16, 8},
+	{DRAW, 45, -1},
+	{DRAW, 5, -10},
+	{DRAW, 0, -10},
+	{DRAW, -5, -10},
+	{STOP, 0, 0},
+};
+
+const struct packet Brainleft[] = 
+{
+	{MOVE, -120, -120},
+	{MOVE, -120, 0},
+	{MOVE, -120, 0},
+	{MOVE, -120, 0},
+	{DRAW, -100, -50},
+	{DRAW, 0, -60},
+	{DRAW, 0, -75},
+	{DRAW, 50, -75},
+	{DRAW, 50, -75},
+	{DRAW, 50, 0},
+	{DRAW, 30, -60},
+	{DRAW, 80, -40},
+	{DRAW, 60, 0},
+	{DRAW, 20, 20},
+	{DRAW, 15, 30},
+	{DRAW, -20, 50},
+	{MOVE, 20, -50},
+	{DRAW, 30, -30},
+	{DRAW, 70, 0},
+	{DRAW, 30, 10},
+	{DRAW, -40, 70},
+	{MOVE, 40, -70},
+	{DRAW, 70, 0},
+	{DRAW, 50, 25},
+	{DRAW, 0, 60},
+	{DRAW, -50, 25},
+	{DRAW, -25, 50},
+	{MOVE, 75, -75},
+	{DRAW, 60, 30},
+	{DRAW, 60, 30},
+	{DRAW, 60, 50},
+	{DRAW, 0, 50},
+	{DRAW, 40, 50},
+	{DRAW, 30, 100},
+	{DRAW, -30, 60},
+	{DRAW, -30, 50},
+	{STOP, 0, 0}
+};
