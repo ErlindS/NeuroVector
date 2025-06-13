@@ -8,6 +8,7 @@
 // --------------------------------------------------
 // Loadingbar
 void Loadingbar(unsigned int q);
+void Lifeline(unsigned int q);
 
 // --------------------------------------------------
 // draw Cross
@@ -27,6 +28,6 @@ void Display_Gamefield(void);
 void draw_menu_arrow(int q);
 
 
-struct SquareObject Displayed_Squares[9] = {	{16, -16, &draw_square}, {16, 0, &draw_square},{16, 16, &draw_square},
-												{0, -16, &draw_square},  {0,  0, &draw_square},{0, 16, &draw_square},
-												{-16, -16, &draw_square},{-16,0, &draw_square},{-16, 16, &draw_square}};
+struct SquareObject Displayed_Squares[9] = {	{16, -16, &draw_square, 0, 0}, {16, 0, &draw_square, 0, 0},{16, 16, &draw_square, 0, 0},
+												{0, -16, &draw_square, 0, 0},  {0,  0, &draw_square, 0, 0},{0, 16, &draw_square, 0, 0},
+												{-16, -16, &draw_square, 0, 0},{-16,0, &draw_square, 0, 0},{-16, 16, &draw_square, 0, 0}};

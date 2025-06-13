@@ -1,7 +1,5 @@
 #pragma once
 
-int sf = 8;
-
 const struct packet Brainright[] = 
 {
 	{MOVE, -120, 120},

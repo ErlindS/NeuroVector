@@ -109,6 +109,49 @@ void Loadingbar(unsigned int q) {
 		dp_VIA_t1_cnt_lo = 0xFF;
 }
 
+
+//--------------------------------------------------
+// Lifeline
+// -------------------------------------------------
+
+
+
+void Lifeline(unsigned int q) {	
+	
+		Reset0Ref();					// reset beam to center of screen
+		unsigned int c = q;
+		q = c;
+		/*
+		dp_VIA_t1_cnt_lo = 0x26;
+		Moveto_d(120, -120);			// move beam to object coordinates
+		Moveto_d(120, -120);			// move beam to object coordinates
+		Moveto_d(120, -120);			// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+		Draw_Line_d(0,80);	
+		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
+		Draw_VLp(&Lifelinestruct);
+		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+		Draw_Line_d(0,80);	
+		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
+		Draw_VLp(&Lifelinestruct);
+		
+		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+		Draw_Line_d(0,80);	
+		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
+		Draw_VLp(&Lifelinestruct);
+		
+		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+		Draw_Line_d(0,80);	
+		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
+		Draw_VLp(&Lifelinestruct);
+		
+		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
+		Draw_Line_d(0,80);	
+		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
+		Draw_VLp(&Lifelinestruct);
+		*/
+}
+
 //--------------------------------------------------
 // Menu Arrow
 // -------------------------------------------------

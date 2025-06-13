@@ -25,4 +25,6 @@ struct SquareObject{
 	int x; 
 	int y;
 	void (*execute_display_functions)(unsigned int i);
+    int x_direction;
+    int y_direction;
 };

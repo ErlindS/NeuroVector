@@ -115,7 +115,7 @@ _square_filled:
 	.byte	-1
 	.byte	-120
 	.byte	120
-	.byte	-1
+	.byte	0
 	.byte	120
 	.byte	0
 	.byte	-1
@@ -175,12 +175,39 @@ _Gamefield:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_sf
-	.area	.data
-_sf:
-	.byte	8
+	.globl	_Lifelinestruct
+_Lifelinestruct:
+	.byte	-1
+	.byte	0
+	.byte	30
+	.byte	-1
+	.byte	15
+	.byte	10
+	.byte	-1
+	.byte	-15
+	.byte	10
+	.byte	-1
+	.byte	0
+	.byte	15
+	.byte	-1
+	.byte	-15
+	.byte	10
+	.byte	-1
+	.byte	45
+	.byte	15
+	.byte	-1
+	.byte	-55
+	.byte	15
+	.byte	-1
+	.byte	25
+	.byte	15
+	.byte	-1
+	.byte	0
+	.byte	15
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_Brainright
-	.area	.text
 _Brainright:
 	.byte	0
 	.byte	-120
@@ -470,30 +497,48 @@ _Displayed_Squares:
 	.byte	16
 	.byte	-16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	16
 	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	16
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	0
 	.byte	-16
 	.word	_draw_square
 	.byte	0
 	.byte	0
+	.byte	0
+	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	0
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	-16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.globl	_current_game
 _current_game:
 	.word	0,0,0,0

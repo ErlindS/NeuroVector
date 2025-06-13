@@ -24,6 +24,8 @@ unsigned int a_random_compare[20] = {0};
 unsigned int RandomSequenceCounter = 50;
 unsigned int RandomSequenceCounterDisplay = 0;
 
+unsigned int Random_Number_for_random_things = 0;
+
 void RandomNumberGenerator(){
 	for(int i = 0; i < 20; ++i){
 		a_random[i] = (a_random[i]) % 10;
@@ -55,16 +57,19 @@ int SequenceTime = 1;
 // ----------------------------------------------------------------------------
 //	Display time left
 // ----------------------------------------------------------------------------
-unsigned int counter = 0;
+unsigned int counter = 3;
 void Display_TimeLeft(){
-	print_string(100, -60, "TIME LEFT\x80");
-	Loadingbar(counter);
+	//print_string(100, -60, "TIME LEFT\x80");
+	//Loadingbar(counter);
+	Lifeline(counter);
 	if(counter == 0){
+		/*
 		while(1){
 			print_string(100, -60, "GAME OVER\x80");	
-		}
+		}*/
 		counter = 200;
 	}
+	counter--;
 }
 
 // ----------------------------------------------------------------------------
@@ -145,15 +150,15 @@ void move_player(){
 	joy_x = joystick_1_x();
 	joy_y = joystick_1_y();
 	
-	(joy_x < 0 && joy_y > 0) ? (Displayed_Squares[0].execute_display_functions = &draw_square_filled) : (Displayed_Squares[0].execute_display_functions = &draw_square);
-	(joy_x == 0 && joy_y > 0)? (Displayed_Squares[1].execute_display_functions = &draw_square_filled) : (Displayed_Squares[1].execute_display_functions = &draw_square);
-	(joy_x > 0 && joy_y > 0)? (Displayed_Squares[2].execute_display_functions = &draw_square_filled) : (Displayed_Squares[2].execute_display_functions = &draw_square);
-	(joy_x < 0 && joy_y == 0)? (Displayed_Squares[3].execute_display_functions = &draw_square_filled) : (Displayed_Squares[3].execute_display_functions = &draw_square);
-	(joy_x == 0 && joy_y == 0)? (Displayed_Squares[4].execute_display_functions = &draw_square_filled) : (Displayed_Squares[4].execute_display_functions = &draw_square);
-	(joy_x > 0 && joy_y == 0)? (Displayed_Squares[5].execute_display_functions = &draw_square_filled) : (Displayed_Squares[5].execute_display_functions = &draw_square);
-	(joy_x < 0 && joy_y < 0)? (Displayed_Squares[6].execute_display_functions = &draw_square_filled) : (Displayed_Squares[6].execute_display_functions = &draw_square);
-	(joy_x == 0 && joy_y < 0)? (Displayed_Squares[7].execute_display_functions = &draw_square_filled) : (Displayed_Squares[7].execute_display_functions = &draw_square);
-	(joy_x > 0 && joy_y < 0)? (Displayed_Squares[8].execute_display_functions = &draw_square_filled) : (Displayed_Squares[8].execute_display_functions = &draw_square);
+	(joy_x < 0 && joy_y > 0) ? (Displayed_Squares[0+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[0+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x == 0 && joy_y > 0)? (Displayed_Squares[1+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[1+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x > 0 && joy_y > 0)? (Displayed_Squares[2+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[2+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x < 0 && joy_y == 0)? (Displayed_Squares[3+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[3+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x == 0 && joy_y == 0)? (Displayed_Squares[4+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[4+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x > 0 && joy_y == 0)? (Displayed_Squares[5+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[5+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x < 0 && joy_y < 0)? (Displayed_Squares[6+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[6+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x == 0 && joy_y < 0)? (Displayed_Squares[7+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[7+sneakyoffset].execute_display_functions = &draw_square);
+	(joy_x > 0 && joy_y < 0)? (Displayed_Squares[8+sneakyoffset].execute_display_functions = &draw_square_filled) : (Displayed_Squares[8+sneakyoffset].execute_display_functions = &draw_square);
 }
 
 //-----------------------------------------------------------------------------------------
@@ -187,7 +192,7 @@ void read_player_input(){
 void check_successfully_repeated(void);
 
 //-----------------------------------------------------------------------------------------
-// For Hard mode
+// For hard mode
 //-----------------------------------------------------------------------------------------
 void Set_traps(){
 	sneakyoffset = 0;
@@ -196,6 +201,72 @@ void Set_traps(){
 		print_string(115, -90, "!SNEAKY OFFSET!\x80");
 		sneakyoffset = 3;
 	}
+	
+	if(RandomSequenceCounterDisplay > 10 && RandomSequenceCounterDisplay < 14){
+		play_tune(3, 400, 200);
+		print_string(115, -90, "!SNEAKY OFFSET!\x80");
+		sneakyoffset = 2;
+	}
+}
+
+//-----------------------------------------------------------------------------------------
+// For extrem mode
+//-----------------------------------------------------------------------------------------
+
+int rand_between_0_to_10(int a){
+	return rand(a) * 11 >> 32;
+}
+
+void add_square_x(unsigned int i){
+	Displayed_Squares[0].x += i;
+	if(Displayed_Squares[0].x > 120){
+		Displayed_Squares[0].addrandom_x = &sub_square_x;
+	}
+}
+
+void sub_square_x(unsigned int i){
+	Displayed_Squares[0].x -= i;
+	if(Displayed_Squares[0].x < 120){
+		Displayed_Squares[0].addrandom_x = &add_square_x;
+	}
+}
+
+
+void add_square_y(unsigned int i){
+	Displayed_Squares[0].y += i;
+	if(Displayed_Squares[0].y > 120){
+		Displayed_Squares[0].addrandom_y = &sub_square_y;
+	}
+}
+
+void sub_square_y(unsigned int i){
+	Displayed_Squares[0].y += i;
+	if(Displayed_Squares[0].y < 120){
+		Displayed_Squares[0].addrandom_y = &add_square_y;
+	}
+}
+
+
+void Add_Movement(){
+	Displayed_Squares[0].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[1].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[2].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));	
+	Displayed_Squares[3].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[4].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[5].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[6].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));	
+	Displayed_Squares[7].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+
+	Displayed_Squares[0].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[1].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[2].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));	
+	Displayed_Squares[3].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[4].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[5].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	Displayed_Squares[6].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));	
+	Displayed_Squares[7].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
+	
+	checkifover();	
 }
 
 //-----------------------------------------------------------------------------------------
@@ -225,6 +296,10 @@ void execute_repeat_sequence_state(void){
 		if(b == 3){
 			Set_traps();
 		}
+		if(b == 4){
+			Add_Movement();
+		}
+		Random_Number_for_random_things++;
 		move_player();
 		read_player_input();
 		check_successfully_repeated();
@@ -306,16 +381,17 @@ void level_init()
 			if(joy_y > 0){
 				b = 2;
 			}
-
 			//hard
 			if(joy_y < 0){
 				b = 3;
 			}
+			//Extrem
+			if(joy_y < 0){
+				b = 4;
+			}
 		}
 	}
 	
-	//RandomNumberGenerator is for testing purpose
-	//RandomNumberGenerator();
 	rand(a);
 	current_level.status  = LEVEL_PLAY;
 	execute_game_playing_state = &execute_display_sequence_state;

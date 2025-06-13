@@ -2,7 +2,7 @@
 
 <configuration version="3">
 
-	<window x="960" y="78" width="692" height="904" fullscreen="false" state="0" menuBar="on" />
+	<window x="1112" y="66" width="692" height="904" fullscreen="false" state="0" menuBar="on" />
 	<timing method="FPS" fps="50" nanos="true" />
 	<sound enabled="true" createThread="true" samplingRate="44100" volume="0.4" />
 	<debug showFps="false" debugFeatures="true" devMode="true" />
@@ -19,7 +19,7 @@
 			<thickness lines="1.0" points="2.5" />
 			<wobbling enabled="true" factor="0.125" />
 		</vectors>
-		<chassis enabled="true" zoom="1.7090017" tx="0.0" ty="-0.196">
+		<chassis enabled="true" zoom="1.7431817" tx="0.0" ty="-0.196">
 			<part id="frame" enabled="true" />
 			<part id="port1" enabled="false" />
 			<part id="port2" enabled="false" />

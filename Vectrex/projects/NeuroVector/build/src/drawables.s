@@ -115,7 +115,7 @@ _square_filled:
 	.byte	-1
 	.byte	-120
 	.byte	120
-	.byte	-1
+	.byte	0
 	.byte	120
 	.byte	0
 	.byte	-1
@@ -175,12 +175,39 @@ _Gamefield:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_sf
-	.area	.data
-_sf:
-	.byte	8
+	.globl	_Lifelinestruct
+_Lifelinestruct:
+	.byte	-1
+	.byte	0
+	.byte	30
+	.byte	-1
+	.byte	15
+	.byte	10
+	.byte	-1
+	.byte	-15
+	.byte	10
+	.byte	-1
+	.byte	0
+	.byte	15
+	.byte	-1
+	.byte	-15
+	.byte	10
+	.byte	-1
+	.byte	45
+	.byte	15
+	.byte	-1
+	.byte	-55
+	.byte	15
+	.byte	-1
+	.byte	25
+	.byte	15
+	.byte	-1
+	.byte	0
+	.byte	15
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_Brainright
-	.area	.text
 _Brainright:
 	.byte	0
 	.byte	-120
@@ -470,30 +497,48 @@ _Displayed_Squares:
 	.byte	16
 	.byte	-16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	16
 	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	16
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	0
 	.byte	-16
 	.word	_draw_square
 	.byte	0
 	.byte	0
+	.byte	0
+	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	0
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	-16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	0
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.byte	-16
 	.byte	16
 	.word	_draw_square
+	.byte	0
+	.byte	0
 	.area	.text
 	.globl	_draw_cross
 _draw_cross:
@@ -773,6 +818,17 @@ _Loadingbar:
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
 	leas	1,s
+	rts
+	.globl	_Lifeline
+_Lifeline:
+	leas	-2,s
+	stb	,s
+	jsr	___Reset0Ref
+	ldb	,s
+	stb	1,s
+	ldb	1,s
+	stb	,s
+	leas	2,s
 	rts
 	.globl	_draw_menu_arrow
 _draw_menu_arrow:

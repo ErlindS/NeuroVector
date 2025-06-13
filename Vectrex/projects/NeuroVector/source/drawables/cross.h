@@ -38,7 +38,7 @@ const struct packet square_filled[] =
 	{DRAW, 0, -120},
 	{DRAW, 120, 0},
 	{DRAW, -120, 120},
-	{DRAW, 120, 0},
+	{MOVE, 120, 0},
 	{DRAW, -120, -120},
 	{STOP, 0, 0},
 };
