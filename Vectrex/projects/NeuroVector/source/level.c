@@ -24,7 +24,7 @@ unsigned int a_random_compare[20] = {0};
 unsigned int RandomSequenceCounter = 50;
 unsigned int RandomSequenceCounterDisplay = 0;
 
-unsigned int Random_Number_for_random_things = 0;
+int Random_Number_for_random_things = 0;
 
 void RandomNumberGenerator(){
 	for(int i = 0; i < 20; ++i){
@@ -42,6 +42,17 @@ void rand(unsigned int n) {
 		n ^= n >> 5;
 		a_random[i] = (a_random[i] + n) % 10;
 	}
+}
+
+int rand2(int n) {	
+    for(int i = 0; i < 20; i++){
+		n ^= n >> 4;
+		n += n << 3;
+		n ^= n >> 6;
+		n += n << 2;
+		n ^= n >> 5;
+	}
+	return (int)n;
 }
 
 // ---------------------------------------------------------------------------
@@ -212,61 +223,84 @@ void Set_traps(){
 //-----------------------------------------------------------------------------------------
 // For extrem mode
 //-----------------------------------------------------------------------------------------
-
+/*
 int rand_between_0_to_10(int a){
-	return rand(a) * 11 >> 32;
+	int res = 0;
+	res = rand2(a);
+	res = res * 11;
+	res = res >> 4;
+	return res;
 }
 
-void add_square_x(unsigned int i){
-	Displayed_Squares[0].x += i;
-	if(Displayed_Squares[0].x > 120){
-		Displayed_Squares[0].addrandom_x = &sub_square_x;
+void add_square_x(struct SquareObject* k){
+	k->x += rand_between_0_to_10(Random_Number_for_random_things);
+	if(k->x > 120){
+		k->addrandom_x = &sub_square_x;
 	}
 }
 
-void sub_square_x(unsigned int i){
-	Displayed_Squares[0].x -= i;
-	if(Displayed_Squares[0].x < 120){
-		Displayed_Squares[0].addrandom_x = &add_square_x;
+void add_square_y(struct SquareObject* k){
+	k->x += rand_between_0_to_10(Random_Number_for_random_things);
+	if(k->x > 120){
+		k->addrandom_x = &sub_square_x;
 	}
 }
 
-
-void add_square_y(unsigned int i){
-	Displayed_Squares[0].y += i;
-	if(Displayed_Squares[0].y > 120){
-		Displayed_Squares[0].addrandom_y = &sub_square_y;
+void sub_square_x(struct SquareObject* k){
+	k->x += rand_between_0_to_10(Random_Number_for_random_things);
+	if(k->x > 120){
+		k->addrandom_x = &sub_square_x;
 	}
 }
 
-void sub_square_y(unsigned int i){
-	Displayed_Squares[0].y += i;
-	if(Displayed_Squares[0].y < 120){
-		Displayed_Squares[0].addrandom_y = &add_square_y;
+void sub_square_y(struct SquareObject* k){
+	k->x += rand_between_0_to_10(Random_Number_for_random_things);
+	if(k->x > 120){
+		k->addrandom_x = &sub_square_x;
 	}
 }
-
-
+*/
 void Add_Movement(){
-	Displayed_Squares[0].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[1].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[2].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));	
-	Displayed_Squares[3].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[4].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[5].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[6].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));	
-	Displayed_Squares[7].addrandom_x(rand_between_0_to_10(Random_Number_for_random_things));
+	/*
+	Displayed_Squares[0].addrandom_x(&Displayed_Squares[0]);
+	Displayed_Squares[1].addrandom_x(&Displayed_Squares[1]);
+	Displayed_Squares[2].addrandom_x(&Displayed_Squares[2]);	
+	Displayed_Squares[3].addrandom_x(&Displayed_Squares[3]);
+	Displayed_Squares[4].addrandom_x(&Displayed_Squares[4]);
+	Displayed_Squares[5].addrandom_x(&Displayed_Squares[5]);
+	Displayed_Squares[6].addrandom_x(&Displayed_Squares[6]);	
+	Displayed_Squares[7].addrandom_x(&Displayed_Squares[7]);
+	Displayed_Squares[8].addrandom_x(&Displayed_Squares[8]);
 
-	Displayed_Squares[0].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[1].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[2].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));	
-	Displayed_Squares[3].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[4].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[5].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	Displayed_Squares[6].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));	
-	Displayed_Squares[7].addrandom_y(rand_between_0_to_10(Random_Number_for_random_things));
-	
-	checkifover();	
+	Displayed_Squares[0].addrandom_y(&Displayed_Squares[0]);
+	Displayed_Squares[1].addrandom_y(&Displayed_Squares[1]);
+	Displayed_Squares[2].addrandom_y(&Displayed_Squares[2]);	
+	Displayed_Squares[3].addrandom_y(&Displayed_Squares[3]);
+	Displayed_Squares[4].addrandom_y(&Displayed_Squares[4]);
+	Displayed_Squares[5].addrandom_y(&Displayed_Squares[5]);
+	Displayed_Squares[6].addrandom_y(&Displayed_Squares[6]);	
+	Displayed_Squares[7].addrandom_y(&Displayed_Squares[7]);
+	Displayed_Squares[8].addrandom_y(&Displayed_Squares[8]);
+	*/
+	Displayed_Squares[0].x = Displayed_Squares[0].x + 10;
+	Displayed_Squares[1].x += 10;
+	Displayed_Squares[2].x += 10;	
+	Displayed_Squares[3].x += 10;
+	Displayed_Squares[4].x += 10;
+	Displayed_Squares[5].x += 10;
+	Displayed_Squares[6].x += 10;	
+	Displayed_Squares[7].x += 10;
+	Displayed_Squares[8].x += 10;
+							   
+	Displayed_Squares[0].y += 10;
+	Displayed_Squares[1].y += 10;
+	Displayed_Squares[2].y += 10;	
+	Displayed_Squares[3].y += 10;
+	Displayed_Squares[4].y += 10;
+	Displayed_Squares[5].y += 10;
+	Displayed_Squares[6].y += 10;	
+	Displayed_Squares[7].y += 10;
+	Displayed_Squares[8].y += 10;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -296,9 +330,9 @@ void execute_repeat_sequence_state(void){
 		if(b == 3){
 			Set_traps();
 		}
-		if(b == 4){
+		//if(b == 4){
 			Add_Movement();
-		}
+		//}
 		Random_Number_for_random_things++;
 		move_player();
 		read_player_input();
@@ -352,47 +386,56 @@ void level_init()
 	disable_controller_2_x();
 	disable_controller_2_y();
 	unsigned int a = 0;
-	
+	unsigned int i = 1;
+	unsigned int state = 1;
 	while(b<2){
 		Read_Btns();
 		a++;
 		print_string(100, -120, "SELECT THE GAMEMODE\x80");	
 		print_string(60, -50, "NORMAL\x80");
 		print_string(40, -50, "HARD\x80");
+		print_string(20, -50, "EXTREM\x80");
 		//draw_menu_arrow(1);
 		
 		Read_Btns();
 		check_joysticks();
-	
-		if(joystick_1_y() != 0){
-			joy_y = joystick_1_y();
+		
+		if(joystick_1_y() == 0){
+			state = 1;
 		}
 		
-		if(joy_y > 0){
-			draw_menu_arrow(0);
+		if(joystick_1_y() > 0 && i > 0 && state == 1){
+			--state;
+			--i;
 		}
 		
-		if(joy_y < 0){
-			draw_menu_arrow(1);
+		if(joystick_1_y() < 0 && i < 2 && state == 1){
+			--state;
+			++i;
 		}
+		
+		
+		draw_menu_arrow(i);
+		
 		if(button_1_1_pressed()){
-			
-			//Normal
-			if(joy_y > 0){
+			if(i == 0){
+				//Normal
 				b = 2;
-			}
-			//hard
-			if(joy_y < 0){
+			} else if(i == 1){
+				//Hard
 				b = 3;
-			}
-			//Extrem
-			if(joy_y < 0){
+			} else if(i == 2){
+				//Extrem
 				b = 4;
+			} else {
+				b = 2;
 			}
 		}
 	}
-	
+	b = 4;
 	rand(a);
+	Displayed_Squares[0].x = Displayed_Squares[0].x + 10;
+	Displayed_Squares[0].y = Displayed_Squares[0].y + 10;
 	current_level.status  = LEVEL_PLAY;
 	execute_game_playing_state = &execute_display_sequence_state;
 }	

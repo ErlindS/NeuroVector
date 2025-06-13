@@ -471,6 +471,8 @@ _Positions_Arrow:
 	.byte	-55
 	.byte	40
 	.byte	-55
+	.byte	20
+	.byte	-55
 	.globl	_arrow
 _arrow:
 	.byte	0
@@ -497,46 +499,64 @@ _Displayed_Squares:
 	.byte	16
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	16
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	16
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.globl	_current_game

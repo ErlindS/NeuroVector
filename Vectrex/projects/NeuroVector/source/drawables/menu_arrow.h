@@ -1,7 +1,7 @@
 #pragma once
 #include "drawablesbasic.h"
 
-const struct vector_t Positions_Arrow[2] = { {60, -55}, {40, -55}};
+const struct vector_t Positions_Arrow[3] = { {60, -55}, {40, -55}, {20, -55}};
 
 const struct packet arrow[] =
 {

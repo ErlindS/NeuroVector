@@ -471,6 +471,8 @@ _Positions_Arrow:
 	.byte	-55
 	.byte	40
 	.byte	-55
+	.byte	20
+	.byte	-55
 	.globl	_arrow
 _arrow:
 	.byte	0
@@ -497,46 +499,64 @@ _Displayed_Squares:
 	.byte	16
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	16
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	16
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	-16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	0
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.byte	-16
 	.byte	16
 	.word	_draw_square
+	.word	_add_square_x
+	.word	_add_square_y
 	.byte	0
 	.byte	0
 	.area	.text
@@ -585,8 +605,8 @@ _draw_cross:
 	.globl	_draw_square
 _draw_square:
 	pshs	u
-	leas	-4,s
-	stb	1,s
+	leas	-8,s
+	stb	5,s
 	jsr	___Reset0Ref
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
@@ -595,40 +615,62 @@ _draw_square:
 	clrb
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	1,s
+	ldb	5,s
 	clra		;zero_extendqihi: R:b -> R:d
+	std	2,s
+	ldd	2,s
 	aslb
 	rola
-	ldu	#_Positions_Cursor+1
-	leax	d,u
-	ldb	,x
-	stb	,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
+	std	2,s
+	ldd	2,s
 	aslb
 	rola
-	ldu	#_Positions_Cursor
-	leax	d,u
+	aslb
+	rola
+	ldx	2,s
+	leax	d,x
+	stx	2,s
+	ldu	2,s
+	leax	_Displayed_Squares+1,u
 	ldb	,x
-	stb	3,s
-	ldb	,s
-	stb	2,s
-	ldb	3,s
+	stb	4,s
+	ldb	5,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	,s
+	ldd	,s
+	aslb
+	rola
+	std	,s
+	ldd	,s
+	aslb
+	rola
+	aslb
+	rola
+	ldx	,s
+	leax	d,x
+	stx	,s
+	ldu	,s
+	leax	_Displayed_Squares,u
+	ldb	,x
+	stb	7,s
+	ldb	4,s
+	stb	6,s
+	ldb	7,s
 	stb	,-s
-	ldb	3,s
+	ldb	7,s
 	jsr	__Moveto_d
 	leas	1,s
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_square
 	jsr	___Draw_VLp
-	leas	4,s
+	leas	8,s
 	puls	u,pc
 	.globl	_draw_square_filled
 _draw_square_filled:
 	pshs	u
-	leas	-4,s
-	stb	1,s
+	leas	-8,s
+	stb	5,s
 	jsr	___Reset0Ref
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
@@ -637,34 +679,56 @@ _draw_square_filled:
 	clrb
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	1,s
+	ldb	5,s
 	clra		;zero_extendqihi: R:b -> R:d
+	std	2,s
+	ldd	2,s
 	aslb
 	rola
-	ldu	#_Positions_Cursor+1
-	leax	d,u
-	ldb	,x
-	stb	,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
+	std	2,s
+	ldd	2,s
 	aslb
 	rola
-	ldu	#_Positions_Cursor
-	leax	d,u
+	aslb
+	rola
+	ldx	2,s
+	leax	d,x
+	stx	2,s
+	ldu	2,s
+	leax	_Displayed_Squares+1,u
 	ldb	,x
-	stb	3,s
-	ldb	,s
-	stb	2,s
-	ldb	3,s
+	stb	4,s
+	ldb	5,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	,s
+	ldd	,s
+	aslb
+	rola
+	std	,s
+	ldd	,s
+	aslb
+	rola
+	aslb
+	rola
+	ldx	,s
+	leax	d,x
+	stx	,s
+	ldu	,s
+	leax	_Displayed_Squares,u
+	ldb	,x
+	stb	7,s
+	ldb	4,s
+	stb	6,s
+	ldb	7,s
 	stb	,-s
-	ldb	3,s
+	ldb	7,s
 	jsr	__Moveto_d
 	leas	1,s
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_square_filled
 	jsr	___Draw_VLp
-	leas	4,s
+	leas	8,s
 	puls	u,pc
 	.globl	_draw_round_advancement_cross
 _draw_round_advancement_cross:
@@ -839,7 +903,7 @@ _draw_menu_arrow:
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
 	ldb	1,s
-	sex		;extendqihi2: R:b -> R:d
+	clra		;zero_extendqihi: R:b -> R:d
 	aslb
 	rola
 	ldu	#_Positions_Arrow+1
@@ -847,7 +911,7 @@ _draw_menu_arrow:
 	ldb	,x
 	stb	,s
 	ldb	1,s
-	sex		;extendqihi2: R:b -> R:d
+	clra		;zero_extendqihi: R:b -> R:d
 	aslb
 	rola
 	ldu	#_Positions_Arrow

@@ -25,9 +25,15 @@ void Display_Gamefield(void);
 
 // --------------------------------------------------
 // Menu Arrow
-void draw_menu_arrow(int q);
+void draw_menu_arrow(unsigned int q);
+
+//-----------------------------------------------------
+void add_square_x(struct SquareObject* k);
+void add_square_y(struct SquareObject* k);
+void sub_square_x(struct SquareObject* k);
+void sub_square_y(struct SquareObject* k);
 
 
-struct SquareObject Displayed_Squares[9] = {	{16, -16, &draw_square, 0, 0}, {16, 0, &draw_square, 0, 0},{16, 16, &draw_square, 0, 0},
-												{0, -16, &draw_square, 0, 0},  {0,  0, &draw_square, 0, 0},{0, 16, &draw_square, 0, 0},
-												{-16, -16, &draw_square, 0, 0},{-16,0, &draw_square, 0, 0},{-16, 16, &draw_square, 0, 0}};
+struct SquareObject Displayed_Squares[9] = {	{16, -16, &draw_square, &add_square_x, &add_square_y, 0, 0}, {16, 0, &draw_square, &add_square_x, &add_square_y, 0, 0},{16, 16, &draw_square, &add_square_x, &add_square_y, 0, 0},
+												{0, -16, &draw_square, &add_square_x, &add_square_y, 0, 0},  {0,  0, &draw_square, &add_square_x, &add_square_y, 0, 0},{0, 16, &draw_square, &add_square_x, &add_square_y, 0, 0},
+												{-16, -16, &draw_square, &add_square_x, &add_square_y, 0, 0},{-16,0, &draw_square, &add_square_x, &add_square_y, 0, 0},{-16, 16, &draw_square, &add_square_x, &add_square_y, 0, 0}};
