@@ -3,28 +3,8 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
 	.module	drawables.c
-	.globl	_Positions_Cursor
-	.area	.text
-_Positions_Cursor:
-	.byte	16
-	.byte	-16
-	.byte	16
-	.byte	0
-	.byte	16
-	.byte	16
-	.byte	0
-	.byte	-16
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	-16
-	.byte	-16
-	.byte	-16
-	.byte	0
-	.byte	-16
-	.byte	16
 	.globl	_Level_advancement
+	.area	.text
 _Level_advancement:
 	.byte	-60
 	.byte	-35
@@ -221,6 +201,27 @@ _Brainright:
 	.byte	0
 	.byte	-120
 	.byte	0
+	.byte	0
+	.byte	-20
+	.byte	-100
+	.byte	0
+	.byte	-20
+	.byte	-100
+	.byte	0
+	.byte	-20
+	.byte	-70
+	.byte	-1
+	.byte	0
+	.byte	100
+	.byte	-1
+	.byte	0
+	.byte	100
+	.byte	-1
+	.byte	0
+	.byte	90
+	.byte	0
+	.byte	60
+	.byte	-30
 	.byte	-1
 	.byte	-100
 	.byte	50
@@ -316,39 +317,7 @@ _Brainright:
 	.byte	-60
 	.byte	-1
 	.byte	-30
-	.byte	-50
-	.byte	1
-	.byte	0
-	.byte	0
-	.globl	_BrainrightDetailed
-_BrainrightDetailed:
-	.byte	0
-	.byte	0
-	.byte	120
-	.byte	-1
-	.byte	120
-	.byte	120
-	.byte	-1
-	.byte	60
-	.byte	0
-	.byte	-1
-	.byte	120
-	.byte	120
-	.byte	-1
-	.byte	16
-	.byte	8
-	.byte	-1
-	.byte	45
-	.byte	-1
-	.byte	-1
-	.byte	5
-	.byte	-10
-	.byte	-1
-	.byte	0
-	.byte	-10
-	.byte	-1
-	.byte	-5
-	.byte	-10
+	.byte	-65
 	.byte	1
 	.byte	0
 	.byte	0
@@ -461,7 +430,7 @@ _Brainleft:
 	.byte	60
 	.byte	-1
 	.byte	-30
-	.byte	50
+	.byte	65
 	.byte	1
 	.byte	0
 	.byte	0
@@ -493,115 +462,6 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_Displayed_Squares
-	.area	.data
-_Displayed_Squares:
-	.byte	16
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.area	.text
-	.globl	_draw_cross
-_draw_cross:
-	pshs	u
-	leas	-4,s
-	stb	1,s
-	jsr	___Reset0Ref
-	ldb	#-1
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-21
-	stb	,-s
-	ldb	#-6
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	aslb
-	rola
-	ldu	#_Positions_Cursor+1
-	leax	d,u
-	ldb	,x
-	stb	,s
-	ldb	1,s
-	clra		;zero_extendqihi: R:b -> R:d
-	aslb
-	rola
-	ldu	#_Positions_Cursor
-	leax	d,u
-	ldb	,x
-	stb	3,s
-	ldb	,s
-	stb	2,s
-	ldb	3,s
-	stb	,-s
-	ldb	3,s
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	#96
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_cross
-	jsr	___Draw_VLp
-	leas	4,s
-	puls	u,pc
 	.globl	_draw_square
 _draw_square:
 	pshs	u
@@ -610,7 +470,7 @@ _draw_square:
 	jsr	___Reset0Ref
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-18
+	ldb	#-7
 	stb	,-s
 	clrb
 	jsr	__Moveto_d
@@ -674,7 +534,7 @@ _draw_square_filled:
 	jsr	___Reset0Ref
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-18
+	ldb	#-7
 	stb	,-s
 	clrb
 	jsr	__Moveto_d
@@ -809,7 +669,7 @@ _Display_Gamefield:
 	jsr	___Reset0Ref
 	ldb	#-128
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#25
+	ldb	#45
 	stb	,-s
 	ldb	#-60
 	jsr	__Moveto_d
@@ -819,14 +679,16 @@ _Display_Gamefield:
 	jsr	___Reset0Ref
 	ldb	#24
 	stb	*_dp_VIA_t1_cnt_lo
-	clr	,-s
+	ldb	#80
+	stb	,-s
 	clrb
 	jsr	__Moveto_d
 	leas	1,s
 	ldx	#_Brainright
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
-	clr	,-s
+	ldb	#80
+	stb	,-s
 	clrb
 	jsr	__Moveto_d
 	leas	1,s
@@ -892,6 +754,73 @@ _Lifeline:
 	stb	1,s
 	ldb	1,s
 	stb	,s
+	ldb	#38
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#120
+	stb	,-s
+	ldb	#-120
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#120
+	stb	,-s
+	ldb	#-120
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#120
+	stb	,-s
+	ldb	#-120
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	ldb	#48
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Lifelinestruct
+	jsr	___Draw_VLp
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	ldb	#48
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Lifelinestruct
+	jsr	___Draw_VLp
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	ldb	#48
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Lifelinestruct
+	jsr	___Draw_VLp
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	ldb	#48
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Lifelinestruct
+	jsr	___Draw_VLp
+	ldb	,s
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	ldb	#80
+	jsr	__Draw_Line_d
+	leas	1,s
+	ldb	#48
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Lifelinestruct
+	jsr	___Draw_VLp
 	leas	2,s
 	rts
 	.globl	_draw_menu_arrow

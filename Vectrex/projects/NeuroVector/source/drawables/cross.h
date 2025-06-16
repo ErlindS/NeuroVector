@@ -1,9 +1,5 @@
 #pragma once
 #include "drawablesbasic.h"
-
-const struct vector_t Positions_Cursor[9] = {	{16, -16}, {16, 0},{16, 16},
-												{0, -16},  {0,  0},{0, 16},
-												{-16, -16},{-16,0},{-16, 16}};
 												
 												
 const struct vector_t Level_advancement[16] = {	{-60,-35}, {-60,-25}, {-60,-15}, {-60,-5}, {-60, 5}, {-60, 15}, {-60, 25}, {-60, 35},

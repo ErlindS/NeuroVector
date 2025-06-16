@@ -25,8 +25,8 @@ struct SquareObject{
 	int x; 
 	int y;
 	void (*execute_display_functions)(unsigned int i);
-	void (*addrandom_x)(struct SquareObject* k);
-	void (*addrandom_y)(struct SquareObject* k);
+	void (*addrandom_x)(int id);
+	void (*addrandom_y)(int id);
     int x_direction;
     int y_direction;
 };

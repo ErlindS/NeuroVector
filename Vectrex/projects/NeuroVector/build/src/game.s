@@ -3,28 +3,8 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
 	.module	game.c
-	.globl	_Positions_Cursor
-	.area	.text
-_Positions_Cursor:
-	.byte	16
-	.byte	-16
-	.byte	16
-	.byte	0
-	.byte	16
-	.byte	16
-	.byte	0
-	.byte	-16
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	-16
-	.byte	-16
-	.byte	-16
-	.byte	0
-	.byte	-16
-	.byte	16
 	.globl	_Level_advancement
+	.area	.text
 _Level_advancement:
 	.byte	-60
 	.byte	-35
@@ -221,6 +201,27 @@ _Brainright:
 	.byte	0
 	.byte	-120
 	.byte	0
+	.byte	0
+	.byte	-20
+	.byte	-100
+	.byte	0
+	.byte	-20
+	.byte	-100
+	.byte	0
+	.byte	-20
+	.byte	-70
+	.byte	-1
+	.byte	0
+	.byte	100
+	.byte	-1
+	.byte	0
+	.byte	100
+	.byte	-1
+	.byte	0
+	.byte	90
+	.byte	0
+	.byte	60
+	.byte	-30
 	.byte	-1
 	.byte	-100
 	.byte	50
@@ -316,39 +317,7 @@ _Brainright:
 	.byte	-60
 	.byte	-1
 	.byte	-30
-	.byte	-50
-	.byte	1
-	.byte	0
-	.byte	0
-	.globl	_BrainrightDetailed
-_BrainrightDetailed:
-	.byte	0
-	.byte	0
-	.byte	120
-	.byte	-1
-	.byte	120
-	.byte	120
-	.byte	-1
-	.byte	60
-	.byte	0
-	.byte	-1
-	.byte	120
-	.byte	120
-	.byte	-1
-	.byte	16
-	.byte	8
-	.byte	-1
-	.byte	45
-	.byte	-1
-	.byte	-1
-	.byte	5
-	.byte	-10
-	.byte	-1
-	.byte	0
-	.byte	-10
-	.byte	-1
-	.byte	-5
-	.byte	-10
+	.byte	-65
 	.byte	1
 	.byte	0
 	.byte	0
@@ -461,7 +430,7 @@ _Brainleft:
 	.byte	60
 	.byte	-1
 	.byte	-30
-	.byte	50
+	.byte	65
 	.byte	1
 	.byte	0
 	.byte	0
@@ -493,73 +462,8 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_Displayed_Squares
-	.area	.data
-_Displayed_Squares:
-	.byte	16
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	-16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	0
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
-	.byte	-16
-	.byte	16
-	.word	_draw_square
-	.word	_add_square_x
-	.word	_add_square_y
-	.byte	0
-	.byte	0
 	.globl	_current_game
+	.area	.data
 _current_game:
 	.word	0,0,0,0
 	.byte	0

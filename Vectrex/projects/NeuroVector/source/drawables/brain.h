@@ -6,6 +6,13 @@ const struct packet Brainright[] =
 	{MOVE, -120, 0},
 	{MOVE, -120, 0},
 	{MOVE, -120, 0},
+	{MOVE, -20, -100},
+	{MOVE, -20, -100},
+	{MOVE, -20, -70},
+	{DRAW, 0, 100},
+	{DRAW, 0, 100},
+	{DRAW, 0, 90},
+	{MOVE, 60, -30},
 	{DRAW, -100, 50},
 	{DRAW, 0, 60},
 	{DRAW, 0, 75},
@@ -37,36 +44,10 @@ const struct packet Brainright[] =
 	{DRAW, 40, -50},
 	{DRAW, 30, -100},
 	{DRAW, -30, -60},
-	{DRAW, -30, -50},
+	{DRAW, -30, -65},
 	{STOP, 0, 0}
 };
 
-/*
- * ,
-	{DRAW, 60, 0},
-	{DRAW, 15, -15},
-	{DRAW, 30, 0},
-	{DRAW, 30, -15},
-	{DRAW, 30, -30},
-	{DRAW, 0, -9},
-	{DRAW, 30, -9},
-	{DRAW, 30, -3},
- * 
- * */
-
-const struct packet BrainrightDetailed[] = 
-{
-	{MOVE, 0, 120},
-	{DRAW, 120, 120},
-	{DRAW, 60, 0},
-	{DRAW, 120, 120},
-	{DRAW, 16, 8},
-	{DRAW, 45, -1},
-	{DRAW, 5, -10},
-	{DRAW, 0, -10},
-	{DRAW, -5, -10},
-	{STOP, 0, 0},
-};
 
 const struct packet Brainleft[] = 
 {
@@ -105,6 +86,6 @@ const struct packet Brainleft[] =
 	{DRAW, 40, 50},
 	{DRAW, 30, 100},
 	{DRAW, -30, 60},
-	{DRAW, -30, 50},
+	{DRAW, -30, 65},
 	{STOP, 0, 0}
 };
