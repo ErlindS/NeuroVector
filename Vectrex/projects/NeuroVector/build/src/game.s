@@ -462,12 +462,6 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_current_game
-	.area	.data
-_current_game:
-	.word	0,0,0,0
-	.byte	0
-	.area	.text
 	.globl	_game
 _game:
 	jsr	_level_init

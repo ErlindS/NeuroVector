@@ -1,4 +1,4 @@
-ParaJVE 0.7.0.101229 running on Windows 8, with an x86 architecture...
+ParaJVE 0.7.0.101229 running on Windows 11, with an amd64 architecture...
 
 Loading configuration [project\configuration.xml]
 Loading development properties [project\development.properties]
@@ -22,7 +22,7 @@ Creating engine
 Loading system [data/roms/system/FastBoot.bin]
 Loading cartridge [project/project.bin]
 Opening emulation UI
-WARNING: Found unknown Windows version: Windows 8
+WARNING: Found unknown Windows version: Windows 11
 Attempting to use default windows plug-in.
 Failed to initialize device GAOMON HID because of: java.io.IOException: Failed to acquire device (8007001e)
 java.lang.NullPointerException
@@ -36,7 +36,6 @@ java.lang.NullPointerException
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
 	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at java.lang.Class.newInstance0(Unknown Source)
 	at java.lang.Class.newInstance(Unknown Source)
 	at net.java.games.input.DefaultControllerEnvironment.getControllers(DefaultControllerEnvironment.java:157)
 	at frc.input.JInputManager.getControllers(JInputManager.java)
@@ -84,11 +83,11 @@ java.lang.RuntimeException: Cannot open resource [project/project$.png]
 	at javax.media.opengl.GLCanvas$DisplayOnEventDispatchThreadAction.run(GLCanvas.java:452)
 	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
 	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$400(Unknown Source)
-	at java.awt.EventQueue$2.run(Unknown Source)
-	at java.awt.EventQueue$2.run(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
 	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.AccessControlContext$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
 	at java.awt.EventQueue.dispatchEvent(Unknown Source)
 	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
 	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
@@ -106,9 +105,6 @@ Audio Line initialised : PCM_SIGNED 44100.0 Hz, 16 bit, mono, 2 bytes/frame, big
  - Line Buffer ...... 4414 bytes
 Pluging Joystick in port 1
 Pluging Joystick in port 2
-- Ticks Driven Frame
-- Timer Driven Frame
-Saving configuration [project/configuration.xml]
 Shutdown...
 Removing Joystick from port 1
 Removing Joystick from port 2

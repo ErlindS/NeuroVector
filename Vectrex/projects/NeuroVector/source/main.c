@@ -4,6 +4,8 @@
 
 #include <vectrex.h>
 #include "game.h"
+#include "utils/controller.h"
+#include "level.h"
 
 // ---------------------------------------------------------------------------
 // at system startup, a cold reset is performed
@@ -21,7 +23,8 @@ int main(void)
 	// main loop
 	do
 	{
-		error_code = game();
+		level_init();
+		level_play();
 	}
 	while (error_code == 0);
 	

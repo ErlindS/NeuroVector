@@ -462,21 +462,14 @@
    06D2 01                  462 	.byte	1
    06D3 00                  463 	.byte	0
    06D4 00                  464 	.byte	0
-                            465 	.globl	_current_game
-                            466 	.area	.data
-   C880                     467 _current_game:
-   C880 00 00 00 00 00 00   468 	.word	0,0,0,0
-        00 00
-   C888 00                  469 	.byte	0
-                            470 	.area	.text
-                            471 	.globl	_game
-   06D5                     472 _game:
-   06D5 BD 18 DB      [ 8]  473 	jsr	_level_init
-   06D8 BD 19 F8      [ 8]  474 	jsr	_level_play
-   06DB 5F            [ 2]  475 	clrb
-   06DC 39            [ 5]  476 	rts
+                            465 	.globl	_game
+   06D5                     466 _game:
+   06D5 BD 18 DB      [ 8]  467 	jsr	_level_init
+   06D8 BD 19 F8      [ 8]  468 	jsr	_level_play
+   06DB 5F            [ 2]  469 	clrb
+   06DC 39            [ 5]  470 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Jun 16 04:11:00 2025
+Hexadecimal [16-Bits]                                 Sat Jun 28 00:20:38 2025
 
 Symbol Table
 
@@ -487,19 +480,18 @@ Symbol Table
   2 _Lifelinestruc     0089 GR  |   2 _Positions_Arr     019A GR
   2 _advancement_c     005C GR  |   2 _advancement_p     006B GR
   2 _arrow             01A0 GR  |   2 _cross             0020 GR
-  3 _current_game      0000 GR  |   2 _game              01B2 GR
-    _level_init        **** GX  |     _level_play        **** GX
-  2 _square            002F GR  |   2 _square_filled     0041 GR
+  2 _game              01B2 GR  |     _level_init        **** GX
+    _level_play        **** GX  |   2 _square            002F GR
+  2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Jun 16 04:11:00 2025
+Hexadecimal [16-Bits]                                 Sat Jun 28 00:20:38 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .text            size  1BA   flags  100
-   3 .data            size    9   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

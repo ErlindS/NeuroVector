@@ -1,12 +1,12 @@
 // drawables.h
 #pragma once
 
-#include "drawables/cross.h"
-#include "drawables/gamefield.h"
-#include "drawables/brain.h"
-#include "drawables/menu_arrow.h"
+#include "NEVE_drawables/cross.h"
+#include "NEVE_drawables/gamefield.h"
+#include "NEVE_drawables/brain.h"
+#include "NEVE_drawables/menu_arrow.h"
 #include <vectrex.h>
-#include "drawables/drawablesbasic.h" 
+#include "NEVE_drawables/drawablesbasic.h" 
 
 // --------------------------------------------------
 // Loadingbar

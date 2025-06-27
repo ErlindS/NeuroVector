@@ -2,7 +2,7 @@
 
 <configuration version="3">
 
-	<window x="1291" y="36" width="548" height="501" fullscreen="false" state="0" menuBar="on" />
+	<window x="1291" y="36" width="548" height="706" fullscreen="false" state="0" menuBar="on" />
 	<timing method="FPS" fps="50" nanos="true" />
 	<sound enabled="true" createThread="true" samplingRate="44100" volume="0.0" />
 	<debug showFps="true" debugFeatures="false" devMode="false" />
@@ -138,7 +138,7 @@
 		<cartridgeMenu id="AUTOVF" mode="VECFLASH" name="Automatic Launcher for VecFlash" path="data/roms/menu/vfm_auto.men.jverom" counterSize="0" namesSize="1" />
 	</cartridgeMenus>
 
-	<games selected="BERZERK">
+	<games selected="PICKED" picked="C:/Users/erlin/Documents/repo/Vectrex/Vectrex/projects/NeuroVector/bin/NeuroVector.bin">
 
 		<separator label="Development" />
 
@@ -251,7 +251,7 @@
 		<game id="robhop" name="Robhop">
 			<roms system="DEFAULT" cartridge="C:/Users/peer.johannsen.MA/Documents/Hochschule Pforzheim/Vorlesungen/Vorlesungen 2016 SS/Robot Programming/Games/robhop.bin" />
 			<info author="GCE" date="2016" doc="C:/Users/peer.johannsen.MA/Documents/Hochschule Pforzheim/Vorlesungen/Vorlesungen 2016 SS/Robot Programming/Games/robhop.pdf" />
-			<overlay tx="0.0050" ty="0.035" sx="0.975" sy="1.01" passes="2" mipmap="true" path="C:/Users/peer.johannsen.MA/Documents/Hochschule Pforzheim/Vorlesungen/Vorlesungen 2016 SS/Robot Programming/Games/robhop.png" />
+			<overlay tx="0.005" ty="0.035" sx="0.975" sy="1.01" passes="2" mipmap="true" path="C:/Users/peer.johannsen.MA/Documents/Hochschule Pforzheim/Vorlesungen/Vorlesungen 2016 SS/Robot Programming/Games/robhop.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
@@ -349,7 +349,7 @@
 		<game id="NARZOD" name="Fortress of Narzod">
 			<roms system="DEFAULT" cartridge="data/roms/cartridge/Fortress_of_Narzod.bin" />
 			<info author="GCE" date="1982" doc="data/docs/Narzod.html" />
-			<overlay tx="0.0050" ty="0.06" sx="1.0" sy="0.975" passes="2" mipmap="true" path="data/packs/Narzod.png" />
+			<overlay tx="0.005" ty="0.06" sx="1.0" sy="0.975" passes="2" mipmap="true" path="data/packs/Narzod.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
@@ -437,7 +437,7 @@
 		<game id="SPIKE" name="Spike">
 			<roms system="DEFAULT" cartridge="data/roms/cartridge/Spike.bin" />
 			<info author="GCE" date="1983" doc="data/docs/Spike.html" />
-			<overlay tx="0.0" ty="-0.0050" sx="1.0" sy="0.94" passes="2" mipmap="true" path="data/packs/Spike.png" />
+			<overlay tx="0.0" ty="-0.005" sx="1.0" sy="0.94" passes="2" mipmap="true" path="data/packs/Spike.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
@@ -605,7 +605,7 @@
 		<game id="WOTR" name="War of the Robots">
 			<roms system="DEFAULT" cartridge="data/roms/homebrew/WOTR.bin" />
 			<info category="HOMEBREW" author="GP" version="Freeware Edition -- NOT public domain" date="2003" />
-			<overlay tx="0.0" ty="-0.0050" sx="0.92" sy="0.935" passes="1" mipmap="true" path="data/packs/WOTR.png" />
+			<overlay tx="0.0" ty="-0.005" sx="0.92" sy="0.935" passes="1" mipmap="true" path="data/packs/WOTR.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
@@ -613,7 +613,7 @@
 		<game id="BTTQ" name="War of the Robots - Bow to the Queen">
 			<roms system="DEFAULT" cartridge="data/roms/homebrew/BTTQ.bin" />
 			<info category="HOMEBREW" author="GP" version="Freeware Edition -- NOT public domain" date="2003" />
-			<overlay tx="0.0" ty="-0.0050" sx="0.92" sy="0.935" passes="1" mipmap="true" path="data/packs/WOTR.png" />
+			<overlay tx="0.0" ty="-0.005" sx="0.92" sy="0.935" passes="1" mipmap="true" path="data/packs/WOTR.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
@@ -758,7 +758,7 @@
 		<game id="SPINBALL" name="Spinball">
 			<roms system="DEFAULT" cartridge="data/roms/cartridge/Spinball.bin" />
 			<info author="GCE" date="1983" doc="data/docs/Spinball.html" />
-			<overlay tx="0.0050" ty="0.035" sx="0.975" sy="1.01" passes="2" mipmap="true" path="data/packs/Spinball.png" />
+			<overlay tx="0.005" ty="0.035" sx="0.975" sy="1.01" passes="2" mipmap="true" path="data/packs/Spinball.png" />
 			<persistence enabled="true" history="20" />
 			<shininess normal="2.0" blurred="1.5" />
 		</game>
