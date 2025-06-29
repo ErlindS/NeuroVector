@@ -2,3 +2,4 @@
 build/lib/*
 build/lib/print.lib
 build/lib/debug/debug.lst
+./build/*

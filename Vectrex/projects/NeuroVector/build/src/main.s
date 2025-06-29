@@ -462,6 +462,23 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
+	.area	.bss
+	.globl	_display_game_over_state
+_display_game_over_state:	.blkb	2
+	.globl	_CurrentHighscore
+_CurrentHighscore:	.blkb	2
+	.globl	_GameplaySettingsmode
+	.area	.data
+_GameplaySettingsmode:
+	.byte	1
+	.area	.bss
+	.globl	_Level_specific_action
+_Level_specific_action:	.blkb	2
+	.globl	_execute_game_playing_state
+_execute_game_playing_state:	.blkb	2
+	.globl	_move_player
+_move_player:	.blkb	2
+	.area	.text
 	.globl	_main
 _main:
 	leas	-1,s

@@ -3,9 +3,8 @@
 // ***************************************************************************
 
 #include <vectrex.h>
-#include "game.h"
 #include "utils/controller.h"
-#include "level.h"
+#include "NEVE_controller/game_states.h"
 
 // ---------------------------------------------------------------------------
 // at system startup, a cold reset is performed
@@ -18,12 +17,11 @@
 int main(void)
 {
 	// local variables
-	int error_code;
-			
+	int error_code;	
 	// main loop
 	do
 	{
-		level_init();
+		level_init();	
 		level_play();
 	}
 	while (error_code == 0);

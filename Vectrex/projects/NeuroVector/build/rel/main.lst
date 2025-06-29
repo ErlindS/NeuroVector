@@ -462,41 +462,63 @@
    01AF 01                  462 	.byte	1
    01B0 00                  463 	.byte	0
    01B1 00                  464 	.byte	0
-                            465 	.globl	_main
-   01B2                     466 _main:
-   01B2 32 7F         [ 5]  467 	leas	-1,s
-   01B4                     468 L2:
-   01B4 BD`00`00      [ 8]  469 	jsr	_level_init
-   01B7 BD`00`00      [ 8]  470 	jsr	_level_play
-   01BA 6D E4         [ 6]  471 	tst	,s
-   01BC 27 F6         [ 3]  472 	beq	L2
-   01BE E6 E4         [ 4]  473 	ldb	,s
-   01C0 32 61         [ 5]  474 	leas	1,s
-   01C2 39            [ 5]  475 	rts
+                            465 	.area	.bss
+                            466 	.globl	_display_game_over_state
+   0000                     467 _display_game_over_state:	.blkb	2
+                            468 	.globl	_CurrentHighscore
+   0002                     469 _CurrentHighscore:	.blkb	2
+                            470 	.globl	_GameplaySettingsmode
+                            471 	.area	.data
+   0000                     472 _GameplaySettingsmode:
+   0000 01                  473 	.byte	1
+                            474 	.area	.bss
+                            475 	.globl	_Level_specific_action
+   0004                     476 _Level_specific_action:	.blkb	2
+                            477 	.globl	_execute_game_playing_state
+   0006                     478 _execute_game_playing_state:	.blkb	2
+                            479 	.globl	_move_player
+   0008                     480 _move_player:	.blkb	2
+                            481 	.area	.text
+                            482 	.globl	_main
+   01B2                     483 _main:
+   01B2 32 7F         [ 5]  484 	leas	-1,s
+   01B4                     485 L2:
+   01B4 BD`00`00      [ 8]  486 	jsr	_level_init
+   01B7 BD`00`00      [ 8]  487 	jsr	_level_play
+   01BA 6D E4         [ 6]  488 	tst	,s
+   01BC 27 F6         [ 3]  489 	beq	L2
+   01BE E6 E4         [ 4]  490 	ldb	,s
+   01C0 32 61         [ 5]  491 	leas	1,s
+   01C2 39            [ 5]  492 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat Jun 28 00:20:38 2025
+Hexadecimal [16-Bits]                                 Sun Jun 29 16:55:10 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
   2 L2                 01B4 R   |   2 _Brainleft         012B GR
-  2 _Brainright        00A7 GR  |   2 _Gamefield         007A GR
-  2 _Level_advance     0000 GR  |   2 _Lifelinestruc     0089 GR
-  2 _Positions_Arr     019A GR  |   2 _advancement_c     005C GR
-  2 _advancement_p     006B GR  |   2 _arrow             01A0 GR
-  2 _cross             0020 GR  |     _level_init        **** GX
-    _level_play        **** GX  |   2 _main              01B2 GR
+  2 _Brainright        00A7 GR  |   3 _CurrentHighsc     0002 GR
+  2 _Gamefield         007A GR  |   4 _GameplaySetti     0000 GR
+  2 _Level_advance     0000 GR  |   3 _Level_specifi     0004 GR
+  2 _Lifelinestruc     0089 GR  |   2 _Positions_Arr     019A GR
+  2 _advancement_c     005C GR  |   2 _advancement_p     006B GR
+  2 _arrow             01A0 GR  |   2 _cross             0020 GR
+  3 _display_game_     0000 GR  |   3 _execute_game_     0006 GR
+    _level_init        **** GX  |     _level_play        **** GX
+  2 _main              01B2 GR  |   3 _move_player       0008 GR
   2 _square            002F GR  |   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat Jun 28 00:20:38 2025
+Hexadecimal [16-Bits]                                 Sun Jun 29 16:55:10 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .text            size  1C3   flags  100
+   3 .bss             size    A   flags    0
+   4 .data            size    1   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

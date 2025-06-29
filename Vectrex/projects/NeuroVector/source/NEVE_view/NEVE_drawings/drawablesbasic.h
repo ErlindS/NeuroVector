@@ -1,6 +1,5 @@
 #pragma once
 
-
 enum mode_t
 {
 	MOVE = 0,
@@ -21,12 +20,4 @@ struct vector_t
 	int y;
 };
 
-struct SquareObject{
-	int x; 
-	int y;
-	void (*execute_display_functions)(unsigned int i);
-	void (*addrandom_x)(int id);
-	void (*addrandom_y)(int id);
-    int x_direction;
-    int y_direction;
-};
+

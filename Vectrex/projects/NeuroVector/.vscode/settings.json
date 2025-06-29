@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "print.h": "c"
+        "print.h": "c",
+        "drawables.h": "c",
+        "numbergenerator.h": "c",
+        "globalvariables.h": "c",
+        "vectrex.h": "c"
     }
 }
