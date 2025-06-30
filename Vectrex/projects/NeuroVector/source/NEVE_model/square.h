@@ -15,3 +15,5 @@ void add_square_y(int id);
 
 // Declaration of Displayed_Squares
 extern struct SquareObject Displayed_Squares[9];
+
+void reset_Displayed_Squares_coordinates();

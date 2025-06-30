@@ -12,13 +12,21 @@ struct SquareObject Displayed_Squares[9] = {
     {-16, 16, &draw_square, &add_square_x, &add_square_y}
 };
 
-void Calculate_TimeLeft(unsigned int counter)
+unsigned int counter2 = 10;
+void Calculate_TimeLeft()
 {
-    Lifeline(counter);
+    --counter;
+    Lifeline2(counter);
     if(counter == 0){
-        counter = 200;
+        if(counter2 == 0)
+        {
+            display_game_over();
+        }
+        counter = 5;
+        --counter2;
+        counter=counter2;
+
     }
-    counter--;
 }
 
 void Update_LevelAdvancement(unsigned int n, unsigned int k){
@@ -61,26 +69,24 @@ void read_player_input(){
     (joy_x == 0 && joy_y < 0)?(temppass = 7) : (temppass = temppass);
     (joy_x > 0 && joy_y < 0)?(temppass = 8) : (temppass = temppass);
 
-    if(button_1_1_pressed()){
-        a_random_compare[buttonspressedcounter] = temppass;
-        buttonspressedcounter++;
-    }
-}
-
-void compare_arrays(){
-    unsigned int len = buttonspressedcounter;
-    while (len--) 
+    if(button_1_1_pressed())
     {
-        if ((a_random[len]) != (a_random_compare[len])){
+        if(a_random[buttonspressedcounter] == temppass)
+        {
+            buttonspressedcounter++;
+        }
+        else
+        {
             is_the_same = 0;
-        };
-    }
+        }
+    } 
 }
 
 
 void SaveHighscore(){
 
-    CurrentHighscore = &RandomSequenceCounterDisplay;
+    if(NumberOfCrossesToBeDisplayed > *CurrentHighscore)
+        *CurrentHighscore = NumberOfCrossesToBeDisplayed;
 
     print_string(100, -120, "YOU COMPLETED THIS LEVEL\x80");
     print_string(70, -80, "PRESS BUTTON 2\x80");
@@ -92,7 +98,8 @@ void SaveHighscore(){
 
 void display_game_over(){
 
-    CurrentHighscore = &RandomSequenceCounterDisplay;
+    if(NumberOfCrossesToBeDisplayed > *CurrentHighscore)
+        *CurrentHighscore = NumberOfCrossesToBeDisplayed;
     
     print_string(100, -60, "GAME OVER\x80");
     print_string(70, -80, "PRESS BUTTON 2\x80");

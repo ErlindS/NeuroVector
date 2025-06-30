@@ -187,6 +187,75 @@ _Lifelinestruct:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_Lifelinestruct2
+_Lifelinestruct2:
+	.byte	32
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
 	.globl	_Brainright
 _Brainright:
 	.byte	0
@@ -436,12 +505,14 @@ _Brainleft:
 	.byte	0
 	.globl	_Positions_Arrow
 _Positions_Arrow:
+	.byte	0
+	.byte	0
 	.byte	60
-	.byte	-55
+	.byte	-85
 	.byte	40
-	.byte	-55
+	.byte	-85
 	.byte	20
-	.byte	-55
+	.byte	-85
 	.globl	_arrow
 _arrow:
 	.byte	0
@@ -462,14 +533,84 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_lifeline3
+	.area	.data
+_lifeline3:
+	.byte	0
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.byte	15
+	.byte	10
+	.byte	-15
+	.byte	10
+	.byte	0
+	.byte	15
+	.byte	-15
+	.byte	10
+	.byte	45
+	.byte	15
+	.byte	-55
+	.byte	15
+	.byte	25
+	.byte	15
+	.byte	0
+	.byte	15
+	.byte	0
+	.byte	30
+	.byte	0
+	.byte	30
+	.word	0
+	.byte	0
 	.area	.bss
 	.globl	_display_game_over_state
 _display_game_over_state:	.blkb	2
-	.globl	_CurrentHighscore
-_CurrentHighscore:	.blkb	2
-	.globl	_GameplaySettingsmode
+	.globl	_levelselection
 	.area	.data
-_GameplaySettingsmode:
+_levelselection:
 	.byte	1
 	.area	.bss
 	.globl	_Level_specific_action
@@ -482,6 +623,7 @@ _move_player:	.blkb	2
 	.globl	_main
 _main:
 	leas	-1,s
+	clr	,s
 L2:
 	jsr	_level_init
 	jsr	_level_play

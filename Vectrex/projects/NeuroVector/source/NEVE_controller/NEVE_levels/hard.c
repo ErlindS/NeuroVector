@@ -2,13 +2,13 @@
 
 void Set_traps(){
     sneakyoffset = 0;
-    if(RandomSequenceCounterDisplay > 3 && RandomSequenceCounterDisplay < 8){
+    if(NumberOfCrossesToBeDisplayed > 3 && NumberOfCrossesToBeDisplayed < 8){
         play_tune(3, 400, 200);
         print_string(115, -90, "!SNEAKY OFFSET!\x80");
         sneakyoffset = 3;
     }
 
-    if(RandomSequenceCounterDisplay > 10 && RandomSequenceCounterDisplay < 14){
+    if(NumberOfCrossesToBeDisplayed > 10 && NumberOfCrossesToBeDisplayed < 14){
         play_tune(3, 400, 200);
         print_string(115, -90, "!SNEAKY OFFSET!\x80");
         sneakyoffset = 2;

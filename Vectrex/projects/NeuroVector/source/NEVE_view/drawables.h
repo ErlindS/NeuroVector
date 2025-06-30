@@ -14,6 +14,7 @@
 // --------------------------------------------------
 void Loadingbar(unsigned int q);
 void Lifeline(unsigned int q);
+void Lifeline2(unsigned int n);
 
 // --------------------------------------------------
 // draw Cross
@@ -33,4 +34,48 @@ void Display_Gamefield(void);
 // Menu Arrow
 // --------------------------------------------------
 void draw_menu_arrow(unsigned int q);
+
+typedef struct {
+    unsigned int first;
+    const int rest[69];
+} LifelineStruct;
+
+LifelineStruct lifeline3 = {
+    .first = 0,
+    .rest = {
+        0, 30,
+        15, 10,
+        -15, 10,
+        0, 15,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 15,
+        0, 30,
+        0, 30,
+        0, 30,
+        15, 10,
+        -15, 10,
+        0, 15,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 15,
+        0, 30,
+        0, 30,
+        0, 30,
+        15, 10,
+        -15, 10,
+        0, 15,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 15,
+        0, 30,
+        0, 30
+    }
+};
 

@@ -27,3 +27,16 @@ void sub_square_y(int id){
         Displayed_Squares[id].addrandom_y = &add_square_y;
     }
 }
+
+
+void reset_Displayed_Squares_coordinates(){
+    Displayed_Squares[0].x = 16; Displayed_Squares[0].y = -16;
+    Displayed_Squares[1].x = 16; Displayed_Squares[1].y = 0;
+    Displayed_Squares[2].x = 16; Displayed_Squares[2].y = 16;
+    Displayed_Squares[3].x = 0; Displayed_Squares[3].y = -16;
+    Displayed_Squares[4].x = 0; Displayed_Squares[4].y = 0;
+    Displayed_Squares[5].x = 0; Displayed_Squares[5].y = 16;
+    Displayed_Squares[6].x = -16; Displayed_Squares[6].y = -16;
+    Displayed_Squares[7].x = -16; Displayed_Squares[7].y = 0;
+    Displayed_Squares[8].x = -16; Displayed_Squares[8].y = 16;
+}

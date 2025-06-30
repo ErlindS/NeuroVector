@@ -17,7 +17,7 @@
 int main(void)
 {
 	// local variables
-	int error_code;	
+	int error_code = 0;	
 	// main loop
 	do
 	{

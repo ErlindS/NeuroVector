@@ -23,8 +23,6 @@ void display_game_over();
 
 void (*display_game_over_state)(void);
 
-unsigned int* CurrentHighscore;
-
 
 
 

@@ -17,7 +17,9 @@
 
 #include "globalvariables.h"
 #include "level_functionalities.h"
-int GameplaySettingsmode = 1;
+
+//Indicates which level will be selected
+unsigned int levelselection = 1;
 
 void (*Level_specific_action)();
 void (*execute_game_playing_state)();

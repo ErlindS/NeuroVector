@@ -119,6 +119,22 @@ void Lifeline(unsigned int q) {
 		Draw_VLp(&Lifelinestruct);
 }
 
+unsigned int Lifeline2_Counter = 0;
+void Lifeline2(unsigned int n) {
+	Reset0Ref();					// reset beam to center of screen
+	dp_VIA_t1_cnt_lo = 0x30;	
+	Moveto_d(120, -120);
+	Moveto_d(120, -120);
+	Moveto_d(0, -50);
+	++lifeline3.first;
+	if(lifeline3.first == 32){
+		lifeline3.first = 0;
+	}
+	Draw_VLc(&lifeline3);
+	Reset0Ref();					// reset beam to center of screen
+		
+}
+
 //--------------------------------------------------
 // Menu Arrow
 // -------------------------------------------------
