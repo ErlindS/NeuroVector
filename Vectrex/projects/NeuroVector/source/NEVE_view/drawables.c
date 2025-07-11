@@ -8,7 +8,7 @@ void draw_square(unsigned int i){
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
 	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 0x10;
+	dp_VIA_t1_cnt_lo = scaling_factor;
 	Draw_VLp(&square);
 }
 
@@ -17,7 +17,7 @@ void draw_square_filled(unsigned int i){
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
 	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 0x10;
+	dp_VIA_t1_cnt_lo = scaling_factor;
 	Draw_VLp(&square_filled);
 }
 
@@ -120,16 +120,13 @@ void Lifeline(unsigned int q) {
 }
 
 unsigned int Lifeline2_Counter = 0;
-void Lifeline2(unsigned int n) {
+
+void Lifeline2() {
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0x30;	
 	Moveto_d(120, -120);
 	Moveto_d(120, -120);
 	Moveto_d(0, -50);
-	++lifeline3.first;
-	if(lifeline3.first == 32){
-		lifeline3.first = 0;
-	}
 	Draw_VLc(&lifeline3);
 	Reset0Ref();					// reset beam to center of screen
 		

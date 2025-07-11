@@ -1,5 +1,5 @@
 ASxxxx Linker V05.50                                                                Page 1
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
@@ -11,7 +11,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F000  _abort                             gcc_abort.c
 
 ASxxxx Linker V05.50                                                                Page 2
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -23,7 +23,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0000  _game_header                       cartridge.c
 
 ASxxxx Linker V05.50                                                                Page 3
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -35,136 +35,139 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           001F  _boot                              boot_loader.c
 
 ASxxxx Linker V05.50                                                                Page 4
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-.text                      005E        1FA0 =        8096. bytes (REL,CON,CSEG)
+.text                      005E        1CA9 =        7337. bytes (REL,CON,CSEG)
 
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
-          0255  _main                              main.c
-          045F  _execute_repeat_sequence_state     game_states.c
-          04B5  _execute_display_sequence_state    game_states.c
-          0565  _level_init                        game_states.c
-          06FE  _level_play                        game_states.c
-          0732  _getback                           game_states.c
-          0773  _game_over                         game_states.c
-          077A  _check_successfully_repeated       game_states.c
-          09DC  _Calculate_TimeLeft                level_functionalities.c
-          0A0B  _Update_LevelAdvancement           level_functionalities.c
-          0A49  _Execute_Player_action             level_functionalities.c
-          0A88  _read_player_input                 level_functionalities.c
-          0C0A  _SaveHighscore                     level_functionalities.c
-          0C75  _display_game_over                 level_functionalities.c
-          0ECC  _Add_Movement                      extrem.c
-          1151  _Set_traps                         hard.c
-          11B3  _move_player_hard                  hard.c
-          15F7  _nothing                           normal.c
-          15F8  _move_player_normal                normal.c
-          16F2  _RandomNumberGenerator             numbergenerator.c
-          172C  _create_random_sequence            numbergenerator.c
-          17B2  _add_square_x                      square.c
-          1817  _add_square_y                      square.c
-          1879  _sub_square_x                      square.c
-          18DE  _sub_square_y                      square.c
-          1940  _reset_Displayed_Squares_coordin   square.c
-          198F  _Level_advancement                 drawables.c
-          19AF  _cross                             drawables.c
-          19BE  _square                            drawables.c
-          19D0  _square_filled                     drawables.c
-          19EB  _advancement_cross                 drawables.c
-          19FA  _advancement_plus                  drawables.c
-          1A09  _Gamefield                         drawables.c
-          1A18  _Lifelinestruct                    drawables.c
-          1A36  _Lifelinestruct2                   drawables.c
-          1A79  _Brainright                        drawables.c
-          1AFD  _Brainleft                         drawables.c
-          1B6C  _Positions_Arrow                   drawables.c
-          1B74  _arrow                             drawables.c
-          1B86  _draw_square                       drawables.c
-          1BDE  _draw_square_filled                drawables.c
-          1C36  _draw_round_advancement_cross      drawables.c
-          1C7C  _draw_round_advancement_cross_pl   drawables.c
-          1CC2  _Display_Gamefield                 drawables.c
-          1D05  _Loadingbar                        drawables.c
-          1D6D  _Lifeline                          drawables.c
-          1E17  _Lifeline2                         drawables.c
+          0212  _main                              main.c
+          03D9  _is_gameover                       game_states.c
+          03E6  _execute_repeat_sequence_state     game_states.c
+          043F  _execute_display_sequence_state    game_states.c
+          04FC  _level_init                        game_states.c
+          0695  _level_play                        game_states.c
+          06C9  _getback                           game_states.c
+          070A  _game_over                         game_states.c
+          0711  _check_successfully_repeated       game_states.c
+          092D  _Calculate_TimeLeft                level_functionalities.c
+          0966  _Display_heartbeat                 level_functionalities.c
+          0988  _Update_LevelAdvancement           level_functionalities.c
+          09C6  _Execute_Player_action             level_functionalities.c
+          0A05  _read_player_input                 level_functionalities.c
+          0B87  _SaveHighscore                     level_functionalities.c
+          0BF2  _display_game_over                 level_functionalities.c
+          0E06  _Add_Movement                      extrem.c
+          1048  _Set_traps                         hard.c
+          10AA  _move_player_hard                  hard.c
+          1358  _nothing                           normal.c
+          1359  _move_player_normal                normal.c
+          1453  _RandomNumberGenerator             numbergenerator.c
+          148D  _create_random_sequence            numbergenerator.c
+          1513  _add_square_x                      square.c
+          1578  _add_square_y                      square.c
+          15DA  _sub_square_x                      square.c
+          163F  _sub_square_y                      square.c
+          16A1  _reset_Displayed_Squares_coordin   square.c
+          16F0  _Level_advancement                 drawables.c
+          1710  _cross                             drawables.c
+          171F  _square                            drawables.c
+          1731  _square_filled                     drawables.c
+          174C  _advancement_cross                 drawables.c
+          175B  _advancement_plus                  drawables.c
+          176A  _Gamefield                         drawables.c
+          1779  _Lifelinestruct                    drawables.c
+          1797  _Brainright                        drawables.c
+          181B  _Brainleft                         drawables.c
+          188A  _Positions_Arrow                   drawables.c
+          1892  _arrow                             drawables.c
+          18A4  _draw_square                       drawables.c
+          18FD  _draw_square_filled                drawables.c
+          1956  _draw_round_advancement_cross      drawables.c
+          199C  _draw_round_advancement_cross_pl   drawables.c
+          19E2  _Display_Gamefield                 drawables.c
+          1A25  _Loadingbar                        drawables.c
+          1A8D  _Lifeline                          drawables.c
 ASxxxx Linker V05.50                                                                Page 5
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-.text                      005E        1FA0 =        8096. bytes (REL,CON,CSEG)
+.text                      005E        1CA9 =        7337. bytes (REL,CON,CSEG)
 
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
-          1E5E  _draw_menu_arrow                   drawables.c
-          1EA4  _print_string                      print_string.c
-          1ECE  __Explosion_Snd                    vec_rum_12_12_Explosion_Snd.
-          1ED7  __Init_Music_chk                   vec_rum_12_07_Init_Music_chk
-          1EE0  _umodhi3                           
-          1EF1  __Do_Sound                         vec_rum_12_06_Do_Sound.c
-          1EF8  _print_unsigned_int2               print_unsigned_int2.c
-          1F41  __Print_Str_d                      vec_rum_05_02_03_Print_Str_d
-          1F4C  _play_tune                         play_tune.c
-          1FB1  __Draw_Line_d                      vec_rum_05_03_01_04_Draw_Lin
-          1FB6  __Sound_Byte                       vec_rum_12_01_Sound_Byte.c
-          1FBB  __Moveto_d                         vec_rum_13_07_Moveto_d.c
-          1FC0  _euclid                            
-          1FF2  _music_off                         music_off.c
-          1FFA  _explosion_off                     explosion_off.c
+          1B37  _Lifeline2                         drawables.c
+          1B67  _draw_menu_arrow                   drawables.c
+          1BAD  _print_string                      print_string.c
+          1BD7  __Explosion_Snd                    vec_rum_12_12_Explosion_Snd.
+          1BE0  __Init_Music_chk                   vec_rum_12_07_Init_Music_chk
+          1BE9  _umodhi3                           
+          1BFA  __Do_Sound                         vec_rum_12_06_Do_Sound.c
+          1C01  _print_unsigned_int2               print_unsigned_int2.c
+          1C4A  __Print_Str_d                      vec_rum_05_02_03_Print_Str_d
+          1C55  _play_tune                         play_tune.c
+          1CBA  __Draw_Line_d                      vec_rum_05_03_01_04_Draw_Lin
+          1CBF  __Sound_Byte                       vec_rum_12_01_Sound_Byte.c
+          1CC4  __Moveto_d                         vec_rum_13_07_Moveto_d.c
+          1CC9  _euclid                            
+          1CFB  _music_off                         music_off.c
+          1D03  _explosion_off                     explosion_off.c
 
 ASxxxx Linker V05.50                                                                Page 6
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == ram ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-.data                      C880        025C =         604. bytes (REL,CON,CSEG)
+.data                      C880        00BB =         187. bytes (REL,CON,CSEG)
 
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
-          C90D  _levelselection                    game_states.c
-          C90E  _buttonspressedcounter             globalvariables.c
-          C90F  _DisplayDurationForCross           globalvariables.c
-          C910  _NumberOfCrossesToBeDisplayed      globalvariables.c
-          C911  _counter                           globalvariables.c
-          C912  _temppass                          globalvariables.c
-          C913  _joy_x                             globalvariables.c
-          C914  _joy_y                             globalvariables.c
-          C915  _HighscoreNormal                   globalvariables.c
-          C916  _HighscoreHard                     globalvariables.c
-          C917  _HighscoreExtrem                   globalvariables.c
-          C918  _CurrentHighscore                  globalvariables.c
-          C91A  _sneakyoffset                      globalvariables.c
-          C91B  _is_the_same                       globalvariables.c
-          C962  _Displayed_Squares                 level_functionalities.c
-          C9AA  _counter2                          level_functionalities.c
-          CA7D  _a_random                          numbergenerator.c
-          CA91  _lifeline3                         drawables.c
-          CAD7  _Lifeline2_Counter                 drawables.c
-          CAD8  _current_explosion                 current_explosion.c
-          CADA  _current_music                     current_music.c
-
+          C881  _levelselection                    game_states.c
+          C882  _buttonspressedcounter             globalvariables.c
+          C883  _DisplayDurationForCross           globalvariables.c
+          C884  _NumberOfCrossesToBeDisplayed      globalvariables.c
+          C885  _counter                           globalvariables.c
+          C886  _temppass                          globalvariables.c
+          C887  _joy_x                             globalvariables.c
+          C888  _joy_y                             globalvariables.c
+          C889  _HighscoreNormal                   globalvariables.c
+          C88A  _HighscoreHard                     globalvariables.c
+          C88B  _HighscoreExtrem                   globalvariables.c
+          C88C  _CurrentHighscore                  globalvariables.c
+          C88E  _sneakyoffset                      globalvariables.c
+          C88F  _is_the_same                       globalvariables.c
+          C890  _time_left_counter                 globalvariables.c
+          C891  _counter2                          globalvariables.c
+          C892  _counter3                          globalvariables.c
+          C893  _scaling_factor                    globalvariables.c
+          C894  _Displayed_Squares                 level_functionalities.c
+          C8DC  _lifeline3                         lifeline.c
+          C922  _a_random                          numbergenerator.c
+          C936  _Lifeline2_Counter                 drawables.c
+          C937  _current_explosion                 current_explosion.c
+          C939  _current_music                     current_music.c
 ASxxxx Linker V05.50                                                                Page 7
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == ram ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-.bss                       CADC        0012 =          18. bytes (REL,CON,CSEG)
+.bss                       C93B        0012 =          18. bytes (REL,CON,CSEG)
 
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
-          CAE6  _Level_specific_action             game_states.c
-          CAE8  _execute_game_playing_state        game_states.c
-          CAEA  _move_player                       game_states.c
-          CAEC  _display_game_over_state           level_functionalities.c
+          C945  _Level_specific_action             game_states.c
+          C947  _execute_game_playing_state        game_states.c
+          C949  _move_player                       game_states.c
+          C94B  _display_game_over_state           level_functionalities.c
 ASxxxx Linker V05.50                                                                Page 8
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -221,7 +224,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C836  _Vec_Angle                         vec_ram_0xc8_0.c
           C837  _Vec_Run_Index                     vec_ram_0xc8_0.c
 ASxxxx Linker V05.50                                                                Page 9
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -279,7 +282,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C86A  _Vec_XXX_12                        vec_ram_0xc8_0.c
           C86B  _Vec_XXX_13                        vec_ram_0xc8_0.c
 ASxxxx Linker V05.50                                                                 Page 10
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -310,7 +313,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C87F  _Vec_Random_Seed2                  vec_ram_0xc8_0.c
 
 ASxxxx Linker V05.50                                                                 Page 11
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_cb ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -336,7 +339,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           CBFB  _Vec_NWI_vector                    vec_ram_0xcb_3.c
           CBFE  _Vec_Cold_Flag                     vec_ram_0xcb_0.c
 ASxxxx Linker V05.50                                                                 Page 12
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_d0 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -370,7 +373,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           D00F  _VIA_port_a_nohs                   vec_ram_0xd0_0.c
 
 ASxxxx Linker V05.50                                                                 Page 13
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -427,7 +430,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           001F  _dp_Vec_Joy_Mux_1_X                vec_ram_dpc8_1.c
           001F  _dp_Vec_Joy_Mux                    vec_ram_dpc8_2.c
 ASxxxx Linker V05.50                                                                 Page 14
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -485,7 +488,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0049  _dp_Vec_XXX_06                     vec_ram_dpc8_0.c
           004A  _dp_Vec_XXX_07                     vec_ram_dpc8_0.c
 ASxxxx Linker V05.50                                                                 Page 15
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -543,7 +546,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0077  _dp_Vec_Expl_Timer                 vec_ram_dpc8_0.c
           0077  _dp_Vec_Music_0                    vec_rom_dped_0.c
 ASxxxx Linker V05.50                                                                 Page 16
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -593,7 +596,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           00FE  _dp_Vec_Cold_Flag                  vec_ram_dpcb_0.c
 
 ASxxxx Linker V05.50                                                                 Page 17
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_ed ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -606,7 +609,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           ED8F  _Vec_ADSR_FADE66                   vec_rom_0xed_0.c
 
 ASxxxx Linker V05.50                                                                 Page 18
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_fc ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -620,7 +623,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FC8D  _Vec_Note_Table                    vec_rom_0xfc_0.c
 
 ASxxxx Linker V05.50                                                                 Page 19
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_fd ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -638,7 +641,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FDD3  _Vec_Music_4                       vec_rom_0xfd_0.c
 
 ASxxxx Linker V05.50                                                                 Page 20
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_fe ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -659,7 +662,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FEF8  _Vec_Music_8                       vec_rom_0xfe_0.c
 
 ASxxxx Linker V05.50                                                                 Page 21
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_ff ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -676,7 +679,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FF8F  _Vec_Music_d                       vec_rom_0xff_0.c
 
 ASxxxx Linker V05.50                                                                 Page 22
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_e7 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -689,7 +692,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           E7D2  ___Displ16_xy                      vec_rum_0xe7.c
 
 ASxxxx Linker V05.50                                                                 Page 23
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_e9 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -701,7 +704,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           E98A  ___Ranpos                          vec_rum_0xe9.c
 
 ASxxxx Linker V05.50                                                                 Page 24
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_ea ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -721,7 +724,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           EAF0  ___Wait_Bound                      vec_rum_0xea.c
 
 ASxxxx Linker V05.50                                                                 Page 25
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f0 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -733,7 +736,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F000  ___Reset                           vec_rum_0xf0.c
 
 ASxxxx Linker V05.50                                                                 Page 26
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f1 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -754,7 +757,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F1F8  ___Joy_Digital                     vec_rum_0xf1.c
 
 ASxxxx Linker V05.50                                                                 Page 27
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f2 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -786,7 +789,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F2FC  ___Moveto_d_7F                     vec_rum_0xf2.c
 
 ASxxxx Linker V05.50                                                                 Page 28
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f3 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -828,7 +831,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F3DD  ___Draw_VL                         vec_rum_0xf3.c
           F3DF  ___Draw_Line_d                     vec_rum_0xf3.c
 ASxxxx Linker V05.50                                                                 Page 29
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f4 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -850,7 +853,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F495  ___Print_Str                       vec_rum_0xf4.c
           F498  ___Print_MRast                     vec_rum_0xf4.c
 ASxxxx Linker V05.50                                                                 Page 30
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f5 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -887,7 +890,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F5FF  ___Rise_Run_X                      vec_rum_0xf5.c
 
 ASxxxx Linker V05.50                                                                 Page 31
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f6 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -916,7 +919,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F692  ___Init_Music_x                    vec_rum_0xf6.c
 
 ASxxxx Linker V05.50                                                                 Page 32
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f7 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -929,7 +932,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F7A9  ___Select_Game                     vec_rum_0xf7.c
 
 ASxxxx Linker V05.50                                                                 Page 33
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -950,7 +953,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F8FF  ___Obj_Hit                         vec_rum_0xf8.c
 
 ASxxxx Linker V05.50                                                                 Page 34
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_f9 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -963,7 +966,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F9CA  ___Set_Amp                         vec_rum_0xf9.c
 
 ASxxxx Linker V05.50                                                                 Page 35
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 [ Bank == page_ffx ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -975,7 +978,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FF9F  ___Draw_Grid_VL                    vec_rum_0xff.c
 
 ASxxxx Linker V05.50                                                                 Page 36
-Hexadecimal [16-Bits]                                 Tue Jul  1 00:49:57 2025
+Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
 
 Files Linked                              [ module(s) ]
 
@@ -1035,6 +1038,7 @@ Files Linked                              [ module(s) ]
 .\build\rel\NEVE_controller_NEVE_levels_  [ extrem.c ]
 .\build\rel\NEVE_controller_NEVE_levels_  [ hard.c ]
 .\build\rel\NEVE_controller_NEVE_levels_  [ normal.c ]
+.\build\rel\NEVE_model_lifeline.rel       [ lifeline.c ]
 .\build\rel\NEVE_model_numbergenerator.r  [ numbergenerator.c ]
 .\build\rel\NEVE_model_square.rel         [ square.c ]
 .\build\rel\NEVE_view_drawables.rel       [ drawables.c ]

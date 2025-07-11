@@ -22,3 +22,10 @@ unsigned int* CurrentHighscore = 0;
 
 unsigned int sneakyoffset = 0;
 unsigned int is_the_same = 1;
+
+unsigned int time_left_counter = 7;
+
+unsigned int counter2 = 0;
+unsigned int counter3 = 0;
+
+unsigned int scaling_factor = 16;

@@ -23,3 +23,11 @@ extern unsigned int* CurrentHighscore;
 extern unsigned int sneakyoffset;
 
 extern unsigned is_the_same;
+
+
+extern unsigned int time_left_counter;
+
+extern unsigned int counter2;
+extern unsigned int counter3;
+
+extern unsigned int scaling_factor;

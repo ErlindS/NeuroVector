@@ -3,16 +3,24 @@
 // ***************************************************************************
 #include "game_states.h"
 
+void is_gameover(){
+    if(time_left_counter == 0){
+        execute_game_playing_state = &game_over;
+    }
+}
+
 void execute_repeat_sequence_state(void){
     Display_Gamefield();
-    Calculate_TimeLeft();
     Execute_Player_action();
     Level_specific_action();
     move_player();
     read_player_input();
     check_successfully_repeated();
     Update_LevelAdvancement(NumberOfCrossesToBeDisplayed-buttonspressedcounter, buttonspressedcounter);
+    Calculate_TimeLeft();
+    is_gameover();
 }
+
 
 void execute_display_sequence_state(void){
     Display_Gamefield();
@@ -21,7 +29,6 @@ void execute_display_sequence_state(void){
     {
         while(--DisplayDurationForCross)
         {
-            counter = 200;
             Wait_Recal();
             Display_Gamefield();
             Update_LevelAdvancement(NumberOfCrossesToBeDisplayed, 0);
@@ -34,7 +41,12 @@ void execute_display_sequence_state(void){
         }
         DisplayDurationForCross = 30;
     }
+    counter = 200;
     Update_LevelAdvancement(NumberOfCrossesToBeDisplayed, 0);
+
+    counter3 = 0;
+    lifeline3.first = 32;
+    time_left_counter = 8;
 
     execute_game_playing_state = execute_repeat_sequence_state;
 }
@@ -172,7 +184,7 @@ void getback(){
 }
 
 void game_over(){
-
+    //SaveHighscore();
     display_game_over();    
     getback();
 }
@@ -183,7 +195,6 @@ void check_successfully_repeated(){
     //Game Over
     if(is_the_same == 0){
         execute_game_playing_state = &game_over;
-        SaveHighscore();
     }
 
     if(NumberOfCrossesToBeDisplayed == buttonspressedcounter)

@@ -3,7 +3,6 @@
 
 void nothing(){
 
-
 }
 
 void move_player_normal(){

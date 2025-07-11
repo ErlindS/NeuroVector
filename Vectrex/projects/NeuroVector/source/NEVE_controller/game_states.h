@@ -6,6 +6,7 @@
 #include "../../NEVE_view/drawables.h"
 #include "../../NEVE_model/square.h"
 #include "../../NEVE_model/numbergenerator.h"
+#include "../../NEVE_model/lifeline.h"
 #include "print/print.h"
 #include "utils/controller.h"
 #include <vectrex.h>
@@ -32,6 +33,8 @@ void execute_repeat_sequence_state(void);
 void execute_display_sequence_state(void);
 void getback();
 void check_successfully_repeated();
+void is_gameover();
+void game_over();
 
 // ***************************************************************************
 // end of file

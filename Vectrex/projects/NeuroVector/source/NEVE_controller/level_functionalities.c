@@ -12,22 +12,29 @@ struct SquareObject Displayed_Squares[9] = {
     {-16, 16, &draw_square, &add_square_x, &add_square_y}
 };
 
-unsigned int counter2 = 10;
 void Calculate_TimeLeft()
 {
-    --counter;
-    Lifeline2(counter);
-    if(counter == 0){
-        if(counter2 == 0)
-        {
-            display_game_over();
-        }
-        counter = 5;
-        --counter2;
-        counter=counter2;
 
+    ++counter3;
+    if(counter3 == 8){
+        ++lifeline3.first;
+        counter3 = time_left_counter; 
     }
+
+    if(lifeline3.first == 32){
+        lifeline3.first = 0;
+        time_left_counter -= 1;
+    }
+
+    Lifeline2();
+    Display_heartbeat();
 }
+
+void Display_heartbeat(){
+    print_string(100, 70, "BPM/\x80");
+    print_unsigned_int2(100, 50, time_left_counter*12);
+}
+
 
 void Update_LevelAdvancement(unsigned int n, unsigned int k){
     while(n--){
@@ -106,6 +113,5 @@ void display_game_over(){
     print_string(50, -60, "TO RESTART\x80");
     print_string(20, -80, "PRESS BUTTON 3\x80");
     print_string(0, -100, "TO GO TO THE MENU\x80");
-
 }
 

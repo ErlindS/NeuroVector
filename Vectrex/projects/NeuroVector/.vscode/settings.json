@@ -4,6 +4,8 @@
         "drawables.h": "c",
         "numbergenerator.h": "c",
         "globalvariables.h": "c",
-        "vectrex.h": "c"
+        "vectrex.h": "c",
+        "square.h": "c",
+        "drawablesbasic.h": "c"
     }
 }
