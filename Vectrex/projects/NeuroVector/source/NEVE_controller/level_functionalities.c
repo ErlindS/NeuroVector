@@ -1,15 +1,15 @@
 #include "level_functionalities.h"
 
 struct SquareObject Displayed_Squares[9] = {
-    {16, -16, &draw_square, &add_square_x, &add_square_y},
-    {16, 0, &draw_square, &add_square_x, &add_square_y},
-    {16, 16, &draw_square, &add_square_x, &add_square_y},
-    {0, -16, &draw_square, &add_square_x, &add_square_y},
-    {0, 0, &draw_square, &add_square_x, &add_square_y},
-    {0, 16, &draw_square, &add_square_x, &add_square_y},
-    {-16, -16, &draw_square, &add_square_x, &add_square_y},
-    {-16, 0, &draw_square, &add_square_x, &add_square_y},
-    {-16, 16, &draw_square, &add_square_x, &add_square_y}
+    {16, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {16, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {0, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {0, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {0, 16, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {-16, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {-16, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
+    {-16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0}
 };
 
 void Calculate_TimeLeft()
@@ -31,7 +31,7 @@ void Calculate_TimeLeft()
 }
 
 void Display_heartbeat(){
-    print_string(100, 70, "BPM/\x80");
+    print_string(100, 70, "BPM\x80");
     print_unsigned_int2(100, 50, time_left_counter*12);
 }
 
@@ -76,10 +76,18 @@ void read_player_input(){
     (joy_x == 0 && joy_y < 0)?(temppass = 7) : (temppass = temppass);
     (joy_x > 0 && joy_y < 0)?(temppass = 8) : (temppass = temppass);
 
-    if(button_1_1_pressed())
+    if(music_counter > 5){
+        play_tune(2, 15*last_music_input+120, 200);
+    }
+    --music_counter;
+    
+    if(button_1_4_pressed())
     {
+        
+        music_counter = 30;
         if(a_random[buttonspressedcounter] == temppass)
         {
+            last_music_input = temppass;
             buttonspressedcounter++;
         }
         else

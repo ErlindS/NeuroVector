@@ -1,19 +1,17 @@
 #include "hard.h"
 
 void Set_traps(){
-    sneakyoffset = 0;
-    if(NumberOfCrossesToBeDisplayed > 3 && NumberOfCrossesToBeDisplayed < 8){
-        play_tune(3, 400, 200);
-        print_string(115, -90, "!SNEAKY OFFSET!\x80");
-        //sneakyoffset = 3;
-        scaling_factor = 32;
-    }
 
-    if(NumberOfCrossesToBeDisplayed > 10 && NumberOfCrossesToBeDisplayed < 14){
-        play_tune(3, 400, 200);
-        print_string(115, -90, "!SNEAKY OFFSET!\x80");
-        //sneakyoffset = 2;
-        scaling_factor = 10;
+   //0 decrement
+   //1 increment
+    for(int i = 0; i < 9; i++){
+        if(Displayed_Squares[i].scalingfactor_toggle == 1){
+            ++Displayed_Squares[i].scalingfactor;
+            if(Displayed_Squares[i].scalingfactor > 32) Displayed_Squares[i].scalingfactor_toggle = 0;
+        } else {
+            --Displayed_Squares[i].scalingfactor;
+            if(Displayed_Squares[i].scalingfactor < 9) Displayed_Squares[i].scalingfactor_toggle = 1;
+        }
     }
 }
 

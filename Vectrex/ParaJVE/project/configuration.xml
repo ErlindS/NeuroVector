@@ -19,7 +19,7 @@
 			<thickness lines="1.0" points="2.5" />
 			<wobbling enabled="true" factor="0.125" />
 		</vectors>
-		<chassis enabled="true" zoom="1.6439601" tx="0.0" ty="-0.196">
+		<chassis enabled="true" zoom="1.4317387" tx="0.0" ty="-0.19151036">
 			<part id="frame" enabled="true" />
 			<part id="port1" enabled="false" />
 			<part id="port2" enabled="false" />

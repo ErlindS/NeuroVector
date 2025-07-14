@@ -465,6 +465,10 @@ _arrow:
 	.byte	0
 	.byte	0
 	.area	.bss
+	.globl	_music_counter
+_music_counter:	.blkb	1
+	.globl	_last_music_input
+_last_music_input:	.blkb	1
 	.globl	_display_game_over_state
 _display_game_over_state:	.blkb	2
 	.globl	_levelselection

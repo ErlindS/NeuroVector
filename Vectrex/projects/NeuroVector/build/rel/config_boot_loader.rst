@@ -10,10 +10,10 @@
                              10 ; 21 "source\config\boot_loader.c" 1
    001F                      11 	_crt0:							
    001F                      12 	_crt0_data:					
-   001F 8E 00 BB      [ 3]   13 		ldx		#l_.data			
+   001F 8E 00 CF      [ 3]   13 		ldx		#l_.data			
    0022 27 1B         [ 3]   14 		beq		_crt0_data_done		
    0024 CE 00 5E      [ 3]   15 		ldu		#a_.text			
-   0027 33 C9 1C A9   [ 8]   16 		leau	l_.text,u			
+   0027 33 C9 1F F7   [ 8]   16 		leau	l_.text,u			
    002B 33 C9 00 00   [ 8]   17 		leau	l_.text.hot,u		
    002F 33 C9 00 00   [ 8]   18 		leau	l_.text.unlikely,u	
    0033 10 8E C8 80   [ 4]   19 		ldy		#a_.data			
@@ -24,9 +24,9 @@
    003D 26 F8         [ 3]   24 		bne		_crt0_data_copy		
    003F                      25 	_crt0_data_done:				
    003F                      26 	_crt0_bss:						
-   003F 8E 00 12      [ 3]   27 		ldx		#l_.bss				
+   003F 8E 00 20      [ 3]   27 		ldx		#l_.bss				
    0042 27 0A         [ 3]   28 		beq		_crt0_bss_done		
-   0044 10 8E C9 3B   [ 4]   29 		ldy		#a_.bss				
+   0044 10 8E C9 4F   [ 4]   29 		ldy		#a_.bss				
    0048                      30 	_crt0_bss_zero:				
    0048 6F A0         [ 8]   31 		clr		,y+					
    004A 30 1F         [ 5]   32 		leax	-1,x				
@@ -43,7 +43,7 @@
    005A BD F0 00      [ 8]   43 	jsr	___Reset
    005D 39            [ 5]   44 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
+Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
 
 Symbol Table
 
@@ -61,7 +61,7 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
+Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
 
 Area Table
 

@@ -39,4 +39,14 @@ void reset_Displayed_Squares_coordinates(){
     Displayed_Squares[6].x = -16; Displayed_Squares[6].y = -16;
     Displayed_Squares[7].x = -16; Displayed_Squares[7].y = 0;
     Displayed_Squares[8].x = -16; Displayed_Squares[8].y = 16;
+
+    Displayed_Squares[0].scalingfactor = 16;
+    Displayed_Squares[1].scalingfactor = 16;
+    Displayed_Squares[2].scalingfactor = 16;
+    Displayed_Squares[3].scalingfactor = 16;
+    Displayed_Squares[4].scalingfactor = 16;
+    Displayed_Squares[5].scalingfactor = 16;
+    Displayed_Squares[6].scalingfactor = 16;
+    Displayed_Squares[7].scalingfactor = 16;
+
 }

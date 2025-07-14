@@ -7,6 +7,7 @@ struct SquareObject{
 	void (*addrandom_x)(int id);
 	void (*addrandom_y)(int id);
 	unsigned int scalingfactor;
+	unsigned int scalingfactor_toggle;
 };
 
 void sub_square_x(int id);

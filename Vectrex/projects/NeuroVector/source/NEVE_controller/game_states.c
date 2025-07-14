@@ -10,6 +10,7 @@ void is_gameover(){
 }
 
 void execute_repeat_sequence_state(void){
+    Clear_Sound();
     Display_Gamefield();
     Execute_Player_action();
     Level_specific_action();
@@ -19,6 +20,7 @@ void execute_repeat_sequence_state(void){
     Update_LevelAdvancement(NumberOfCrossesToBeDisplayed-buttonspressedcounter, buttonspressedcounter);
     Calculate_TimeLeft();
     is_gameover();
+    play_tune(2, 15*last_music_input+120, 200);
 }
 
 
@@ -34,9 +36,9 @@ void execute_display_sequence_state(void){
             Update_LevelAdvancement(NumberOfCrossesToBeDisplayed, 0);
             Execute_Player_action();
             draw_square_filled(a_random[i]);
-            
-            print_string(100, -75, "REMEMBER THE\x80");
-            print_string(80, -50, "SEQUENCE\x80");
+            play_tune(2, 15*a_random[i]+120, 200);
+            print_string(110, -75, "REMEMBER THE\x80");
+            print_string(90, -50, "SEQUENCE\x80");
             
         }
         DisplayDurationForCross = 30;
@@ -100,7 +102,7 @@ void level_init()
 
         draw_menu_arrow(levelselection);
 
-        if(button_1_1_pressed()){
+        if(button_1_4_pressed()){
             is_the_same = 1;
             reset_Displayed_Squares_coordinates();
             (Displayed_Squares[0].execute_display_functions = &draw_square);
@@ -165,15 +167,27 @@ void level_play(void)
 
 void getback(){
     Read_Btns();
-    if(button_1_2_pressed())
+    if(button_1_3_pressed())
     {
         execute_game_playing_state = &execute_display_sequence_state;
         create_random_sequence(NumberOfCrossesToBeDisplayed);
         buttonspressedcounter = 0;
         NumberOfCrossesToBeDisplayed = 1;
+
+        is_the_same = 1;
+        reset_Displayed_Squares_coordinates();
+        (Displayed_Squares[0].execute_display_functions = &draw_square);
+        (Displayed_Squares[1].execute_display_functions = &draw_square);
+        (Displayed_Squares[2].execute_display_functions = &draw_square);
+        (Displayed_Squares[3].execute_display_functions = &draw_square);
+        (Displayed_Squares[4].execute_display_functions = &draw_square);
+        (Displayed_Squares[5].execute_display_functions = &draw_square);
+        (Displayed_Squares[6].execute_display_functions = &draw_square);
+        (Displayed_Squares[7].execute_display_functions = &draw_square);
+        (Displayed_Squares[8].execute_display_functions = &draw_square);
     }
 
-    if(button_1_3_pressed())
+    if(button_1_2_pressed())
     {
         execute_game_playing_state = &level_init;
         levelselection = 1;

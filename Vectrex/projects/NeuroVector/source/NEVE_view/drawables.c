@@ -8,7 +8,7 @@ void draw_square(unsigned int i){
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
 	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = scaling_factor;
+	dp_VIA_t1_cnt_lo = Displayed_Squares[i].scalingfactor;
 	Draw_VLp(&square);
 }
 
@@ -17,7 +17,7 @@ void draw_square_filled(unsigned int i){
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
 	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = scaling_factor;
+	dp_VIA_t1_cnt_lo = Displayed_Squares[i].scalingfactor;
 	Draw_VLp(&square_filled);
 }
 

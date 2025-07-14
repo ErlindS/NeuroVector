@@ -31,3 +31,6 @@ extern unsigned int counter2;
 extern unsigned int counter3;
 
 extern unsigned int scaling_factor;
+
+unsigned int music_counter;
+unsigned int last_music_input;

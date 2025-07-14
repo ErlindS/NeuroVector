@@ -29,3 +29,6 @@ unsigned int counter2 = 0;
 unsigned int counter3 = 0;
 
 unsigned int scaling_factor = 16;
+
+unsigned int music_counter = 30;
+unsigned int last_music_input = 1;

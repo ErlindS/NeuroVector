@@ -465,34 +465,38 @@
    0210 00                  465 	.byte	0
    0211 00                  466 	.byte	0
                             467 	.area	.bss
-                            468 	.globl	_display_game_over_state
-   C93B                     469 _display_game_over_state:	.blkb	2
-                            470 	.globl	_levelselection
-                            471 	.area	.data
-   C880                     472 _levelselection:
-   C880 01                  473 	.byte	1
-                            474 	.area	.bss
-                            475 	.globl	_Level_specific_action
-   C93D                     476 _Level_specific_action:	.blkb	2
-                            477 	.globl	_execute_game_playing_state
-   C93F                     478 _execute_game_playing_state:	.blkb	2
-                            479 	.globl	_move_player
-   C941                     480 _move_player:	.blkb	2
-                            481 	.area	.text
-                            482 	.globl	_main
-   0212                     483 _main:
-   0212 32 7F         [ 5]  484 	leas	-1,s
-   0214 6F E4         [ 6]  485 	clr	,s
-   0216                     486 L2:
-   0216 BD 04 FC      [ 8]  487 	jsr	_level_init
-   0219 BD 06 95      [ 8]  488 	jsr	_level_play
-   021C 6D E4         [ 6]  489 	tst	,s
-   021E 27 F6         [ 3]  490 	beq	L2
-   0220 E6 E4         [ 4]  491 	ldb	,s
-   0222 32 61         [ 5]  492 	leas	1,s
-   0224 39            [ 5]  493 	rts
+                            468 	.globl	_music_counter
+   C94F                     469 _music_counter:	.blkb	1
+                            470 	.globl	_last_music_input
+   C950                     471 _last_music_input:	.blkb	1
+                            472 	.globl	_display_game_over_state
+   C951                     473 _display_game_over_state:	.blkb	2
+                            474 	.globl	_levelselection
+                            475 	.area	.data
+   C880                     476 _levelselection:
+   C880 01                  477 	.byte	1
+                            478 	.area	.bss
+                            479 	.globl	_Level_specific_action
+   C953                     480 _Level_specific_action:	.blkb	2
+                            481 	.globl	_execute_game_playing_state
+   C955                     482 _execute_game_playing_state:	.blkb	2
+                            483 	.globl	_move_player
+   C957                     484 _move_player:	.blkb	2
+                            485 	.area	.text
+                            486 	.globl	_main
+   0212                     487 _main:
+   0212 32 7F         [ 5]  488 	leas	-1,s
+   0214 6F E4         [ 6]  489 	clr	,s
+   0216                     490 L2:
+   0216 BD 05 38      [ 8]  491 	jsr	_level_init
+   0219 BD 06 D1      [ 8]  492 	jsr	_level_play
+   021C 6D E4         [ 6]  493 	tst	,s
+   021E 27 F6         [ 3]  494 	beq	L2
+   0220 E6 E4         [ 4]  495 	ldb	,s
+   0222 32 61         [ 5]  496 	leas	1,s
+   0224 39            [ 5]  497 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
+Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
 
 Symbol Table
 
@@ -500,25 +504,26 @@ Symbol Table
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
   2 L2                 01B8 R   |   2 _Brainleft         012B GR
   2 _Brainright        00A7 GR  |   2 _Gamefield         007A GR
-  2 _Level_advance     0000 GR  |   3 _Level_specifi     0002 GR
+  2 _Level_advance     0000 GR  |   3 _Level_specifi     0004 GR
   2 _Lifelinestruc     0089 GR  |   2 _Positions_Arr     019A GR
   2 _advancement_c     005C GR  |   2 _advancement_p     006B GR
   2 _arrow             01A2 GR  |   2 _cross             0020 GR
-  3 _display_game_     0000 GR  |   3 _execute_game_     0004 GR
-    _level_init        **** GX  |     _level_play        **** GX
-  4 _levelselectio     0000 GR  |   2 _main              01B4 GR
-  3 _move_player       0006 GR  |   2 _square            002F GR
+  3 _display_game_     0002 GR  |   3 _execute_game_     0006 GR
+  3 _last_music_in     0001 GR  |     _level_init        **** GX
+    _level_play        **** GX  |   4 _levelselectio     0000 GR
+  2 _main              01B4 GR  |   3 _move_player       0008 GR
+  3 _music_counter     0000 GR  |   2 _square            002F GR
   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jul 11 01:28:28 2025
+Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .text            size  1C7   flags  100
-   3 .bss             size    8   flags    0
+   3 .bss             size    A   flags    0
    4 .data            size    1   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
