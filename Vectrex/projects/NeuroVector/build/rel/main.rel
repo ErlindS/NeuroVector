@@ -1,5 +1,5 @@
 XH2
-H 5 areas 17 global symbols 2 banks 1 modes
+H 5 areas 16 global symbols 2 banks 1 modes
 M main.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
@@ -9,7 +9,7 @@ S _level_play Ref0000
 S .__.ABS. Def0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .text size 1C7 flags D00
+A .text size 1BC flags D00
 S _main Def01B4
 S _advancement_plus Def006B
 S _cross Def0020
@@ -23,8 +23,7 @@ S _square Def002F
 S _Brainleft Def012B
 S _Level_advancement Def0000
 S _square_filled Def0041
-A .bss size A flags C00
-S _move_player Def0008
+A .bss size 8 flags C00
 S _Level_specific_action Def0004
 S _execute_game_playing_state Def0006
 S _music_counter Def0000
@@ -154,15 +153,9 @@ T 00 04
 R 00 00 00 03
 T 00 06
 R 00 00 00 03
-T 00 08
-R 00 00 00 03
 T 01 B4
 R 00 00 00 02
-T 01 B4 32 7F 6F E4
+T 01 B4
 R 00 00 00 02
-T 01 B8
-R 00 00 00 02
-T 01 B8 BD 00 00 BD 00 00 6D E4 27 F6 E6 E4 32
+T 01 B4 BD 00 00 BD 00 00 20 F8
 R 00 00 00 02 81 03 00 00 81 06 00 01
-T 01 C5 61 39
-R 00 00 00 02

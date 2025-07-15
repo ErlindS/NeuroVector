@@ -3,15 +3,10 @@
 // ***************************************************************************
 #include "game_states.h"
 
-void is_gameover(){
-    if(time_left_counter == 0){
-        execute_game_playing_state = &game_over;
-    }
-}
-
 void execute_repeat_sequence_state(void){
-    Clear_Sound();
+    //Display Gamefield
     Display_Gamefield();
+    //Display Player
     Execute_Player_action();
     Level_specific_action();
     move_player();
@@ -19,10 +14,8 @@ void execute_repeat_sequence_state(void){
     check_successfully_repeated();
     Update_LevelAdvancement(NumberOfCrossesToBeDisplayed-buttonspressedcounter, buttonspressedcounter);
     Calculate_TimeLeft();
-    is_gameover();
-    play_tune(2, 15*last_music_input+120, 200);
+    //play_tune(2, 15*last_music_input+120, 200);
 }
-
 
 void execute_display_sequence_state(void){
     Display_Gamefield();
@@ -105,67 +98,51 @@ void level_init()
         if(button_1_4_pressed()){
             is_the_same = 1;
             reset_Displayed_Squares_coordinates();
-            (Displayed_Squares[0].execute_display_functions = &draw_square);
-            (Displayed_Squares[1].execute_display_functions = &draw_square);
-            (Displayed_Squares[2].execute_display_functions = &draw_square);
-            (Displayed_Squares[3].execute_display_functions = &draw_square);
-            (Displayed_Squares[4].execute_display_functions = &draw_square);
-            (Displayed_Squares[5].execute_display_functions = &draw_square);
-            (Displayed_Squares[6].execute_display_functions = &draw_square);
-            (Displayed_Squares[7].execute_display_functions = &draw_square);
-            (Displayed_Squares[8].execute_display_functions = &draw_square);
 
             if(levelselection == 1){
                 //Normal
                 Level_specific_action = &nothing;
-                move_player = &move_player_normal;
                 CurrentHighscore = &HighscoreNormal;
                 break;
 
             } else if(levelselection == 2) {
                 //Hard
                 Level_specific_action = &Set_traps;
-                move_player = &move_player_hard;
                 CurrentHighscore = &HighscoreHard;
                 break;
 
             } else if(levelselection == 3) {
                 //Extrem
                 Level_specific_action = &Add_Movement;
-                move_player = &move_player_normal;
                 CurrentHighscore = &HighscoreExtrem;
                 break;
 
             } else {
                 //defensive code
                 Level_specific_action = &nothing;
-                move_player = &move_player_normal;
                 CurrentHighscore = &HighscoreNormal;
                 break;
-
             }
         }
     }
-    create_random_sequence(Random_Number_for_create_random_sequence);
 
+    create_random_sequence(Random_Number_for_create_random_sequence);
     execute_game_playing_state = &execute_display_sequence_state;
 }
 
-void level_play(void)
-{
-    int a = 1;
-    while(a){
-        DP_to_C8();
-        Explosion_Snd(current_explosion);
-        Init_Music_chk(current_music);
-        Wait_Recal();
-        Do_Sound();
-        Intensity_5F();
-        execute_game_playing_state();
-    }
-}
+void game_over(){
 
-void getback(){
+    //Display Game over
+    if(NumberOfCrossesToBeDisplayed > *CurrentHighscore)
+        *CurrentHighscore = NumberOfCrossesToBeDisplayed;
+    
+    print_string(100, -60, "GAME OVER\x80");
+    print_string(70, -80, "PRESS BUTTON 2\x80");
+    print_string(50, -60, "TO RESTART\x80");
+    print_string(20, -80, "PRESS BUTTON 3\x80");
+    print_string(0, -100, "TO GO TO THE MENU\x80");
+
+    //Posibility to get back
     Read_Btns();
     if(button_1_3_pressed())
     {
@@ -197,16 +174,14 @@ void getback(){
     }
 }
 
-void game_over(){
-    //SaveHighscore();
-    display_game_over();    
-    getback();
-}
-
-
 void check_successfully_repeated(){
 
-    //Game Over
+    //Game over, no time left
+    if(time_left_counter == 0){
+        execute_game_playing_state = &game_over;
+    }
+
+    //Game over, repeated wrongly
     if(is_the_same == 0){
         execute_game_playing_state = &game_over;
     }
@@ -227,6 +202,20 @@ void check_successfully_repeated(){
         buttonspressedcounter = 0;
         counter = 200;
         execute_game_playing_state = &execute_display_sequence_state;
+    }
+}
+
+
+void level_play(void)
+{
+    while(1){
+        DP_to_C8();
+        Explosion_Snd(current_explosion);
+        Init_Music_chk(current_music);
+        Wait_Recal();
+        Do_Sound();
+        Intensity_5F();
+        execute_game_playing_state();
     }
 }
 

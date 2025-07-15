@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	main.c
                               6 	.globl	_Level_advancement
                               7 	.area	.text
@@ -480,29 +480,21 @@
    0004                     480 _Level_specific_action:	.blkb	2
                             481 	.globl	_execute_game_playing_state
    0006                     482 _execute_game_playing_state:	.blkb	2
-                            483 	.globl	_move_player
-   0008                     484 _move_player:	.blkb	2
-                            485 	.area	.text
-                            486 	.globl	_main
-   01B4                     487 _main:
-   01B4 32 7F         [ 5]  488 	leas	-1,s
-   01B6 6F E4         [ 6]  489 	clr	,s
-   01B8                     490 L2:
-   01B8 BD`00`00      [ 8]  491 	jsr	_level_init
-   01BB BD`00`00      [ 8]  492 	jsr	_level_play
-   01BE 6D E4         [ 6]  493 	tst	,s
-   01C0 27 F6         [ 3]  494 	beq	L2
-   01C2 E6 E4         [ 4]  495 	ldb	,s
-   01C4 32 61         [ 5]  496 	leas	1,s
-   01C6 39            [ 5]  497 	rts
+                            483 	.area	.text
+                            484 	.globl	_main
+   01B4                     485 _main:
+   01B4                     486 L2:
+   01B4 BD`00`00      [ 8]  487 	jsr	_level_init
+   01B7 BD`00`00      [ 8]  488 	jsr	_level_play
+   01BA 20 F8         [ 3]  489 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 01B8 R   |   2 _Brainleft         012B GR
+  2 L2                 01B4 R   |   2 _Brainleft         012B GR
   2 _Brainright        00A7 GR  |   2 _Gamefield         007A GR
   2 _Level_advance     0000 GR  |   3 _Level_specifi     0004 GR
   2 _Lifelinestruc     0089 GR  |   2 _Positions_Arr     019A GR
@@ -511,19 +503,18 @@ Symbol Table
   3 _display_game_     0002 GR  |   3 _execute_game_     0006 GR
   3 _last_music_in     0001 GR  |     _level_init        **** GX
     _level_play        **** GX  |   4 _levelselectio     0000 GR
-  2 _main              01B4 GR  |   3 _move_player       0008 GR
-  3 _music_counter     0000 GR  |   2 _square            002F GR
-  2 _square_filled     0041 GR
+  2 _main              01B4 GR  |   3 _music_counter     0000 GR
+  2 _square            002F GR  |   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size  1C7   flags  100
-   3 .bss             size    A   flags    0
+   2 .text            size  1BC   flags  100
+   3 .bss             size    8   flags    0
    4 .data            size    1   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0

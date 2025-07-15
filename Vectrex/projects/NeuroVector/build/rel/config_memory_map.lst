@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	memory_map.c
                               6 ;----- asm -----
                               7 	.bank rom(BASE=0x0000,SIZE=0x8000,FSFX=_rom)
@@ -17,7 +17,7 @@
                              17 	.area .bss             (BANK=ram)
                              18 	
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Symbol Table
 
@@ -25,7 +25,7 @@ Symbol Table
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Area Table
 

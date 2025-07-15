@@ -1,12 +1,7 @@
-// ***************************************************************************
-// level
-// ***************************************************************************
-
 #pragma once
 #include "../../NEVE_view/drawables.h"
 #include "../../NEVE_model/square.h"
 #include "../../NEVE_model/numbergenerator.h"
-#include "../../NEVE_model/lifeline.h"
 #include "print/print.h"
 #include "utils/controller.h"
 #include <vectrex.h>
@@ -24,7 +19,6 @@ unsigned int levelselection = 1;
 
 void (*Level_specific_action)();
 void (*execute_game_playing_state)();
-void (*move_player)();
 
 void level_play();
 void level_init();

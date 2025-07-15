@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	cartridge.c
                               6 	.globl	_game_header
                               7 	.area	.cartridge
@@ -18,7 +18,7 @@
         56 45
    0019 43 54 4F 52 80 00    17 	.byte	67,84,79,82,-128,0
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Symbol Table
 
@@ -27,7 +27,7 @@ Symbol Table
     _Vec_Music_1       **** GX  |   2 _game_header       0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Jul 14 14:17:30 2025
+Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
 
 Area Table
 

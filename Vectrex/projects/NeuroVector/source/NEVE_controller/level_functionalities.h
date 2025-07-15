@@ -1,7 +1,6 @@
 #pragma once
 #include "../NEVE_model/square.h"
 #include "../NEVE_model/numbergenerator.h"
-#include "../NEVE_model/lifeline.h"
 #include "../NEVE_view/drawables.h"
 #include "globalvariables.h"
 #include <vectrex.h>
@@ -26,6 +25,7 @@ void (*display_game_over_state)(void);
 
 void Display_heartbeat();
 
+void move_player();
 
 
 

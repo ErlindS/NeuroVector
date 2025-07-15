@@ -55,33 +55,6 @@ void Display_Gamefield(){
 }
 
 //--------------------------------------------------
-// Loadingbar
-// -------------------------------------------------
-void Loadingbar(unsigned int q) {	
-	
-		Reset0Ref();					// reset beam to center of screen
-		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(70, -60);			// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);
-	
-		Reset0Ref();					// reset beam to center of screen
-		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(66, -60);			// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);
-			
-		Reset0Ref();					// reset beam to center of screen
-		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(62, -60);			// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);
-						
-		dp_VIA_t1_cnt_lo = 0xFF;
-}
-
-
-//--------------------------------------------------
 // Lifeline
 // -------------------------------------------------
 void Lifeline(unsigned int q) {	
@@ -143,3 +116,39 @@ void draw_menu_arrow(unsigned int q) {
 	Draw_VLp(&arrow);
 }
 
+
+//--------------------------------------------------
+// Life line
+// -------------------------------------------------
+LifelineStruct lifeline3 = {
+    .first = 0,
+    .rest = {
+        0, 30,
+        15, 10,
+        -15, 10,
+        0, 5,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 30,
+        0, 20,
+        15, 10,
+        -15, 10,
+        0, 5,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 30,
+        0, 20,
+        15, 10,
+        -15, 10,
+        0, 5,
+        -15, 10,
+        45, 15,
+        -55, 15,
+        25, 15,
+        0, 45,
+    }
+};

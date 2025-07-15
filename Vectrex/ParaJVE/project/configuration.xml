@@ -2,7 +2,7 @@
 
 <configuration version="3">
 
-	<window x="889" y="45" width="692" height="904" fullscreen="false" state="0" menuBar="on" />
+	<window x="-966" y="40" width="692" height="904" fullscreen="false" state="0" menuBar="on" />
 	<timing method="FPS" fps="50" nanos="true" />
 	<sound enabled="true" createThread="true" samplingRate="44100" volume="0.4" />
 	<debug showFps="false" debugFeatures="true" devMode="true" />

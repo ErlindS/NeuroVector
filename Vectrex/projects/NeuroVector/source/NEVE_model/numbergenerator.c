@@ -3,12 +3,6 @@
 // ---------------------------------------------------------------------------
 #include "numbergenerator.h"
 
-void RandomNumberGenerator(){
-    for(int i = 0; i < 20; ++i){
-        a_random[i] = (a_random[i]) % 9;
-    }
-}
-
 // TODO: Improve this
 void create_random_sequence(unsigned int n) {
     for(int i = 0; i < 20; i++){

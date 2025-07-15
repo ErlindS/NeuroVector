@@ -8,16 +8,21 @@
 #include "NEVE_drawings/menu_arrow.h"
 #include "NEVE_drawings/drawablesbasic.h" 
 #include "../NEVE_model/square.h"
-#include "../NEVE_model/lifeline.h"
 
 #include "../NEVE_controller/globalvariables.h"
 
 // --------------------------------------------------
 // Loadingbar
 // --------------------------------------------------
-void Loadingbar(unsigned int q);
 void Lifeline(unsigned int q);
 void Lifeline2();
+
+typedef struct {
+    unsigned int first;
+    const int rest[69];
+} LifelineStruct;
+
+extern LifelineStruct lifeline3;
 
 // --------------------------------------------------
 // draw Cross

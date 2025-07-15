@@ -1,11 +1,15 @@
 #pragma once
+#include "../NEVE_view/drawables.h"
 
 struct SquareObject{
 	int x; 
 	int y;
 	void (*execute_display_functions)(unsigned int i);
+
+	//insane trade off to safe cycles instead of ram
 	void (*addrandom_x)(int id);
 	void (*addrandom_y)(int id);
+	
 	unsigned int scalingfactor;
 	unsigned int scalingfactor_toggle;
 };

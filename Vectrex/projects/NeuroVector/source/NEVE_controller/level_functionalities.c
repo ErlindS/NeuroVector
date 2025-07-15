@@ -14,7 +14,6 @@ struct SquareObject Displayed_Squares[9] = {
 
 void Calculate_TimeLeft()
 {
-
     ++counter3;
     if(counter3 == 8){
         ++lifeline3.first;
@@ -63,9 +62,6 @@ void read_player_input(){
     joy_x = joystick_1_x();
     joy_y = joystick_1_y();
 
-    joy_x = joystick_1_x();
-    joy_y = joystick_1_y();
-
     (joy_x < 0 && joy_y > 0) ? (temppass = 0) : (temppass = temppass);
     (joy_x == 0 && joy_y > 0)? (temppass = 1) : (temppass = temppass);
     (joy_x > 0 && joy_y > 0)?  (temppass = 2) : (temppass = temppass);
@@ -75,19 +71,11 @@ void read_player_input(){
     (joy_x < 0 && joy_y < 0)? (temppass = 6): (temppass = temppass);
     (joy_x == 0 && joy_y < 0)?(temppass = 7) : (temppass = temppass);
     (joy_x > 0 && joy_y < 0)?(temppass = 8) : (temppass = temppass);
-
-    if(music_counter > 5){
-        play_tune(2, 15*last_music_input+120, 200);
-    }
-    --music_counter;
     
     if(button_1_4_pressed())
     {
-        
-        music_counter = 30;
         if(a_random[buttonspressedcounter] == temppass)
         {
-            last_music_input = temppass;
             buttonspressedcounter++;
         }
         else
@@ -97,29 +85,19 @@ void read_player_input(){
     } 
 }
 
+void move_player(){
+    check_joysticks();
 
-void SaveHighscore(){
+    joy_x = joystick_1_x();
+    joy_y = joystick_1_y();
 
-    if(NumberOfCrossesToBeDisplayed > *CurrentHighscore)
-        *CurrentHighscore = NumberOfCrossesToBeDisplayed;
-
-    print_string(100, -120, "YOU COMPLETED THIS LEVEL\x80");
-    print_string(70, -80, "PRESS BUTTON 2\x80");
-    print_string(50, -60, "TO RESTART\x80");
-    print_string(20, -80, "PRESS BUTTON 3\x80");
-    print_string(0, -100, "TO GO TO THE MENU\x80");
+    (joy_x < 0 && joy_y > 0) ? (Displayed_Squares[0].execute_display_functions = &draw_square_filled) : (Displayed_Squares[0].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y > 0)? (Displayed_Squares[1].execute_display_functions = &draw_square_filled) : (Displayed_Squares[1].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y > 0)? (Displayed_Squares[2].execute_display_functions = &draw_square_filled) : (Displayed_Squares[2].execute_display_functions = &draw_square);
+    (joy_x < 0 && joy_y == 0)? (Displayed_Squares[3].execute_display_functions = &draw_square_filled) : (Displayed_Squares[3].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y == 0)? (Displayed_Squares[4].execute_display_functions = &draw_square_filled) : (Displayed_Squares[4].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y == 0)? (Displayed_Squares[5].execute_display_functions = &draw_square_filled) : (Displayed_Squares[5].execute_display_functions = &draw_square);
+    (joy_x < 0 && joy_y < 0)? (Displayed_Squares[6].execute_display_functions = &draw_square_filled) : (Displayed_Squares[6].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y < 0)? (Displayed_Squares[7].execute_display_functions = &draw_square_filled) : (Displayed_Squares[7].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y < 0)? (Displayed_Squares[8].execute_display_functions = &draw_square_filled) : (Displayed_Squares[8].execute_display_functions = &draw_square);
 }
-
-
-void display_game_over(){
-
-    if(NumberOfCrossesToBeDisplayed > *CurrentHighscore)
-        *CurrentHighscore = NumberOfCrossesToBeDisplayed;
-    
-    print_string(100, -60, "GAME OVER\x80");
-    print_string(70, -80, "PRESS BUTTON 2\x80");
-    print_string(50, -60, "TO RESTART\x80");
-    print_string(20, -80, "PRESS BUTTON 3\x80");
-    print_string(0, -100, "TO GO TO THE MENU\x80");
-}
-
