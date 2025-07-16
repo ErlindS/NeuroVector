@@ -6,6 +6,7 @@
         "globalvariables.h": "c",
         "vectrex.h": "c",
         "square.h": "c",
-        "drawablesbasic.h": "c"
+        "drawablesbasic.h": "c",
+        "game_states.h": "c"
     }
 }

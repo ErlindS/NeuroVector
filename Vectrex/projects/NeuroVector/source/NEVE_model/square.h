@@ -1,3 +1,8 @@
+// Filename: square.h
+// Description: Defines the structure for a square object and declares related functions.
+// Author: Erlind Sejdiu
+// Date: 2025-07-16
+
 #pragma once
 #include "../NEVE_view/drawables.h"
 
@@ -10,8 +15,8 @@ struct SquareObject{
 	void (*addrandom_x)(int id);
 	void (*addrandom_y)(int id);
 	
-	unsigned int scalingfactor;
-	unsigned int scalingfactor_toggle;
+	unsigned int scaling_factor;
+	unsigned int scaling_factor_toggle;
 };
 
 void sub_square_x(int id);
@@ -19,7 +24,7 @@ void sub_square_y(int id);
 void add_square_x(int id);
 void add_square_y(int id);
 
-// Declaration of Displayed_Squares
-extern struct SquareObject Displayed_Squares[9];
+// Declaration of displayed_squares
+extern struct SquareObject displayed_squares[9];
 
-void reset_Displayed_Squares_coordinates();
+void reset_displayed_squares_coordinates();

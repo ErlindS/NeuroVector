@@ -2,4 +2,4 @@
 #include "../../NEVE_view/drawables.h"
 #include "../globalvariables.h"
 
-void Set_traps(void);
+void change_cross_size(void);

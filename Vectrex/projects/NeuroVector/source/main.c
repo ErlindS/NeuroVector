@@ -19,9 +19,10 @@ int main(void)
 	// local variables
 	int error_code = 0;	
 	// main loop
+
+	execute_menu_state();	
 	do
 	{
-		level_init();	
 		level_play();
 	}
 	while (error_code == 0);

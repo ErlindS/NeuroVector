@@ -3,4 +3,3 @@
 #include "../globalvariables.h"
 
 void nothing(void);
-void move_player_normal();

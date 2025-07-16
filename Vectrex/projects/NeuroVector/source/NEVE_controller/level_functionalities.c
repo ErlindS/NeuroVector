@@ -1,6 +1,6 @@
 #include "level_functionalities.h"
 
-struct SquareObject Displayed_Squares[9] = {
+struct SquareObject displayed_squares[9] = {
     {16, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
     {16, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
     {16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0},
@@ -12,48 +12,45 @@ struct SquareObject Displayed_Squares[9] = {
     {-16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0}
 };
 
-void Calculate_TimeLeft()
+void calculate_time_left()
 {
-    ++counter3;
-    if(counter3 == 8){
-        ++lifeline3.first;
-        counter3 = time_left_counter; 
+    ++time_left_counter3;
+    if(time_left_counter3 == 8){
+        ++lifeline.first;
+        time_left_counter3 = time_left_counter; 
     }
 
-    if(lifeline3.first == 32){
-        lifeline3.first = 0;
+    if(lifeline.first == 32){
+        lifeline.first = 0;
         time_left_counter -= 1;
     }
 
-    Lifeline2();
-    Display_heartbeat();
-}
+    draw_lifeline();
 
-void Display_heartbeat(){
+    //Display hearbeat
     print_string(100, 70, "BPM\x80");
     print_unsigned_int2(100, 50, time_left_counter*12);
 }
 
-
-void Update_LevelAdvancement(unsigned int n, unsigned int k){
+void update_level_advancement(unsigned int n, unsigned int k){
     while(n--){
-        draw_round_advancement_cross(n+buttonspressedcounter);
+        draw_round_advancement_cross(n+button_pressed_counter);
     }
     while(k--){
         draw_round_advancement_cross_plus(k);
     }
 }
 
-void Execute_Player_action(){
-    Displayed_Squares[0].execute_display_functions(0);
-    Displayed_Squares[1].execute_display_functions(1);
-    Displayed_Squares[2].execute_display_functions(2);
-    Displayed_Squares[3].execute_display_functions(3);
-    Displayed_Squares[4].execute_display_functions(4);
-    Displayed_Squares[5].execute_display_functions(5);
-    Displayed_Squares[6].execute_display_functions(6);
-    Displayed_Squares[7].execute_display_functions(7);
-    Displayed_Squares[8].execute_display_functions(8);
+void execute_player_action(){
+    displayed_squares[0].execute_display_functions(0);
+    displayed_squares[1].execute_display_functions(1);
+    displayed_squares[2].execute_display_functions(2);
+    displayed_squares[3].execute_display_functions(3);
+    displayed_squares[4].execute_display_functions(4);
+    displayed_squares[5].execute_display_functions(5);
+    displayed_squares[6].execute_display_functions(6);
+    displayed_squares[7].execute_display_functions(7);
+    displayed_squares[8].execute_display_functions(8);
 }
 
 void read_player_input(){
@@ -62,21 +59,21 @@ void read_player_input(){
     joy_x = joystick_1_x();
     joy_y = joystick_1_y();
 
-    (joy_x < 0 && joy_y > 0) ? (temppass = 0) : (temppass = temppass);
-    (joy_x == 0 && joy_y > 0)? (temppass = 1) : (temppass = temppass);
-    (joy_x > 0 && joy_y > 0)?  (temppass = 2) : (temppass = temppass);
-    (joy_x < 0 && joy_y == 0)? (temppass = 3): (temppass = temppass);
-    (joy_x == 0 && joy_y == 0)?(temppass = 4): (temppass = temppass);
-    (joy_x > 0 && joy_y == 0)?(temppass = 5): (temppass = temppass);
-    (joy_x < 0 && joy_y < 0)? (temppass = 6): (temppass = temppass);
-    (joy_x == 0 && joy_y < 0)?(temppass = 7) : (temppass = temppass);
-    (joy_x > 0 && joy_y < 0)?(temppass = 8) : (temppass = temppass);
+    (joy_x < 0 && joy_y > 0) ? (temp_pass = 0) : (temp_pass = temp_pass);
+    (joy_x == 0 && joy_y > 0)? (temp_pass = 1) : (temp_pass = temp_pass);
+    (joy_x > 0 && joy_y > 0)?  (temp_pass = 2) : (temp_pass = temp_pass);
+    (joy_x < 0 && joy_y == 0)? (temp_pass = 3): (temp_pass = temp_pass);
+    (joy_x == 0 && joy_y == 0)?(temp_pass = 4): (temp_pass = temp_pass);
+    (joy_x > 0 && joy_y == 0)?(temp_pass = 5): (temp_pass = temp_pass);
+    (joy_x < 0 && joy_y < 0)? (temp_pass = 6): (temp_pass = temp_pass);
+    (joy_x == 0 && joy_y < 0)?(temp_pass = 7) : (temp_pass = temp_pass);
+    (joy_x > 0 && joy_y < 0)?(temp_pass = 8) : (temp_pass = temp_pass);
     
     if(button_1_4_pressed())
     {
-        if(a_random[buttonspressedcounter] == temppass)
+        if(a_random[button_pressed_counter] == temp_pass)
         {
-            buttonspressedcounter++;
+            button_pressed_counter++;
         }
         else
         {
@@ -91,13 +88,13 @@ void move_player(){
     joy_x = joystick_1_x();
     joy_y = joystick_1_y();
 
-    (joy_x < 0 && joy_y > 0) ? (Displayed_Squares[0].execute_display_functions = &draw_square_filled) : (Displayed_Squares[0].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y > 0)? (Displayed_Squares[1].execute_display_functions = &draw_square_filled) : (Displayed_Squares[1].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y > 0)? (Displayed_Squares[2].execute_display_functions = &draw_square_filled) : (Displayed_Squares[2].execute_display_functions = &draw_square);
-    (joy_x < 0 && joy_y == 0)? (Displayed_Squares[3].execute_display_functions = &draw_square_filled) : (Displayed_Squares[3].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y == 0)? (Displayed_Squares[4].execute_display_functions = &draw_square_filled) : (Displayed_Squares[4].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y == 0)? (Displayed_Squares[5].execute_display_functions = &draw_square_filled) : (Displayed_Squares[5].execute_display_functions = &draw_square);
-    (joy_x < 0 && joy_y < 0)? (Displayed_Squares[6].execute_display_functions = &draw_square_filled) : (Displayed_Squares[6].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y < 0)? (Displayed_Squares[7].execute_display_functions = &draw_square_filled) : (Displayed_Squares[7].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y < 0)? (Displayed_Squares[8].execute_display_functions = &draw_square_filled) : (Displayed_Squares[8].execute_display_functions = &draw_square);
+    (joy_x < 0 && joy_y > 0) ? (displayed_squares[0].execute_display_functions = &draw_square_filled) : (displayed_squares[0].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y > 0)? (displayed_squares[1].execute_display_functions = &draw_square_filled) : (displayed_squares[1].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y > 0)? (displayed_squares[2].execute_display_functions = &draw_square_filled) : (displayed_squares[2].execute_display_functions = &draw_square);
+    (joy_x < 0 && joy_y == 0)? (displayed_squares[3].execute_display_functions = &draw_square_filled) : (displayed_squares[3].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y == 0)? (displayed_squares[4].execute_display_functions = &draw_square_filled) : (displayed_squares[4].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y == 0)? (displayed_squares[5].execute_display_functions = &draw_square_filled) : (displayed_squares[5].execute_display_functions = &draw_square);
+    (joy_x < 0 && joy_y < 0)? (displayed_squares[6].execute_display_functions = &draw_square_filled) : (displayed_squares[6].execute_display_functions = &draw_square);
+    (joy_x == 0 && joy_y < 0)? (displayed_squares[7].execute_display_functions = &draw_square_filled) : (displayed_squares[7].execute_display_functions = &draw_square);
+    (joy_x > 0 && joy_y < 0)? (displayed_squares[8].execute_display_functions = &draw_square_filled) : (displayed_squares[8].execute_display_functions = &draw_square);
 }

@@ -1,3 +1,9 @@
+// Filename: globalvariables.c
+// Description: Implements global variables used throughout the game.
+// Author: Erlind Sejdiu
+// Date: 2025-07-16
+
+
 // ---------------------------------------------------------------------------
 // Global Variables
 // ---------------------------------------------------------------------------
@@ -6,31 +12,24 @@
 #include "print/print.h"
 #include "sound.h"
 
-extern unsigned int buttonspressedcounter;
-extern unsigned int DisplayDurationForCross;
-extern unsigned int NumberOfCrossesToBeDisplayed;
+extern unsigned int button_pressed_counter;
+extern unsigned int display_duration_for_cross;
+extern unsigned int number_of_crosses_to_be_displayed;
 
 extern unsigned int counter;
-extern unsigned int temppass;
+extern unsigned int temp_pass;
 extern int joy_x;
 extern int joy_y;
 
-extern unsigned int HighscoreExtrem;
-extern unsigned int HighscoreHard;
-extern unsigned int HighscoreNormal;
-extern unsigned int* CurrentHighscore;
-
-extern unsigned int sneakyoffset;
+extern unsigned int highscore_extrem;
+extern unsigned int highscore_hard;
+extern unsigned int highscore_normal;
+extern unsigned int* current_highscore;
 
 extern unsigned is_the_same;
-
-
 extern unsigned int time_left_counter;
-
-extern unsigned int counter2;
-extern unsigned int counter3;
+extern unsigned int time_left_counter2;
+extern unsigned int time_left_counter3;
 
 extern unsigned int scaling_factor;
-
-unsigned int music_counter;
-unsigned int last_music_input;
+extern unsigned int level_selection;

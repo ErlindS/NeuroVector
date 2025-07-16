@@ -1,12 +1,12 @@
 XH2
-H 5 areas 16 global symbols 2 banks 1 modes
+H 4 areas 13 global symbols 2 banks 1 modes
 M main.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
 B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
-S _level_init Ref0000
 S _level_play Ref0000
 S .__.ABS. Def0000
+S _execute_menu_state Ref0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
 A .text size 1BC flags D00
@@ -14,7 +14,7 @@ S _main Def01B4
 S _advancement_plus Def006B
 S _cross Def0020
 S _arrow Def01A2
-S _Positions_Arrow Def019A
+S _position_arrows Def019A
 S _Gamefield Def007A
 S _Brainright Def00A7
 S _Lifelinestruct Def0089
@@ -23,14 +23,10 @@ S _square Def002F
 S _Brainleft Def012B
 S _Level_advancement Def0000
 S _square_filled Def0041
-A .bss size 8 flags C00
-S _Level_specific_action Def0004
-S _execute_game_playing_state Def0006
-S _music_counter Def0000
-S _last_music_input Def0001
-S _display_game_over_state Def0002
-A .data size 1 flags D00
-S _levelselection Def0000
+A .bss size 6 flags C00
+S _execute_game_playing_state Def0004
+S _level_specific_action Def0002
+S _display_execute_game_over_state_state Def0000
 T 00 00
 R 00 00 00 02
 T 00 00 C4 DD C4 E7 C4 F1 C4 FB C4 05 C4 0F C4
@@ -141,21 +137,15 @@ T 01 AF 00 EC 01 00 00
 R 00 00 00 02
 T 00 00
 R 00 00 00 03
-T 00 01
-R 00 00 00 03
 T 00 02
 R 00 00 00 03
-T 00 00
-R 00 00 00 04
-T 00 00 01
-R 00 00 00 04
 T 00 04
 R 00 00 00 03
-T 00 06
-R 00 00 00 03
 T 01 B4
 R 00 00 00 02
-T 01 B4
+T 01 B4 BD 00 00
+R 00 00 00 02 81 03 00 02
+T 01 B7
 R 00 00 00 02
-T 01 B4 BD 00 00 BD 00 00 20 F8
-R 00 00 00 02 81 03 00 00 81 06 00 01
+T 01 B7 BD 00 00 20 FB
+R 00 00 00 02 81 03 00 00

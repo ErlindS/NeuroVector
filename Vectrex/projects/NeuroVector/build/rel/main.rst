@@ -434,8 +434,8 @@
    01F4 01                  434 	.byte	1
    01F5 00                  435 	.byte	0
    01F6 00                  436 	.byte	0
-                            437 	.globl	_Positions_Arrow
-   01F7                     438 _Positions_Arrow:
+                            437 	.globl	_position_arrows
+   01F7                     438 _position_arrows:
    01F7 00                  439 	.byte	0
    01F8 00                  440 	.byte	0
    01F9 3C                  441 	.byte	60
@@ -465,57 +465,46 @@
    020F 00                  465 	.byte	0
    0210 00                  466 	.byte	0
                             467 	.area	.bss
-                            468 	.globl	_music_counter
-   C94F                     469 _music_counter:	.blkb	1
-                            470 	.globl	_last_music_input
-   C950                     471 _last_music_input:	.blkb	1
-                            472 	.globl	_display_game_over_state
-   C951                     473 _display_game_over_state:	.blkb	2
-                            474 	.globl	_levelselection
-                            475 	.area	.data
-   C880                     476 _levelselection:
-   C880 01                  477 	.byte	1
-                            478 	.area	.bss
-                            479 	.globl	_Level_specific_action
-   C953                     480 _Level_specific_action:	.blkb	2
-                            481 	.globl	_execute_game_playing_state
-   C955                     482 _execute_game_playing_state:	.blkb	2
-                            483 	.area	.text
-                            484 	.globl	_main
-   0211                     485 _main:
-   0211                     486 L2:
-   0211 BD 04 FD      [ 8]  487 	jsr	_level_init
-   0214 BD 07 82      [ 8]  488 	jsr	_level_play
-   0217 20 F8         [ 3]  489 	bra	L2
+                            468 	.globl	_display_execute_game_over_state_state
+   C949                     469 _display_execute_game_over_state_state:	.blkb	2
+                            470 	.globl	_level_specific_action
+   C94B                     471 _level_specific_action:	.blkb	2
+                            472 	.globl	_execute_game_playing_state
+   C94D                     473 _execute_game_playing_state:	.blkb	2
+                            474 	.area	.text
+                            475 	.globl	_main
+   0211                     476 _main:
+   0211 BD 04 EF      [ 8]  477 	jsr	_execute_menu_state
+   0214                     478 L2:
+   0214 BD 07 6F      [ 8]  479 	jsr	_level_play
+   0217 20 FB         [ 3]  480 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
+Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:15 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 01B4 R   |   2 _Brainleft         012B GR
+  2 L2                 01B7 R   |   2 _Brainleft         012B GR
   2 _Brainright        00A7 GR  |   2 _Gamefield         007A GR
-  2 _Level_advance     0000 GR  |   3 _Level_specifi     0004 GR
-  2 _Lifelinestruc     0089 GR  |   2 _Positions_Arr     019A GR
+  2 _Level_advance     0000 GR  |   2 _Lifelinestruc     0089 GR
   2 _advancement_c     005C GR  |   2 _advancement_p     006B GR
   2 _arrow             01A2 GR  |   2 _cross             0020 GR
-  3 _display_game_     0002 GR  |   3 _execute_game_     0006 GR
-  3 _last_music_in     0001 GR  |     _level_init        **** GX
-    _level_play        **** GX  |   4 _levelselectio     0000 GR
-  2 _main              01B4 GR  |   3 _music_counter     0000 GR
-  2 _square            002F GR  |   2 _square_filled     0041 GR
+  3 _display_execu     0000 GR  |   3 _execute_game_     0004 GR
+    _execute_menu_     **** GX  |     _level_play        **** GX
+  3 _level_specifi     0002 GR  |   2 _main              01B4 GR
+  2 _position_arro     019A GR  |   2 _square            002F GR
+  2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Wed Jul 16 00:26:18 2025
+Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:15 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .text            size  1BC   flags  100
-   3 .bss             size    8   flags    0
-   4 .data            size    1   flags  100
+   3 .bss             size    6   flags    0
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

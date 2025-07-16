@@ -2,13 +2,12 @@
 // --------------------------------------------------
 // cross
 // --------------------------------------------------
-
 void draw_square(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
-	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = Displayed_Squares[i].scalingfactor;
+	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			// move beam to object coordinates
+	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square);
 }
 
@@ -16,8 +15,8 @@ void draw_square_filled(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
 	Moveto_d(-7, 0);
-	Moveto_d(Displayed_Squares[i].x, Displayed_Squares[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = Displayed_Squares[i].scalingfactor;
+	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			// move beam to object coordinates
+	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square_filled);
 }
 
@@ -57,52 +56,14 @@ void Display_Gamefield(){
 //--------------------------------------------------
 // Lifeline
 // -------------------------------------------------
-void Lifeline(unsigned int q) {	
-	
-		Reset0Ref();					// reset beam to center of screen
-		unsigned int c = q;
-		q = c;
-		
-		dp_VIA_t1_cnt_lo = 0x26;
-		Moveto_d(120, -120);			// move beam to object coordinates
-		Moveto_d(120, -120);			// move beam to object coordinates
-		Moveto_d(120, -120);			// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);	
-		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
-		Draw_VLp(&Lifelinestruct);
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);	
-		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
-		Draw_VLp(&Lifelinestruct);
-		
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);	
-		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
-		Draw_VLp(&Lifelinestruct);
-		
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);	
-		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
-		Draw_VLp(&Lifelinestruct);
-		
-		dp_VIA_t1_cnt_lo = q;		// set scalinf factor for drawing
-		Draw_Line_d(0,80);	
-		dp_VIA_t1_cnt_lo = 0x30;		// set scalinf factor for drawing
-		Draw_VLp(&Lifelinestruct);
-}
-
-unsigned int Lifeline2_Counter = 0;
-
-void Lifeline2() {
+void draw_lifeline() {
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0x30;	
 	Moveto_d(120, -120);
 	Moveto_d(120, -120);
 	Moveto_d(0, -50);
-	Draw_VLc(&lifeline3);
+	Draw_VLc(&lifeline);
 	Reset0Ref();					// reset beam to center of screen
-		
 }
 
 //--------------------------------------------------
@@ -111,16 +72,13 @@ void Lifeline2() {
 void draw_menu_arrow(unsigned int q) {
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(Positions_Arrow[q].x, Positions_Arrow[q].y);			// move beam to object coordinates
+	Moveto_d(position_arrows[q].x, position_arrows[q].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 0x60;
 	Draw_VLp(&arrow);
 }
 
-
-//--------------------------------------------------
-// Life line
-// -------------------------------------------------
-LifelineStruct lifeline3 = {
+//Needs to be in c file, when added to header data will be increased about 400 bytes
+LifelineStruct lifeline = {
     .first = 0,
     .rest = {
         0, 30,

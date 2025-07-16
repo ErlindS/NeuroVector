@@ -1,3 +1,8 @@
+// Filename: game_states.c
+// Description: Manages the various states and transitions of the game.
+// Author: Erlind Sejdiou
+// Date: 2025-07-16
+
 #pragma once
 #include "../../NEVE_view/drawables.h"
 #include "../../NEVE_model/square.h"
@@ -15,20 +20,17 @@
 #include "level_functionalities.h"
 
 //Indicates which level will be selected
-unsigned int levelselection = 1;
 
-void (*Level_specific_action)();
+void (*level_specific_action)();
 void (*execute_game_playing_state)();
 
 void level_play();
-void level_init();
+void execute_menu_state();
 
 void execute_repeat_sequence_state(void);
 void execute_display_sequence_state(void);
-void getback();
+void execute_game_over_state();
 void check_successfully_repeated();
-void is_gameover();
-void game_over();
 
 // ***************************************************************************
 // end of file

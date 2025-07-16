@@ -434,8 +434,8 @@ _Brainleft:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_Positions_Arrow
-_Positions_Arrow:
+	.globl	_position_arrows
+_position_arrows:
 	.byte	0
 	.byte	0
 	.byte	60
@@ -465,25 +465,16 @@ _arrow:
 	.byte	0
 	.byte	0
 	.area	.bss
-	.globl	_music_counter
-_music_counter:	.blkb	1
-	.globl	_last_music_input
-_last_music_input:	.blkb	1
-	.globl	_display_game_over_state
-_display_game_over_state:	.blkb	2
-	.globl	_levelselection
-	.area	.data
-_levelselection:
-	.byte	1
-	.area	.bss
-	.globl	_Level_specific_action
-_Level_specific_action:	.blkb	2
+	.globl	_display_execute_game_over_state_state
+_display_execute_game_over_state_state:	.blkb	2
+	.globl	_level_specific_action
+_level_specific_action:	.blkb	2
 	.globl	_execute_game_playing_state
 _execute_game_playing_state:	.blkb	2
 	.area	.text
 	.globl	_main
 _main:
+	jsr	_execute_menu_state
 L2:
-	jsr	_level_init
 	jsr	_level_play
 	bra	L2

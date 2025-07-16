@@ -14,7 +14,6 @@ const struct packet cross[] =
 	{STOP, 0, 0},
 };
 
-
 const struct packet square[] =
 {
 	{MOVE, 60, -60},
@@ -24,7 +23,6 @@ const struct packet square[] =
 	{DRAW, 120, 0},
 	{STOP, 0, 0},
 };
-
 
 const struct packet square_filled[] =
 {
@@ -39,8 +37,6 @@ const struct packet square_filled[] =
 	{STOP, 0, 0},
 };
 
-
-
 const struct packet advancement_cross[] =
 {
 	{MOVE, 16, 32},
@@ -49,7 +45,6 @@ const struct packet advancement_cross[] =
 	{DRAW, -32, 32},
 	{STOP, 0, 0},
 };
-
 
 const struct packet advancement_plus[] =
 {
