@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	print_unsigned_int2.c
 	.area	.text
 	.globl	_print_unsigned_int2
@@ -25,7 +25,6 @@ L5:
 	cmpb	#9	;cmpqi:
 	bhi	L5
 L2:
-	ldb	7,s
 	addb	#48
 	stb	2,s
 	ldb	#-52

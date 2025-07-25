@@ -1,11 +1,12 @@
+// ---------------------------------------------------------------------------
+// Game States
+//
 // Filename: game_states.c
 // Description: Manages the various states and transitions of the game.
 // Author: Erlind Sejdiu
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
-// ***************************************************************************
-// Game States
-// ***************************************************************************
 #include "game_states.h"
 
 void execute_repeat_sequence_state(void){
@@ -26,7 +27,6 @@ void execute_display_sequence_state(void){
     {
         while(--display_duration_for_cross)
         {
-            Wait_Recal();
             Display_Gamefield();
             update_level_advancement(number_of_crosses_to_be_displayed, 0);
             execute_player_action();
@@ -61,7 +61,7 @@ void execute_menu_state()
     //After moving the menu arrow once, you need to let go of the Joystick to move it again
     unsigned int arrow_movement_allowed = 1;
 
-    while(level_selection >0){
+    while(level_selection>0){
         Wait_Recal();
         //Reset0Ref();
         random_number_for_create_random_sequence++;
@@ -94,7 +94,7 @@ void execute_menu_state()
             ++level_selection ;
         }
 
-        draw_menu_arrow(level_selection );
+        draw_menu_arrow(level_selection);
 
         if(button_1_4_pressed()){
             is_the_same = 1;
@@ -221,6 +221,7 @@ void level_play(void)
         Init_Music_chk(current_music);
         Wait_Recal();
         Do_Sound();
+        Intensity_5F();
         execute_game_playing_state();
     }
 }

@@ -1,7 +1,11 @@
+// ---------------------------------------------------------------------------
+// Game States
+//
 // Filename: game_states.c
 // Description: Manages the various states and transitions of the game.
 // Author: Erlind Sejdiou
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
 #pragma once
 #include "../../NEVE_view/drawables.h"

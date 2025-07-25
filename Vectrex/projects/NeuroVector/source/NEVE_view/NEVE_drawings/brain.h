@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// Brain
+//
+// Filename: brain.h
+// Description: Saves the coordinates for the brain.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #pragma once
 
 const struct packet Brainright[] = 

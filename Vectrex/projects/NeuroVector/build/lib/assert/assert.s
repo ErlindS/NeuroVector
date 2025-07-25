@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	assert.c
 	.globl	_yy0
 	.area	.text
@@ -177,12 +177,12 @@ L9:
 	ldb	43,u	;movlsbqihi: msb:42,u -> R:b
 	jsr	__Add_Score_a
 	clr	18,u
+	ldb	18,u
 	bra	L12
 L32:
 	ldb	4,u
 	stb	18,u
 L12:
-	ldb	18,u
 	incb
 	stb	4,u
 	ldb	18,u
@@ -210,7 +210,6 @@ L12:
 	cmpb	#-1	;cmpqi:
 	beq	L13
 L22:
-	ldb	26,u
 	clra		;zero_extendqihi: R:b -> R:d
 	std	,u
 	ldx	44,u

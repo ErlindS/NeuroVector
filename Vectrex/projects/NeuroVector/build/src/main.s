@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	main.c
 	.globl	_Level_advancement
 	.area	.text
@@ -152,38 +152,6 @@ _Gamefield:
 	.byte	-1
 	.byte	0
 	.byte	-120
-	.byte	1
-	.byte	0
-	.byte	0
-	.globl	_Lifelinestruct
-_Lifelinestruct:
-	.byte	-1
-	.byte	0
-	.byte	30
-	.byte	-1
-	.byte	15
-	.byte	10
-	.byte	-1
-	.byte	-15
-	.byte	10
-	.byte	-1
-	.byte	0
-	.byte	15
-	.byte	-1
-	.byte	-15
-	.byte	10
-	.byte	-1
-	.byte	45
-	.byte	15
-	.byte	-1
-	.byte	-55
-	.byte	15
-	.byte	-1
-	.byte	25
-	.byte	15
-	.byte	-1
-	.byte	0
-	.byte	15
 	.byte	1
 	.byte	0
 	.byte	0

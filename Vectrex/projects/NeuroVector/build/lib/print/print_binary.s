@@ -1,43 +1,73 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	print_binary.c
 	.area	.text
 	.globl	_print_binary
 _print_binary:
-	pshs	u
-	leas	-14,s
-	stb	3,s
+	leas	-16,s
+	stb	,s
 	ldb	#-128
-	stb	13,s
-	ldb	#7
-	stb	4,s
-L2:
+	stb	15,s
 	ldb	#1
 	andb	19,s
 	addb	#48
-	stb	,s
+	stb	14,s
+	ldb	19,s
+	lsrb
+	stb	1,s
+	ldb	#1
+	andb	1,s
+	addb	#48
+	stb	13,s
+	ldb	1,s
+	lsrb
+	stb	2,s
+	ldb	#1
+	andb	2,s
+	addb	#48
+	stb	12,s
+	ldb	2,s
+	lsrb
+	stb	3,s
+	ldb	#1
+	andb	3,s
+	addb	#48
+	stb	11,s
+	ldb	3,s
+	lsrb
+	stb	4,s
+	ldb	#1
+	andb	4,s
+	addb	#48
+	stb	10,s
 	ldb	4,s
-	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	leau	5,s
-	leax	d,u
-	ldb	,s
-	stb	,x
-	dec	4,s
-	lsr	19,s
-	ldb	4,s
-	cmpb	#-1	;cmpqi:
-	bne	L2
+	lsrb
+	stb	5,s
+	ldb	#1
+	andb	5,s
+	addb	#48
+	stb	9,s
+	ldb	5,s
+	lsrb
+	stb	6,s
+	ldb	#1
+	andb	6,s
+	addb	#48
+	stb	8,s
+	lsr	6,s
+	ldb	6,s
+	addb	#48
+	stb	7,s
 	ldb	#-52
 	stb	*_dp_VIA_cntl
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	3,s
+	ldb	,s
 	pshs	b
-	leax	,u
+	leax	8,s
 	ldb	19,s
 	jsr	__Print_Str_d
-	leas	15,s
-	puls	u,pc
+	leas	17,s
+	rts

@@ -1,7 +1,15 @@
+// ---------------------------------------------------------------------------
+// Drawbales
+//
+// Filename: drawables.c
+// Description: Every function starting with draw_ represents one function which may be called from the controller.
+//				It basically represents the interface.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #include "drawables.h"
-// --------------------------------------------------
-// cross
-// --------------------------------------------------
+
 void draw_square(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
 	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
@@ -41,8 +49,9 @@ void draw_round_advancement_cross_plus(unsigned int i){
 // -------------------------------------------------
 void Display_Gamefield(){
 		Reset0Ref();
+		dp_VIA_t1_cnt_lo = 0x40;
+		Moveto_d(90, -120);
 		dp_VIA_t1_cnt_lo = 0x80;
-		Moveto_d(45, -60);
 		Draw_VLp(&Gamefield);
 		Reset0Ref();
 		dp_VIA_t1_cnt_lo = 0x18;

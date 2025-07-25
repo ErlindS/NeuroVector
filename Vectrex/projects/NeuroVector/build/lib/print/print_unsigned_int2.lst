@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
                               5 	.module	print_unsigned_int2.c
                               6 	.area	.text
                               7 	.globl	_print_unsigned_int2
@@ -25,22 +25,21 @@
    001E C1 09         [ 2]   25 	cmpb	#9	;cmpqi:
    0020 22 F2         [ 3]   26 	bhi	L5
    0022                      27 L2:
-   0022 E6 67         [ 5]   28 	ldb	7,s
-   0024 CB 30         [ 2]   29 	addb	#48
-   0026 E7 62         [ 5]   30 	stb	2,s
-   0028 C6 CC         [ 2]   31 	ldb	#-52
-   002A D7`00         [ 4]   32 	stb	*_dp_VIA_cntl
-   002C C6 7F         [ 2]   33 	ldb	#127
-   002E D7`00         [ 4]   34 	stb	*_dp_VIA_t1_cnt_lo
-   0030 E6 E4         [ 4]   35 	ldb	,s
-   0032 34 04         [ 6]   36 	pshs	b
-   0034 30 62         [ 5]   37 	leax	2,s
-   0036 E6 67         [ 5]   38 	ldb	7,s
-   0038 BD`00`00      [ 8]   39 	jsr	__Print_Str_d
-   003B 32 65         [ 5]   40 	leas	5,s
-   003D 39            [ 5]   41 	rts
+   0022 CB 30         [ 2]   28 	addb	#48
+   0024 E7 62         [ 5]   29 	stb	2,s
+   0026 C6 CC         [ 2]   30 	ldb	#-52
+   0028 D7`00         [ 4]   31 	stb	*_dp_VIA_cntl
+   002A C6 7F         [ 2]   32 	ldb	#127
+   002C D7`00         [ 4]   33 	stb	*_dp_VIA_t1_cnt_lo
+   002E E6 E4         [ 4]   34 	ldb	,s
+   0030 34 04         [ 6]   35 	pshs	b
+   0032 30 62         [ 5]   36 	leax	2,s
+   0034 E6 67         [ 5]   37 	ldb	7,s
+   0036 BD`00`00      [ 8]   38 	jsr	__Print_Str_d
+   0039 32 65         [ 5]   39 	leas	5,s
+   003B 39            [ 5]   40 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Symbol Table
 
@@ -51,13 +50,13 @@ Symbol Table
     _dp_VIA_t1_cnt     **** GX  |   2 _print_unsigne     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   3E   flags  100
+   2 .text            size   3C   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

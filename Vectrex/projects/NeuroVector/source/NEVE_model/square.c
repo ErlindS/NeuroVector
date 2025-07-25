@@ -1,7 +1,11 @@
+// ---------------------------------------------------------------------------
+// Square
+//
 // Filename: square.c
 // Description: Implements functions for managing and manipulating square objects.
 // Author: Erlind Sejdiu
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
 #include "square.h"
 

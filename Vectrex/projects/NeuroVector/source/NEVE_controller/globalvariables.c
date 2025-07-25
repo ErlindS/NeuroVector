@@ -1,7 +1,11 @@
+// ---------------------------------------------------------------------------
+// Global variables
+//
 // Filename: globalvariables.c
 // Description: Implements global variables used throughout the game.
 // Author: Erlind Sejdiu
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
 #include "globalvariables.h"
 

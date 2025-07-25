@@ -1,7 +1,11 @@
+// ---------------------------------------------------------------------------
+// Square
+//
 // Filename: square.h
 // Description: Defines the structure for a square object and declares related functions.
 // Author: Erlind Sejdiu
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
 #pragma once
 #include "../NEVE_view/drawables.h"

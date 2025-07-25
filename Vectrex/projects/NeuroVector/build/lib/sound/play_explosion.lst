@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
                               5 	.module	play_explosion.c
                               6 	.area	.text
                               7 	.globl	_play_explosion
@@ -15,7 +15,7 @@
    0010 F7`00`00      [ 5]   15 	stb	_Vec_Expl_Flag
    0013 35 A0         [ 7]   16 	puls	y,pc
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Symbol Table
 
@@ -26,7 +26,7 @@ Symbol Table
     _stop_music        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Area Table
 

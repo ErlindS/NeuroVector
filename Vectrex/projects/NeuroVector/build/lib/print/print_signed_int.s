@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	print_signed_int.c
 	.area	.text
 	.globl	_print_signed_int
@@ -22,20 +22,17 @@ L3:
 	bgt	L4
 	ldb	#48
 	stb	2,s
-L5:
 	ldb	9,s
-	cmpb	#9	;cmpqi:
-	ble	L6
+	bra	L11
 L9:
 	inc	3,s
 	ldb	3,s
 	ldb	9,s
 	addb	#-10
 	stb	9,s
+L11:
 	cmpb	#9	;cmpqi:
 	bgt	L9
-L6:
-	ldb	9,s
 	addb	#48
 	stb	4,s
 	ldb	#-52
@@ -55,7 +52,7 @@ L4:
 	ldb	9,s
 	addb	#-100
 	stb	9,s
-	bra	L5
+	bra	L11
 L2:
 	ldb	#45
 	stb	1,s

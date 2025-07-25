@@ -1,4 +1,13 @@
-// drawables.h
+// ---------------------------------------------------------------------------
+// Drawbales
+//
+// Filename: drawables.h
+// Description: Every function starting with draw_ represents one function which may be called from the controller.
+//				It basically represents the interface.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #pragma once
 
 #include <vectrex.h>
@@ -18,7 +27,7 @@
 void draw_lifeline();
 
 // --------------------------------------------------
-// draw Cross
+// Draw Cross
 // --------------------------------------------------
 void draw_square(unsigned int q);
 void draw_square_filled(unsigned int q);

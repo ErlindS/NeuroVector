@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
                               5 	.module	print_long_signed_int.c
                               6 	.area	.text
                               7 	.globl	_print_long_signed_int
@@ -78,7 +78,7 @@
    0085 1E 01         [ 8]   78 	exg	d,x
    0087 16 FF 9D      [ 5]   79 	lbra	L21
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Symbol Table
 
@@ -93,7 +93,7 @@ Symbol Table
   2 _print_long_si     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Area Table
 

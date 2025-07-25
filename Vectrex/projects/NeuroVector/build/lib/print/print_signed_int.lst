@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
                               5 	.module	print_signed_int.c
                               6 	.area	.text
                               7 	.globl	_print_signed_int
@@ -13,75 +13,72 @@
    0008 C6 30         [ 2]   13 	ldb	#48
    000A E7 63         [ 5]   14 	stb	3,s
    000C 6D 69         [ 7]   15 	tst	9,s
-   000E 2D 4A         [ 3]   16 	blt	L2
+   000E 2D 46         [ 3]   16 	blt	L2
    0010 C6 2B         [ 2]   17 	ldb	#43
    0012 E7 61         [ 5]   18 	stb	1,s
    0014                      19 L3:
    0014 E6 69         [ 5]   20 	ldb	9,s
    0016 C1 63         [ 2]   21 	cmpb	#99	;cmpqi:
-   0018 2E 34         [ 3]   22 	bgt	L4
+   0018 2E 30         [ 3]   22 	bgt	L4
    001A C6 30         [ 2]   23 	ldb	#48
    001C E7 62         [ 5]   24 	stb	2,s
-   001E                      25 L5:
-   001E E6 69         [ 5]   26 	ldb	9,s
-   0020 C1 09         [ 2]   27 	cmpb	#9	;cmpqi:
-   0022 2F 0E         [ 3]   28 	ble	L6
-   0024                      29 L9:
-   0024 6C 63         [ 7]   30 	inc	3,s
-   0026 E6 63         [ 5]   31 	ldb	3,s
-   0028 E6 69         [ 5]   32 	ldb	9,s
-   002A CB F6         [ 2]   33 	addb	#-10
-   002C E7 69         [ 5]   34 	stb	9,s
-   002E C1 09         [ 2]   35 	cmpb	#9	;cmpqi:
-   0030 2E F2         [ 3]   36 	bgt	L9
-   0032                      37 L6:
-   0032 E6 69         [ 5]   38 	ldb	9,s
-   0034 CB 30         [ 2]   39 	addb	#48
-   0036 E7 64         [ 5]   40 	stb	4,s
-   0038 C6 CC         [ 2]   41 	ldb	#-52
-   003A D7`00         [ 4]   42 	stb	*_dp_VIA_cntl
-   003C C6 7F         [ 2]   43 	ldb	#127
-   003E D7`00         [ 4]   44 	stb	*_dp_VIA_t1_cnt_lo
-   0040 E6 E4         [ 4]   45 	ldb	,s
-   0042 34 04         [ 6]   46 	pshs	b
-   0044 30 62         [ 5]   47 	leax	2,s
-   0046 E6 69         [ 5]   48 	ldb	9,s
-   0048 BD`00`00      [ 8]   49 	jsr	__Print_Str_d
-   004B 32 67         [ 5]   50 	leas	7,s
-   004D 39            [ 5]   51 	rts
-   004E                      52 L4:
-   004E C6 31         [ 2]   53 	ldb	#49
-   0050 E7 62         [ 5]   54 	stb	2,s
-   0052 E6 69         [ 5]   55 	ldb	9,s
-   0054 CB 9C         [ 2]   56 	addb	#-100
-   0056 E7 69         [ 5]   57 	stb	9,s
-   0058 20 C4         [ 3]   58 	bra	L5
-   005A                      59 L2:
-   005A C6 2D         [ 2]   60 	ldb	#45
-   005C E7 61         [ 5]   61 	stb	1,s
-   005E 60 69         [ 7]   62 	neg	9,s
-   0060 20 B2         [ 3]   63 	bra	L3
+   001E E6 69         [ 5]   25 	ldb	9,s
+   0020 20 0A         [ 3]   26 	bra	L11
+   0022                      27 L9:
+   0022 6C 63         [ 7]   28 	inc	3,s
+   0024 E6 63         [ 5]   29 	ldb	3,s
+   0026 E6 69         [ 5]   30 	ldb	9,s
+   0028 CB F6         [ 2]   31 	addb	#-10
+   002A E7 69         [ 5]   32 	stb	9,s
+   002C                      33 L11:
+   002C C1 09         [ 2]   34 	cmpb	#9	;cmpqi:
+   002E 2E F2         [ 3]   35 	bgt	L9
+   0030 CB 30         [ 2]   36 	addb	#48
+   0032 E7 64         [ 5]   37 	stb	4,s
+   0034 C6 CC         [ 2]   38 	ldb	#-52
+   0036 D7`00         [ 4]   39 	stb	*_dp_VIA_cntl
+   0038 C6 7F         [ 2]   40 	ldb	#127
+   003A D7`00         [ 4]   41 	stb	*_dp_VIA_t1_cnt_lo
+   003C E6 E4         [ 4]   42 	ldb	,s
+   003E 34 04         [ 6]   43 	pshs	b
+   0040 30 62         [ 5]   44 	leax	2,s
+   0042 E6 69         [ 5]   45 	ldb	9,s
+   0044 BD`00`00      [ 8]   46 	jsr	__Print_Str_d
+   0047 32 67         [ 5]   47 	leas	7,s
+   0049 39            [ 5]   48 	rts
+   004A                      49 L4:
+   004A C6 31         [ 2]   50 	ldb	#49
+   004C E7 62         [ 5]   51 	stb	2,s
+   004E E6 69         [ 5]   52 	ldb	9,s
+   0050 CB 9C         [ 2]   53 	addb	#-100
+   0052 E7 69         [ 5]   54 	stb	9,s
+   0054 20 D6         [ 3]   55 	bra	L11
+   0056                      56 L2:
+   0056 C6 2D         [ 2]   57 	ldb	#45
+   0058 E7 61         [ 5]   58 	stb	1,s
+   005A 60 69         [ 7]   59 	neg	9,s
+   005C 20 B6         [ 3]   60 	bra	L3
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 005A R   |   2 L3                 0014 R
-  2 L4                 004E R   |   2 L5                 001E R
-  2 L6                 0032 R   |   2 L9                 0024 R
-    __Print_Str_d      **** GX  |     _dp_VIA_cntl       **** GX
-    _dp_VIA_t1_cnt     **** GX  |   2 _print_signed_     0000 GR
+  2 L11                002C R   |   2 L2                 0056 R
+  2 L3                 0014 R   |   2 L4                 004A R
+  2 L9                 0022 R   |     __Print_Str_d      **** GX
+    _dp_VIA_cntl       **** GX  |     _dp_VIA_t1_cnt     **** GX
+  2 _print_signed_     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 17 00:50:14 2025
+Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   62   flags  100
+   2 .text            size   5E   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

@@ -1,3 +1,13 @@
+// ---------------------------------------------------------------------------
+// Extrem
+//
+// Filename: extrem.c
+// Description: Manages the functions needed for the extrem mode.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
+
 #include "extrem.h"
 
 void Add_Movement()

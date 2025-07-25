@@ -1,7 +1,11 @@
+// ---------------------------------------------------------------------------
+// Level Functionalities
+//
 // Filename: level_functionalities.h
 // Description: Declares functions related to level progression and player actions.
 // Author: Erlind Sejdiu
-// Date: 2025-07-16
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
 
 #pragma once
 #include "../NEVE_model/square.h"

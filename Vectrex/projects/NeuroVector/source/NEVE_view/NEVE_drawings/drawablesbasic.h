@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// Drawablesbasic
+//
+// Filename: drawablesbasic.h
+// Description: Basics needed or helpful for drawin.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #pragma once
 
 enum mode_t

@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// Level Functionalities
+//
+// Filename: level_functionalities.c
+// Description: Declares functions related to level progression and player actions.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #include "level_functionalities.h"
 
 struct SquareObject displayed_squares[9] = {

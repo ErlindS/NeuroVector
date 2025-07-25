@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// Menu Arrow
+//
+// Filename: menu_arrow.h
+// Description: Saves the coordinates for the menu arrow.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #pragma once
 #include "drawablesbasic.h"
 

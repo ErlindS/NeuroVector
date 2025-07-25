@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// Hard
+//
+// Filename: hard.c
+// Description: Manages the functions needed for the hard mode.
+// Author: Erlind Sejdiu
+// Date: 2025-07-26
+// ---------------------------------------------------------------------------
+
 #include "hard.h"
 
 void change_cross_size(){
