@@ -434,11 +434,11 @@
    01F2 00                  434 	.byte	0
                             435 	.area	.bss
                             436 	.globl	_display_execute_game_over_state_state
-   C949                     437 _display_execute_game_over_state_state:	.blkb	2
+   C937                     437 _display_execute_game_over_state_state:	.blkb	2
                             438 	.globl	_level_specific_action
-   C94B                     439 _level_specific_action:	.blkb	2
+   C939                     439 _level_specific_action:	.blkb	2
                             440 	.globl	_execute_game_playing_state
-   C94D                     441 _execute_game_playing_state:	.blkb	2
+   C93B                     441 _execute_game_playing_state:	.blkb	2
                             442 	.area	.text
                             443 	.globl	_main
    01F3                     444 _main:
@@ -447,7 +447,7 @@
    01F6 BD 07 73      [ 8]  447 	jsr	_level_play
    01F9 20 FB         [ 3]  448 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
+Hexadecimal [16-Bits]                                 Sun Jul 27 17:26:17 2025
 
 Symbol Table
 
@@ -464,7 +464,7 @@ Symbol Table
   2 _square            002F GR  |   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat Jul 26 01:09:30 2025
+Hexadecimal [16-Bits]                                 Sun Jul 27 17:26:17 2025
 
 Area Table
 

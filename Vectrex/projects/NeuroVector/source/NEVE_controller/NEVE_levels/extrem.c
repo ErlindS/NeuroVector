@@ -10,25 +10,36 @@
 
 #include "extrem.h"
 
+int flip_sign;
+#define UPDATE_COORDINATES(coordinates, change) \
+	do { \
+	(coordinates) += (change); \
+	flip_sign = (((coordinates) > 25) | ((coordinates) < -25)); \
+	change = flip_sign?change*-1:change; \
+	} while(0); 
+
+
+
 void Add_Movement()
 {
-    displayed_squares[0].addrandom_x(0);
-    displayed_squares[1].addrandom_x(1);
-    displayed_squares[2].addrandom_x(2);
-    displayed_squares[3].addrandom_x(3);
-    displayed_squares[4].addrandom_x(4);
-    displayed_squares[5].addrandom_x(5);
-    displayed_squares[6].addrandom_x(6);
-    displayed_squares[7].addrandom_x(7);
-    displayed_squares[8].addrandom_x(8);
-    displayed_squares[0].addrandom_y(0);
-    displayed_squares[1].addrandom_y(1);
-    displayed_squares[2].addrandom_y(2);
-    displayed_squares[3].addrandom_y(3);
-    displayed_squares[4].addrandom_y(4);
-    displayed_squares[5].addrandom_y(5);
-    displayed_squares[6].addrandom_y(6);
-    displayed_squares[7].addrandom_y(7);
-    displayed_squares[8].addrandom_y(8);
+    UPDATE_COORDINATES(displayed_squares[0].x, displayed_squares[0].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[1].x, displayed_squares[1].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[2].x, displayed_squares[2].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[3].x, displayed_squares[3].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[4].x, displayed_squares[4].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[5].x, displayed_squares[5].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[6].x, displayed_squares[6].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[7].x, displayed_squares[7].change_of_x);
+    UPDATE_COORDINATES(displayed_squares[8].x, displayed_squares[8].change_of_x);
+    
+    UPDATE_COORDINATES(displayed_squares[0].y, displayed_squares[0].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[1].y, displayed_squares[1].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[2].y, displayed_squares[2].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[3].y, displayed_squares[3].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[4].y, displayed_squares[4].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[5].y, displayed_squares[5].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[6].y, displayed_squares[6].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[7].y, displayed_squares[7].change_of_y);
+    UPDATE_COORDINATES(displayed_squares[8].y, displayed_squares[8].change_of_y);
 }
 

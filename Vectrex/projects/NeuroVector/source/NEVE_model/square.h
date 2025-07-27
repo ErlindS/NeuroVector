@@ -15,20 +15,15 @@ struct SquareObject{
 	int y;
 	void (*execute_display_functions)(unsigned int i);
 
-	//insane trade off to safe cycles instead of ram
-	void (*addrandom_x)(int id);
-	void (*addrandom_y)(int id);
+	int change_of_x;
+	int change_of_y;
 	
 	unsigned int scaling_factor;
 	unsigned int scaling_factor_toggle;
 };
 
-void sub_square_x(int id);
-void sub_square_y(int id);
-void add_square_x(int id);
-void add_square_y(int id);
-
 // Declaration of displayed_squares
 extern struct SquareObject displayed_squares[9];
 
 void reset_displayed_squares_coordinates();
+void change_square_coordinates(int id);

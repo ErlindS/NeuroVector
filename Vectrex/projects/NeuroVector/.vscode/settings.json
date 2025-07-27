@@ -8,6 +8,7 @@
         "square.h": "c",
         "drawablesbasic.h": "c",
         "game_states.h": "c",
-        "level_functionalities.h": "c"
+        "level_functionalities.h": "c",
+        "extrem.h": "c"
     }
 }

@@ -10,15 +10,15 @@
 #include "level_functionalities.h"
 
 struct SquareObject displayed_squares[9] = {
-    {16, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {16, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {0, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {0, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {0, 16, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {-16, -16, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {-16, 0, &draw_square, &add_square_x, &add_square_y, 16, 0},
-    {-16, 16, &draw_square, &add_square_x, &add_square_y, 16, 0}
+    {16, -16, &draw_square, 1, 1, 16, 0},
+    {16, 0, &draw_square, 1, 1, 16, 0},
+    {16, 16, &draw_square, 1, 1, 16, 0},
+    {0, -16, &draw_square, 1, 1, 16, 0},
+    {0, 0, &draw_square, 1, 1, 16, 0},
+    {0, 16, &draw_square, 1, 1, 16, 0},
+    {-16, -16, &draw_square, 1, 1, 16, 0},
+    {-16, 0, &draw_square, 1, 1, 16, 0},
+    {-16, 16, &draw_square, 1, 1, 16, 0}
 };
 
 void calculate_time_left()

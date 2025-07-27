@@ -9,34 +9,17 @@
 
 #include "square.h"
 
-void add_square_x(int id){
-    displayed_squares[id].x += 1;
-    if(displayed_squares[id].x > 25){
-        displayed_squares[id].addrandom_x = &sub_square_x;
+void change_square_coordinates(int id){
+    displayed_squares[id].x += displayed_squares[id].change_of_x;
+    if(displayed_squares[id].x > 25 || displayed_squares[id].x < -25){
+        displayed_squares[id].change_of_x *= -1;
+    }
+
+    displayed_squares[id].y += displayed_squares[id].change_of_y;
+    if(displayed_squares[id].y > 25 || displayed_squares[id].y < -25){
+        displayed_squares[id].change_of_y *= -1;
     }
 }
-
-void add_square_y(int id){
-    displayed_squares[id].y += 1;
-    if(displayed_squares[id].y > 25){
-        displayed_squares[id].addrandom_y = &sub_square_y;
-    }
-}
-
-void sub_square_x(int id){
-    displayed_squares[id].x -= 1;
-    if(displayed_squares[id].x < -25){
-        displayed_squares[id].addrandom_x = &add_square_x;
-    }
-}
-
-void sub_square_y(int id){
-    displayed_squares[id].y -= 1;
-    if(displayed_squares[id].y < -25){
-        displayed_squares[id].addrandom_y = &add_square_y;
-    }
-}
-
 
 void reset_displayed_squares_coordinates(){
     displayed_squares[0].x = 16; displayed_squares[0].y = -16;
