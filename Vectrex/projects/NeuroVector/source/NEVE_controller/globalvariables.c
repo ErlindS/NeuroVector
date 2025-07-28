@@ -14,13 +14,15 @@
 // ---------------------------------------------------------------------------
 unsigned int button_pressed_counter = 0;
 unsigned int display_duration_for_cross = 50;
-unsigned int number_of_crosses_to_be_displayed = 1;
+unsigned int number_of_crosses_to_be_displayed = 0;
 
 unsigned int temp_pass = 0;
 
 //Controller
 int joy_x = 0;
 int joy_y = 0;
+int joy_x_old = 5;
+int joy_y_old = 5;
 
 //Highscores
 unsigned int highscore_normal = 0;

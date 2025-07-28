@@ -10,19 +10,21 @@
 
 #include "drawables.h"
 
+
 void draw_square(unsigned int i){
-	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
-	Moveto_d(-7, 0);
-	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			// move beam to object coordinates
+	Reset0Ref();					
+	dp_VIA_t1_cnt_lo = 0x1f;		
+	Moveto_d(-56, 0);
+	dp_VIA_t1_cnt_lo = 0x4f;		
+	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			
 	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square);
 }
 
 void draw_square_filled(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0xFF;		// set scaling factor for positioning
-	Moveto_d(-7, 0);
+	dp_VIA_t1_cnt_lo = 0x1f;		// set scaling factor for positioning
+	Moveto_d(-56, 0);
 	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square_filled);

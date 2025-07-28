@@ -24,6 +24,8 @@ extern unsigned int counter;
 extern unsigned int temp_pass;
 extern int joy_x;
 extern int joy_y;
+extern int joy_x_old;
+extern int joy_y_old;
 
 extern unsigned int highscore_extrem;
 extern unsigned int highscore_hard;

@@ -4,21 +4,160 @@
 // Filename: game_states.c
 // Description: Manages the various states and transitions of the game.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
+// Date: 2025-07-28
 // ---------------------------------------------------------------------------
 
 #include "game_states.h"
 
+//    Display_Gamefield();
+//    execute_player_action();
+//    level_specific_action();
+//    move_player();
+//    read_player_input();
+//    check_successfully_repeated();
+//    update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
+//    calculate_time_left();
+
+const int joy_to_index[9] = {
+    6, 7, 8,
+    3, 4, 5,
+    0, 1, 2
+};
+
 void execute_repeat_sequence_state(void){
-    //Display Gamefield
-    Display_Gamefield();
-    execute_player_action();
+    /*************************************/
+    //Display_Gamefield();
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x40;
+    Moveto_d(90, -120);
+    dp_VIA_t1_cnt_lo = 0x80;
+    Draw_VLp(&Gamefield);
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x18;
+    Moveto_d(80, 0);
+    Draw_VLp(&fullbrain);
+    /*************************************/
+
+    //This is a function ptr and therefore to dynamic to be exchange(for now)
     level_specific_action();
-    move_player();
-    read_player_input();
-    check_successfully_repeated();
-    update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
-    calculate_time_left();
+
+    /*************************************/
+    //move_player();
+    check_joysticks();
+
+    joy_x = joystick_1_x();
+    joy_y = joystick_1_y();
+
+    //only change values if change is necessary
+    if(joy_x != joy_x_old || joy_y != joy_y_old){
+        joy_x_old = joy_x;
+        joy_y_old = joy_y;
+
+        joy_x = (joy_x < 0) ? -1 : (joy_x > 0) ? 1 : 0;
+        joy_y = (joy_y < 0) ? -1 : (joy_y > 0) ? 1 : 0;
+        //check if old value changed
+
+        int joy_index = (joy_y + 1) * 3 + (joy_x + 1);
+        temp_pass = joy_to_index[joy_index];
+
+        // Pre-fill all with draw_square
+        for (int i = 0; i < 9; ++i)
+            displayed_squares[i].execute_display_functions = &draw_square;
+
+        // Overwrite selected one
+        displayed_squares[temp_pass].execute_display_functions = &draw_square_filled;
+    }
+
+    Read_Btns();
+    
+    //this checks if the button was rightfully pushed
+    if(button_1_4_pressed())
+    {
+        //is the same will be 0(and the game will end) if the sequence does not fit the fieldnummer
+        is_the_same = (a_random[button_pressed_counter] == temp_pass)?++button_pressed_counter:0;
+    } 
+    /*************************************/
+
+    /*************************************/
+    //execute_player_action();
+    //execute_player_action just shall draw the fields, but multiple functioncalls seem overkill
+    displayed_squares[0].execute_display_functions(0);
+    displayed_squares[1].execute_display_functions(1);
+    displayed_squares[2].execute_display_functions(2);
+    displayed_squares[3].execute_display_functions(3);
+    displayed_squares[4].execute_display_functions(4);
+    displayed_squares[5].execute_display_functions(5);
+    displayed_squares[6].execute_display_functions(6);
+    displayed_squares[7].execute_display_functions(7);
+    displayed_squares[8].execute_display_functions(8);
+    /*************************************/
+
+    /*************************************/
+    //check_successfully_repeated();
+
+    //Game over, no time left
+    //Game over, repeated wrongly
+    if(time_left_counter == 0 || is_the_same == 0){
+        execute_game_playing_state = &execute_game_over_state;
+    }
+
+    if(number_of_crosses_to_be_displayed == button_pressed_counter)
+    {
+        (displayed_squares[0].execute_display_functions = &draw_square);
+        (displayed_squares[1].execute_display_functions = &draw_square);
+        (displayed_squares[2].execute_display_functions = &draw_square);
+        (displayed_squares[3].execute_display_functions = &draw_square);
+        (displayed_squares[4].execute_display_functions = &draw_square);
+        (displayed_squares[5].execute_display_functions = &draw_square);
+        (displayed_squares[6].execute_display_functions = &draw_square);
+        (displayed_squares[7].execute_display_functions = &draw_square);
+        (displayed_squares[8].execute_display_functions = &draw_square);
+
+        number_of_crosses_to_be_displayed++;
+        button_pressed_counter = 0;
+        execute_game_playing_state = &execute_display_sequence_state;
+    }
+    /*************************************/
+
+    //update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
+    int n = number_of_crosses_to_be_displayed -button_pressed_counter;
+    int k = button_pressed_counter;
+    while(n--){
+        draw_round_advancement_cross(n+button_pressed_counter);
+    }
+    while(k--){
+        draw_round_advancement_cross_plus(k);
+    }
+
+    /*************************************/
+    //calculate_time_left();
+
+    ++time_left_counter3;
+    if(time_left_counter3 == 8){
+        ++lifeline.first;
+        time_left_counter3 = time_left_counter; 
+    }
+
+    if(lifeline.first == 32){
+        lifeline.first = 0;
+        time_left_counter -= 1;
+    }
+
+        /*****************************/
+        //draw_lifeline();
+        	Reset0Ref();					// reset beam to center of screen
+            dp_VIA_t1_cnt_lo = 0x30;	
+            Moveto_d(120, -120);
+            Moveto_d(120, -120);
+            Moveto_d(0, -50);
+            Draw_VLc(&lifeline);
+            Reset0Ref();					// reset beam to center of screen
+        /***************************/
+
+    //Display hearbeat
+    print_string(100, 70, "BPM\x80");
+    print_unsigned_int2(100, 50, time_left_counter*12);
+    /*************************************/
 }
 
 void execute_display_sequence_state(void){
@@ -84,14 +223,14 @@ void execute_menu_state()
             arrow_movement_allowed = 1;
         }
 
-        if(joystick_1_y() > 0 && level_selection  > 1 && arrow_movement_allowed == 1){
+        if(joystick_1_y() > 0 && level_selection > 1 && arrow_movement_allowed == 1){
             --arrow_movement_allowed;
             --level_selection ;
         }
 
-        if(joystick_1_y() < 0 && level_selection  < 3 && arrow_movement_allowed == 1){
+        if(joystick_1_y() < 0 && level_selection < 3 && arrow_movement_allowed == 1){
             --arrow_movement_allowed;
-            ++level_selection ;
+            ++level_selection;
         }
 
         draw_menu_arrow(level_selection);
@@ -175,47 +314,9 @@ void execute_game_over_state(){
     }
 }
 
-void check_successfully_repeated(){
-
-    //Game over, no time left
-    if(time_left_counter == 0){
-        execute_game_playing_state = &execute_game_over_state;
-    }
-
-    //Game over, repeated wrongly
-    if(is_the_same == 0){
-        execute_game_playing_state = &execute_game_over_state;
-    }
-
-    if(number_of_crosses_to_be_displayed  == button_pressed_counter)
-    {
-        (displayed_squares[0].execute_display_functions = &draw_square);
-        (displayed_squares[1].execute_display_functions = &draw_square);
-        (displayed_squares[2].execute_display_functions = &draw_square);
-        (displayed_squares[3].execute_display_functions = &draw_square);
-        (displayed_squares[4].execute_display_functions = &draw_square);
-        (displayed_squares[5].execute_display_functions = &draw_square);
-        (displayed_squares[6].execute_display_functions = &draw_square);
-        (displayed_squares[7].execute_display_functions = &draw_square);
-        (displayed_squares[8].execute_display_functions = &draw_square);
-
-        number_of_crosses_to_be_displayed++;
-        button_pressed_counter = 0;
-        execute_game_playing_state = &execute_display_sequence_state;
-    }
-}
-
-
 void level_play(void)
 {
     while(1){
-        //DP_to_C8();
-        //Explosion_Snd(current_explosion);
-        //Init_Music_chk(current_music);
-        //Wait_Recal();
-        //Do_Sound();
-        //Intensity_5F();
-
         DP_to_C8();
         Explosion_Snd(current_explosion);
         Init_Music_chk(current_music);
