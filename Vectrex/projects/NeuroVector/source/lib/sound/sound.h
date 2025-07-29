@@ -469,7 +469,7 @@ complex sounds... Like wawa pedals, or tones which rise or fall in frequency
 
 
 
-That's it for now. I'm still planning an improved song playing routine which
+That's it for now. I'm highscores.still planning an improved song playing routine which
 I hope will see the light of day shortly. I doubt it'll just be a hacked
 init_sound/do_sound as all I really need from there is the
 note->frequency->AY-3-8192 frequency algorithym. I'd also like a better

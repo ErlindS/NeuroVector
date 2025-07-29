@@ -16,6 +16,17 @@
 #include "print/print.h"
 #include "sound.h"
 
+typedef struct scores {
+    unsigned int still;
+    unsigned int pulse;
+    unsigned int mirror;
+    unsigned int orbit;
+    unsigned int echo;
+    unsigned int* current_score; 
+} Scores;
+
+extern Scores highscores;
+
 extern unsigned int button_pressed_counter;
 extern unsigned int display_duration_for_cross;
 extern unsigned int number_of_crosses_to_be_displayed;
@@ -26,13 +37,6 @@ extern int joy_x;
 extern int joy_y;
 extern int joy_x_old;
 extern int joy_y_old;
-
-extern unsigned int highscore_extrem;
-extern unsigned int highscore_hard;
-extern unsigned int highscore_normal;
-extern unsigned int highscore_circle;
-extern unsigned int highscore_reverse;
-extern unsigned int* current_highscore;
 
 extern unsigned is_the_same;
 extern unsigned int time_left_counter;

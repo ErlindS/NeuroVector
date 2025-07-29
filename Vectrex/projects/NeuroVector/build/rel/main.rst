@@ -944,12 +944,12 @@
                             944 	.area	.text
                             945 	.globl	_main
    03E5                     946 _main:
-   03E5 BD 0B 25      [ 8]  947 	jsr	_execute_menu_state
+   03E5 BD 0A E4      [ 8]  947 	jsr	_execute_menu_state
    03E8                     948 L2:
-   03E8 BD 0E 77      [ 8]  949 	jsr	_level_play
+   03E8 BD 0F AD      [ 8]  949 	jsr	_level_play
    03EB 20 FB         [ 3]  950 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Tue Jul 29 13:00:11 2025
+Hexadecimal [16-Bits]                                 Tue Jul 29 23:46:41 2025
 
 Symbol Table
 
@@ -967,7 +967,7 @@ Symbol Table
   2 _square            002F GR  |   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Tue Jul 29 13:00:11 2025
+Hexadecimal [16-Bits]                                 Tue Jul 29 23:46:41 2025
 
 Area Table
 

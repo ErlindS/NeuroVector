@@ -107,3 +107,21 @@ void move_player(){
     (joy_x == 0 && joy_y < 0)? (displayed_squares[7].execute_display_functions = &draw_square_filled) : (displayed_squares[7].execute_display_functions = &draw_square);
     (joy_x > 0 && joy_y < 0)? (displayed_squares[8].execute_display_functions = &draw_square_filled) : (displayed_squares[8].execute_display_functions = &draw_square);
 }
+
+/*
+void print_highscore_still(int y, int x)
+{
+    volatile char str1[] = "STILL     /16\x80";
+	str1[8] = '0';
+	str1[9] = '0';
+	while (highscores.still >= 10)
+	{
+		++str1[8];
+		highscores.still -= 10;
+	}
+	str1[9] = '0' + highscores.still;
+
+	reset_print_position();
+	Print_Str_d(y, x, (void*) &str1[0]);
+}*/
+

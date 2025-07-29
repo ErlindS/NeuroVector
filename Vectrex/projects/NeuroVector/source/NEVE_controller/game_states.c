@@ -210,8 +210,9 @@ void execute_menu_state()
     disable_controller_2_x();
     disable_controller_2_y();
 
-    //In the menu random_number_for_create_random_sequence will be increased to be used as a parameter when creating a random_sequence to repeat.
-    unsigned int random_number_for_create_random_sequence = 0;
+    //In the menu random_number_to_create_random_sequence will be increased to be 
+    //used as a parameter when creating a random_sequence to repeat.
+    unsigned int random_number_to_create_random_sequence = 0;
 
     //After moving the menu arrow once, you need to let go of the Joystick to move it again
     unsigned int arrow_movement_allowed = 1;
@@ -219,25 +220,16 @@ void execute_menu_state()
     while(level_selection>0){
         Wait_Recal();
         //Reset0Ref();
-        random_number_for_create_random_sequence++;
+        random_number_to_create_random_sequence++;
 
-        Read_Btns();
-        
-        //Menu display
         print_string(100, -120, "SELECT THE GAMEMODE\x80");
-        print_string(60, -80,  "NORMAL  16/\x80");
-        print_string(40, -80,  "SCALER  16/\x80");
-        print_string(20, -80,  "MOVER   16/\x80");
-        print_string(0, -80,   "CIRCLE  16/\x80");
-        print_string(-20, -80, "REVERSE 16/\x80");
-        print_unsigned_int2(60, 50,  highscore_normal);
-        print_unsigned_int2(40, 50,  highscore_hard);
-        print_unsigned_int2(20, 50,  highscore_extrem);
-        print_unsigned_int2(0, 50,   highscore_circle);
-        print_unsigned_int2(-20, 50, highscore_reverse);
+        print_highscore_still(60,-80);
+        print_highscore_pulse(40,-80);
+        print_highscore_mirror(20,-80);
+        print_highscore_orbit(0,-80);
+        print_highscore_echo(-20,-80);
         
         check_joysticks();
-        
         //Joystick arrow movement allowed
         if(joystick_1_y() == 0){
             arrow_movement_allowed = 1;
@@ -253,8 +245,8 @@ void execute_menu_state()
             ++level_selection;
         }
 
-        draw_menu_arrow(level_selection);
-
+        //draw_menu_arrow(level_selection);
+        Read_Btns();
         if(button_1_4_pressed()){
             is_the_same = 1;
             reset_displayed_squares_coordinates();
@@ -262,47 +254,47 @@ void execute_menu_state()
             {
             case 1:
                 level_specific_action = &nothing;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
             
             case 2:
                 level_specific_action = &change_cross_size;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
 
             case 3:
                 level_specific_action = &Add_Movement;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
 
             case 4:
                 level_specific_action = &circle_movement;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
 
             case 5:
                 level_specific_action = &circle_movement2;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
 
             default:
                 level_specific_action = &nothing;
-                current_highscore  = &highscore_normal;
+                highscores.current_score = &highscores.still;
                 break;
             }
             level_selection = 0;
         }
     }
 
-    create_random_sequence(random_number_for_create_random_sequence);
+    create_random_sequence(random_number_to_create_random_sequence);
     execute_game_playing_state = &execute_display_sequence_state;
 }
 
 void execute_game_over_state(){
 
     //Display Game over
-    if(number_of_crosses_to_be_displayed  > *current_highscore)
-        *current_highscore  = number_of_crosses_to_be_displayed;
+    if(number_of_crosses_to_be_displayed  > *highscores.current_score)
+        *highscores.current_score  = number_of_crosses_to_be_displayed;
     
     print_string(100, -60, "GAME OVER\x80");
     print_string(70, -80, "PRESS BUTTON 2\x80");
@@ -345,8 +337,8 @@ void execute_game_over_state(){
 void execute_game_won_state(){
 
     //Display Game over
-    if(number_of_crosses_to_be_displayed  > *current_highscore)
-        *current_highscore  = number_of_crosses_to_be_displayed;
+    if(number_of_crosses_to_be_displayed  > *highscores.current_score)
+        *highscores.current_score  = number_of_crosses_to_be_displayed;
     
     print_string(100, -60, "YOU WON\x80");
     print_string(70, -80, "PRESS BUTTON 2\x80");
