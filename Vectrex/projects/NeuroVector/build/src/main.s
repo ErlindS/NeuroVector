@@ -649,35 +649,61 @@ _position_arrows:
 	.byte	0
 	.byte	0
 	.byte	60
-	.byte	-85
+	.byte	-100
 	.byte	40
-	.byte	-85
+	.byte	-100
 	.byte	20
-	.byte	-85
+	.byte	-100
 	.byte	0
-	.byte	-85
+	.byte	-100
 	.byte	-20
-	.byte	-85
+	.byte	-100
 	.globl	_arrow
 _arrow:
 	.byte	0
-	.byte	4
+	.byte	40
 	.byte	0
 	.byte	-1
-	.byte	-10
-	.byte	10
+	.byte	-100
+	.byte	100
 	.byte	-1
-	.byte	-10
-	.byte	-10
+	.byte	-100
+	.byte	-100
 	.byte	0
-	.byte	10
-	.byte	10
+	.byte	100
+	.byte	100
 	.byte	-1
 	.byte	0
-	.byte	-20
+	.byte	-100
+	.byte	-1
+	.byte	0
+	.byte	-100
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_Display_Gamefield
+_Display_Gamefield:
+	jsr	___Reset0Ref
+	ldb	#64
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#26
+	stb	,-s
+	addb	#46
+	jsr	__Moveto_d
+	ldb	#-128
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_Gamefield
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#24
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#56
+	stb	,-s
+	clrb
+	jsr	__Moveto_d
+	leas	2,s
+	ldx	#_fullbrain
+	jmp	___Draw_VLp
 	.globl	_circle_value
 _circle_value:
 	.byte	70
@@ -945,6 +971,6 @@ _execute_game_playing_state:	.blkb	2
 	.globl	_main
 _main:
 	jsr	_execute_menu_state
-L2:
+L4:
 	jsr	_level_play
-	bra	L2
+	bra	L4

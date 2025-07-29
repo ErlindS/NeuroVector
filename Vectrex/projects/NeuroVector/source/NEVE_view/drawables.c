@@ -48,44 +48,13 @@ void draw_round_advancement_cross_plus(unsigned int i){
 }
 
 //--------------------------------------------------
-// Gamefield + Brain
-// -------------------------------------------------
-void Display_Gamefield(){
-		Reset0Ref();
-		dp_VIA_t1_cnt_lo = 0x40;
-		Moveto_d(90, -120);
-		dp_VIA_t1_cnt_lo = 0x80;
-		Draw_VLp(&Gamefield);
-		Reset0Ref();
-		dp_VIA_t1_cnt_lo = 0x18;
-		Moveto_d(80, 0);
-		Draw_VLp(&Brainright);
-		Reset0Ref();
-		Moveto_d(80, 0);
-		Draw_VLp(&Brainleft);
-}
-
-//--------------------------------------------------
-// Lifeline
-// -------------------------------------------------
-void draw_lifeline() {
-	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0x30;	
-	Moveto_d(120, -120);
-	Moveto_d(120, -120);
-	Moveto_d(0, -50);
-	Draw_VLc(&lifeline);
-	Reset0Ref();					// reset beam to center of screen
-}
-
-//--------------------------------------------------
 // Menu Arrow
 // -------------------------------------------------
 void draw_menu_arrow(unsigned int q) {
 	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
+	dp_VIA_t1_cnt_lo = 125;		// set scaling factor for positioning
 	Moveto_d(position_arrows[q].x, position_arrows[q].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 0x60;
+	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&arrow);
 }
 

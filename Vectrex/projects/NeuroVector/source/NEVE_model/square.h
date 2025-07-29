@@ -10,7 +10,7 @@
 #pragma once
 #include "../NEVE_view/drawables.h"
 
-struct SquareObject{
+typedef struct Square{
 	int x; 
 	int y;
 	void (*execute_display_functions)(unsigned int i);
@@ -20,10 +20,10 @@ struct SquareObject{
 	
 	unsigned int scaling_factor;
 	unsigned int scaling_factor_toggle;
-};
+} Square;
 
 // Declaration of displayed_squares
-extern struct SquareObject displayed_squares[9];
+extern struct Square displayed_squares[9];
 
 void reset_displayed_squares_coordinates();
 void change_square_coordinates(int id);

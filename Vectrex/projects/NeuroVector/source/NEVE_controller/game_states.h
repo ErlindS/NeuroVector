@@ -37,7 +37,49 @@ void execute_repeat_sequence_state(void);
 void execute_display_sequence_state(void);
 void execute_game_over_state();
 void execute_game_won_state();
-void check_successfully_repeated();
+
+//check successfully_repeated is part of game_states, since successfully_repeated contatins state transistions
+static inline __attribute__((always_inline))
+void check_successfully_repeated(){
+    //Game over, no time left
+    //Game over, repeated wrongly
+    if(time_left_counter == 0 || is_the_same == 0){
+        execute_game_playing_state = &execute_game_over_state;
+    }
+
+    if(button_pressed_counter == 16){
+        (displayed_squares[0].execute_display_functions = &draw_square);
+        (displayed_squares[1].execute_display_functions = &draw_square);
+        (displayed_squares[2].execute_display_functions = &draw_square);
+        (displayed_squares[3].execute_display_functions = &draw_square);
+        (displayed_squares[4].execute_display_functions = &draw_square);
+        (displayed_squares[5].execute_display_functions = &draw_square);
+        (displayed_squares[6].execute_display_functions = &draw_square);
+        (displayed_squares[7].execute_display_functions = &draw_square);
+        (displayed_squares[8].execute_display_functions = &draw_square);
+
+        button_pressed_counter = 0;
+        execute_game_playing_state = &execute_game_won_state;
+    }
+
+    if(number_of_crosses_to_be_displayed == button_pressed_counter)
+    {
+        (displayed_squares[0].execute_display_functions = &draw_square);
+        (displayed_squares[1].execute_display_functions = &draw_square);
+        (displayed_squares[2].execute_display_functions = &draw_square);
+        (displayed_squares[3].execute_display_functions = &draw_square);
+        (displayed_squares[4].execute_display_functions = &draw_square);
+        (displayed_squares[5].execute_display_functions = &draw_square);
+        (displayed_squares[6].execute_display_functions = &draw_square);
+        (displayed_squares[7].execute_display_functions = &draw_square);
+        (displayed_squares[8].execute_display_functions = &draw_square);
+
+        number_of_crosses_to_be_displayed++;
+        button_pressed_counter = 0;
+        execute_game_playing_state = &execute_display_sequence_state;
+    }
+};
+
 
 // ***************************************************************************
 // end of file

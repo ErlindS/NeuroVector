@@ -10,14 +10,15 @@
 #pragma once
 #include "drawablesbasic.h"
 
-const struct vector_t position_arrows[6] = { {0,0}, {60, -85}, {40, -85}, {20, -85}, {0, -85}, {-20, -85}};
+const struct vector_t position_arrows[6] = { {0,0}, {60, -100}, {40, -100}, {20, -100}, {0, -100}, {-20, -100}};
 
 const struct packet arrow[] =
 {
-	{MOVE, 4, 0},
-	{DRAW, -10, 10},
-	{DRAW, -10, -10},
-	{MOVE, 10, 10},
-	{DRAW, 0, -20},
+	{MOVE, 40, 0},
+	{DRAW, -100, 100},
+	{DRAW, -100, -100},
+	{MOVE, 100, 100},
+	{DRAW, 0, -100},
+	{DRAW, 0, -100},
 	{STOP, 0, 0},
 };

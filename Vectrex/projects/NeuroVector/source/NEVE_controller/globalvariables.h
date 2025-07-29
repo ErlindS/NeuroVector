@@ -37,6 +37,8 @@ extern int joy_x;
 extern int joy_y;
 extern int joy_x_old;
 extern int joy_y_old;
+extern const int joy_to_index[9];
+
 
 extern unsigned is_the_same;
 extern unsigned int time_left_counter;

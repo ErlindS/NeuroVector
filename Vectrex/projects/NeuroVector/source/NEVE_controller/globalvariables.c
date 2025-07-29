@@ -24,6 +24,13 @@ int joy_y = 0;
 int joy_x_old = 5;
 int joy_y_old = 5;
 
+const int joy_to_index[9] = {
+    6, 7, 8,
+    3, 4, 5,
+    0, 1, 2
+};
+
+
 //Highscores
 Scores highscores = {0,0,0,0,0,0};
 

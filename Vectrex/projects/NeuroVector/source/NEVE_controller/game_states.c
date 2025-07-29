@@ -9,73 +9,16 @@
 
 #include "game_states.h"
 
-//    Display_Gamefield();
-//    execute_player_action();
-//    level_specific_action();
-//    move_player();
-//    read_player_input();
-//    check_successfully_repeated();
-//    update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
-//    calculate_time_left();
-
-const int joy_to_index[9] = {
-    6, 7, 8,
-    3, 4, 5,
-    0, 1, 2
-};
-
 void execute_repeat_sequence_state(void){
     /*************************************/
-    //Display_Gamefield();
-    Reset0Ref();
-    dp_VIA_t1_cnt_lo = 0x40;
-    Moveto_d(90, -120);
-    dp_VIA_t1_cnt_lo = 0x80;
-    Draw_VLp(&Gamefield);
-    Reset0Ref();
-    dp_VIA_t1_cnt_lo = 0x18;
-    Moveto_d(80, 0);
-    Draw_VLp(&fullbrain);
+    Display_Gamefield();
     /*************************************/
 
     //This is a function ptr and therefore to dynamic to be exchange(for now)
     level_specific_action();
 
     /*************************************/
-    //move_player();
-    check_joysticks();
-
-    joy_x = joystick_1_x();
-    joy_y = joystick_1_y();
-
-    //only change values if change is necessary
-    if(joy_x != joy_x_old || joy_y != joy_y_old){
-        joy_x_old = joy_x;
-        joy_y_old = joy_y;
-
-        joy_x = (joy_x < 0) ? -1 : (joy_x > 0) ? 1 : 0;
-        joy_y = (joy_y < 0) ? -1 : (joy_y > 0) ? 1 : 0;
-        //check if old value changed
-
-        int joy_index = (joy_y + 1) * 3 + (joy_x + 1);
-        temp_pass = joy_to_index[joy_index];
-
-        // Pre-fill all with draw_square
-        for (int i = 0; i < 9; ++i)
-            displayed_squares[i].execute_display_functions = &draw_square;
-
-        // Overwrite selected one
-        displayed_squares[temp_pass].execute_display_functions = &draw_square_filled;
-    }
-
-    Read_Btns();
-    
-    //this checks if the button was rightfully pushed
-    if(button_1_4_pressed())
-    {
-        //is the same will be 0(and the game will end) if the sequence does not fit the fieldnummer
-        is_the_same = (a_random[button_pressed_counter] == temp_pass)?++button_pressed_counter:0;
-    } 
+    move_player();
     /*************************************/
 
     /*************************************/
@@ -93,45 +36,7 @@ void execute_repeat_sequence_state(void){
     /*************************************/
 
     /*************************************/
-    //check_successfully_repeated();
-
-    //Game over, no time left
-    //Game over, repeated wrongly
-    if(time_left_counter == 0 || is_the_same == 0){
-        execute_game_playing_state = &execute_game_over_state;
-    }
-
-    if(button_pressed_counter == 16){
-        (displayed_squares[0].execute_display_functions = &draw_square);
-        (displayed_squares[1].execute_display_functions = &draw_square);
-        (displayed_squares[2].execute_display_functions = &draw_square);
-        (displayed_squares[3].execute_display_functions = &draw_square);
-        (displayed_squares[4].execute_display_functions = &draw_square);
-        (displayed_squares[5].execute_display_functions = &draw_square);
-        (displayed_squares[6].execute_display_functions = &draw_square);
-        (displayed_squares[7].execute_display_functions = &draw_square);
-        (displayed_squares[8].execute_display_functions = &draw_square);
-
-        button_pressed_counter = 0;
-        execute_game_playing_state = &execute_game_won_state;
-    }
-
-    if(number_of_crosses_to_be_displayed == button_pressed_counter)
-    {
-        (displayed_squares[0].execute_display_functions = &draw_square);
-        (displayed_squares[1].execute_display_functions = &draw_square);
-        (displayed_squares[2].execute_display_functions = &draw_square);
-        (displayed_squares[3].execute_display_functions = &draw_square);
-        (displayed_squares[4].execute_display_functions = &draw_square);
-        (displayed_squares[5].execute_display_functions = &draw_square);
-        (displayed_squares[6].execute_display_functions = &draw_square);
-        (displayed_squares[7].execute_display_functions = &draw_square);
-        (displayed_squares[8].execute_display_functions = &draw_square);
-
-        number_of_crosses_to_be_displayed++;
-        button_pressed_counter = 0;
-        execute_game_playing_state = &execute_display_sequence_state;
-    }
+    check_successfully_repeated();
     /*************************************/
 
     //update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
@@ -158,20 +63,8 @@ void execute_repeat_sequence_state(void){
         time_left_counter -= 1;
     }
 
-        /*****************************/
-        //draw_lifeline();
-        Reset0Ref();					// reset beam to center of screen
-        dp_VIA_t1_cnt_lo = 0x30;	
-        Moveto_d(120, -120);
-        Moveto_d(120, -120);
-        Moveto_d(0, -50);
-        Draw_VLc(&lifeline);
-        Reset0Ref();					// reset beam to center of screen
-        /***************************/
-
-    //Display hearbeat
-    print_string(100, 70, "BPM\x80");
-    print_unsigned_int2(100, 50, time_left_counter*12);
+    /*************************************/
+    draw_lifeline();
     /*************************************/
 }
 
@@ -191,7 +84,7 @@ void execute_display_sequence_state(void){
             print_string(90, -50, "SEQUENCE\x80");
             
         }
-        display_duration_for_cross  = 30;
+        display_duration_for_cross = 30;
     }
     update_level_advancement(number_of_crosses_to_be_displayed, 0);
 
@@ -202,6 +95,7 @@ void execute_display_sequence_state(void){
     execute_game_playing_state = &execute_repeat_sequence_state;
 }
 
+//Done
 void execute_menu_state()
 {
     //Enable controller
@@ -217,11 +111,17 @@ void execute_menu_state()
     //After moving the menu arrow once, you need to let go of the Joystick to move it again
     unsigned int arrow_movement_allowed = 1;
 
+
+    //This is sadly necessary the menu takes up 31500 cycles. This is little above 30 000.
+    //I tried to optimize it, but the only optimization left, is not drawing the menu arrow,
+    //but out of my view, I think it is necessary to add some nice menu feeling, which can be achieved with the arrow. 
     while(level_selection>0){
+
         Wait_Recal();
-        //Reset0Ref();
+        Intensity_5F();
         random_number_to_create_random_sequence++;
 
+        //Print the menu
         print_string(100, -120, "SELECT THE GAMEMODE\x80");
         print_highscore_still(60,-80);
         print_highscore_pulse(40,-80);
@@ -229,23 +129,26 @@ void execute_menu_state()
         print_highscore_orbit(0,-80);
         print_highscore_echo(-20,-80);
         
+
+        //Joystick logic
         check_joysticks();
-        //Joystick arrow movement allowed
-        if(joystick_1_y() == 0){
+        joy_y = joystick_1_y();
+        if (joy_y == 0) {
             arrow_movement_allowed = 1;
+        } else if (arrow_movement_allowed == 1) {
+            if (joy_y > 0 && level_selection > 1) {
+                --level_selection;
+                arrow_movement_allowed = 0;
+            } else if (joy_y < 0 && level_selection < 5) {
+                ++level_selection;
+                arrow_movement_allowed = 0;
+            }
         }
 
-        if(joystick_1_y() > 0 && level_selection > 1 && arrow_movement_allowed == 1){
-            --arrow_movement_allowed;
-            --level_selection ;
-        }
+        //Draw arrow
+        draw_menu_arrow(level_selection);
 
-        if(joystick_1_y() < 0 && level_selection < 5 && arrow_movement_allowed == 1){
-            --arrow_movement_allowed;
-            ++level_selection;
-        }
-
-        //draw_menu_arrow(level_selection);
+        //Mode/Level selection
         Read_Btns();
         if(button_1_4_pressed()){
             is_the_same = 1;
@@ -259,22 +162,22 @@ void execute_menu_state()
             
             case 2:
                 level_specific_action = &change_cross_size;
-                highscores.current_score = &highscores.still;
+                highscores.current_score = &highscores.pulse;
                 break;
 
             case 3:
                 level_specific_action = &Add_Movement;
-                highscores.current_score = &highscores.still;
+                highscores.current_score = &highscores.mirror;
                 break;
 
             case 4:
                 level_specific_action = &circle_movement;
-                highscores.current_score = &highscores.still;
+                highscores.current_score = &highscores.orbit;
                 break;
 
             case 5:
                 level_specific_action = &circle_movement2;
-                highscores.current_score = &highscores.still;
+                highscores.current_score = &highscores.echo;
                 break;
 
             default:
@@ -310,18 +213,8 @@ void execute_game_over_state(){
         create_random_sequence(number_of_crosses_to_be_displayed);
         button_pressed_counter  = 0;
         number_of_crosses_to_be_displayed  = 1;
-
         is_the_same = 1;
         reset_displayed_squares_coordinates();
-        (displayed_squares[0].execute_display_functions = &draw_square);
-        (displayed_squares[1].execute_display_functions = &draw_square);
-        (displayed_squares[2].execute_display_functions = &draw_square);
-        (displayed_squares[3].execute_display_functions = &draw_square);
-        (displayed_squares[4].execute_display_functions = &draw_square);
-        (displayed_squares[5].execute_display_functions = &draw_square);
-        (displayed_squares[6].execute_display_functions = &draw_square);
-        (displayed_squares[7].execute_display_functions = &draw_square);
-        (displayed_squares[8].execute_display_functions = &draw_square);
     }
 
     if(button_1_2_pressed())
@@ -357,15 +250,6 @@ void execute_game_won_state(){
 
         is_the_same = 1;
         reset_displayed_squares_coordinates();
-        (displayed_squares[0].execute_display_functions = &draw_square);
-        (displayed_squares[1].execute_display_functions = &draw_square);
-        (displayed_squares[2].execute_display_functions = &draw_square);
-        (displayed_squares[3].execute_display_functions = &draw_square);
-        (displayed_squares[4].execute_display_functions = &draw_square);
-        (displayed_squares[5].execute_display_functions = &draw_square);
-        (displayed_squares[6].execute_display_functions = &draw_square);
-        (displayed_squares[7].execute_display_functions = &draw_square);
-        (displayed_squares[8].execute_display_functions = &draw_square);
     }
 
     if(button_1_2_pressed())

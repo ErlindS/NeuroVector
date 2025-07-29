@@ -39,5 +39,4 @@ void reset_displayed_squares_coordinates(){
     (displayed_squares[6].execute_display_functions = &draw_square);
     (displayed_squares[7].execute_display_functions = &draw_square);
     (displayed_squares[8].execute_display_functions = &draw_square);
-
 }

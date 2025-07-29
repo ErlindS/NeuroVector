@@ -24,7 +24,18 @@
 // --------------------------------------------------
 // Lifeline
 // --------------------------------------------------
-void draw_lifeline();
+static inline __attribute__((always_inline))
+void draw_lifeline(){
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x30;
+    Moveto_d(120, -120);
+    Moveto_d(120, -120);
+    Moveto_d(0, -50);
+    Draw_VLc(&lifeline);
+    Reset0Ref();
+    print_string(100, 70, "BPM\x80");
+    print_unsigned_int2(100, 50, time_left_counter*12);
+};
 
 // --------------------------------------------------
 // Draw Cross
@@ -37,7 +48,17 @@ void draw_round_advancement_cross_plus(unsigned int q);
 // --------------------------------------------------
 // Gamefield
 // --------------------------------------------------
-void Display_Gamefield(void);
+void Display_Gamefield(void){
+	Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x40;
+    Moveto_d(90, -120);
+    dp_VIA_t1_cnt_lo = 0x80;
+    Draw_VLp(&Gamefield);
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x18;
+    Moveto_d(80, 0);
+    Draw_VLp(&fullbrain);
+};
 
 // --------------------------------------------------
 // Menu Arrow

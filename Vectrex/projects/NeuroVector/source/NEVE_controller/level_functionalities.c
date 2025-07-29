@@ -9,7 +9,7 @@
 
 #include "level_functionalities.h"
 
-struct SquareObject displayed_squares[9] = {
+struct Square displayed_squares[9] = {
     {127, -128, &draw_square, 1, 1, 16, 0},
     {127, 0, &draw_square, 1, 1, 16, 0},
     {127, 127, &draw_square, 1, 1, 16, 0},
@@ -90,38 +90,4 @@ void read_player_input(){
         }
     } 
 }
-
-void move_player(){
-    check_joysticks();
-
-    joy_x = joystick_1_x();
-    joy_y = joystick_1_y();
-
-    (joy_x < 0 && joy_y > 0) ? (displayed_squares[0].execute_display_functions = &draw_square_filled) : (displayed_squares[0].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y > 0)? (displayed_squares[1].execute_display_functions = &draw_square_filled) : (displayed_squares[1].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y > 0)? (displayed_squares[2].execute_display_functions = &draw_square_filled) : (displayed_squares[2].execute_display_functions = &draw_square);
-    (joy_x < 0 && joy_y == 0)? (displayed_squares[3].execute_display_functions = &draw_square_filled) : (displayed_squares[3].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y == 0)? (displayed_squares[4].execute_display_functions = &draw_square_filled) : (displayed_squares[4].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y == 0)? (displayed_squares[5].execute_display_functions = &draw_square_filled) : (displayed_squares[5].execute_display_functions = &draw_square);
-    (joy_x < 0 && joy_y < 0)? (displayed_squares[6].execute_display_functions = &draw_square_filled) : (displayed_squares[6].execute_display_functions = &draw_square);
-    (joy_x == 0 && joy_y < 0)? (displayed_squares[7].execute_display_functions = &draw_square_filled) : (displayed_squares[7].execute_display_functions = &draw_square);
-    (joy_x > 0 && joy_y < 0)? (displayed_squares[8].execute_display_functions = &draw_square_filled) : (displayed_squares[8].execute_display_functions = &draw_square);
-}
-
-/*
-void print_highscore_still(int y, int x)
-{
-    volatile char str1[] = "STILL     /16\x80";
-	str1[8] = '0';
-	str1[9] = '0';
-	while (highscores.still >= 10)
-	{
-		++str1[8];
-		highscores.still -= 10;
-	}
-	str1[9] = '0' + highscores.still;
-
-	reset_print_position();
-	Print_Str_d(y, x, (void*) &str1[0]);
-}*/
 
