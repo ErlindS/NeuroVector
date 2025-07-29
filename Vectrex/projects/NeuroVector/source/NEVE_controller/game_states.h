@@ -19,6 +19,8 @@
 #include "NEVE_levels/extrem.h"
 #include "NEVE_levels/hard.h"
 #include "NEVE_levels/normal.h"
+#include "NEVE_levels/circle_pattern.h"
+#include "NEVE_levels/anti_movement.h"
 
 #include "globalvariables.h"
 #include "level_functionalities.h"
@@ -34,6 +36,7 @@ void execute_menu_state();
 void execute_repeat_sequence_state(void);
 void execute_display_sequence_state(void);
 void execute_game_over_state();
+void execute_game_won_state();
 void check_successfully_repeated();
 
 // ***************************************************************************

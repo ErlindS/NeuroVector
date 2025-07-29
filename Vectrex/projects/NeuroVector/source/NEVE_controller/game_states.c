@@ -101,6 +101,21 @@ void execute_repeat_sequence_state(void){
         execute_game_playing_state = &execute_game_over_state;
     }
 
+    if(button_pressed_counter == 16){
+        (displayed_squares[0].execute_display_functions = &draw_square);
+        (displayed_squares[1].execute_display_functions = &draw_square);
+        (displayed_squares[2].execute_display_functions = &draw_square);
+        (displayed_squares[3].execute_display_functions = &draw_square);
+        (displayed_squares[4].execute_display_functions = &draw_square);
+        (displayed_squares[5].execute_display_functions = &draw_square);
+        (displayed_squares[6].execute_display_functions = &draw_square);
+        (displayed_squares[7].execute_display_functions = &draw_square);
+        (displayed_squares[8].execute_display_functions = &draw_square);
+
+        button_pressed_counter = 0;
+        execute_game_playing_state = &execute_game_won_state;
+    }
+
     if(number_of_crosses_to_be_displayed == button_pressed_counter)
     {
         (displayed_squares[0].execute_display_functions = &draw_square);
@@ -145,13 +160,13 @@ void execute_repeat_sequence_state(void){
 
         /*****************************/
         //draw_lifeline();
-        	Reset0Ref();					// reset beam to center of screen
-            dp_VIA_t1_cnt_lo = 0x30;	
-            Moveto_d(120, -120);
-            Moveto_d(120, -120);
-            Moveto_d(0, -50);
-            Draw_VLc(&lifeline);
-            Reset0Ref();					// reset beam to center of screen
+        Reset0Ref();					// reset beam to center of screen
+        dp_VIA_t1_cnt_lo = 0x30;	
+        Moveto_d(120, -120);
+        Moveto_d(120, -120);
+        Moveto_d(0, -50);
+        Draw_VLc(&lifeline);
+        Reset0Ref();					// reset beam to center of screen
         /***************************/
 
     //Display hearbeat
@@ -166,6 +181,7 @@ void execute_display_sequence_state(void){
     {
         while(--display_duration_for_cross)
         {
+            Wait_Recal();
             Display_Gamefield();
             update_level_advancement(number_of_crosses_to_be_displayed, 0);
             execute_player_action();
@@ -209,12 +225,16 @@ void execute_menu_state()
         
         //Menu display
         print_string(100, -120, "SELECT THE GAMEMODE\x80");
-        print_string(60, -80, "NORMAL 16/\x80");
-        print_string(40, -80, "HARD   16/\x80");
-        print_string(20, -80, "EXTREM 16/\x80");
-        print_unsigned_int2(60, 30, highscore_normal);
-        print_unsigned_int2(40, 30, highscore_hard);
-        print_unsigned_int2(20, 30, highscore_extrem);
+        print_string(60, -80,  "NORMAL  16/\x80");
+        print_string(40, -80,  "SCALER  16/\x80");
+        print_string(20, -80,  "MOVER   16/\x80");
+        print_string(0, -80,   "CIRCLE  16/\x80");
+        print_string(-20, -80, "REVERSE 16/\x80");
+        print_unsigned_int2(60, 50,  highscore_normal);
+        print_unsigned_int2(40, 50,  highscore_hard);
+        print_unsigned_int2(20, 50,  highscore_extrem);
+        print_unsigned_int2(0, 50,   highscore_circle);
+        print_unsigned_int2(-20, 50, highscore_reverse);
         
         check_joysticks();
         
@@ -228,7 +248,7 @@ void execute_menu_state()
             --level_selection ;
         }
 
-        if(joystick_1_y() < 0 && level_selection < 3 && arrow_movement_allowed == 1){
+        if(joystick_1_y() < 0 && level_selection < 5 && arrow_movement_allowed == 1){
             --arrow_movement_allowed;
             ++level_selection;
         }
@@ -238,31 +258,39 @@ void execute_menu_state()
         if(button_1_4_pressed()){
             is_the_same = 1;
             reset_displayed_squares_coordinates();
-
-            if(level_selection  == 1){
-                //Normal
+            switch (level_selection)
+            {
+            case 1:
                 level_specific_action = &nothing;
                 current_highscore  = &highscore_normal;
                 break;
-
-            } else if(level_selection  == 2) {
-                //Hard
+            
+            case 2:
                 level_specific_action = &change_cross_size;
-                current_highscore  = &highscore_hard;
+                current_highscore  = &highscore_normal;
                 break;
 
-            } else if(level_selection  == 3) {
-                //Extrem
+            case 3:
                 level_specific_action = &Add_Movement;
-                current_highscore  = &highscore_extrem;
+                current_highscore  = &highscore_normal;
                 break;
 
-            } else {
-                //defensive code
+            case 4:
+                level_specific_action = &circle_movement;
+                current_highscore  = &highscore_normal;
+                break;
+
+            case 5:
+                level_specific_action = &circle_movement2;
+                current_highscore  = &highscore_normal;
+                break;
+
+            default:
                 level_specific_action = &nothing;
                 current_highscore  = &highscore_normal;
                 break;
             }
+            level_selection = 0;
         }
     }
 
@@ -277,6 +305,50 @@ void execute_game_over_state(){
         *current_highscore  = number_of_crosses_to_be_displayed;
     
     print_string(100, -60, "GAME OVER\x80");
+    print_string(70, -80, "PRESS BUTTON 2\x80");
+    print_string(50, -60, "TO RESTART\x80");
+    print_string(20, -80, "PRESS BUTTON 3\x80");
+    print_string(0, -100, "TO GO TO THE MENU\x80");
+
+    //Posibility to get back
+    Read_Btns();
+    if(button_1_3_pressed())
+    {
+        execute_game_playing_state = &execute_display_sequence_state;
+        create_random_sequence(number_of_crosses_to_be_displayed);
+        button_pressed_counter  = 0;
+        number_of_crosses_to_be_displayed  = 1;
+
+        is_the_same = 1;
+        reset_displayed_squares_coordinates();
+        (displayed_squares[0].execute_display_functions = &draw_square);
+        (displayed_squares[1].execute_display_functions = &draw_square);
+        (displayed_squares[2].execute_display_functions = &draw_square);
+        (displayed_squares[3].execute_display_functions = &draw_square);
+        (displayed_squares[4].execute_display_functions = &draw_square);
+        (displayed_squares[5].execute_display_functions = &draw_square);
+        (displayed_squares[6].execute_display_functions = &draw_square);
+        (displayed_squares[7].execute_display_functions = &draw_square);
+        (displayed_squares[8].execute_display_functions = &draw_square);
+    }
+
+    if(button_1_2_pressed())
+    {
+        execute_game_playing_state = &execute_menu_state;
+        level_selection  = 1;
+        create_random_sequence(number_of_crosses_to_be_displayed);
+        button_pressed_counter  = 0;
+        number_of_crosses_to_be_displayed  = 1;
+    }
+}
+
+void execute_game_won_state(){
+
+    //Display Game over
+    if(number_of_crosses_to_be_displayed  > *current_highscore)
+        *current_highscore  = number_of_crosses_to_be_displayed;
+    
+    print_string(100, -60, "YOU WON\x80");
     print_string(70, -80, "PRESS BUTTON 2\x80");
     print_string(50, -60, "TO RESTART\x80");
     print_string(20, -80, "PRESS BUTTON 3\x80");

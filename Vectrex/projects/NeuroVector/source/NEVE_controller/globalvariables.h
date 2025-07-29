@@ -30,6 +30,8 @@ extern int joy_y_old;
 extern unsigned int highscore_extrem;
 extern unsigned int highscore_hard;
 extern unsigned int highscore_normal;
+extern unsigned int highscore_circle;
+extern unsigned int highscore_reverse;
 extern unsigned int* current_highscore;
 
 extern unsigned is_the_same;

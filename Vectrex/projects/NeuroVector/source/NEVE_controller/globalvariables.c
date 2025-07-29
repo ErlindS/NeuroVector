@@ -28,6 +28,8 @@ int joy_y_old = 5;
 unsigned int highscore_normal = 0;
 unsigned int highscore_hard = 0;
 unsigned int highscore_extrem = 0;
+unsigned int highscore_circle = 0;
+unsigned int highscore_reverse = 0;
 unsigned int* current_highscore = 0;
 
 unsigned int is_the_same = 1;

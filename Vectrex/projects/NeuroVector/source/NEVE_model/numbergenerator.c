@@ -17,7 +17,11 @@ void create_random_sequence(unsigned int n) {
         n ^= n >> 6;
         n += n << 2;
         n ^= n >> 5;
-        a_random[i] = (a_random[i] + n) % 9;
+        unsigned int val = a_random[i] + n;
+        while(val >= 9) {
+            val -= 9;
+        }
+        a_random[i] = val;
     }
 }
 

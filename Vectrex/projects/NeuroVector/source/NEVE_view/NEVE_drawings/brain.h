@@ -102,7 +102,6 @@ const struct packet Brainleft[] =
 
 const struct packet fullbrain[] = 
 {
-	{MOVE, 80, 0},
 	{MOVE, -120, 120},
 	{MOVE, -120, 0},
 	{MOVE, -120, 0},

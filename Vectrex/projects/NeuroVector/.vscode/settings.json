@@ -9,6 +9,9 @@
         "drawablesbasic.h": "c",
         "game_states.h": "c",
         "level_functionalities.h": "c",
-        "extrem.h": "c"
+        "extrem.h": "c",
+        "circle_pattern.h": "c",
+        "normal.h": "c",
+        "hard.h": "c"
     }
 }

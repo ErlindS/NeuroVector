@@ -20,15 +20,15 @@ void reset_displayed_squares_coordinates(){
     displayed_squares[7].x = -128/4; displayed_squares[7].y = 0;
     displayed_squares[8].x = -128/4; displayed_squares[8].y = 127/4;
 
-    displayed_squares[0].scaling_factor = 8;
-    displayed_squares[1].scaling_factor = 8;
-    displayed_squares[2].scaling_factor = 8;
-    displayed_squares[3].scaling_factor = 8;
-    displayed_squares[4].scaling_factor = 8;
-    displayed_squares[5].scaling_factor = 8;
-    displayed_squares[6].scaling_factor = 8;
-    displayed_squares[7].scaling_factor = 8;
-    displayed_squares[8].scaling_factor = 8;
+    displayed_squares[0].scaling_factor = 20;
+    displayed_squares[1].scaling_factor = 20;
+    displayed_squares[2].scaling_factor = 20;
+    displayed_squares[3].scaling_factor = 20;
+    displayed_squares[4].scaling_factor = 20;
+    displayed_squares[5].scaling_factor = 20;
+    displayed_squares[6].scaling_factor = 20;
+    displayed_squares[7].scaling_factor = 20;
+    displayed_squares[8].scaling_factor = 20;
 
     (displayed_squares[0].execute_display_functions = &draw_square);
     (displayed_squares[1].execute_display_functions = &draw_square);

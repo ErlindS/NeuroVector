@@ -44,7 +44,7 @@ void Display_Gamefield(void);
 // --------------------------------------------------
 void draw_menu_arrow(unsigned int q);
 
-
+/*
 #define DRAW_SQUARE_CONST(id) \
 	Reset0Ref();				\	
 	dp_VIA_t1_cnt_lo = 0x1f;	\	
@@ -52,5 +52,5 @@ void draw_menu_arrow(unsigned int q);
 	Moveto_d(displayed_squares[id].x, displayed_squares[id].y);			\
 	dp_VIA_t1_cnt_lo = displayed_squares[id].scaling_factor;			\
 	Draw_VLp(&square); \
-
+*/
 
