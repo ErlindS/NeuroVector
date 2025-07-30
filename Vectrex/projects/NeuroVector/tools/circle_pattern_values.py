@@ -3,8 +3,8 @@ import matplotlib.pyplot as mplot
 
 values = np.linspace(0,2*np.pi,127)
 
-x = np.cos(values) * 70
-y = np.sin(values) * 70
+x = np.cos(values) * 120
+y = np.sin(values) * 120
 
 k = list(zip(x,y))
 

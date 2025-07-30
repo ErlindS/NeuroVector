@@ -16,11 +16,11 @@
 #include <vectrex.h>
 #include "utils/utils.h"
 
-#include "NEVE_levels/extrem.h"
-#include "NEVE_levels/hard.h"
-#include "NEVE_levels/normal.h"
-#include "NEVE_levels/circle_pattern.h"
-#include "NEVE_levels/anti_movement.h"
+#include "NEVE_levels/still.h"
+#include "NEVE_levels/pulse.h"
+#include "NEVE_levels/mirror.h"
+#include "NEVE_levels/orbit.h"
+#include "NEVE_levels/echo.h"
 
 #include "globalvariables.h"
 #include "level_functionalities.h"

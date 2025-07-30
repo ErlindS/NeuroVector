@@ -13,9 +13,9 @@
 
 void draw_square(unsigned int i){
 	Reset0Ref();					
-	dp_VIA_t1_cnt_lo = 31;		
-	Moveto_d(-56, 0);
-	dp_VIA_t1_cnt_lo = 80;		
+	dp_VIA_t1_cnt_lo = 15;		
+	Moveto_d(-110, 0);
+	dp_VIA_t1_cnt_lo = 30;		
 	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			
 	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square);
@@ -23,9 +23,9 @@ void draw_square(unsigned int i){
 
 void draw_square_filled(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 31;		// set scaling factor for positioning
-	Moveto_d(-56, 0);
-	dp_VIA_t1_cnt_lo = 80;
+	dp_VIA_t1_cnt_lo = 15;		// set scaling factor for positioning
+	Moveto_d(-110, 0);
+	dp_VIA_t1_cnt_lo = 30;
 	Moveto_d(displayed_squares[i].x, displayed_squares[i].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = displayed_squares[i].scaling_factor;
 	Draw_VLp(&square_filled);
@@ -33,7 +33,7 @@ void draw_square_filled(unsigned int i){
 
 void draw_round_advancement_cross(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0xff;		// set scaling factor for positioning
+	dp_VIA_t1_cnt_lo = 128;		// set scaling factor for positioning
 	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 0x20;
 	Draw_VLp(&cross);
@@ -41,7 +41,7 @@ void draw_round_advancement_cross(unsigned int i){
 
 void draw_round_advancement_cross_plus(unsigned int i){
 	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 0xff;		// set scaling factor for positioning
+	dp_VIA_t1_cnt_lo = 128;		// set scaling factor for positioning
 	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 0x20;
 	Draw_VLp(&advancement_plus);

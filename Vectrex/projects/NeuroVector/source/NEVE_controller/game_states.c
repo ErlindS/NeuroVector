@@ -105,7 +105,7 @@ void execute_menu_state()
     disable_controller_2_y();
 
     //In the menu random_number_to_create_random_sequence will be increased to be 
-    //used as a parameter when creating a random_sequence to repeat.
+    //used as a parameter when creating a random_sequence.
     unsigned int random_number_to_create_random_sequence = 0;
 
     //After moving the menu arrow once, you need to let go of the Joystick to move it again
@@ -122,13 +122,13 @@ void execute_menu_state()
         random_number_to_create_random_sequence++;
 
         //Print the menu
+        //TODO replace this
         print_string(100, -120, "SELECT THE GAMEMODE\x80");
         print_highscore_still(60,-80);
         print_highscore_pulse(40,-80);
         print_highscore_mirror(20,-80);
         print_highscore_orbit(0,-80);
-        print_highscore_echo(-20,-80);
-        
+        print_highscore_echo(-20,-80);        
 
         //Joystick logic
         check_joysticks();

@@ -1,4 +1,4 @@
-#include "circle_pattern.h"
+#include "orbit.h"
 
 int position_coordinate_0 = 0;
 int position_coordinate_1 = 128/8 * 1;
@@ -20,8 +20,6 @@ void circle_movement(){
     displayed_squares[2].x = circle_value[position_coordinate_2].x;
     displayed_squares[3].y = circle_value[position_coordinate_3].y;
     displayed_squares[3].x = circle_value[position_coordinate_3].x;
-    //displayed_squares[4].y = circle_value[position_coordinate_4].y;
-    //displayed_squares[4].x = circle_value[position_coordinate_4].x;
     displayed_squares[5].y = circle_value[position_coordinate_5].y;
     displayed_squares[5].x = circle_value[position_coordinate_5].x;
     displayed_squares[6].y = circle_value[position_coordinate_6].y;
@@ -44,7 +42,6 @@ void circle_movement(){
     if(position_coordinate_1 > MAXSIZE) position_coordinate_1 = 0;
     if(position_coordinate_2 > MAXSIZE) position_coordinate_2 = 0;
     if(position_coordinate_3 > MAXSIZE) position_coordinate_3 = 0;
-    //if(position_coordinate_4 > MAXSIZE) position_coordinate_4 = 0;
     if(position_coordinate_5 > MAXSIZE) position_coordinate_5 = 0;
     if(position_coordinate_6 > MAXSIZE) position_coordinate_6 = 0;
     if(position_coordinate_7 > MAXSIZE) position_coordinate_7 = 0;
