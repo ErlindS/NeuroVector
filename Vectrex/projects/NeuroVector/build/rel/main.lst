@@ -681,328 +681,396 @@
    028A 01                  681 	.byte	1
    028B 00                  682 	.byte	0
    028C 00                  683 	.byte	0
-                            684 	.globl	_Display_Gamefield
-   028D                     685 _Display_Gamefield:
-   028D BD`00`00      [ 8]  686 	jsr	___Reset0Ref
-   0290 C6 40         [ 2]  687 	ldb	#64
-   0292 D7`00         [ 4]  688 	stb	*_dp_VIA_t1_cnt_lo
-   0294 CB 1A         [ 2]  689 	addb	#26
-   0296 E7 E2         [ 6]  690 	stb	,-s
-   0298 CB 2E         [ 2]  691 	addb	#46
-   029A BD`00`00      [ 8]  692 	jsr	__Moveto_d
-   029D C6 80         [ 2]  693 	ldb	#-128
-   029F D7`00         [ 4]  694 	stb	*_dp_VIA_t1_cnt_lo
-   02A1 8E`00`7A      [ 3]  695 	ldx	#_Gamefield
-   02A4 BD`00`00      [ 8]  696 	jsr	___Draw_VLp
-   02A7 BD`00`00      [ 8]  697 	jsr	___Reset0Ref
-   02AA C6 18         [ 2]  698 	ldb	#24
-   02AC D7`00         [ 4]  699 	stb	*_dp_VIA_t1_cnt_lo
-   02AE CB 38         [ 2]  700 	addb	#56
-   02B0 E7 E2         [ 6]  701 	stb	,-s
-   02B2 5F            [ 2]  702 	clrb
-   02B3 BD`00`00      [ 8]  703 	jsr	__Moveto_d
-   02B6 32 62         [ 5]  704 	leas	2,s
-   02B8 8E`01`7C      [ 3]  705 	ldx	#_fullbrain
-   02BB 7E`00`00      [ 4]  706 	jmp	___Draw_VLp
-                            707 	.globl	_circle_value
-   02BE                     708 _circle_value:
-   02BE 78                  709 	.byte	120
-   02BF 00                  710 	.byte	0
-   02C0 78                  711 	.byte	120
-   02C1 06                  712 	.byte	6
-   02C2 77                  713 	.byte	119
-   02C3 0C                  714 	.byte	12
-   02C4 77                  715 	.byte	119
-   02C5 12                  716 	.byte	18
-   02C6 76                  717 	.byte	118
-   02C7 18                  718 	.byte	24
-   02C8 74                  719 	.byte	116
-   02C9 1E                  720 	.byte	30
-   02CA 73                  721 	.byte	115
-   02CB 23                  722 	.byte	35
-   02CC 71                  723 	.byte	113
-   02CD 29                  724 	.byte	41
-   02CE 6F                  725 	.byte	111
-   02CF 2F                  726 	.byte	47
-   02D0 6C                  727 	.byte	108
-   02D1 34                  728 	.byte	52
-   02D2 69                  729 	.byte	105
-   02D3 39                  730 	.byte	57
-   02D4 66                  731 	.byte	102
-   02D5 3F                  732 	.byte	63
-   02D6 63                  733 	.byte	99
-   02D7 44                  734 	.byte	68
-   02D8 60                  735 	.byte	96
-   02D9 48                  736 	.byte	72
-   02DA 5C                  737 	.byte	92
-   02DB 4D                  738 	.byte	77
-   02DC 58                  739 	.byte	88
-   02DD 52                  740 	.byte	82
-   02DE 54                  741 	.byte	84
-   02DF 56                  742 	.byte	86
-   02E0 4F                  743 	.byte	79
-   02E1 5A                  744 	.byte	90
-   02E2 4B                  745 	.byte	75
-   02E3 5E                  746 	.byte	94
-   02E4 46                  747 	.byte	70
-   02E5 61                  748 	.byte	97
-   02E6 41                  749 	.byte	65
-   02E7 65                  750 	.byte	101
-   02E8 3C                  751 	.byte	60
-   02E9 68                  752 	.byte	104
-   02EA 37                  753 	.byte	55
-   02EB 6B                  754 	.byte	107
-   02EC 31                  755 	.byte	49
-   02ED 6D                  756 	.byte	109
-   02EE 2C                  757 	.byte	44
-   02EF 70                  758 	.byte	112
-   02F0 26                  759 	.byte	38
-   02F1 72                  760 	.byte	114
-   02F2 21                  761 	.byte	33
-   02F3 74                  762 	.byte	116
-   02F4 1B                  763 	.byte	27
-   02F5 75                  764 	.byte	117
-   02F6 15                  765 	.byte	21
-   02F7 76                  766 	.byte	118
-   02F8 0F                  767 	.byte	15
-   02F9 77                  768 	.byte	119
-   02FA 09                  769 	.byte	9
-   02FB 78                  770 	.byte	120
-   02FC 03                  771 	.byte	3
-   02FD 78                  772 	.byte	120
-   02FE FD                  773 	.byte	-3
-   02FF 78                  774 	.byte	120
-   0300 F7                  775 	.byte	-9
-   0301 78                  776 	.byte	120
-   0302 F1                  777 	.byte	-15
-   0303 77                  778 	.byte	119
-   0304 EB                  779 	.byte	-21
-   0305 76                  780 	.byte	118
-   0306 E5                  781 	.byte	-27
-   0307 75                  782 	.byte	117
-   0308 DF                  783 	.byte	-33
-   0309 74                  784 	.byte	116
-   030A DA                  785 	.byte	-38
-   030B 72                  786 	.byte	114
-   030C D4                  787 	.byte	-44
-   030D 70                  788 	.byte	112
-   030E CF                  789 	.byte	-49
-   030F 6D                  790 	.byte	109
-   0310 C9                  791 	.byte	-55
-   0311 6B                  792 	.byte	107
-   0312 C4                  793 	.byte	-60
-   0313 68                  794 	.byte	104
-   0314 BF                  795 	.byte	-65
-   0315 65                  796 	.byte	101
-   0316 BA                  797 	.byte	-70
-   0317 61                  798 	.byte	97
-   0318 B5                  799 	.byte	-75
-   0319 5E                  800 	.byte	94
-   031A B1                  801 	.byte	-79
-   031B 5A                  802 	.byte	90
-   031C AC                  803 	.byte	-84
-   031D 56                  804 	.byte	86
-   031E A8                  805 	.byte	-88
-   031F 52                  806 	.byte	82
-   0320 A4                  807 	.byte	-92
-   0321 4D                  808 	.byte	77
-   0322 A0                  809 	.byte	-96
-   0323 48                  810 	.byte	72
-   0324 9D                  811 	.byte	-99
-   0325 44                  812 	.byte	68
-   0326 9A                  813 	.byte	-102
-   0327 3F                  814 	.byte	63
-   0328 97                  815 	.byte	-105
-   0329 39                  816 	.byte	57
-   032A 94                  817 	.byte	-108
-   032B 34                  818 	.byte	52
-   032C 91                  819 	.byte	-111
-   032D 2F                  820 	.byte	47
-   032E 8F                  821 	.byte	-113
-   032F 29                  822 	.byte	41
-   0330 8D                  823 	.byte	-115
-   0331 23                  824 	.byte	35
-   0332 8C                  825 	.byte	-116
-   0333 1E                  826 	.byte	30
-   0334 8A                  827 	.byte	-118
-   0335 18                  828 	.byte	24
-   0336 89                  829 	.byte	-119
-   0337 12                  830 	.byte	18
-   0338 89                  831 	.byte	-119
-   0339 0C                  832 	.byte	12
-   033A 88                  833 	.byte	-120
-   033B 06                  834 	.byte	6
-   033C 88                  835 	.byte	-120
-   033D 00                  836 	.byte	0
-   033E 88                  837 	.byte	-120
-   033F FA                  838 	.byte	-6
-   0340 89                  839 	.byte	-119
-   0341 F4                  840 	.byte	-12
-   0342 89                  841 	.byte	-119
-   0343 EE                  842 	.byte	-18
-   0344 8A                  843 	.byte	-118
-   0345 E8                  844 	.byte	-24
-   0346 8C                  845 	.byte	-116
-   0347 E2                  846 	.byte	-30
-   0348 8D                  847 	.byte	-115
-   0349 DD                  848 	.byte	-35
-   034A 8F                  849 	.byte	-113
-   034B D7                  850 	.byte	-41
-   034C 91                  851 	.byte	-111
-   034D D1                  852 	.byte	-47
-   034E 94                  853 	.byte	-108
-   034F CC                  854 	.byte	-52
-   0350 97                  855 	.byte	-105
-   0351 C7                  856 	.byte	-57
-   0352 9A                  857 	.byte	-102
-   0353 C1                  858 	.byte	-63
-   0354 9D                  859 	.byte	-99
-   0355 BC                  860 	.byte	-68
-   0356 A0                  861 	.byte	-96
-   0357 B8                  862 	.byte	-72
-   0358 A4                  863 	.byte	-92
-   0359 B3                  864 	.byte	-77
-   035A A8                  865 	.byte	-88
-   035B AE                  866 	.byte	-82
-   035C AC                  867 	.byte	-84
-   035D AA                  868 	.byte	-86
-   035E B1                  869 	.byte	-79
-   035F A6                  870 	.byte	-90
-   0360 B5                  871 	.byte	-75
-   0361 A2                  872 	.byte	-94
-   0362 BA                  873 	.byte	-70
-   0363 9F                  874 	.byte	-97
-   0364 BF                  875 	.byte	-65
-   0365 9B                  876 	.byte	-101
-   0366 C4                  877 	.byte	-60
-   0367 98                  878 	.byte	-104
-   0368 C9                  879 	.byte	-55
-   0369 95                  880 	.byte	-107
-   036A CF                  881 	.byte	-49
-   036B 93                  882 	.byte	-109
-   036C D4                  883 	.byte	-44
-   036D 90                  884 	.byte	-112
-   036E DA                  885 	.byte	-38
-   036F 8E                  886 	.byte	-114
-   0370 DF                  887 	.byte	-33
-   0371 8C                  888 	.byte	-116
-   0372 E5                  889 	.byte	-27
-   0373 8B                  890 	.byte	-117
-   0374 EB                  891 	.byte	-21
-   0375 8A                  892 	.byte	-118
-   0376 F1                  893 	.byte	-15
-   0377 89                  894 	.byte	-119
-   0378 F7                  895 	.byte	-9
-   0379 88                  896 	.byte	-120
-   037A FD                  897 	.byte	-3
-   037B 88                  898 	.byte	-120
-   037C 03                  899 	.byte	3
-   037D 88                  900 	.byte	-120
-   037E 09                  901 	.byte	9
-   037F 88                  902 	.byte	-120
-   0380 0F                  903 	.byte	15
-   0381 89                  904 	.byte	-119
-   0382 15                  905 	.byte	21
-   0383 8A                  906 	.byte	-118
-   0384 1B                  907 	.byte	27
-   0385 8B                  908 	.byte	-117
-   0386 21                  909 	.byte	33
-   0387 8C                  910 	.byte	-116
-   0388 26                  911 	.byte	38
-   0389 8E                  912 	.byte	-114
-   038A 2C                  913 	.byte	44
-   038B 90                  914 	.byte	-112
-   038C 31                  915 	.byte	49
-   038D 93                  916 	.byte	-109
-   038E 37                  917 	.byte	55
-   038F 95                  918 	.byte	-107
-   0390 3C                  919 	.byte	60
-   0391 98                  920 	.byte	-104
-   0392 41                  921 	.byte	65
-   0393 9B                  922 	.byte	-101
-   0394 46                  923 	.byte	70
-   0395 9F                  924 	.byte	-97
-   0396 4B                  925 	.byte	75
-   0397 A2                  926 	.byte	-94
-   0398 4F                  927 	.byte	79
-   0399 A6                  928 	.byte	-90
-   039A 54                  929 	.byte	84
-   039B AA                  930 	.byte	-86
-   039C 58                  931 	.byte	88
-   039D AE                  932 	.byte	-82
-   039E 5C                  933 	.byte	92
-   039F B3                  934 	.byte	-77
-   03A0 60                  935 	.byte	96
-   03A1 B8                  936 	.byte	-72
-   03A2 63                  937 	.byte	99
-   03A3 BC                  938 	.byte	-68
-   03A4 66                  939 	.byte	102
-   03A5 C1                  940 	.byte	-63
-   03A6 69                  941 	.byte	105
-   03A7 C7                  942 	.byte	-57
-   03A8 6C                  943 	.byte	108
-   03A9 CC                  944 	.byte	-52
-   03AA 6F                  945 	.byte	111
-   03AB D1                  946 	.byte	-47
-   03AC 71                  947 	.byte	113
-   03AD D7                  948 	.byte	-41
-   03AE 73                  949 	.byte	115
-   03AF DD                  950 	.byte	-35
-   03B0 74                  951 	.byte	116
-   03B1 E2                  952 	.byte	-30
-   03B2 76                  953 	.byte	118
-   03B3 E8                  954 	.byte	-24
-   03B4 77                  955 	.byte	119
-   03B5 EE                  956 	.byte	-18
-   03B6 77                  957 	.byte	119
-   03B7 F4                  958 	.byte	-12
-   03B8 78                  959 	.byte	120
-   03B9 FA                  960 	.byte	-6
-   03BA 78                  961 	.byte	120
-   03BB 00                  962 	.byte	0
-                            963 	.area	.bss
-                            964 	.globl	_display_execute_game_over_state_state
-   0000                     965 _display_execute_game_over_state_state:	.blkb	2
-                            966 	.globl	_level_specific_action
-   0002                     967 _level_specific_action:	.blkb	2
-                            968 	.globl	_execute_game_playing_state
-   0004                     969 _execute_game_playing_state:	.blkb	2
-                            970 	.area	.text
-                            971 	.globl	_main
-   03BC                     972 _main:
-   03BC BD`00`00      [ 8]  973 	jsr	_execute_menu_state
-   03BF                     974 L4:
-   03BF BD`00`00      [ 8]  975 	jsr	_level_play
-   03C2 20 FB         [ 3]  976 	bra	L4
+                            684 	.globl	_menu
+   028D                     685 _menu:
+   028D FF                  686 	.byte	-1
+   028E 64                  687 	.byte	100
+   028F 00                  688 	.byte	0
+   0290 FF                  689 	.byte	-1
+   0291 9C                  690 	.byte	-100
+   0292 32                  691 	.byte	50
+   0293 FF                  692 	.byte	-1
+   0294 64                  693 	.byte	100
+   0295 32                  694 	.byte	50
+   0296 FF                  695 	.byte	-1
+   0297 9C                  696 	.byte	-100
+   0298 00                  697 	.byte	0
+   0299 00                  698 	.byte	0
+   029A 00                  699 	.byte	0
+   029B 1E                  700 	.byte	30
+   029C FF                  701 	.byte	-1
+   029D 00                  702 	.byte	0
+   029E 32                  703 	.byte	50
+   029F 00                  704 	.byte	0
+   02A0 00                  705 	.byte	0
+   02A1 CE                  706 	.byte	-50
+   02A2 FF                  707 	.byte	-1
+   02A3 64                  708 	.byte	100
+   02A4 00                  709 	.byte	0
+   02A5 00                  710 	.byte	0
+   02A6 CE                  711 	.byte	-50
+   02A7 00                  712 	.byte	0
+   02A8 FF                  713 	.byte	-1
+   02A9 00                  714 	.byte	0
+   02AA 32                  715 	.byte	50
+   02AB 00                  716 	.byte	0
+   02AC 32                  717 	.byte	50
+   02AD CE                  718 	.byte	-50
+   02AE FF                  719 	.byte	-1
+   02AF 00                  720 	.byte	0
+   02B0 32                  721 	.byte	50
+   02B1 00                  722 	.byte	0
+   02B2 9C                  723 	.byte	-100
+   02B3 1E                  724 	.byte	30
+   02B4 FF                  725 	.byte	-1
+   02B5 64                  726 	.byte	100
+   02B6 00                  727 	.byte	0
+   02B7 FF                  728 	.byte	-1
+   02B8 9C                  729 	.byte	-100
+   02B9 32                  730 	.byte	50
+   02BA FF                  731 	.byte	-1
+   02BB 6E                  732 	.byte	110
+   02BC 00                  733 	.byte	0
+   02BD 00                  734 	.byte	0
+   02BE 92                  735 	.byte	-110
+   02BF 1E                  736 	.byte	30
+   02C0 FF                  737 	.byte	-1
+   02C1 6E                  738 	.byte	110
+   02C2 00                  739 	.byte	0
+   02C3 00                  740 	.byte	0
+   02C4 92                  741 	.byte	-110
+   02C5 00                  742 	.byte	0
+   02C6 FF                  743 	.byte	-1
+   02C7 00                  744 	.byte	0
+   02C8 32                  745 	.byte	50
+   02C9 FF                  746 	.byte	-1
+   02CA 6E                  747 	.byte	110
+   02CB 00                  748 	.byte	0
+   02CC 01                  749 	.byte	1
+   02CD 00                  750 	.byte	0
+   02CE 00                  751 	.byte	0
+                            752 	.globl	_Display_Gamefield
+   02CF                     753 _Display_Gamefield:
+   02CF BD`00`00      [ 8]  754 	jsr	___Reset0Ref
+   02D2 C6 40         [ 2]  755 	ldb	#64
+   02D4 D7`00         [ 4]  756 	stb	*_dp_VIA_t1_cnt_lo
+   02D6 CB 1A         [ 2]  757 	addb	#26
+   02D8 E7 E2         [ 6]  758 	stb	,-s
+   02DA CB 2E         [ 2]  759 	addb	#46
+   02DC BD`00`00      [ 8]  760 	jsr	__Moveto_d
+   02DF C6 80         [ 2]  761 	ldb	#-128
+   02E1 D7`00         [ 4]  762 	stb	*_dp_VIA_t1_cnt_lo
+   02E3 8E`00`7A      [ 3]  763 	ldx	#_Gamefield
+   02E6 BD`00`00      [ 8]  764 	jsr	___Draw_VLp
+   02E9 BD`00`00      [ 8]  765 	jsr	___Reset0Ref
+   02EC C6 18         [ 2]  766 	ldb	#24
+   02EE D7`00         [ 4]  767 	stb	*_dp_VIA_t1_cnt_lo
+   02F0 CB 38         [ 2]  768 	addb	#56
+   02F2 E7 E2         [ 6]  769 	stb	,-s
+   02F4 5F            [ 2]  770 	clrb
+   02F5 BD`00`00      [ 8]  771 	jsr	__Moveto_d
+   02F8 32 62         [ 5]  772 	leas	2,s
+   02FA 8E`01`7C      [ 3]  773 	ldx	#_fullbrain
+   02FD 7E`00`00      [ 4]  774 	jmp	___Draw_VLp
+                            775 	.globl	_circle_value
+   0300                     776 _circle_value:
+   0300 78                  777 	.byte	120
+   0301 00                  778 	.byte	0
+   0302 78                  779 	.byte	120
+   0303 06                  780 	.byte	6
+   0304 77                  781 	.byte	119
+   0305 0C                  782 	.byte	12
+   0306 77                  783 	.byte	119
+   0307 12                  784 	.byte	18
+   0308 76                  785 	.byte	118
+   0309 18                  786 	.byte	24
+   030A 74                  787 	.byte	116
+   030B 1E                  788 	.byte	30
+   030C 73                  789 	.byte	115
+   030D 23                  790 	.byte	35
+   030E 71                  791 	.byte	113
+   030F 29                  792 	.byte	41
+   0310 6F                  793 	.byte	111
+   0311 2F                  794 	.byte	47
+   0312 6C                  795 	.byte	108
+   0313 34                  796 	.byte	52
+   0314 69                  797 	.byte	105
+   0315 39                  798 	.byte	57
+   0316 66                  799 	.byte	102
+   0317 3F                  800 	.byte	63
+   0318 63                  801 	.byte	99
+   0319 44                  802 	.byte	68
+   031A 60                  803 	.byte	96
+   031B 48                  804 	.byte	72
+   031C 5C                  805 	.byte	92
+   031D 4D                  806 	.byte	77
+   031E 58                  807 	.byte	88
+   031F 52                  808 	.byte	82
+   0320 54                  809 	.byte	84
+   0321 56                  810 	.byte	86
+   0322 4F                  811 	.byte	79
+   0323 5A                  812 	.byte	90
+   0324 4B                  813 	.byte	75
+   0325 5E                  814 	.byte	94
+   0326 46                  815 	.byte	70
+   0327 61                  816 	.byte	97
+   0328 41                  817 	.byte	65
+   0329 65                  818 	.byte	101
+   032A 3C                  819 	.byte	60
+   032B 68                  820 	.byte	104
+   032C 37                  821 	.byte	55
+   032D 6B                  822 	.byte	107
+   032E 31                  823 	.byte	49
+   032F 6D                  824 	.byte	109
+   0330 2C                  825 	.byte	44
+   0331 70                  826 	.byte	112
+   0332 26                  827 	.byte	38
+   0333 72                  828 	.byte	114
+   0334 21                  829 	.byte	33
+   0335 74                  830 	.byte	116
+   0336 1B                  831 	.byte	27
+   0337 75                  832 	.byte	117
+   0338 15                  833 	.byte	21
+   0339 76                  834 	.byte	118
+   033A 0F                  835 	.byte	15
+   033B 77                  836 	.byte	119
+   033C 09                  837 	.byte	9
+   033D 78                  838 	.byte	120
+   033E 03                  839 	.byte	3
+   033F 78                  840 	.byte	120
+   0340 FD                  841 	.byte	-3
+   0341 78                  842 	.byte	120
+   0342 F7                  843 	.byte	-9
+   0343 78                  844 	.byte	120
+   0344 F1                  845 	.byte	-15
+   0345 77                  846 	.byte	119
+   0346 EB                  847 	.byte	-21
+   0347 76                  848 	.byte	118
+   0348 E5                  849 	.byte	-27
+   0349 75                  850 	.byte	117
+   034A DF                  851 	.byte	-33
+   034B 74                  852 	.byte	116
+   034C DA                  853 	.byte	-38
+   034D 72                  854 	.byte	114
+   034E D4                  855 	.byte	-44
+   034F 70                  856 	.byte	112
+   0350 CF                  857 	.byte	-49
+   0351 6D                  858 	.byte	109
+   0352 C9                  859 	.byte	-55
+   0353 6B                  860 	.byte	107
+   0354 C4                  861 	.byte	-60
+   0355 68                  862 	.byte	104
+   0356 BF                  863 	.byte	-65
+   0357 65                  864 	.byte	101
+   0358 BA                  865 	.byte	-70
+   0359 61                  866 	.byte	97
+   035A B5                  867 	.byte	-75
+   035B 5E                  868 	.byte	94
+   035C B1                  869 	.byte	-79
+   035D 5A                  870 	.byte	90
+   035E AC                  871 	.byte	-84
+   035F 56                  872 	.byte	86
+   0360 A8                  873 	.byte	-88
+   0361 52                  874 	.byte	82
+   0362 A4                  875 	.byte	-92
+   0363 4D                  876 	.byte	77
+   0364 A0                  877 	.byte	-96
+   0365 48                  878 	.byte	72
+   0366 9D                  879 	.byte	-99
+   0367 44                  880 	.byte	68
+   0368 9A                  881 	.byte	-102
+   0369 3F                  882 	.byte	63
+   036A 97                  883 	.byte	-105
+   036B 39                  884 	.byte	57
+   036C 94                  885 	.byte	-108
+   036D 34                  886 	.byte	52
+   036E 91                  887 	.byte	-111
+   036F 2F                  888 	.byte	47
+   0370 8F                  889 	.byte	-113
+   0371 29                  890 	.byte	41
+   0372 8D                  891 	.byte	-115
+   0373 23                  892 	.byte	35
+   0374 8C                  893 	.byte	-116
+   0375 1E                  894 	.byte	30
+   0376 8A                  895 	.byte	-118
+   0377 18                  896 	.byte	24
+   0378 89                  897 	.byte	-119
+   0379 12                  898 	.byte	18
+   037A 89                  899 	.byte	-119
+   037B 0C                  900 	.byte	12
+   037C 88                  901 	.byte	-120
+   037D 06                  902 	.byte	6
+   037E 88                  903 	.byte	-120
+   037F 00                  904 	.byte	0
+   0380 88                  905 	.byte	-120
+   0381 FA                  906 	.byte	-6
+   0382 89                  907 	.byte	-119
+   0383 F4                  908 	.byte	-12
+   0384 89                  909 	.byte	-119
+   0385 EE                  910 	.byte	-18
+   0386 8A                  911 	.byte	-118
+   0387 E8                  912 	.byte	-24
+   0388 8C                  913 	.byte	-116
+   0389 E2                  914 	.byte	-30
+   038A 8D                  915 	.byte	-115
+   038B DD                  916 	.byte	-35
+   038C 8F                  917 	.byte	-113
+   038D D7                  918 	.byte	-41
+   038E 91                  919 	.byte	-111
+   038F D1                  920 	.byte	-47
+   0390 94                  921 	.byte	-108
+   0391 CC                  922 	.byte	-52
+   0392 97                  923 	.byte	-105
+   0393 C7                  924 	.byte	-57
+   0394 9A                  925 	.byte	-102
+   0395 C1                  926 	.byte	-63
+   0396 9D                  927 	.byte	-99
+   0397 BC                  928 	.byte	-68
+   0398 A0                  929 	.byte	-96
+   0399 B8                  930 	.byte	-72
+   039A A4                  931 	.byte	-92
+   039B B3                  932 	.byte	-77
+   039C A8                  933 	.byte	-88
+   039D AE                  934 	.byte	-82
+   039E AC                  935 	.byte	-84
+   039F AA                  936 	.byte	-86
+   03A0 B1                  937 	.byte	-79
+   03A1 A6                  938 	.byte	-90
+   03A2 B5                  939 	.byte	-75
+   03A3 A2                  940 	.byte	-94
+   03A4 BA                  941 	.byte	-70
+   03A5 9F                  942 	.byte	-97
+   03A6 BF                  943 	.byte	-65
+   03A7 9B                  944 	.byte	-101
+   03A8 C4                  945 	.byte	-60
+   03A9 98                  946 	.byte	-104
+   03AA C9                  947 	.byte	-55
+   03AB 95                  948 	.byte	-107
+   03AC CF                  949 	.byte	-49
+   03AD 93                  950 	.byte	-109
+   03AE D4                  951 	.byte	-44
+   03AF 90                  952 	.byte	-112
+   03B0 DA                  953 	.byte	-38
+   03B1 8E                  954 	.byte	-114
+   03B2 DF                  955 	.byte	-33
+   03B3 8C                  956 	.byte	-116
+   03B4 E5                  957 	.byte	-27
+   03B5 8B                  958 	.byte	-117
+   03B6 EB                  959 	.byte	-21
+   03B7 8A                  960 	.byte	-118
+   03B8 F1                  961 	.byte	-15
+   03B9 89                  962 	.byte	-119
+   03BA F7                  963 	.byte	-9
+   03BB 88                  964 	.byte	-120
+   03BC FD                  965 	.byte	-3
+   03BD 88                  966 	.byte	-120
+   03BE 03                  967 	.byte	3
+   03BF 88                  968 	.byte	-120
+   03C0 09                  969 	.byte	9
+   03C1 88                  970 	.byte	-120
+   03C2 0F                  971 	.byte	15
+   03C3 89                  972 	.byte	-119
+   03C4 15                  973 	.byte	21
+   03C5 8A                  974 	.byte	-118
+   03C6 1B                  975 	.byte	27
+   03C7 8B                  976 	.byte	-117
+   03C8 21                  977 	.byte	33
+   03C9 8C                  978 	.byte	-116
+   03CA 26                  979 	.byte	38
+   03CB 8E                  980 	.byte	-114
+   03CC 2C                  981 	.byte	44
+   03CD 90                  982 	.byte	-112
+   03CE 31                  983 	.byte	49
+   03CF 93                  984 	.byte	-109
+   03D0 37                  985 	.byte	55
+   03D1 95                  986 	.byte	-107
+   03D2 3C                  987 	.byte	60
+   03D3 98                  988 	.byte	-104
+   03D4 41                  989 	.byte	65
+   03D5 9B                  990 	.byte	-101
+   03D6 46                  991 	.byte	70
+   03D7 9F                  992 	.byte	-97
+   03D8 4B                  993 	.byte	75
+   03D9 A2                  994 	.byte	-94
+   03DA 4F                  995 	.byte	79
+   03DB A6                  996 	.byte	-90
+   03DC 54                  997 	.byte	84
+   03DD AA                  998 	.byte	-86
+   03DE 58                  999 	.byte	88
+   03DF AE                 1000 	.byte	-82
+   03E0 5C                 1001 	.byte	92
+   03E1 B3                 1002 	.byte	-77
+   03E2 60                 1003 	.byte	96
+   03E3 B8                 1004 	.byte	-72
+   03E4 63                 1005 	.byte	99
+   03E5 BC                 1006 	.byte	-68
+   03E6 66                 1007 	.byte	102
+   03E7 C1                 1008 	.byte	-63
+   03E8 69                 1009 	.byte	105
+   03E9 C7                 1010 	.byte	-57
+   03EA 6C                 1011 	.byte	108
+   03EB CC                 1012 	.byte	-52
+   03EC 6F                 1013 	.byte	111
+   03ED D1                 1014 	.byte	-47
+   03EE 71                 1015 	.byte	113
+   03EF D7                 1016 	.byte	-41
+   03F0 73                 1017 	.byte	115
+   03F1 DD                 1018 	.byte	-35
+   03F2 74                 1019 	.byte	116
+   03F3 E2                 1020 	.byte	-30
+   03F4 76                 1021 	.byte	118
+   03F5 E8                 1022 	.byte	-24
+   03F6 77                 1023 	.byte	119
+   03F7 EE                 1024 	.byte	-18
+   03F8 77                 1025 	.byte	119
+   03F9 F4                 1026 	.byte	-12
+   03FA 78                 1027 	.byte	120
+   03FB FA                 1028 	.byte	-6
+   03FC 78                 1029 	.byte	120
+   03FD 00                 1030 	.byte	0
+                           1031 	.area	.bss
+                           1032 	.globl	_display_execute_game_over_state_state
+   0000                    1033 _display_execute_game_over_state_state:	.blkb	2
+                           1034 	.globl	_level_specific_action
+   0002                    1035 _level_specific_action:	.blkb	2
+                           1036 	.globl	_execute_game_playing_state
+   0004                    1037 _execute_game_playing_state:	.blkb	2
+                           1038 	.area	.text
+                           1039 	.globl	_main
+   03FE                    1040 _main:
+   03FE BD`00`00      [ 8] 1041 	jsr	_execute_menu_state
+   0401                    1042 L4:
+   0401 BD`00`00      [ 8] 1043 	jsr	_level_play
+   0404 20 FB         [ 3] 1044 	bra	L4
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Wed Jul 30 21:20:05 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 01:17:24 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L4                 03BF R   |   2 _Brainleft         010D GR
-  2 _Brainright        0089 GR  |   2 _Display_Gamef     028D GR
+  2 L4                 0401 R   |   2 _Brainleft         010D GR
+  2 _Brainright        0089 GR  |   2 _Display_Gamef     02CF GR
   2 _Gamefield         007A GR  |   2 _Level_advance     0000 GR
     __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
     ___Reset0Ref       **** GX  |   2 _advancement_c     005C GR
   2 _advancement_p     006B GR  |   2 _arrow             0278 GR
-  2 _circle_value      02BE GR  |   2 _cross             0020 GR
+  2 _circle_value      0300 GR  |   2 _cross             0020 GR
   3 _display_execu     0000 GR  |     _dp_VIA_t1_cnt     **** GX
   3 _execute_game_     0004 GR  |     _execute_menu_     **** GX
   2 _fullbrain         017C GR  |     _level_play        **** GX
-  3 _level_specifi     0002 GR  |   2 _main              03BC GR
-  2 _position_arro     026C GR  |   2 _square            002F GR
-  2 _square_filled     0041 GR
+  3 _level_specifi     0002 GR  |   2 _main              03FE GR
+  2 _menu              028D GR  |   2 _position_arro     026C GR
+  2 _square            002F GR  |   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Wed Jul 30 21:20:05 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 01:17:24 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size  3C4   flags  100
+   2 .text            size  406   flags  100
    3 .bss             size    6   flags    0
 [_DSEG]
    1 _DATA            size    0   flags C0C0

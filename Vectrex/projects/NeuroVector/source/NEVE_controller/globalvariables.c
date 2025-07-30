@@ -32,9 +32,9 @@ const int joy_to_index[9] = {
 
 //Highscores
 Scores highscores = {0,0,0,0,0,0};
+//Timing
 Timing lifeline_timing = {0, 8};
-
+//Check if correctly repeated
 unsigned int is_the_same = 1;
-
-unsigned int scaling_factor = 16;
+//Levelselection
 unsigned int level_selection  = 1;

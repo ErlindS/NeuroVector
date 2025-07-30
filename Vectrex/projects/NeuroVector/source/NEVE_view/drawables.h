@@ -17,6 +17,7 @@
 #include "NEVE_drawings/menu_arrow.h"
 #include "NEVE_drawings/drawablesbasic.h" 
 #include "NEVE_drawings/lifeline.h" 
+#include "NEVE_drawings/menu.h" 
 #include "../NEVE_model/square.h"
 
 #include "../NEVE_controller/globalvariables.h"
@@ -66,14 +67,4 @@ void Display_Gamefield(void){
 // Menu Arrow
 // --------------------------------------------------
 void draw_menu_arrow(unsigned int q);
-
-/*
-#define DRAW_SQUARE_CONST(id) \
-	Reset0Ref();				\	
-	dp_VIA_t1_cnt_lo = 0x1f;	\	
-	Moveto_d(-56, 0);			\
-	Moveto_d(displayed_squares[id].x, displayed_squares[id].y);			\
-	dp_VIA_t1_cnt_lo = displayed_squares[id].scaling_factor;			\
-	Draw_VLp(&square); \
-*/
-
+void draw_menu_sign();

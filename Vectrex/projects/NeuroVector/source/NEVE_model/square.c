@@ -10,6 +10,7 @@
 #include "square.h"
 
 void reset_displayed_squares_coordinates(){
+
     displayed_squares[0].x = UNIFIED_VALUE_1; displayed_squares[0].y = UNIFIED_VALUE_2;
     displayed_squares[1].x = UNIFIED_VALUE_1; displayed_squares[1].y = 0;
     displayed_squares[2].x = UNIFIED_VALUE_1; displayed_squares[2].y = UNIFIED_VALUE_1;

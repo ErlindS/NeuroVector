@@ -681,6 +681,74 @@ _arrow:
 	.byte	1
 	.byte	0
 	.byte	0
+	.globl	_menu
+_menu:
+	.byte	-1
+	.byte	100
+	.byte	0
+	.byte	-1
+	.byte	-100
+	.byte	50
+	.byte	-1
+	.byte	100
+	.byte	50
+	.byte	-1
+	.byte	-100
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	30
+	.byte	-1
+	.byte	0
+	.byte	50
+	.byte	0
+	.byte	0
+	.byte	-50
+	.byte	-1
+	.byte	100
+	.byte	0
+	.byte	0
+	.byte	-50
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	50
+	.byte	0
+	.byte	50
+	.byte	-50
+	.byte	-1
+	.byte	0
+	.byte	50
+	.byte	0
+	.byte	-100
+	.byte	30
+	.byte	-1
+	.byte	100
+	.byte	0
+	.byte	-1
+	.byte	-100
+	.byte	50
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	-110
+	.byte	30
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	50
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_Display_Gamefield
 _Display_Gamefield:
 	jsr	___Reset0Ref

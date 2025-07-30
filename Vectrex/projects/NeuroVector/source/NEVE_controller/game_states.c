@@ -132,7 +132,8 @@ void execute_menu_state()
 
         //Print the menu
         //TODO replace this
-        print_string(100, -120, "SELECT THE GAMEMODE\x80");
+        //print_string(100, -120, "SELECT THE GAMEMODE\x80");
+        draw_menu_sign();
         print_highscore_still(60,-80);
         print_highscore_pulse(40,-80);
         print_highscore_mirror(20,-80);
@@ -209,9 +210,9 @@ void execute_game_over_state(){
         *highscores.current_score  = number_of_crosses_to_be_displayed;
     
     print_string(100, -60, "GAME OVER\x80");
-    print_string(70, -80, "PRESS BUTTON 2\x80");
+    print_string(70, -80, "PRESS BUTTON 3\x80");
     print_string(50, -60, "TO RESTART\x80");
-    print_string(20, -80, "PRESS BUTTON 3\x80");
+    print_string(20, -80, "PRESS BUTTON 2\x80");
     print_string(0, -100, "TO GO TO THE MENU\x80");
 
     //Posibility to get back
@@ -243,9 +244,9 @@ void execute_game_won_state(){
         *highscores.current_score  = number_of_crosses_to_be_displayed;
     
     print_string(100, -60, "YOU WON\x80");
-    print_string(70, -80, "PRESS BUTTON 2\x80");
+    print_string(70, -80, "PRESS BUTTON 3\x80");
     print_string(50, -60, "TO RESTART\x80");
-    print_string(20, -80, "PRESS BUTTON 3\x80");
+    print_string(20, -80, "PRESS BUTTON 2\x80");
     print_string(0, -100, "TO GO TO THE MENU\x80");
 
     //Posibility to get back

@@ -9,7 +9,6 @@
 
 #include "numbergenerator.h"
 
-// TODO: Improve this
 void create_random_sequence(unsigned int n) {
     for(int i = 0; i < 20; i++){
         n ^= n >> 4;

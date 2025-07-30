@@ -10,10 +10,10 @@
                              10 ; 21 "source\config\boot_loader.c" 1
    001F                      11 	_crt0:							
    001F                      12 	_crt0_data:					
-   001F 8E 00 CA      [ 3]   13 		ldx		#l_.data			
+   001F 8E 00 C9      [ 3]   13 		ldx		#l_.data			
    0022 27 1B         [ 3]   14 		beq		_crt0_data_done		
    0024 CE 00 5D      [ 3]   15 		ldu		#a_.text			
-   0027 33 C9 33 6A   [ 8]   16 		leau	l_.text,u			
+   0027 33 C9 36 24   [ 8]   16 		leau	l_.text,u			
    002B 33 C9 00 00   [ 8]   17 		leau	l_.text.hot,u		
    002F 33 C9 00 00   [ 8]   18 		leau	l_.text.unlikely,u	
    0033 10 8E C8 80   [ 4]   19 		ldy		#a_.data			
@@ -26,7 +26,7 @@
    003F                      26 	_crt0_bss:						
    003F 8E 00 0F      [ 3]   27 		ldx		#l_.bss				
    0042 27 0A         [ 3]   28 		beq		_crt0_bss_done		
-   0044 10 8E C9 4A   [ 4]   29 		ldy		#a_.bss				
+   0044 10 8E C9 49   [ 4]   29 		ldy		#a_.bss				
    0048                      30 	_crt0_bss_zero:				
    0048 6F A0         [ 8]   31 		clr		,y+					
    004A 30 1F         [ 5]   32 		leax	-1,x				
@@ -34,7 +34,7 @@
    004E                      34 	_crt0_bss_done:				
                              35 	
                              36 ;--- end asm ---
-   004E BD 04 19      [ 8]   37 	jsr	_main
+   004E BD 04 5B      [ 8]   37 	jsr	_main
    0051 5D            [ 2]   38 	tstb
    0052 27 06         [ 3]   39 	beq	L2
    0054 CC 00 00      [ 3]   40 	ldd	#0
@@ -42,7 +42,7 @@
    005A                      42 L2:
    005A 7E F0 00      [ 4]   43 	jmp	___Reset
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Wed Jul 30 21:20:05 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 01:17:24 2025
 
 Symbol Table
 
@@ -60,7 +60,7 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Wed Jul 30 21:20:05 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 01:17:24 2025
 
 Area Table
 
