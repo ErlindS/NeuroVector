@@ -10,7 +10,9 @@
 #pragma once
 
 typedef struct {
-    unsigned int first;
+    int progress;
+    int draw_tick;
+    int remaining_cycles;
     const int rest[69];
 } LifelineStruct;
 

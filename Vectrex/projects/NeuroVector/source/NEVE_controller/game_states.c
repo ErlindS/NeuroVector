@@ -5,7 +5,7 @@
 // Description: Manages the various states and transitions of the game.
 // Author: Erlind Sejdiu
 // Date: 2025-07-28
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 
 #include "game_states.h"
 
@@ -50,8 +50,8 @@ void execute_repeat_sequence_state(void){
     }
 
     /*************************************/
-    //calculate_time_left();
-
+    calculate_time_left();
+    /*
     ++time_left_counter3;
     if(time_left_counter3 == 8){
         ++lifeline.first;
@@ -62,10 +62,11 @@ void execute_repeat_sequence_state(void){
         lifeline.first = 0;
         time_left_counter -= 1;
     }
+    */
+    /*************************************/
+    //draw_lifeline();
+    /*************************************/
 
-    /*************************************/
-    draw_lifeline();
-    /*************************************/
 }
 
 void execute_display_sequence_state(void){
@@ -88,9 +89,9 @@ void execute_display_sequence_state(void){
     }
     update_level_advancement(number_of_crosses_to_be_displayed, 0);
 
-    time_left_counter3 = 0;
-    lifeline.first = 32;
-    time_left_counter = 8;
+    lifeline.draw_tick = 0;
+    lifeline.progress = 32;
+    lifeline.remaining_cycles = 8;
 
     execute_game_playing_state = &execute_repeat_sequence_state;
 }

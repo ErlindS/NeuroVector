@@ -689,7 +689,7 @@
    02F1 CB 1A         [ 2]  689 	addb	#26
    02F3 E7 E2         [ 6]  690 	stb	,-s
    02F5 CB 2E         [ 2]  691 	addb	#46
-   02F7 BD 33 D3      [ 8]  692 	jsr	__Moveto_d
+   02F7 BD 33 52      [ 8]  692 	jsr	__Moveto_d
    02FA C6 80         [ 2]  693 	ldb	#-128
    02FC D7 04         [ 4]  694 	stb	*_dp_VIA_t1_cnt_lo
    02FE 8E 00 D7      [ 3]  695 	ldx	#_Gamefield
@@ -700,7 +700,7 @@
    030B CB 38         [ 2]  700 	addb	#56
    030D E7 E2         [ 6]  701 	stb	,-s
    030F 5F            [ 2]  702 	clrb
-   0310 BD 33 D3      [ 8]  703 	jsr	__Moveto_d
+   0310 BD 33 52      [ 8]  703 	jsr	__Moveto_d
    0313 32 62         [ 5]  704 	leas	2,s
    0315 8E 01 D9      [ 3]  705 	ldx	#_fullbrain
    0318 7E F4 10      [ 4]  706 	jmp	___Draw_VLp
@@ -962,20 +962,20 @@
    0418 00                  962 	.byte	0
                             963 	.area	.bss
                             964 	.globl	_display_execute_game_over_state_state
-   C94B                     965 _display_execute_game_over_state_state:	.blkb	2
+   C94A                     965 _display_execute_game_over_state_state:	.blkb	2
                             966 	.globl	_level_specific_action
-   C94D                     967 _level_specific_action:	.blkb	2
+   C94C                     967 _level_specific_action:	.blkb	2
                             968 	.globl	_execute_game_playing_state
-   C94F                     969 _execute_game_playing_state:	.blkb	2
+   C94E                     969 _execute_game_playing_state:	.blkb	2
                             970 	.area	.text
                             971 	.globl	_main
    0419                     972 _main:
-   0419 BD 0B 6F      [ 8]  973 	jsr	_execute_menu_state
+   0419 BD 0A F8      [ 8]  973 	jsr	_execute_menu_state
    041C                     974 L4:
-   041C BD 0F F0      [ 8]  975 	jsr	_level_play
+   041C BD 0F 79      [ 8]  975 	jsr	_level_play
    041F 20 FB         [ 3]  976 	bra	L4
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Wed Jul 30 10:10:25 2025
+Hexadecimal [16-Bits]                                 Wed Jul 30 20:58:56 2025
 
 Symbol Table
 
@@ -996,7 +996,7 @@ Symbol Table
   2 _square_filled     0041 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Wed Jul 30 10:10:25 2025
+Hexadecimal [16-Bits]                                 Wed Jul 30 20:58:56 2025
 
 Area Table
 

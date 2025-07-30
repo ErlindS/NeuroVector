@@ -27,14 +27,16 @@
 static inline __attribute__((always_inline))
 void draw_lifeline(){
     Reset0Ref();
-    dp_VIA_t1_cnt_lo = 0x30;
+    dp_VIA_t1_cnt_lo = 24;
     Moveto_d(120, -120);
     Moveto_d(120, -120);
-    Moveto_d(0, -50);
+    Moveto_d(120, -120);
+    Moveto_d(120, -120);
+    Moveto_d(0, -100);
     Draw_VLc(&lifeline);
     Reset0Ref();
     print_string(100, 70, "BPM\x80");
-    print_unsigned_int2(100, 50, time_left_counter*12);
+    print_unsigned_int2(100, 50, lifeline.remaining_cycles*12);
 };
 
 // --------------------------------------------------

@@ -45,11 +45,7 @@ extern int joy_x_old;
 extern int joy_y_old;
 extern const int joy_to_index[9];
 
-
 extern unsigned is_the_same;
-extern unsigned int time_left_counter;
-extern unsigned int time_left_counter2;
-extern unsigned int time_left_counter3;
 
 extern unsigned int scaling_factor;
 extern unsigned int level_selection;

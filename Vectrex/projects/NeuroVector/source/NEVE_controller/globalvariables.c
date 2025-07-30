@@ -23,7 +23,6 @@ int joy_x = 0;
 int joy_y = 0;
 int joy_x_old = 5;
 int joy_y_old = 5;
-
 const int joy_to_index[9] = {
     6, 7, 8,
     3, 4, 5,
@@ -35,10 +34,6 @@ const int joy_to_index[9] = {
 Scores highscores = {0,0,0,0,0,0};
 
 unsigned int is_the_same = 1;
-
-unsigned int time_left_counter = 7;
-unsigned int time_left_counter2 = 0;
-unsigned int time_left_counter3 = 0;
 
 unsigned int scaling_factor = 16;
 unsigned int level_selection  = 1;
