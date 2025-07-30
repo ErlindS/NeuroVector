@@ -43,7 +43,7 @@ static inline __attribute__((always_inline))
 void check_successfully_repeated(){
     //Game over, no time left
     //Game over, repeated wrongly
-    if(lifeline.remaining_cycles == 0 || is_the_same == 0){
+    if(lifeline_timing.remaining_cycles == 0 || is_the_same == 0){
         execute_game_playing_state = &execute_game_over_state;
     }
 

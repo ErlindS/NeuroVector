@@ -32,6 +32,7 @@ const int joy_to_index[9] = {
 
 //Highscores
 Scores highscores = {0,0,0,0,0,0};
+Timing lifeline_timing = {0, 8};
 
 unsigned int is_the_same = 1;
 

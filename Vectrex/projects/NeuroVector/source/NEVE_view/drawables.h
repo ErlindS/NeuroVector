@@ -36,7 +36,7 @@ void draw_lifeline(){
     Draw_VLc(&lifeline);
     Reset0Ref();
     print_string(100, 70, "BPM\x80");
-    print_unsigned_int2(100, 50, lifeline.remaining_cycles*12);
+    print_unsigned_int2(100, 50, lifeline_timing.remaining_cycles*12);
 };
 
 // --------------------------------------------------

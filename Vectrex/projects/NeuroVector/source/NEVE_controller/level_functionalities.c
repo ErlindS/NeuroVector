@@ -30,22 +30,19 @@ void calculate_time_left()
     //and time_left_counter will be assigend to time_left_counter.
     //time_left_counter will be decreased meaning, in later iterations, when the player has not much time left,
     //time_left_counter3 will need more cycles. 
-    ++lifeline.draw_tick;
-    if(lifeline.draw_tick == 8){
+    ++lifeline_timing.draw_tick;
+    if(lifeline_timing.draw_tick == 8){
         ++lifeline.progress;
-        lifeline.draw_tick = lifeline.remaining_cycles; 
+        lifeline_timing.draw_tick = lifeline_timing.remaining_cycles; 
     }
 
     if(lifeline.progress == 32){
         lifeline.progress = 0;
-        lifeline.remaining_cycles -= 1;
+        lifeline_timing.remaining_cycles -= 1;
     }
-
+    /*************************************/
     draw_lifeline();
-
-    //Display hearbeat
-    //print_string(100, 70, "BPM\x80");
-    //print_unsigned_int2(100, 50, lifeline.remaining_cycles*12);
+    /*************************************/
 }
 
 void update_level_advancement(unsigned int n, unsigned int k){

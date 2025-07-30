@@ -60,8 +60,6 @@ void draw_menu_arrow(unsigned int q) {
 
 //Needs to be in c file, when added to header .data will be increased about 400 bytes
 LifelineStruct lifeline = {
-    .draw_tick = 0,
-    .remaining_cycles = 7,
     .progress = 0,
     .rest = {
         0, 60,

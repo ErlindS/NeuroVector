@@ -11,8 +11,6 @@
 
 typedef struct {
     int progress;
-    int draw_tick;
-    int remaining_cycles;
     const int rest[69];
 } LifelineStruct;
 

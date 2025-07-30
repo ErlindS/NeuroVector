@@ -31,7 +31,13 @@ typedef struct scores {
     unsigned int* current_score; 
 } Scores;
 
+typedef struct timing_values{
+    int draw_tick;
+    int remaining_cycles;
+} Timing;
+
 extern Scores highscores;
+extern Timing lifeline_timing;
 
 extern unsigned int button_pressed_counter;
 extern unsigned int display_duration_for_cross;

@@ -50,21 +50,29 @@ void execute_repeat_sequence_state(void){
     }
 
     /*************************************/
-    calculate_time_left();
-    /*
-    ++time_left_counter3;
-    if(time_left_counter3 == 8){
-        ++lifeline.first;
-        time_left_counter3 = time_left_counter; 
+    //calculate_time_left();
+    
+    //In each iteration time_left_counter3 will be increased.
+    //After 8 rounds lifeline.progress will be increased.
+    //lifeline.progress determines how much of the lifeline will be drawn. 
+    //because of time_left_counter3 the lifeline is not drawn as fast
+    //and time_left_counter will be assigend to time_left_counter.
+    //time_left_counter will be decreased meaning, in later iterations, when the player has not much time left,
+    //time_left_counter3 will need more cycles. 
+    ++lifeline_timing.draw_tick;
+    if(lifeline_timing.draw_tick == 8){
+        ++lifeline.progress;
+        lifeline_timing.draw_tick = lifeline_timing.remaining_cycles; 
     }
 
-    if(lifeline.first == 32){
-        lifeline.first = 0;
-        time_left_counter -= 1;
+    if(lifeline.progress == 32){
+        lifeline.progress = 0;
+        lifeline_timing.remaining_cycles -= 1;
     }
-    */
     /*************************************/
-    //draw_lifeline();
+    draw_lifeline();
+    /*************************************/
+
     /*************************************/
 
 }
@@ -89,9 +97,9 @@ void execute_display_sequence_state(void){
     }
     update_level_advancement(number_of_crosses_to_be_displayed, 0);
 
-    lifeline.draw_tick = 0;
+    lifeline_timing.draw_tick = 0;
     lifeline.progress = 32;
-    lifeline.remaining_cycles = 8;
+    lifeline_timing.remaining_cycles = 8;
 
     execute_game_playing_state = &execute_repeat_sequence_state;
 }
