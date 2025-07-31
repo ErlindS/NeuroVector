@@ -1,19 +1,17 @@
-// ---------------------------------------------------------------------------
-// Extrem
+// ***************************************************************************
+// Orbit
 //
-// Filename: extrem.h
-// Description: Manages the functions needed for the extrem mode.
+// Filename: orbit.h
+// Description: Manages the functions needed for the orbit mode.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #pragma once
 #include "../../NEVE_view/drawables.h"
 #include "../globalvariables.h"
 
-void circle_init(void);
 void circle_movement(void);
-void circle_movement_optimized(void);
 
 const struct vector_t circle_value[] = 
 {

@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Drawbales
 //
 // Filename: drawables.c
@@ -6,7 +6,7 @@
 //				It basically represents the interface.
 // Author: Erlind Sejdiu
 // Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 
 #include "drawables.h"
 
@@ -56,17 +56,6 @@ void draw_menu_arrow(unsigned int q) {
 	Moveto_d(position_arrows[q].x, position_arrows[q].y);
 	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&arrow);
-}
-
-//--------------------------------------------------
-// Menu
-// -------------------------------------------------
-void draw_menu_sign() {
-	Reset0Ref();
-    dp_VIA_t1_cnt_lo = 40;
-	Moveto_d(120, -60);
-    Moveto_d(120, -120);
-	Draw_VLp(&menu);
 }
 
 //Needs to be in c file, when added to header .data will be increased about 400 bytes

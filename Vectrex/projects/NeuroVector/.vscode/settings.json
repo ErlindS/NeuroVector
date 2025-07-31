@@ -12,6 +12,7 @@
         "extrem.h": "c",
         "circle_pattern.h": "c",
         "normal.h": "c",
-        "hard.h": "c"
+        "hard.h": "c",
+        "controller.h": "c"
     }
 }

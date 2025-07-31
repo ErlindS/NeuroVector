@@ -1,5 +1,13 @@
+// ***************************************************************************
+// Echo
+//
+// Filename: echo.h
+// Description: Manages the functions needed for the echo mode.
+// Author: Erlind Sejdiu
+// Date: 2025-07-31
+// ***************************************************************************
+
 #include "echo.h"
-#include "basic.h"
 
 static int position_coordinate_0 = 0;
 static int position_coordinate_1 = 128/8 * 2;
@@ -277,7 +285,7 @@ const struct vector_t rectangle_rot[] =
 };
 
 
-void circle_movement2(){
+void echo_movement(){
     displayed_squares[1].y = rectangle[position_coordinate_0].y;
     displayed_squares[1].x = rectangle[position_coordinate_0].x;
     displayed_squares[3].y = rectangle[position_coordinate_1].y;

@@ -1,11 +1,11 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Level Functionalities
 //
 // Filename: level_functionalities.c
 // Description: Declares functions related to level progression and player actions.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #include "level_functionalities.h"
 
@@ -20,30 +20,6 @@ struct Square displayed_squares[9] = {
     {UNIFIED_VALUE_2, 0, &draw_square, SCALING_FACTOR, 0},
     {UNIFIED_VALUE_2, UNIFIED_VALUE_1, &draw_square, SCALING_FACTOR, 0}
 };
-
-void calculate_time_left()
-{
-    //In each iteration time_left_counter3 will be increased.
-    //After 8 rounds lifeline.progress will be increased.
-    //lifeline.progress determines how much of the lifeline will be drawn. 
-    //because of time_left_counter3 the lifeline is not drawn as fast
-    //and time_left_counter will be assigend to time_left_counter.
-    //time_left_counter will be decreased meaning, in later iterations, when the player has not much time left,
-    //time_left_counter3 will need more cycles. 
-    ++lifeline_timing.draw_tick;
-    if(lifeline_timing.draw_tick == 8){
-        ++lifeline.progress;
-        lifeline_timing.draw_tick = lifeline_timing.remaining_cycles; 
-    }
-
-    if(lifeline.progress == 32){
-        lifeline.progress = 0;
-        lifeline_timing.remaining_cycles -= 1;
-    }
-    /*************************************/
-    draw_lifeline();
-    /*************************************/
-}
 
 void update_level_advancement(unsigned int n, unsigned int k){
     while(n--){
@@ -84,7 +60,7 @@ void read_player_input(){
     
     if(button_1_4_pressed())
     {
-        if(a_random[button_pressed_counter] == temp_pass)
+        if(random_sequence[button_pressed_counter] == temp_pass)
         {
             button_pressed_counter++;
         }

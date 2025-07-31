@@ -1,14 +1,13 @@
-// ---------------------------------------------------------------------------
-// Hard
+// ***************************************************************************
+// Pulse
 //
-// Filename: hard.c
-// Description: Manages the functions needed for the hard mode.
+// Filename: pulse.c
+// Description: Manages the functions needed for the pulse mode.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #include "pulse.h"
-#include "basic.h"
 
 void change_cross_size(){
 

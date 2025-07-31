@@ -1,5 +1,14 @@
+// ***************************************************************************
+// Portal
+//
+// Filename: protal.h
+// Description: Manages the functions needed for the portal mode.
+// Author: Erlind Sejdiu
+// Date: 2025-07-31
+// ***************************************************************************
+
+
 #include "portal.h"
-#include "basic.h"
 
 #define MAXSIZE 126
 

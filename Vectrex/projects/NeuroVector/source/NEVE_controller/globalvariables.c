@@ -1,17 +1,14 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Global variables
 //
 // Filename: globalvariables.c
 // Description: Implements global variables used throughout the game.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #include "globalvariables.h"
 
-// ---------------------------------------------------------------------------
-// Global Variables
-// ---------------------------------------------------------------------------
 unsigned int button_pressed_counter = 0;
 unsigned int display_duration_for_cross = 50;
 unsigned int number_of_crosses_to_be_displayed = 0;

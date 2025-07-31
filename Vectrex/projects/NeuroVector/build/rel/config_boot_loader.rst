@@ -13,7 +13,7 @@
    001F 8E 00 BB      [ 3]   13 		ldx		#l_.data			
    0022 27 1B         [ 3]   14 		beq		_crt0_data_done		
    0024 CE 00 5D      [ 3]   15 		ldu		#a_.text			
-   0027 33 C9 3B 71   [ 8]   16 		leau	l_.text,u			
+   0027 33 C9 36 05   [ 8]   16 		leau	l_.text,u			
    002B 33 C9 00 00   [ 8]   17 		leau	l_.text.hot,u		
    002F 33 C9 00 00   [ 8]   18 		leau	l_.text.unlikely,u	
    0033 10 8E C8 80   [ 4]   19 		ldy		#a_.data			
@@ -24,7 +24,7 @@
    003D 26 F8         [ 3]   24 		bne		_crt0_data_copy		
    003F                      25 	_crt0_data_done:				
    003F                      26 	_crt0_bss:						
-   003F 8E 00 15      [ 3]   27 		ldx		#l_.bss				
+   003F 8E 00 13      [ 3]   27 		ldx		#l_.bss				
    0042 27 0A         [ 3]   28 		beq		_crt0_bss_done		
    0044 10 8E C9 3B   [ 4]   29 		ldy		#a_.bss				
    0048                      30 	_crt0_bss_zero:				
@@ -34,7 +34,7 @@
    004E                      34 	_crt0_bss_done:				
                              35 	
                              36 ;--- end asm ---
-   004E BD 04 5B      [ 8]   37 	jsr	_main
+   004E BD 04 2A      [ 8]   37 	jsr	_main
    0051 5D            [ 2]   38 	tstb
    0052 27 06         [ 3]   39 	beq	L2
    0054 CC 00 00      [ 3]   40 	ldd	#0
@@ -42,7 +42,7 @@
    005A                      42 L2:
    005A 7E F0 00      [ 4]   43 	jmp	___Reset
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 31 17:19:46 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 19:06:23 2025
 
 Symbol Table
 
@@ -60,7 +60,7 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 31 17:19:46 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 19:06:23 2025
 
 Area Table
 

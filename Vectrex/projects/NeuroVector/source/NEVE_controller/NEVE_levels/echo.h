@@ -1,17 +1,17 @@
-// ---------------------------------------------------------------------------
-// Extrem
+// ***************************************************************************
+// Echo
 //
-// Filename: extrem.h
-// Description: Manages the functions needed for the extrem mode.
+// Filename: echo.h
+// Description: Manages the functions needed for the echo mode.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #pragma once
 #include "../../NEVE_view/drawables.h"
 #include "../globalvariables.h"
 
-void circle_movement2();
+void echo_movement();
 
 extern const struct vector_t rectangle[];
 extern const struct vector_t rectangle_rot[];

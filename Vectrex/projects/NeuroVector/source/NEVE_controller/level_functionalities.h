@@ -1,11 +1,11 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Level Functionalities
 //
 // Filename: level_functionalities.h
 // Description: Declares functions related to level progression and player actions.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 #pragma once
 #include "../NEVE_model/square.h"
@@ -16,13 +16,9 @@
 #include "utils/controller.h"
 #include "print/print.h"
 
-void calculate_time_left();
-
 void update_level_advancement(unsigned int n, unsigned int k);
 
 void execute_player_action();
-
-void read_player_input();
 
 void (*display_execute_game_over_state_state)(void);
 
@@ -57,7 +53,7 @@ void move_player(){
     if(button_1_4_pressed())
     {
         //is the same will be 0(and the game will end) if the sequence does not fit the fieldnummer
-        is_the_same = (a_random[button_pressed_counter] == temp_pass)?++button_pressed_counter:0;
+        is_the_same = (random_sequence[button_pressed_counter] == temp_pass)?++button_pressed_counter:0;
     } 
 };
 
@@ -134,19 +130,25 @@ void print_highscore_echo(int y, int x)
 	reset_print_position();
 	Print_Str_d(y, x, (void*) &str[0]);
 }
-/*
+
+
 static inline __attribute__((always_inline))
-void draw_lifeline(){
-    Reset0Ref();
-    dp_VIA_t1_cnt_lo = 0x30;
-    Moveto_d(120, -120);
-    Moveto_d(120, -120);
-    Moveto_d(0, -50);
-    Draw_VLc(&lifeline);
-    Reset0Ref();
-    print_string(100, 70, "BPM\x80");
-    print_unsigned_int2(100, 50, time_left_counter*12);
-};
-*/
+void calculate_time_left(){
+    //In each iteration time_left_counter3 will be increased.
+    //After 8 rounds lifeline.progress will be increased.
+    //lifeline.progress determines how much of the lifeline will be drawn. 
+    //because of time_left_counter3 the lifeline is not drawn as fast
+    //and time_left_counter will be assigend to time_left_counter.
+    //time_left_counter will be decreased meaning, in later iterations, when the player has not much time left,
+    //time_left_counter3 will need more cycles. 
+    ++lifeline_timing.draw_tick;
+    if(lifeline_timing.draw_tick == 8){
+        ++lifeline.progress;
+        lifeline_timing.draw_tick = lifeline_timing.remaining_cycles; 
+    }
 
-
+    if(lifeline.progress == 32){
+        lifeline.progress = 0;
+        lifeline_timing.remaining_cycles -= 1;
+    }
+}

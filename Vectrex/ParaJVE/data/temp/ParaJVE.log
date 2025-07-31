@@ -18,8 +18,6 @@ Loading development properties [project\development.properties]
 * alwaysEmulateFIRQ <-- false
 
 Checking Libraries deployment
-*** ABEND recovery : old lock reused, the last occurrence has likely abended!
-*** ABEND recovery : safe mode not available (safest execution context possible already).
 Creating engine
 Loading system [data/roms/system/FastBoot.bin]
 Loading cartridge [project/project.bin]
@@ -69,8 +67,9 @@ java.lang.NullPointerException
 Loading chassis frame texture [data/packs/chassis_frame.png]
 Loading chassis bay panel texture [data/packs/chassis_joystick_panel.png]
 Loading chassis screen texture [data/packs/chassis_screen.png]
-Error while loading texture : project/project.png
-java.lang.RuntimeException: Cannot open resource [project/project.png]
+Loading overlay texture [project/project.png]
+Error while loading texture : project/project$.png
+java.lang.RuntimeException: Cannot open resource [project/project$.png]
 	at frc.emul.util.Utils.getResourceStream(Utils.java)
 	at frc.emul.tools.data.TexLoader.getResourceStream(TexLoader.java)
 	at frc.emul.vectrex.ui.opengl.JoglContext.loadTexture(JoglContext.java)
@@ -99,10 +98,14 @@ java.lang.RuntimeException: Cannot open resource [project/project.png]
 Loading overlay top holders texture [data/packs/chassis_holders_top.png]
 Loading overlay bottom holders texture [data/packs/chassis_holders_bottom.png]
 Starting engine...
-Shutdown...
-Exiting ParaJVE...
 Audio Line initialised : PCM_SIGNED 44100.0 Hz, 16 bit, mono, 2 bytes/frame, big-endian
  - Sample rate ...... 44100.0
  - Updates/Second ... 20
  - Samples/Update ... 2207
  - Line Buffer ...... 4414 bytes
+Pluging Joystick in port 1
+Pluging Joystick in port 2
+Shutdown...
+Removing Joystick from port 1
+Removing Joystick from port 2
+Exiting ParaJVE...

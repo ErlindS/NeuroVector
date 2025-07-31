@@ -1,11 +1,11 @@
-// ---------------------------------------------------------------------------
-// Hard
+// ***************************************************************************
+// Pulse
 //
-// Filename: hard.h
-// Description: Manages the functions needed for the hard mode.
+// Filename: pulse.c
+// Description: Manages the functions needed for the pulse mode.
 // Author: Erlind Sejdiu
-// Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// Date: 2025-07-31
+// ***************************************************************************
 
 
 #pragma once

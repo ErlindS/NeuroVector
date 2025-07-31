@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Drawbales
 //
 // Filename: drawables.h
@@ -6,7 +6,7 @@
 //				It basically represents the interface.
 // Author: Erlind Sejdiu
 // Date: 2025-07-26
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 
 #pragma once
 
@@ -51,6 +51,7 @@ void draw_round_advancement_cross_plus(unsigned int q);
 // --------------------------------------------------
 // Gamefield
 // --------------------------------------------------
+static inline __attribute__((always_inline))
 void Display_Gamefield(void){
 	Reset0Ref();
     dp_VIA_t1_cnt_lo = 0x40;
@@ -67,4 +68,12 @@ void Display_Gamefield(void){
 // Menu Arrow
 // --------------------------------------------------
 void draw_menu_arrow(unsigned int q);
-void draw_menu_sign();
+
+static inline __attribute__((always_inline))
+void draw_menu_sign() {
+	Reset0Ref();
+    dp_VIA_t1_cnt_lo = 40;
+	Moveto_d(120, -60);
+    Moveto_d(120, -120);
+	Draw_VLp(&menu);
+}

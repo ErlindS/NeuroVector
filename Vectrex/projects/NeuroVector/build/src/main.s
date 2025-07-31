@@ -749,29 +749,6 @@ _menu:
 	.byte	1
 	.byte	0
 	.byte	0
-	.globl	_Display_Gamefield
-_Display_Gamefield:
-	jsr	___Reset0Ref
-	ldb	#64
-	stb	*_dp_VIA_t1_cnt_lo
-	addb	#26
-	stb	,-s
-	addb	#46
-	jsr	__Moveto_d
-	ldb	#-128
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_Gamefield
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#24
-	stb	*_dp_VIA_t1_cnt_lo
-	addb	#56
-	stb	,-s
-	clrb
-	jsr	__Moveto_d
-	leas	2,s
-	ldx	#_fullbrain
-	jmp	___Draw_VLp
 	.globl	_circle_value
 _circle_value:
 	.byte	120
@@ -1039,6 +1016,6 @@ _execute_game_playing_state:	.blkb	2
 	.globl	_main
 _main:
 	jsr	_execute_menu_state
-L4:
+L2:
 	jsr	_level_play
-	bra	L4
+	bra	L2

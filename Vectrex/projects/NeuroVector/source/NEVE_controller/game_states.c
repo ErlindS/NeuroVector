@@ -1,10 +1,10 @@
-// ---------------------------------------------------------------------------
+// ***************************************************************************
 // Game States
 //
 // Filename: game_states.c
 // Description: Manages the various states and transitions of the game.
 // Author: Erlind Sejdiu
-// Date: 2025-07-28
+// Date: 2025-07-31
 // ***************************************************************************
 
 #include "game_states.h"
@@ -50,29 +50,11 @@ void execute_repeat_sequence_state(void){
     }
 
     /*************************************/
-    //calculate_time_left();
+    calculate_time_left();
+    /*************************************/
     
-    //In each iteration time_left_counter3 will be increased.
-    //After 8 rounds lifeline.progress will be increased.
-    //lifeline.progress determines how much of the lifeline will be drawn. 
-    //because of time_left_counter3 the lifeline is not drawn as fast
-    //and time_left_counter will be assigend to time_left_counter.
-    //time_left_counter will be decreased meaning, in later iterations, when the player has not much time left,
-    //time_left_counter3 will need more cycles. 
-    ++lifeline_timing.draw_tick;
-    if(lifeline_timing.draw_tick == 8){
-        ++lifeline.progress;
-        lifeline_timing.draw_tick = lifeline_timing.remaining_cycles; 
-    }
-
-    if(lifeline.progress == 32){
-        lifeline.progress = 0;
-        lifeline_timing.remaining_cycles -= 1;
-    }
     /*************************************/
     draw_lifeline();
-    /*************************************/
-
     /*************************************/
 
 }
@@ -87,8 +69,8 @@ void execute_display_sequence_state(void){
             Display_Gamefield();
             update_level_advancement(number_of_crosses_to_be_displayed, 0);
             execute_player_action();
-            draw_square_filled(a_random[i]);
-            play_tune(2, 15*a_random[i]+120, 200);
+            draw_square_filled(random_sequence[i]);
+            play_tune(2, 15*random_sequence[i]+120, 200);
             print_string(110, -75, "REMEMBER THE\x80");
             print_string(90, -50, "SEQUENCE\x80");
             
@@ -186,7 +168,7 @@ void execute_menu_state()
                 break;
 
             case 5:
-                level_specific_action = &circle_movement2;
+                level_specific_action = &echo_movement;
                 highscores.current_score = &highscores.echo;
                 break;
 
