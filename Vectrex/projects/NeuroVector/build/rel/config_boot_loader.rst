@@ -42,7 +42,7 @@
    005A                      42 L2:
    005A 7E F0 00      [ 4]   43 	jmp	___Reset
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jul 31 22:19:44 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 23:38:28 2025
 
 Symbol Table
 
@@ -60,7 +60,7 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jul 31 22:19:44 2025
+Hexadecimal [16-Bits]                                 Thu Jul 31 23:38:28 2025
 
 Area Table
 

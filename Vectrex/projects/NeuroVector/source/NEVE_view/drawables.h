@@ -35,7 +35,7 @@ void print_BPM()
 	str[1] = '0' + value;
 
 	reset_print_position();
-	Print_Str_d(100, 70, (void*) &str[0]);
+	Print_Str_d(100, 50, (void*) &str[0]);
 }
 
 

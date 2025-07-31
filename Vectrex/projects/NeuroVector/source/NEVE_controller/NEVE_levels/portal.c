@@ -13,16 +13,16 @@
 #define MAXSIZE 124
 
 static int position_coordinate_0 = 0;
-static int position_coordinate_1 = MAXSIZE/9 * 0;
-static int position_coordinate_2 = MAXSIZE/9 * 0;
+static int position_coordinate_1 = 0;
+static int position_coordinate_2 = 0;
 
-static int position_coordinate_3 = MAXSIZE/9 * 3;
-static int position_coordinate_4 = MAXSIZE/9 * 3;
-static int position_coordinate_5 = MAXSIZE/9 * 3;
+static int position_coordinate_3 = MAXSIZE/27;
+static int position_coordinate_4 = MAXSIZE/27;
+static int position_coordinate_5 = MAXSIZE/27;
 
-static int position_coordinate_6 = MAXSIZE/9 * 6;
-static int position_coordinate_7 = MAXSIZE/9 * 6;
-static int position_coordinate_8 = MAXSIZE/9 * 6;
+static int position_coordinate_6 = MAXSIZE/54;
+static int position_coordinate_7 = MAXSIZE/54;
+static int position_coordinate_8 = MAXSIZE/54;
 
 const struct vector_t left_portal[] =
 {

@@ -62,8 +62,8 @@ java.lang.NullPointerException
 - Creating UI window
 - Creating GLCanvas
 - Attaching GLCanvas to UI window
-- Forcing GLCanvas refresh
 * GLEventListener.init(Full)
+- Forcing GLCanvas refresh
 Loading chassis frame texture [data/packs/chassis_frame.png]
 Loading chassis bay panel texture [data/packs/chassis_joystick_panel.png]
 Loading chassis screen texture [data/packs/chassis_screen.png]
@@ -98,10 +98,14 @@ java.lang.RuntimeException: Cannot open resource [project/project$.png]
 Loading overlay top holders texture [data/packs/chassis_holders_top.png]
 Loading overlay bottom holders texture [data/packs/chassis_holders_bottom.png]
 Starting engine...
-Shutdown...
-Exiting ParaJVE...
 Audio Line initialised : PCM_SIGNED 44100.0 Hz, 16 bit, mono, 2 bytes/frame, big-endian
  - Sample rate ...... 44100.0
  - Updates/Second ... 20
  - Samples/Update ... 2207
  - Line Buffer ...... 4414 bytes
+Pluging Joystick in port 1
+Pluging Joystick in port 2
+Shutdown...
+Removing Joystick from port 1
+Removing Joystick from port 2
+Exiting ParaJVE...

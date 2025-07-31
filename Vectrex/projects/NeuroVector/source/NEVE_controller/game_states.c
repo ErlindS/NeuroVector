@@ -55,7 +55,7 @@ void execute_display_sequence_state(void){
             execute_player_action();
             draw_square_filled(random_sequence[i]);
             play_tune(2, 15*random_sequence[i]+120, 200);
-            print_string(110, -120, "REMEMBER THE SEQUENCE\x80");        
+            print_string(110, -128, "REMEMBER THE SEQUENCE\x80");        
         }
         display_duration_for_cross = 30;
     }
