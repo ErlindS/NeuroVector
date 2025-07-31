@@ -19,7 +19,6 @@ int main(void)
 	// local variables
 	int error_code = 0;	
 	// main loop
-	//inline_full_circle_yx(23);
 
 	execute_menu_state();	
 	do

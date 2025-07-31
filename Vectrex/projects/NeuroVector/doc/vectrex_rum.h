@@ -399,7 +399,7 @@ void New_High_Score(void* x, void* u);  //0xF8D8
 // INITPSG 	0xF272 	INTPSG 	Initialize sound generator
 // PSGLUP 	0xF27D 	PSGLST 	Send sound string to PSG
 // PSGULP 	0xF284 	PSGMIR 	Send sound string to PSG
-// REQOUT 	0xF289 	--- 	Send 'REQX' to PSG and mirror
+// REQOUT 	0xF289 	--- 	Send 'REQX' to PSG and portal
 // REPLAY 	0xF687 	--- 	Set 'REQX' for given tune
 // SPLAY 	0xF68D 	--- 	Set 'REQX' for given tune
 // SOPLAY 	0xF690 	ASPLAY 	Set 'REQX' for given tune

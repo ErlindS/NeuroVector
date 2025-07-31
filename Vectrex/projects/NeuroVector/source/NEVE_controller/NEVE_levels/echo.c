@@ -1,4 +1,5 @@
 #include "echo.h"
+#include "basic.h"
 
 static int position_coordinate_0 = 0;
 static int position_coordinate_1 = 128/8 * 2;

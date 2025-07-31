@@ -14,9 +14,6 @@ typedef struct Square{
 	int x; 
 	int y;
 	void (*execute_display_functions)(unsigned int i);
-
-	int change_of_x;
-	int change_of_y;
 	
 	unsigned int scaling_factor;
 	unsigned int scaling_factor_toggle;

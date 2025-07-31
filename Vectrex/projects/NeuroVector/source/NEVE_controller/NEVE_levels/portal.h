@@ -10,9 +10,10 @@
 #pragma once
 #include "../../NEVE_view/drawables.h"
 #include "../globalvariables.h"
-void add_movement();
 
-extern const struct vector_t middle_sideways_mirror[];
-extern const struct vector_t left_mirror[];
-extern const struct vector_t middle__upways_mirror[];
-extern const struct vector_t right_mirror[];
+void portal_movement();
+
+extern const struct vector_t middle_sideways_portal[];
+extern const struct vector_t left_portal[];
+extern const struct vector_t middle__upways_portal[];
+extern const struct vector_t right_portal[];

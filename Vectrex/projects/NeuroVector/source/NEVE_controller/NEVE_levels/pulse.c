@@ -8,6 +8,7 @@
 // ---------------------------------------------------------------------------
 
 #include "pulse.h"
+#include "basic.h"
 
 void change_cross_size(){
 

@@ -27,7 +27,7 @@
 typedef struct scores {
     unsigned int still;
     unsigned int pulse;
-    unsigned int mirror;
+    unsigned int portal;
     unsigned int orbit;
     unsigned int echo;
     unsigned int* current_score; 

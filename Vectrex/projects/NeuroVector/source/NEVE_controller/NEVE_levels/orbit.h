@@ -11,7 +11,9 @@
 #include "../../NEVE_view/drawables.h"
 #include "../globalvariables.h"
 
-void circle_movement();
+void circle_init(void);
+void circle_movement(void);
+void circle_movement_optimized(void);
 
 const struct vector_t circle_value[] = 
 {

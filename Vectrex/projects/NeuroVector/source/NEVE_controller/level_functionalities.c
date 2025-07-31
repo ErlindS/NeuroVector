@@ -10,15 +10,15 @@
 #include "level_functionalities.h"
 
 struct Square displayed_squares[9] = {
-    {UNIFIED_VALUE_1, UNIFIED_VALUE_2, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {UNIFIED_VALUE_1, 0, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {UNIFIED_VALUE_1, UNIFIED_VALUE_1, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {0, UNIFIED_VALUE_2, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {0, 0, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {0, UNIFIED_VALUE_1, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {UNIFIED_VALUE_2, UNIFIED_VALUE_2, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {UNIFIED_VALUE_2, 0, &draw_square, 1, 1, SCALING_FACTOR, 0},
-    {UNIFIED_VALUE_2, UNIFIED_VALUE_1, &draw_square, 1, 1, SCALING_FACTOR, 0}
+    {UNIFIED_VALUE_1, UNIFIED_VALUE_2, &draw_square, SCALING_FACTOR, 0},
+    {UNIFIED_VALUE_1, 0, &draw_square, SCALING_FACTOR, 0},
+    {UNIFIED_VALUE_1, UNIFIED_VALUE_1, &draw_square, SCALING_FACTOR, 0},
+    {0, UNIFIED_VALUE_2, &draw_square, SCALING_FACTOR, 0},
+    {0, 0, &draw_square, SCALING_FACTOR, 0},
+    {0, UNIFIED_VALUE_1, &draw_square, SCALING_FACTOR, 0},
+    {UNIFIED_VALUE_2, UNIFIED_VALUE_2, &draw_square, SCALING_FACTOR, 0},
+    {UNIFIED_VALUE_2, 0, &draw_square, SCALING_FACTOR, 0},
+    {UNIFIED_VALUE_2, UNIFIED_VALUE_1, &draw_square, SCALING_FACTOR, 0}
 };
 
 void calculate_time_left()

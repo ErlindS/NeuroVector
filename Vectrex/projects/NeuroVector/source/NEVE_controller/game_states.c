@@ -136,7 +136,7 @@ void execute_menu_state()
         draw_menu_sign();
         print_highscore_still(60,-80);
         print_highscore_pulse(40,-80);
-        print_highscore_mirror(20,-80);
+        print_highscore_portal(20,-80);
         print_highscore_orbit(0,-80);
         print_highscore_echo(-20,-80);        
 
@@ -176,8 +176,8 @@ void execute_menu_state()
                 break;
 
             case 3:
-                level_specific_action = &add_movement;
-                highscores.current_score = &highscores.mirror;
+                level_specific_action = &portal_movement;
+                highscores.current_score = &highscores.portal;
                 break;
 
             case 4:
@@ -230,8 +230,8 @@ void execute_game_over_state(){
     if(button_1_2_pressed())
     {
         execute_game_playing_state = &execute_menu_state;
-        level_selection  = 1;
         create_random_sequence(number_of_crosses_to_be_displayed);
+        level_selection  = 1;
         button_pressed_counter  = 0;
         number_of_crosses_to_be_displayed  = 1;
     }

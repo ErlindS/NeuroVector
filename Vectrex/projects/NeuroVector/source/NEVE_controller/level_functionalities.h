@@ -91,15 +91,15 @@ void print_highscore_pulse(int y, int x)
 }
 
 static inline __attribute__((always_inline))
-void print_highscore_mirror(int y, int x)
+void print_highscore_portal(int y, int x)
 {
-    char str[] = "MIRROR  00/16\x80";
-	while (highscores.mirror >= 10)
+    char str[] = "PORTAL  00/16\x80";
+	while (highscores.portal >= 10)
 	{
 		++str[8];
-		highscores.mirror -= 10;
+		highscores.portal -= 10;
 	}
-	str[9] = '0' + highscores.mirror;
+	str[9] = '0' + highscores.portal;
 
 	reset_print_position();
 	Print_Str_d(y, x, (void*) &str[0]);

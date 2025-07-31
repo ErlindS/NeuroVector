@@ -18,7 +18,7 @@
 
 #include "NEVE_levels/still.h"
 #include "NEVE_levels/pulse.h"
-#include "NEVE_levels/mirror.h"
+#include "NEVE_levels/portal.h"
 #include "NEVE_levels/orbit.h"
 #include "NEVE_levels/echo.h"
 

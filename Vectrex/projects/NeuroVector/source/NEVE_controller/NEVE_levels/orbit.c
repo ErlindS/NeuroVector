@@ -1,4 +1,5 @@
 #include "orbit.h"
+#include "basic.h"
 
 static int position_coordinate_0 = 0;
 static int position_coordinate_1 = 128/8 * 1;
@@ -11,7 +12,14 @@ static int position_coordinate_8 = 128/8 * 7;
 
 #define MAXSIZE 126
 
+union my_pointer circle_pointer;
+
+void circle_init(){
+    circle_pointer.ptr = &circle_value[0];
+}
+
 void circle_movement(){
+    circle_pointer.angle = position_coordinate_0; 
     displayed_squares[0].y = circle_value[position_coordinate_0].y;
     displayed_squares[0].x = circle_value[position_coordinate_0].x;
     displayed_squares[1].y = circle_value[position_coordinate_1].y;
