@@ -1,13 +1,13 @@
 #include "orbit.h"
 
-int position_coordinate_0 = 0;
-int position_coordinate_1 = 128/8 * 1;
-int position_coordinate_2 = 128/8 * 2;
-int position_coordinate_3 = 128/8 * 3;
-int position_coordinate_5 = 128/8 * 4;
-int position_coordinate_6 = 128/8 * 5;
-int position_coordinate_7 = 128/8 * 6;
-int position_coordinate_8 = 128/8 * 7;
+static int position_coordinate_0 = 0;
+static int position_coordinate_1 = 128/8 * 1;
+static int position_coordinate_2 = 128/8 * 2;
+static int position_coordinate_3 = 128/8 * 3;
+static int position_coordinate_5 = 128/8 * 4;
+static int position_coordinate_6 = 128/8 * 5;
+static int position_coordinate_7 = 128/8 * 6;
+static int position_coordinate_8 = 128/8 * 7;
 
 #define MAXSIZE 126
 

@@ -176,7 +176,7 @@ void execute_menu_state()
                 break;
 
             case 3:
-                level_specific_action = &Add_Movement;
+                level_specific_action = &add_movement;
                 highscores.current_score = &highscores.mirror;
                 break;
 

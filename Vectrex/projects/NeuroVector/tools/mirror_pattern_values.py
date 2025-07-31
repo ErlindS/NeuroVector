@@ -4,10 +4,10 @@ import matplotlib.pyplot as mplot
 lowvalue = -120
 highvalue = 120
 
-values = np.linspace(lowvalue,highvalue,32)
-values1 = np.linspace(highvalue, lowvalue,32)
-values6 = np.linspace(lowvalue,highvalue,32)
-values7= np.linspace(highvalue, lowvalue,32)
+values = np.linspace(lowvalue,highvalue,64)
+values1 = np.linspace(highvalue, lowvalue,64)
+values6 = np.linspace(lowvalue,highvalue,64)
+values7= np.linspace(highvalue, lowvalue,64)
 
 for xv in values:
     print(f"{{0, {xv:.0f}}},")
