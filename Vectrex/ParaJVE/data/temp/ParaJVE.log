@@ -98,14 +98,10 @@ java.lang.RuntimeException: Cannot open resource [project/project$.png]
 Loading overlay top holders texture [data/packs/chassis_holders_top.png]
 Loading overlay bottom holders texture [data/packs/chassis_holders_bottom.png]
 Starting engine...
+Shutdown...
+Exiting ParaJVE...
 Audio Line initialised : PCM_SIGNED 44100.0 Hz, 16 bit, mono, 2 bytes/frame, big-endian
  - Sample rate ...... 44100.0
  - Updates/Second ... 20
  - Samples/Update ... 2207
  - Line Buffer ...... 4414 bytes
-Pluging Joystick in port 1
-Pluging Joystick in port 2
-Shutdown...
-Removing Joystick from port 1
-Removing Joystick from port 2
-Exiting ParaJVE...

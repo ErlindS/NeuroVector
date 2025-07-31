@@ -21,27 +21,6 @@ struct Square displayed_squares[9] = {
     {UNIFIED_VALUE_2, UNIFIED_VALUE_1, &draw_square, SCALING_FACTOR, 0}
 };
 
-void update_level_advancement(unsigned int n, unsigned int k){
-    while(n--){
-        draw_round_advancement_cross(n+button_pressed_counter);
-    }
-    while(k--){
-        draw_round_advancement_cross_plus(k);
-    }
-}
-
-void execute_player_action(){
-    displayed_squares[0].execute_display_functions(0);
-    displayed_squares[1].execute_display_functions(1);
-    displayed_squares[2].execute_display_functions(2);
-    displayed_squares[3].execute_display_functions(3);
-    displayed_squares[4].execute_display_functions(4);
-    displayed_squares[5].execute_display_functions(5);
-    displayed_squares[6].execute_display_functions(6);
-    displayed_squares[7].execute_display_functions(7);
-    displayed_squares[8].execute_display_functions(8);
-}
-
 void read_player_input(){
     Read_Btns();
     check_joysticks();

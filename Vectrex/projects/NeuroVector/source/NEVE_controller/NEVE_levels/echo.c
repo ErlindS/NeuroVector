@@ -286,24 +286,24 @@ const struct vector_t rectangle_rot[] =
 
 
 void echo_movement(){
-    displayed_squares[1].y = rectangle[position_coordinate_0].y;
-    displayed_squares[1].x = rectangle[position_coordinate_0].x;
-    displayed_squares[3].y = rectangle[position_coordinate_1].y;
-    displayed_squares[3].x = rectangle[position_coordinate_1].x;
-    displayed_squares[5].y = rectangle[position_coordinate_2].y;
-    displayed_squares[5].x = rectangle[position_coordinate_2].x;
-    displayed_squares[7].y = rectangle[position_coordinate_3].y;
-    displayed_squares[7].x = rectangle[position_coordinate_3].x;
+    displayed_squares[1].y = rectangle_rot[position_coordinate_0].y;
+    displayed_squares[1].x = rectangle_rot[position_coordinate_0].x;
+    displayed_squares[3].y = rectangle_rot[position_coordinate_1].y;
+    displayed_squares[3].x = rectangle_rot[position_coordinate_1].x;
+    displayed_squares[5].y = rectangle_rot[position_coordinate_2].y;
+    displayed_squares[5].x = rectangle_rot[position_coordinate_2].x;
+    displayed_squares[7].y = rectangle_rot[position_coordinate_3].y;
+    displayed_squares[7].x = rectangle_rot[position_coordinate_3].x;
     //displayed_squares[4].y = circle_val2ue[position_coordinate_4].y;
     //displayed_squares[4].x = circle_val2ue[position_coordinate_4].x;
-    displayed_squares[0].y = rectangle_rot[position_coordinate_5].y;
-    displayed_squares[0].x = rectangle_rot[position_coordinate_5].x;
-    displayed_squares[2].y = rectangle_rot[position_coordinate_6].y;
-    displayed_squares[2].x = rectangle_rot[position_coordinate_6].x;
-    displayed_squares[6].y = rectangle_rot[position_coordinate_7].y;
-    displayed_squares[6].x = rectangle_rot[position_coordinate_7].x;
-    displayed_squares[8].y = rectangle_rot[position_coordinate_8].y;
-    displayed_squares[8].x = rectangle_rot[position_coordinate_8].x;
+    displayed_squares[0].y = rectangle[position_coordinate_5].y;
+    displayed_squares[0].x = rectangle[position_coordinate_5].x;
+    displayed_squares[2].y = rectangle[position_coordinate_6].y;
+    displayed_squares[2].x = rectangle[position_coordinate_6].x;
+    displayed_squares[6].y = rectangle[position_coordinate_7].y;
+    displayed_squares[6].x = rectangle[position_coordinate_7].x;
+    displayed_squares[8].y = rectangle[position_coordinate_8].y;
+    displayed_squares[8].x = rectangle[position_coordinate_8].x;
 
     ++position_coordinate_0;
     ++position_coordinate_1;

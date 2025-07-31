@@ -22,32 +22,16 @@ void execute_repeat_sequence_state(void){
     /*************************************/
 
     /*************************************/
-    //execute_player_action();
-    //execute_player_action just shall draw the fields, but multiple functioncalls seem overkill
-    displayed_squares[0].execute_display_functions(0);
-    displayed_squares[1].execute_display_functions(1);
-    displayed_squares[2].execute_display_functions(2);
-    displayed_squares[3].execute_display_functions(3);
-    displayed_squares[4].execute_display_functions(4);
-    displayed_squares[5].execute_display_functions(5);
-    displayed_squares[6].execute_display_functions(6);
-    displayed_squares[7].execute_display_functions(7);
-    displayed_squares[8].execute_display_functions(8);
+    execute_player_action();
     /*************************************/
 
     /*************************************/
     check_successfully_repeated();
     /*************************************/
 
-    //update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
-    int n = number_of_crosses_to_be_displayed -button_pressed_counter;
-    int k = button_pressed_counter;
-    while(n--){
-        draw_round_advancement_cross(n+button_pressed_counter);
-    }
-    while(k--){
-        draw_round_advancement_cross_plus(k);
-    }
+    /*************************************/
+    update_level_advancement();
+    /*************************************/
 
     /*************************************/
     calculate_time_left();
@@ -60,7 +44,7 @@ void execute_repeat_sequence_state(void){
 }
 
 void execute_display_sequence_state(void){
-
+    reset_displayed_squares_coordinates();
     for(unsigned int i = 0; i < number_of_crosses_to_be_displayed; ++i)
     {
         while(--display_duration_for_cross)
@@ -71,9 +55,7 @@ void execute_display_sequence_state(void){
             execute_player_action();
             draw_square_filled(random_sequence[i]);
             play_tune(2, 15*random_sequence[i]+120, 200);
-            print_string(110, -75, "REMEMBER THE\x80");
-            print_string(90, -50, "SEQUENCE\x80");
-            
+            print_string(110, -120, "REMEMBER THE SEQUENCE\x80");        
         }
         display_duration_for_cross = 30;
     }
@@ -189,7 +171,7 @@ void execute_game_over_state(){
 
     //Display Game over
     if(number_of_crosses_to_be_displayed  > *highscores.current_score)
-        *highscores.current_score  = number_of_crosses_to_be_displayed;
+        *highscores.current_score  = number_of_crosses_to_be_displayed-1;
     
     print_string(100, -60, "GAME OVER\x80");
     print_string(70, -80, "PRESS BUTTON 3\x80");
@@ -216,6 +198,7 @@ void execute_game_over_state(){
         level_selection  = 1;
         button_pressed_counter  = 0;
         number_of_crosses_to_be_displayed  = 1;
+        display_duration_for_cross = 100;
     }
 }
 
@@ -223,7 +206,7 @@ void execute_game_won_state(){
 
     //Display Game over
     if(number_of_crosses_to_be_displayed  > *highscores.current_score)
-        *highscores.current_score  = number_of_crosses_to_be_displayed;
+        *highscores.current_score  = number_of_crosses_to_be_displayed-1;
     
     print_string(100, -60, "YOU WON\x80");
     print_string(70, -80, "PRESS BUTTON 3\x80");

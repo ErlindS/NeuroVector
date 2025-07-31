@@ -9,7 +9,6 @@
 
 #pragma once
 #include "../../NEVE_view/drawables.h"
-#include "../../NEVE_model/square.h"
 #include "../../NEVE_model/numbergenerator.h"
 #include "print/print.h"
 #include "utils/controller.h"
@@ -79,7 +78,6 @@ void check_successfully_repeated(){
         execute_game_playing_state = &execute_display_sequence_state;
     }
 };
-
 
 // ***************************************************************************
 // end of file

@@ -23,4 +23,4 @@ typedef struct Square{
 extern struct Square displayed_squares[9];
 
 void reset_displayed_squares_coordinates();
-void change_square_coordinates(int id);
+

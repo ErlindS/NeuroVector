@@ -31,22 +31,6 @@ void draw_square_filled(unsigned int i){
 	Draw_VLp(&square_filled);
 }
 
-void draw_round_advancement_cross(unsigned int i){
-	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 128;		// set scaling factor for positioning
-	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 0x20;
-	Draw_VLp(&cross);
-}
-
-void draw_round_advancement_cross_plus(unsigned int i){
-	Reset0Ref();					// reset beam to center of screen
-	dp_VIA_t1_cnt_lo = 128;		// set scaling factor for positioning
-	Moveto_d(Level_advancement[i].x, Level_advancement[i].y);			// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 0x20;
-	Draw_VLp(&advancement_plus);
-}
-
 //--------------------------------------------------
 // Menu Arrow
 // -------------------------------------------------
@@ -89,5 +73,52 @@ LifelineStruct lifeline = {
         -110, 30,
         50, 30,
         0, 90,
+    }
+};
+
+
+Advancement advancement_bar_total = {
+    .progress = 0,
+    .rest = {
+        0, 0,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120
+    }
+};
+
+Advancement advancement_bar_current = {
+    .progress = 0,
+    .rest = {
+        0, 0,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120,
+        0, 120
     }
 };

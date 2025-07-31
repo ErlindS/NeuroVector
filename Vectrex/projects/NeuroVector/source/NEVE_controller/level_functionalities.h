@@ -16,10 +16,6 @@
 #include "utils/controller.h"
 #include "print/print.h"
 
-void update_level_advancement(unsigned int n, unsigned int k);
-
-void execute_player_action();
-
 void (*display_execute_game_over_state_state)(void);
 
 static inline __attribute__((always_inline))
@@ -36,16 +32,14 @@ void move_player(){
 
         joy_x = (joy_x < 0) ? -1 : (joy_x > 0) ? 1 : 0;
         joy_y = (joy_y < 0) ? -1 : (joy_y > 0) ? 1 : 0;
-        //check if old value changed
 
         int joy_index = (joy_y + 1) * 3 + (joy_x + 1);
         temp_pass = joy_to_index[joy_index];
 
         for (int i = 0; i < 9; ++i)
             displayed_squares[i].execute_display_functions = &draw_square;
-
-        displayed_squares[temp_pass].execute_display_functions = &draw_square_filled;
     }
+	displayed_squares[temp_pass].execute_display_functions = &draw_square_filled;
 
     Read_Btns();
     
@@ -152,3 +146,37 @@ void calculate_time_left(){
         lifeline_timing.remaining_cycles -= 1;
     }
 }
+
+static inline __attribute__((always_inline))
+execute_player_action(){
+    //execute_player_action just shall draw the fields, but multiple functioncalls seem overkill
+    displayed_squares[0].execute_display_functions(0);
+    displayed_squares[1].execute_display_functions(1);
+    displayed_squares[2].execute_display_functions(2);
+    displayed_squares[3].execute_display_functions(3);
+    displayed_squares[4].execute_display_functions(4);
+    displayed_squares[5].execute_display_functions(5);
+    displayed_squares[6].execute_display_functions(6);
+    displayed_squares[7].execute_display_functions(7);
+    displayed_squares[8].execute_display_functions(8);
+};
+
+
+static inline __attribute__((always_inline))
+update_level_advancement(){
+    //update_level_advancement(number_of_crosses_to_be_displayed -button_pressed_counter, button_pressed_counter);
+	/*
+    int n = number_of_crosses_to_be_displayed -button_pressed_counter;
+    int k = button_pressed_counter;
+    while(n--){
+        draw_round_advancement_cross(n+button_pressed_counter);
+    }
+    while(k--){
+        draw_round_advancement_cross_plus(k);
+    }*/
+
+	advancement_bar_total.progress = number_of_crosses_to_be_displayed;
+	advancement_bar_current.progress = button_pressed_counter;
+	draw_advancementbar_total();
+	draw_advancementbar_current();
+};

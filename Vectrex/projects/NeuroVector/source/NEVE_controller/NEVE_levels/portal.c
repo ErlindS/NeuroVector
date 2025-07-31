@@ -10,7 +10,7 @@
 
 #include "portal.h"
 
-#define MAXSIZE 126
+#define MAXSIZE 124
 
 static int position_coordinate_0 = 0;
 static int position_coordinate_1 = MAXSIZE/9 * 0;
@@ -417,21 +417,21 @@ const struct vector_t right_portal[] =
 void portal_movement(){
     displayed_squares[3].y = left_portal[position_coordinate_3].y;
     displayed_squares[3].x = left_portal[position_coordinate_3].x;
-    displayed_squares[4].y = middle__upways_portal[position_coordinate_4].y;
-    displayed_squares[4].x = middle__upways_portal[position_coordinate_4].x;
-    displayed_squares[5].y = right_portal[position_coordinate_5].y;
-    displayed_squares[5].x = right_portal[position_coordinate_5].x;
-
     displayed_squares[0].y = left_portal[position_coordinate_0].y;
     displayed_squares[0].x = left_portal[position_coordinate_0].x;
     displayed_squares[6].y = left_portal[position_coordinate_6].y;
     displayed_squares[6].x = left_portal[position_coordinate_6].x;
 
+    displayed_squares[4].y = middle__upways_portal[position_coordinate_4].y;
+    displayed_squares[4].x = middle__upways_portal[position_coordinate_4].x;
     displayed_squares[1].y = middle__upways_portal[position_coordinate_1].y;
     displayed_squares[1].x = middle__upways_portal[position_coordinate_1].x;
     displayed_squares[7].y = middle__upways_portal[position_coordinate_7].y;
     displayed_squares[7].x = middle__upways_portal[position_coordinate_7].x;
 
+
+    displayed_squares[5].y = right_portal[position_coordinate_5].y;
+    displayed_squares[5].x = right_portal[position_coordinate_5].x;
     displayed_squares[2].y = right_portal[position_coordinate_2].y;
     displayed_squares[2].x = right_portal[position_coordinate_2].x;
     displayed_squares[8].y = right_portal[position_coordinate_8].y;

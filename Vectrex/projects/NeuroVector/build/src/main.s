@@ -3,59 +3,8 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O3
 	.module	main.c
-	.globl	_Level_advancement
-	.area	.text
-_Level_advancement:
-	.byte	-120
-	.byte	-70
-	.byte	-120
-	.byte	-50
-	.byte	-120
-	.byte	-30
-	.byte	-120
-	.byte	-10
-	.byte	-120
-	.byte	10
-	.byte	-120
-	.byte	30
-	.byte	-120
-	.byte	50
-	.byte	-120
-	.byte	70
-	.byte	-120
-	.byte	-70
-	.byte	-120
-	.byte	-50
-	.byte	-120
-	.byte	-30
-	.byte	-120
-	.byte	-10
-	.byte	-120
-	.byte	10
-	.byte	-120
-	.byte	30
-	.byte	-120
-	.byte	50
-	.byte	-120
-	.byte	70
-	.globl	_cross
-_cross:
-	.byte	0
-	.byte	32
-	.byte	32
-	.byte	-1
-	.byte	-32
-	.byte	-32
-	.byte	0
-	.byte	32
-	.byte	0
-	.byte	-1
-	.byte	-32
-	.byte	32
-	.byte	1
-	.byte	0
-	.byte	0
 	.globl	_square
+	.area	.text
 _square:
 	.byte	0
 	.byte	60
@@ -101,40 +50,6 @@ _square_filled:
 	.byte	-1
 	.byte	-120
 	.byte	-120
-	.byte	1
-	.byte	0
-	.byte	0
-	.globl	_advancement_cross
-_advancement_cross:
-	.byte	0
-	.byte	16
-	.byte	32
-	.byte	-1
-	.byte	-32
-	.byte	-32
-	.byte	0
-	.byte	32
-	.byte	0
-	.byte	-1
-	.byte	-32
-	.byte	32
-	.byte	1
-	.byte	0
-	.byte	0
-	.globl	_advancement_plus
-_advancement_plus:
-	.byte	0
-	.byte	32
-	.byte	16
-	.byte	-1
-	.byte	-32
-	.byte	0
-	.byte	0
-	.byte	16
-	.byte	16
-	.byte	-1
-	.byte	0
-	.byte	-32
 	.byte	1
 	.byte	0
 	.byte	0
